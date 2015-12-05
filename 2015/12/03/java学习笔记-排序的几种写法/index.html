@@ -32,6 +32,10 @@ ga('send', 'pageview');
 </li>
 </ul>
 <p><strong> 若要实现降序排列，只需将第三行的<code>&gt;</code>改为<code>&lt;</code>即可。</strong></p>
+<ul>
+<li>插入排序<br>基本思路是在已排好序的子数列中反复插入一个未排序的元素，直到整个数列全部排好。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; lists.length; i++) &#123;</span><br><span class="line">           <span class="keyword">double</span> currentElement = lists[i];</span><br><span class="line">           <span class="keyword">int</span> k = i - <span class="number">1</span>;</span><br><span class="line">           <span class="keyword">while</span> (k &gt;= <span class="number">0</span> &amp;&amp; lists[k] &gt; currentElement) &#123;</span><br><span class="line">               <span class="keyword">double</span> tmp = lists[k + <span class="number">1</span>];</span><br><span class="line">               lists[k + <span class="number">1</span>] = lists[k];</span><br><span class="line">               lists[k] = tmp;</span><br><span class="line">               k--;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <hr>
 <p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
 <hr>

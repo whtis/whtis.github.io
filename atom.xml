@@ -4,7 +4,7 @@
   <subtitle><![CDATA[点滴的记录，是变强的必经之路]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2015-12-03T15:01:20.264Z</updated>
+  <updated>2015-12-05T13:31:12.184Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.whtis.com/2015/12/03/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95/"/>
     <id>http://www.whtis.com/2015/12/03/java学习笔记-排序的几种写法/</id>
     <published>2015-12-03T12:00:08.000Z</published>
-    <updated>2015-12-03T15:01:20.264Z</updated>
+    <updated>2015-12-05T13:31:12.184Z</updated>
     <content type="html"><![CDATA[<p>最近学到数组这章，最重要的就是对数组中的元素进行排序。总结一下排序的几种写法。<br><em>java.util.array类中提供了排序的重载方法，可以直接调用相关方法进行排序，详见<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#sort-byte:A-" target="_blank" rel="external">API</a></em></p>
 <ul>
 <li><p>选择排序</p>
@@ -42,6 +42,10 @@
 </li>
 </ul>
 <p><strong> 若要实现降序排列，只需将第三行的<code>&gt;</code>改为<code>&lt;</code>即可。</strong></p>
+<ul>
+<li>插入排序<br>基本思路是在已排好序的子数列中反复插入一个未排序的元素，直到整个数列全部排好。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; lists.length; i++) &#123;</span><br><span class="line">           <span class="keyword">double</span> currentElement = lists[i];</span><br><span class="line">           <span class="keyword">int</span> k = i - <span class="number">1</span>;</span><br><span class="line">           <span class="keyword">while</span> (k &gt;= <span class="number">0</span> &amp;&amp; lists[k] &gt; currentElement) &#123;</span><br><span class="line">               <span class="keyword">double</span> tmp = lists[k + <span class="number">1</span>];</span><br><span class="line">               lists[k + <span class="number">1</span>] = lists[k];</span><br><span class="line">               lists[k] = tmp;</span><br><span class="line">               k--;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <hr>
 <p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
 <hr>
