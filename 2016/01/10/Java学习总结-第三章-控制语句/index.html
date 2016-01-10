@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hexo,原创," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -53,25 +53,52 @@
 
 
 
-<meta name="description" content="详细的hexo博客搭建教程可以参考这里
-在我按照教程搭建博客的过程中，无意中看到了可以同时将博客部署到github和gitcafe上，以提高国内外的访问速度，具体操作过程可以参考这里
-当按照教程修改hexo的配置文件_config.yml后，第二个repo里并没有更新代码，经过查阅官方文档，_config.yml正确的配置如下：
-12345deploy:- type: git  repo: git">
+<meta name="description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
+
+本章介绍了java语言中循环（loop）的使用方式。
+主要内容条件语句
+if语句
+if…else语句
+嵌套if语句
+switch语句
+条件表达式：符号？和：在条件表示式中同时出现，构成java中唯一的三目运算符例如 (x&amp;gt;y)?x:y
+
+循环语句
+while循环
+do-while">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo 3.x同时部署到github和gitcafe的方法">
-<meta property="og:url" content="http://www.whtis.com/2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/index.html">
+<meta property="og:title" content="Java学习总结--第三章 控制语句">
+<meta property="og:url" content="http://www.whtis.com/2016/01/10/Java学习总结-第三章-控制语句/index.html">
 <meta property="og:site_name" content="whtis's blog">
-<meta property="og:description" content="详细的hexo博客搭建教程可以参考这里
-在我按照教程搭建博客的过程中，无意中看到了可以同时将博客部署到github和gitcafe上，以提高国内外的访问速度，具体操作过程可以参考这里
-当按照教程修改hexo的配置文件_config.yml后，第二个repo里并没有更新代码，经过查阅官方文档，_config.yml正确的配置如下：
-12345deploy:- type: git  repo: git">
-<meta property="og:updated_time" content="2016-01-10T13:35:57.572Z">
+<meta property="og:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
+
+本章介绍了java语言中循环（loop）的使用方式。
+主要内容条件语句
+if语句
+if…else语句
+嵌套if语句
+switch语句
+条件表达式：符号？和：在条件表示式中同时出现，构成java中唯一的三目运算符例如 (x&amp;gt;y)?x:y
+
+循环语句
+while循环
+do-while">
+<meta property="og:updated_time" content="2016-01-10T15:34:11.861Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo 3.x同时部署到github和gitcafe的方法">
-<meta name="twitter:description" content="详细的hexo博客搭建教程可以参考这里
-在我按照教程搭建博客的过程中，无意中看到了可以同时将博客部署到github和gitcafe上，以提高国内外的访问速度，具体操作过程可以参考这里
-当按照教程修改hexo的配置文件_config.yml后，第二个repo里并没有更新代码，经过查阅官方文档，_config.yml正确的配置如下：
-12345deploy:- type: git  repo: git">
+<meta name="twitter:title" content="Java学习总结--第三章 控制语句">
+<meta name="twitter:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
+
+本章介绍了java语言中循环（loop）的使用方式。
+主要内容条件语句
+if语句
+if…else语句
+嵌套if语句
+switch语句
+条件表达式：符号？和：在条件表示式中同时出现，构成java中唯一的三目运算符例如 (x&amp;gt;y)?x:y
+
+循环语句
+while循环
+do-while">
 
 
 
@@ -83,7 +110,7 @@
   };
 </script>
 
-  <title> hexo 3.x同时部署到github和gitcafe的方法 | whtis's blog </title>
+  <title> Java学习总结--第三章 控制语句 | whtis's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -273,7 +300,7 @@
             
             
               
-                hexo 3.x同时部署到github和gitcafe的方法
+                Java学习总结--第三章 控制语句
               
             
           </h1>
@@ -282,34 +309,19 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-03T11:24:55+08:00" content="2015-11-03">
-              2015-11-03
+            <time itemprop="dateCreated" datetime="2016-01-10T21:49:40+08:00" content="2016-01-10">
+              2016-01-10
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/" itemprop="commentsCount"></span>
+                <a href="/2016/01/10/Java学习总结-第三章-控制语句/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/10/Java学习总结-第三章-控制语句/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -328,12 +340,39 @@
       
 
       
-        <span itemprop="articleBody"><p>详细的hexo博客搭建教程可以参考<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">这里</a></p>
-<p>在我按照教程搭建博客的过程中，无意中看到了可以同时将博客部署到<code>github</code>和<code>gitcafe</code>上，以提高国内外的访问速度，具体操作过程可以参考<a href="http://opiece.me/2015/04/28/push-hexo-to-github-and-gitcafe/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">这里</a></p>
-<p>当按照教程修改hexo的配置文件<code>_config.yml</code>后，第二个repo里并没有更新代码，经过查阅<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">官方文档</a>，<code>_config.yml</code>正确的配置如下：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:yourname/yourname.github.io.git,master</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@gitcafe</span>.<span class="attribute">com</span>:yourname/yourname.git,gitcafe-pages</span><br></pre></td></tr></table></figure>
-<p>现在使用<code>hexo d</code>，应该就没问题了。</p>
-<p><strong>注意，type前面的<code>-</code>不能省略。</strong></p>
+        <span itemprop="articleBody"><p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<p>本章介绍了java语言中循环（loop）的使用方式。</p>
+<h2 id="主要内容">主要内容</h2><h3 id="条件语句">条件语句</h3><ul>
+<li>if语句</li>
+<li>if…else语句</li>
+<li>嵌套if语句</li>
+<li>switch语句</li>
+<li>条件表达式：符号？和：在条件表示式中同时出现，构成java中唯一的三目运算符<br>例如 <code>(x&gt;y)?x:y</code></li>
+</ul>
+<h3 id="循环语句">循环语句</h3><ul>
+<li>while循环</li>
+<li>do-while循环</li>
+<li>for循环<br><strong>如果知道循环次数，就选择for循环；如果不知道次数，就选择while循环。</strong></li>
+</ul>
+<h3 id="关键字break和continue">关键字break和continue</h3><ul>
+<li>break: 跳出离它最近的循环体。</li>
+<li>continue： 跳出当次循环。</li>
+<li>利用语句标号终止循环：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">outer:</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">0</span>;i++)&#123;</span><br><span class="line">  inner:</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;<span class="number">10</span>;j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i*j&gt;<span class="number">50</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(i*j);</span><br><span class="line">    &#125;   </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>while循环执行最多<code>n</code>次，do-while循环执行次数最多是<code>n+1</code>次。</li>
+<li>从jdk1.7开始，switch变量增至6个：<code>byte</code>,<code>int</code>,<code>long</code>,<code>short</code>,<code>enum</code>,<code>String</code>。后两个为新增的。</li>
+<li>使用switch语句，可以处理多种情况，简化代码。</li>
+<li>for语句可以写为如下形式：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( ; ; ) &#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这样可以在不知道具体循环次数的情况下保证代码的正常运行。</p>
+<hr>
+<h2 id="编程练习">编程练习</h2><p>3.2 （三个整数排序）：见<a href="http://www.whtis.com/2015/11/13/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89%E4%B8%AA%E6%95%B4%E6%95%B0%E8%BF%9B%E8%A1%8C%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/">三个整数进行比较大小的三种方法</a></p>
+<p>3.14 （查找两个最高分）编写程序，提示用户输入学生的数量及每个学生的名字和得分，而后显示最高分的学生。<br>解题思路：使用hashMap存入key-value，排序后显示，代码如下：(本题解法，若按照书中顺序，是无法完成的。看书时没有细想，参考了网上的解法。有时间再回来更新吧0.0)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $3<span class="title">_14</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String, Integer&gt;();</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println( <span class="string">"请输入学生的数量："</span>);</span><br><span class="line">        <span class="keyword">int</span> num = scanner.nextInt();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入学生的姓名： "</span>);</span><br><span class="line">            String name = scanner.next();</span><br><span class="line">            System.out.println(<span class="string">"请输入该生的成绩： "</span>);</span><br><span class="line">            <span class="keyword">int</span> hh = scanner.nextInt();</span><br><span class="line">            map.put(name, hh);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        List&lt;Map.Entry&lt;String, Integer&gt;&gt; infolds = <span class="keyword">new</span> ArrayList&lt;Map.Entry&lt;String, Integer&gt;&gt;(map.entrySet());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//排序</span></span><br><span class="line">        Collections.sort(infolds, <span class="keyword">new</span> Comparator&lt;Map.Entry&lt;String, Integer&gt;&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Map.Entry&lt;String, Integer&gt; o1, Map.Entry&lt;String, Integer&gt; o2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (o2.getValue() - o1.getValue());</span><br><span class="line"><span class="comment">//                return (o1.getKey()).toString().compareTo(o2.getKey());</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; infolds.size(); i++) &#123;</span><br><span class="line">            String id = infolds.get(i).toString();</span><br><span class="line">            System.out.println(id);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>习题3.5 3.7 3.10 3.12 3.13 3.19 3.20 3.21 3.25 3.27 3.28 3.30 3.31 3.34源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter3/src" target="_blank" rel="external">chapter3</a></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div></span>
       
@@ -341,30 +380,18 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/hexo/" rel="tag">#hexo</a>
-          
-            <a href="/tags/原创/" rel="tag">#原创</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/" rel="next" title="ubuntu14.04本地安装wordpress中的一些问题总结">
-                <i class="fa fa-chevron-left"></i> ubuntu14.04本地安装wordpress中的一些问题总结
+              <a href="/2015/12/23/Premiere-学习笔记/" rel="next" title="Premiere 学习笔记">
+                <i class="fa fa-chevron-left"></i> Premiere 学习笔记
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/11/13/Java学习笔记-double类型的值保留指定小数位的几种方法/" rel="prev" title="Java学习笔记--double类型的值保留指定小数位的几种方法">
-                Java学习笔记--double类型的值保留指定小数位的几种方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -379,10 +406,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/"
-     data-title="hexo 3.x同时部署到github和gitcafe的方法"
+        <div class="ds-share flat" data-thread-key="2016/01/10/Java学习总结-第三章-控制语句/"
+     data-title="Java学习总结--第三章 控制语句"
      data-content=""
-     data-url="http://www.whtis.com/2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/">
+     data-url="http://www.whtis.com/2016/01/10/Java学习总结-第三章-控制语句/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -410,8 +437,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/"
-           data-title="hexo 3.x同时部署到github和gitcafe的方法" data-url="http://www.whtis.com/2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/">
+      <div class="ds-thread" data-thread-key="2016/01/10/Java学习总结-第三章-控制语句/"
+           data-title="Java学习总结--第三章 控制语句" data-url="http://www.whtis.com/2016/01/10/Java学习总结-第三章-控制语句/">
       </div>
     
   </div>
@@ -526,7 +553,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件语句"><span class="nav-number">1.1.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环语句"><span class="nav-number">1.2.</span> <span class="nav-text">循环语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字break和continue"><span class="nav-number">1.3.</span> <span class="nav-text">关键字break和continue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习小结"><span class="nav-number">2.</span> <span class="nav-text">复习小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程练习"><span class="nav-number">3.</span> <span class="nav-text">编程练习</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

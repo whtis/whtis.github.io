@@ -4,7 +4,7 @@
   <subtitle><![CDATA[点滴的记录，是变强的必经之路]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-01-10T13:37:50.250Z</updated>
+  <updated>2016-01-10T15:34:11.861Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -15,23 +15,73 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Java学习总结--第三章 控制语句]]></title>
+    <link href="http://www.whtis.com/2016/01/10/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
+    <id>http://www.whtis.com/2016/01/10/Java学习总结-第三章-控制语句/</id>
+    <published>2016-01-10T13:49:40.000Z</published>
+    <updated>2016-01-10T15:34:11.861Z</updated>
+    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<p>本章介绍了java语言中循环（loop）的使用方式。</p>
+<h2 id="主要内容">主要内容</h2><h3 id="条件语句">条件语句</h3><ul>
+<li>if语句</li>
+<li>if…else语句</li>
+<li>嵌套if语句</li>
+<li>switch语句</li>
+<li>条件表达式：符号？和：在条件表示式中同时出现，构成java中唯一的三目运算符<br>例如 <code>(x&gt;y)?x:y</code></li>
+</ul>
+<h3 id="循环语句">循环语句</h3><ul>
+<li>while循环</li>
+<li>do-while循环</li>
+<li>for循环<br><strong>如果知道循环次数，就选择for循环；如果不知道次数，就选择while循环。</strong></li>
+</ul>
+<h3 id="关键字break和continue">关键字break和continue</h3><ul>
+<li>break: 跳出离它最近的循环体。</li>
+<li>continue： 跳出当次循环。</li>
+<li>利用语句标号终止循环：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">outer:</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">0</span>;i++)&#123;</span><br><span class="line">  inner:</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;<span class="number">10</span>;j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i*j&gt;<span class="number">50</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(i*j);</span><br><span class="line">    &#125;   </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>while循环执行最多<code>n</code>次，do-while循环执行次数最多是<code>n+1</code>次。</li>
+<li>从jdk1.7开始，switch变量增至6个：<code>byte</code>,<code>int</code>,<code>long</code>,<code>short</code>,<code>enum</code>,<code>String</code>。后两个为新增的。</li>
+<li>使用switch语句，可以处理多种情况，简化代码。</li>
+<li>for语句可以写为如下形式：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( ; ; ) &#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这样可以在不知道具体循环次数的情况下保证代码的正常运行。</p>
+<hr>
+<h2 id="编程练习">编程练习</h2><p>3.2 （三个整数排序）：见<a href="http://www.whtis.com/2015/11/13/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89%E4%B8%AA%E6%95%B4%E6%95%B0%E8%BF%9B%E8%A1%8C%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/">三个整数进行比较大小的三种方法</a></p>
+<p>3.14 （查找两个最高分）编写程序，提示用户输入学生的数量及每个学生的名字和得分，而后显示最高分的学生。<br>解题思路：使用hashMap存入key-value，排序后显示，代码如下：(本题解法，若按照书中顺序，是无法完成的。看书时没有细想，参考了网上的解法。有时间再回来更新吧0.0)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $3<span class="title">_14</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String, Integer&gt;();</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println( <span class="string">"请输入学生的数量："</span>);</span><br><span class="line">        <span class="keyword">int</span> num = scanner.nextInt();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入学生的姓名： "</span>);</span><br><span class="line">            String name = scanner.next();</span><br><span class="line">            System.out.println(<span class="string">"请输入该生的成绩： "</span>);</span><br><span class="line">            <span class="keyword">int</span> hh = scanner.nextInt();</span><br><span class="line">            map.put(name, hh);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        List&lt;Map.Entry&lt;String, Integer&gt;&gt; infolds = <span class="keyword">new</span> ArrayList&lt;Map.Entry&lt;String, Integer&gt;&gt;(map.entrySet());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//排序</span></span><br><span class="line">        Collections.sort(infolds, <span class="keyword">new</span> Comparator&lt;Map.Entry&lt;String, Integer&gt;&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Map.Entry&lt;String, Integer&gt; o1, Map.Entry&lt;String, Integer&gt; o2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (o2.getValue() - o1.getValue());</span><br><span class="line"><span class="comment">//                return (o1.getKey()).toString().compareTo(o2.getKey());</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; infolds.size(); i++) &#123;</span><br><span class="line">            String id = infolds.get(i).toString();</span><br><span class="line">            System.out.println(id);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>习题3.5 3.7 3.10 3.12 3.13 3.19 3.20 3.21 3.25 3.27 3.28 3.30 3.31 3.34源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter3/src" target="_blank" rel="external">chapter3</a></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<p>本章介绍了java语言中循环（loop）的使用方式。</p>
+<h2 id="主要内容">主要内容</]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Premiere 学习笔记]]></title>
     <link href="http://www.whtis.com/2015/12/23/Premiere-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://www.whtis.com/2015/12/23/Premiere-学习笔记/</id>
     <published>2015-12-23T05:24:26.000Z</published>
-    <updated>2016-01-10T13:37:50.250Z</updated>
+    <updated>2016-01-10T13:47:21.328Z</updated>
     <content type="html"><![CDATA[<p><strong>视频教程<a href="http://www.bilibili.com/video/av1290353.html" target="_blank" rel="external">看这里</a></strong></p>
-<h3 id="第一课_导入、图片素材处理、导出视频">第一课 导入、图片素材处理、导出视频</h3><ul>
+<h3 id="导入、图片素材处理、导出视频">导入、图片素材处理、导出视频</h3><ul>
 <li>导入： ctrl+I</li>
 <li>时间轴缩放： +、-</li>
 <li>导出媒体： ctrl+M</li>
 </ul>
-<h3 id="第二课_视频剪辑">第二课 视频剪辑</h3><ul>
+<h3 id="视频剪辑">视频剪辑</h3><ul>
 <li>入点和出点： 标记视频，快捷键（I/O）</li>
 <li>剃刀工具： 剪辑标记段视频，快捷键C</li>
 <li>子剪辑： 剪辑下来的片段重新存储为素材</li>
 </ul>
-<h3 id="第三课_放机与录机">第三课 放机与录机</h3><ul>
+<h3 id="放机与录机">放机与录机</h3><ul>
 <li>全屏幕切换放机与录机： ~</li>
 <li>分离视频和音频： 右键→取消链接</li>
 <li>详细找素材：<ul>
@@ -46,13 +96,13 @@
 </ul>
 </li>
 </ul>
-<h3 id="第四课_历史记录、工作区、面板">第四课 历史记录、工作区、面板</h3><ul>
+<h3 id="历史记录、工作区、面板">历史记录、工作区、面板</h3><ul>
 <li>历史记录面板： 可以选择记录多少次历史状态</li>
 <li>原数据面板： 看素材属性</li>
 <li>蓝布棉门帘？</li>
 <li>自动保存： 手动以时间另存为</li>
 </ul>
-<h3 id="第五课_界面设置、快捷键">第五课 界面设置、快捷键</h3><ul>
+<h3 id="界面设置、快捷键">界面设置、快捷键</h3><ul>
 <li>时间轴滚动方式<ul>
 <li>不滚动</li>
 <li>页面滚动</li>
@@ -61,7 +111,7 @@
 </li>
 <li>标识帧： 在视频上定义一个标识位置</li>
 </ul>
-<h3 id="第六课_标记">第六课 标记</h3><ul>
+<h3 id="标记">标记</h3><ul>
 <li>连续视频缩览图： 时间轴面板右键可以调出</li>
 <li>标记（marker）： 标记时间轴上的某个位置，快捷键M<ul>
 <li>下一个标记： shift+M</li>
@@ -71,11 +121,11 @@
 </ul>
 </li>
 </ul>
-<h3 id="第七课_速度设置">第七课 速度设置</h3><ul>
+<h3 id="速度设置">速度设置</h3><ul>
 <li>鼠标右键→速度/持续时间… 可以调整视频的速度、是否倒放： 快捷键R</li>
 <li>编辑区播放头快速定位： ↑ ↓ 箭头</li>
 </ul>
-<h3 id="第八课_节奏、序列、轨道">第八课 节奏、序列、轨道</h3><ul>
+<h3 id="节奏、序列、轨道">节奏、序列、轨道</h3><ul>
 <li>导入序列的两种方法：<ul>
 <li>新建一个序列后直接拖动： 会保留所有原始信息</li>
 <li>将序列作为嵌套或个别剪辑插入并覆盖： 仅包含序列整体的信息</li>
@@ -83,15 +133,15 @@
 </li>
 <li>轨道： 音频轨道和视频轨道可以分离并重新编辑（鼠标右键→取消链接）</li>
 </ul>
-<h3 id="第九课_画中画">第九课 画中画</h3><ul>
+<h3 id="画中画">画中画</h3><ul>
 <li>效果控件： shift+5 可以更改单个视频轨道的视频位置    </li>
 <li>视频的位置和角度可以使用数值进行精确编辑： 效果控件面板中，视频→运动</li>
 </ul>
-<h3 id="第十课_关键帧（keyframe）">第十课 关键帧（keyframe）</h3><ul>
+<h3 id="关键帧（keyframe）">关键帧（keyframe）</h3><ul>
 <li>效果控件面板，视频→运动下面的选项，都可以点击相应左侧闹钟添加、编辑关键帧</li>
 <li>通过控制关键帧的数值操作视频</li>
 </ul>
-<h3 id="第十一课_淡入淡出">第十一课 淡入淡出</h3><ul>
+<h3 id="淡入淡出">淡入淡出</h3><ul>
 <li>效果控件面板，视频→透明度下面的选项，都可以点击相应左侧闹钟添加、编辑关键帧</li>
 <li></li>
 </ul>
@@ -99,7 +149,7 @@
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong>视频教程<a href="http://www.bilibili.com/video/av1290353.html" target="_blank" rel="external">看这里</a></strong></p>
-<h3 id="第一课_导入、图片素]]>
+<h3 id="导入、图片素材处理、]]>
     </summary>
     
       <category term="Premiere" scheme="http://www.whtis.com/tags/Premiere/"/>
@@ -115,9 +165,10 @@
     <link href="http://www.whtis.com/2015/12/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
     <id>http://www.whtis.com/2015/12/22/Java学习总结-第二章-基本数据类型和基本操作/</id>
     <published>2015-12-22T06:10:25.000Z</published>
-    <updated>2016-01-10T13:37:17.171Z</updated>
+    <updated>2016-01-10T15:32:07.135Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
+<p>本章对Java中的各种数据类型进行了介绍，并给出了互相转换的方法；本章介绍了Java的语法规则，编写规则和编程错误。</p>
 <h2 id="主要内容">主要内容</h2><h3 id="命名标识符的规则">命名标识符的规则</h3><ul>
 <li>必须以字母、下划线（_）或美元符号（$）开头，不能用数字开头。</li>
 <li>不能是java中的关键字。</li>
@@ -215,14 +266,14 @@
 <li>Java在运算时会自动的提升变量的精度来进行运算。double比float精度高，所以可以自动的从float转化至double再进行运算。</li>
 </ul>
 <hr>
-<h2 id="编程练习">编程练习</h2><p>课后习题1,2,3,4,5,6,7,8,9,10,11,12<br>源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter2/src" target="_blank" rel="external">chapter2</a></p>
+<h2 id="编程练习">编程练习</h2><p>习题2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 2.11程序源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter2/src" target="_blank" rel="external">chapter2</a></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
 ]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
-<h2 id="主要内容">主要内容</h2><h3 id="命名标识符的规则">命名标识符的规则</h3>]]>
+<p>本章对Java中的各种数据类型进行了介绍，并给出了互相转换的方法；本章介绍了Java的语法规则，编写规]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>
@@ -240,9 +291,10 @@
     <link href="http://www.whtis.com/2015/12/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E3%80%81%E7%A8%8B%E5%BA%8F%E5%92%8CJava%E6%A6%82%E8%BF%B0/"/>
     <id>http://www.whtis.com/2015/12/20/Java学习总结-第一章-计算机、程序和Java概述/</id>
     <published>2015-12-20T12:42:57.000Z</published>
-    <updated>2016-01-10T13:36:15.225Z</updated>
+    <updated>2016-01-10T13:53:01.062Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
+<p>本章简单介绍了计算机和Java有关的知识，让人有初步了解。</p>
 <h2 id="主要内容">主要内容</h2><h3 id="二进制与十进制数的转换">二进制与十进制数的转换</h3><p>给定二进制数<img src="http://latex.codecogs.com/gif.latex?b_{n}b_{n-1}b_{n-2}...b_{2}b_{1}b_{0}">,与它相等的十进制数为<br><img src="http://latex.codecogs.com/gif.latex?b_{n}*2^{n}&plus;b_{n-1}*2^{n-1}&plus;b_{n-2}*2^{n-2}&plus;...&plus;b_{2}*2^{2}&plus;b_{1}*2^{1}&plus;b_{0}*2^{0}"><br>把一个十进制数d转换为二进制数，就是求满足<br><img src="http://latex.codecogs.com/gif.latex?d=b_{n}*2^{n}&plus;b_{n-1}*2^{n-1}&plus;b_{n-2}*2^{n-2}&plus;...&plus;b_{2}*2^{2}&plus;b_{1}*2^{1}&plus;b_{0}*2^{0}"><br>的位<img src="http://latex.codecogs.com/gif.latex?b_{n},b_{n-1},b_{n-2},...,b_{2},b_{1},b_{0}">。用2不断的除d，直到商为0为止，余数即为所求的位<img src="http://latex.codecogs.com/gif.latex?b_{0},b_{1},b_{2},...,b_{n-2},b_{n-1},b_{n}">。</p>
 <h3 id="十六进制与十进制数的转换">十六进制与十进制数的转换</h3><p>给定十六进制数<img src="http://latex.codecogs.com/gif.latex?h_{n}h_{n-1}h_{n-2}...h_{2}h_{1}h_{0}">,与它相等的十进制数为<br><img src="http://latex.codecogs.com/gif.latex?h_{n}*16^{n}&plus;h_{n-1}*16^{n-1}&plus;h_{n-2}*16^{n-2}&plus;...&plus;h_{2}*16^{2}&plus;h_{1}*16^{1}&plus;h_{0}*16^{0}"><br>把一个十进制数d转换为二进制数，就是求满足<br><img src="http://latex.codecogs.com/gif.latex?d=h_{n}*16^{n}&plus;h_{n-1}*16^{n-1}&plus;h_{n-2}*16^{n-2}&plus;...&plus;h_{2}*16^{2}&plus;h_{1}*16^{1}&plus;h_{0}*16^{0}"><br>的位<img src="http://latex.codecogs.com/gif.latex?h_{n},h_{n-1},h_{n-2},...,h_{2},h_{1},h_{0}">。用16不断的除d，直到商为0为止，余数即为所求的位<img src="http://latex.codecogs.com/gif.latex?h_{0},h_{1},h_{2},...,h_{n-2},h_{n-1},h_{n}">。</p>
 <h3 id="二进制数与十六进制数的转换">二进制数与十六进制数的转换</h3><p>要把一个十六进制数转换为二进制数，只需要使用下表，把十六进制数的每一位转换为四位二进制数即可。</p>
@@ -370,7 +422,8 @@
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
-<h2 id="主要内容">主要内容</h2><h3 id="二进制与十进制数的转换">二进制与十进制数的转]]>
+<p>本章简单介绍了计算机和Java有关的知识，让人有初步了解。</p>
+<h2 id="主要内容">主要内]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>
