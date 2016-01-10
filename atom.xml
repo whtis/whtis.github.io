@@ -4,7 +4,7 @@
   <subtitle><![CDATA[点滴的记录，是变强的必经之路]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2015-12-23T16:04:54.202Z</updated>
+  <updated>2016-01-10T13:37:50.250Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.whtis.com/2015/12/23/Premiere-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://www.whtis.com/2015/12/23/Premiere-学习笔记/</id>
     <published>2015-12-23T05:24:26.000Z</published>
-    <updated>2015-12-23T16:04:54.202Z</updated>
+    <updated>2016-01-10T13:37:50.250Z</updated>
     <content type="html"><![CDATA[<p><strong>视频教程<a href="http://www.bilibili.com/video/av1290353.html" target="_blank" rel="external">看这里</a></strong></p>
 <h3 id="第一课_导入、图片素材处理、导出视频">第一课 导入、图片素材处理、导出视频</h3><ul>
 <li>导入： ctrl+I</li>
@@ -33,12 +33,70 @@
 </ul>
 <h3 id="第三课_放机与录机">第三课 放机与录机</h3><ul>
 <li>全屏幕切换放机与录机： ~</li>
+<li>分离视频和音频： 右键→取消链接</li>
+<li>详细找素材：<ul>
+<li>（加速）倒放： (j)j</li>
+<li>暂停： k</li>
+<li>（加速）快进： (l)l</li>
+<li>放机中的素材插入到录机中的两种操作：<ul>
+<li>插入</li>
+<li>覆盖<br><strong>编辑视频找素材时，应该在录机和放机中寻找和剪辑，这样能够节约很多时间</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="第四课_历史记录、工作区、面板">第四课 历史记录、工作区、面板</h3><ul>
+<li>历史记录面板： 可以选择记录多少次历史状态</li>
+<li>原数据面板： 看素材属性</li>
+<li>蓝布棉门帘？</li>
+<li>自动保存： 手动以时间另存为</li>
+</ul>
+<h3 id="第五课_界面设置、快捷键">第五课 界面设置、快捷键</h3><ul>
+<li>时间轴滚动方式<ul>
+<li>不滚动</li>
+<li>页面滚动</li>
+<li>平滑滚动</li>
+</ul>
+</li>
+<li>标识帧： 在视频上定义一个标识位置</li>
+</ul>
+<h3 id="第六课_标记">第六课 标记</h3><ul>
+<li>连续视频缩览图： 时间轴面板右键可以调出</li>
+<li>标记（marker）： 标记时间轴上的某个位置，快捷键M<ul>
+<li>下一个标记： shift+M</li>
+<li>上一个标记： ctrl+shift+M</li>
+<li>可以调出标记面板进行标记的详细说明</li>
+<li>标记不仅可以在放机时间轴上使用，还可以在录机时间轴上使用</li>
+</ul>
+</li>
+</ul>
+<h3 id="第七课_速度设置">第七课 速度设置</h3><ul>
+<li>鼠标右键→速度/持续时间… 可以调整视频的速度、是否倒放： 快捷键R</li>
+<li>编辑区播放头快速定位： ↑ ↓ 箭头</li>
+</ul>
+<h3 id="第八课_节奏、序列、轨道">第八课 节奏、序列、轨道</h3><ul>
+<li>导入序列的两种方法：<ul>
+<li>新建一个序列后直接拖动： 会保留所有原始信息</li>
+<li>将序列作为嵌套或个别剪辑插入并覆盖： 仅包含序列整体的信息</li>
+</ul>
+</li>
+<li>轨道： 音频轨道和视频轨道可以分离并重新编辑（鼠标右键→取消链接）</li>
+</ul>
+<h3 id="第九课_画中画">第九课 画中画</h3><ul>
+<li>效果控件： shift+5 可以更改单个视频轨道的视频位置    </li>
+<li>视频的位置和角度可以使用数值进行精确编辑： 效果控件面板中，视频→运动</li>
+</ul>
+<h3 id="第十课_关键帧（keyframe）">第十课 关键帧（keyframe）</h3><ul>
+<li>效果控件面板，视频→运动下面的选项，都可以点击相应左侧闹钟添加、编辑关键帧</li>
+<li>通过控制关键帧的数值操作视频</li>
+</ul>
+<h3 id="第十一课_淡入淡出">第十一课 淡入淡出</h3><ul>
+<li>效果控件面板，视频→透明度下面的选项，都可以点击相应左侧闹钟添加、编辑关键帧</li>
+<li></li>
 </ul>
 <hr>
-<p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
-<hr>
-<p><em>本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</em></p>
-]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong>视频教程<a href="http://www.bilibili.com/video/av1290353.html" target="_blank" rel="external">看这里</a></strong></p>
 <h3 id="第一课_导入、图片素]]>
@@ -57,21 +115,114 @@
     <link href="http://www.whtis.com/2015/12/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
     <id>http://www.whtis.com/2015/12/22/Java学习总结-第二章-基本数据类型和基本操作/</id>
     <published>2015-12-22T06:10:25.000Z</published>
-    <updated>2015-12-22T06:11:45.872Z</updated>
+    <updated>2016-01-10T13:37:17.171Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
-<h2 id="主要内容">主要内容</h2><hr>
-<h2 id="复习小结">复习小结</h2><hr>
-<h2 id="编程练习">编程练习</h2><hr>
-<p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
+<h2 id="主要内容">主要内容</h2><h3 id="命名标识符的规则">命名标识符的规则</h3><ul>
+<li>必须以字母、下划线（_）或美元符号（$）开头，不能用数字开头。</li>
+<li>不能是java中的关键字。</li>
+<li>Java区分大小写，标识符大小写有区别。<br><strong>java标识符选取应该“见名知意”，命名通常采用“驼峰命名法”。</strong></li>
+</ul>
+<h3 id="常量和变量">常量和变量</h3><ul>
+<li>变量是用来表示特定类型的数据。变量在使用前应该用“=”进行赋值，以减少编程错误。</li>
+<li>常量使用<code>final</code>关键字定义表示常量的值一旦生成就不会改变。</li>
+</ul>
+<h3 id="数值数据类型及其运算">数值数据类型及其运算</h3><ul>
+<li>整数除法的结果是整数，5/2结果是2。整型数可以精确存储而浮点数不能。</li>
+<li>默认情况下，整型直接量是十进制数。如果要写八进制数，用<code>0</code>开头，要写十六进制数，用<code>0x</code>或者<code>0X</code>开头。</li>
+<li>double型的值比float型更精确。</li>
+<li>简捷运算符<ul>
+<li><code>+=</code>,<code>-=</code>,<code>*=</code>,<code>/=</code>,<code>%=</code></li>
+<li>加一和减一（假设i=1）<ul>
+<li>a=i++； //执行完本条语句后，a=1,i=2</li>
+<li>a=++i； //执行完本条语句后，a=2,i=2</li>
+<li>a=i–； //执行完本条语句后，a=1,i=0</li>
+<li>a=–i； //执行完本条语句后，a=0,i=0</li>
+<li><h3 id="数值类型转换">数值类型转换</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>拓宽类型：将一个小范围类型的变量转换为大范围类型的变量；<br>缩窄类型：将一个大范围类型的变量转换为小范围类型的变量。<br>拓宽类型不需要明确指出，可以自动执行，缩窄类型必须明确指出。</li>
+<li>缩窄类型会导致不精确的结果。而且必须得进行显性转换，否则会出现编译错误。</li>
+</ul>
+<h3 id="字符数据类型及其运算">字符数据类型及其运算</h3><ul>
+<li>字符型直接量用单引号扩住：’A’<br>字符串类型直接量用双引号扩住：”A”<br>字符型直接量只能是单个字符，字符串直接量可以有多个字符。</li>
+<li>特殊字符的转义： 使用<code>\*</code>，其中，<code>\t</code>是制表符，<code>\b</code>是退格键，<code>\n</code>是指换行</li>
+<li>字符型数据与数值型数据之间的转换<ul>
+<li>整数转为char型：只使用整数的低16位，其余忽略。</li>
+<li>浮点数转为char型：先将浮点数转为int型，再转为char型数据。</li>
+<li>char型转换为数值型：字符的Unicode码被转换成指定的数值类型。<br><strong>如果转换结果在目标变量的范围内，可以使用隐式转换（自动转换）。例如： byte b=’0’。在十六进制表示的0到FFFF之间的任何一个正整数，都可以自动转换成char型数据。</strong></li>
+<li>当计算<code>a+b</code>时。如果b是一个数字或字符，a将会被转换成Unicode数值。如果b是个字符串，a将会以字符串参与运算。</li>
+</ul>
+</li>
+</ul>
+<h3 id="布尔数据类型及其运算">布尔数据类型及其运算</h3><ul>
+<li>比较运算符：<code>==</code>,<code>!=</code>,<code>&lt;=</code>,<code>&gt;=</code>,<code>&lt;</code>,<code>&gt;</code></li>
+<li>逻辑运算符：<code>!</code>,<code>&amp;&amp;</code>,<code>||</code>,<code>^</code></li>
+<li>条件和无条件逻辑运算符（布尔运算符，）<ul>
+<li><code>&amp;&amp;</code>,<code>||</code> 称为<code>条件</code>运算符或<code>捷径</code>运算符：假设<code>p1&amp;&amp;p2</code>中p1为false，则无需计算p2的真值。</li>
+<li><code>&amp;</code>,<code>|</code> 称为<code>无条件</code>运算符或<code>无捷径</code>运算符：假设<code>p1&amp;p2</code>中p1为false，但还是需要计算p2的真值。</li>
+</ul>
+</li>
+<li>布尔类型不能转换为其他类型。</li>
+</ul>
+<h3 id="运算符的优先级和结合方向">运算符的优先级和结合方向</h3><ul>
+<li>赋值运算符是右结合的，双目运算符是左结合的。</li>
+<li>双目运算符左边运算对象的计算先于右边运算对象任何一部分的计算。</li>
+<li>如果运算对象没有修改变量值的副作用，运算对象的运算顺序是无关紧要的。</li>
+<li>运算对象的计算顺序的优先级高于运算符的优先级规则。</li>
+</ul>
+<h3 id="格式化输出">格式化输出</h3><ul>
+<li>格式化输出：<code>System.out.printf(format,items);</code></li>
+</ul>
+<h3 id="程序错误">程序错误</h3><ul>
+<li>语法错误（编译错误）</li>
+<li>运行错误</li>
+<li>逻辑错误</li>
+</ul>
+<h3 id="编程风格">编程风格</h3><ul>
+<li>适当的注释和注释类型</li>
+<li>块的对齐方式<ul>
+<li>此行风格</li>
+<li>行尾风格</li>
+</ul>
+</li>
+</ul>
+<h3 id="调试（debug）">调试（debug）</h3><p>略。</p>
+<h2 id="复习小结">复习小结</h2><h3 id="闰年的计算方式">闰年的计算方式</h3><ul>
+<li>一个年号如果能被4整除但不能被100整除，或者能被400整除，则它是闰年。<br><code>（（year%4==0）&amp;&amp;（year%100！=0））||（year%400==0）</code></li>
+</ul>
+<h3 id="时间的计算">时间的计算</h3><ul>
+<li><p>使用System类中的currentTimeMillis（）方法得到Unix时间戳。使用如下步骤可以计算出当前时间的时、分、秒。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> totalMilliseconds = System.currentTimeMillis();</span><br><span class="line"><span class="keyword">long</span> totalSeconds = totalMilliseconds / <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">int</span> seconds = (<span class="keyword">int</span>) (totalSeconds % <span class="number">60</span>);</span><br><span class="line"><span class="keyword">long</span> totalMinutes = totalSeconds / <span class="number">60</span>;</span><br><span class="line"><span class="keyword">int</span> minutes = (<span class="keyword">int</span>) (totalMinutes % <span class="number">60</span>);</span><br><span class="line"><span class="keyword">long</span> totalHours = totalMinutes / <span class="number">60</span>;</span><br><span class="line"><span class="keyword">int</span> hours = (<span class="keyword">int</span>) (totalHours % <span class="number">24</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>java currentTimeMillis()和nanoTime()方法辨析<br> currentTimeMillis（）和nanoTime都属于java.lang这个包中，其中：</p>
+<ul>
+<li>currentTimeMillis() 返回的是当前时间（0区时间）与<code>1970</code>年<code>1</code>月<code>1</code>日<code>0</code>时 相差的时间，返回值是long类型，以毫秒计数。可用于计算当前时间。</li>
+<li>nanoTime()返回的是一个随机的纳秒数，与系统当前时间无关，仅用于测量某一个时间段中所用的时间。</li>
+</ul>
+</li>
+</ul>
+<h3 id="从控制台获取输入：">从控制台获取输入：</h3><ul>
+<li>使用Scanner类:<br><code>Scanner sc = new Scanner(System.in);</code></li>
+<li>使用args数组获得输入<br><code>java *.class args[0] args[1]</code></li>
+</ul>
+<h3 id="直接量">直接量</h3><p>  直接量并非是运算的结果，也不是I/O操作的结果，而是直接写在代码里的数据。</p>
+<h3 id="需要注意的几点">需要注意的几点</h3><ul>
+<li>int类型转换byte类型可以得到结果，但结果不精确，仅取相应字节的数据。</li>
+<li>double转换float类型会得到infinity错误，原因是浮点数存储方式不同。</li>
+<li>Java在运算时会自动的提升变量的精度来进行运算。double比float精度高，所以可以自动的从float转化至double再进行运算。</li>
+</ul>
 <hr>
-<p><em>本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</em></p>
+<h2 id="编程练习">编程练习</h2><p>课后习题1,2,3,4,5,6,7,8,9,10,11,12<br>源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter2/src" target="_blank" rel="external">chapter2</a></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
 ]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
-<h2 id="主要内容">主要内容</h2><hr>
-<h2 id="复习小结">复习小结</h2><hr]]>
+<h2 id="主要内容">主要内容</h2><h3 id="命名标识符的规则">命名标识符的规则</h3>]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>
@@ -89,7 +240,7 @@
     <link href="http://www.whtis.com/2015/12/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E3%80%81%E7%A8%8B%E5%BA%8F%E5%92%8CJava%E6%A6%82%E8%BF%B0/"/>
     <id>http://www.whtis.com/2015/12/20/Java学习总结-第一章-计算机、程序和Java概述/</id>
     <published>2015-12-20T12:42:57.000Z</published>
-    <updated>2015-12-22T06:07:08.902Z</updated>
+    <updated>2016-01-10T13:36:15.225Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><h3 id="二进制与十进制数的转换">二进制与十进制数的转换</h3><p>给定二进制数<img src="http://latex.codecogs.com/gif.latex?b_{n}b_{n-1}b_{n-2}...b_{2}b_{1}b_{0}">,与它相等的十进制数为<br><img src="http://latex.codecogs.com/gif.latex?b_{n}*2^{n}&plus;b_{n-1}*2^{n-1}&plus;b_{n-2}*2^{n-2}&plus;...&plus;b_{2}*2^{2}&plus;b_{1}*2^{1}&plus;b_{0}*2^{0}"><br>把一个十进制数d转换为二进制数，就是求满足<br><img src="http://latex.codecogs.com/gif.latex?d=b_{n}*2^{n}&plus;b_{n-1}*2^{n-1}&plus;b_{n-2}*2^{n-2}&plus;...&plus;b_{2}*2^{2}&plus;b_{1}*2^{1}&plus;b_{0}*2^{0}"><br>的位<img src="http://latex.codecogs.com/gif.latex?b_{n},b_{n-1},b_{n-2},...,b_{2},b_{1},b_{0}">。用2不断的除d，直到商为0为止，余数即为所求的位<img src="http://latex.codecogs.com/gif.latex?b_{0},b_{1},b_{2},...,b_{n-2},b_{n-1},b_{n}">。</p>
@@ -215,10 +366,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>（略）</p>
 <hr>
-<p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
-<hr>
-<p><em>本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</em></p>
-]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -240,7 +388,7 @@
     <link href="http://www.whtis.com/2015/12/03/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95/"/>
     <id>http://www.whtis.com/2015/12/03/java学习笔记-排序的几种写法/</id>
     <published>2015-12-03T12:00:08.000Z</published>
-    <updated>2015-12-05T13:31:12.184Z</updated>
+    <updated>2016-01-10T13:37:36.579Z</updated>
     <content type="html"><![CDATA[<p>最近学到数组这章，最重要的就是对数组中的元素进行排序。总结一下排序的几种写法。<br><em>java.util.array类中提供了排序的重载方法，可以直接调用相关方法进行排序，详见<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#sort-byte:A-" target="_blank" rel="external">API</a></em></p>
 <ul>
 <li><p>选择排序</p>
@@ -268,10 +416,7 @@
 </li>
 </ul>
 <hr>
-<p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
-<hr>
-<p><em>本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</em></p>
-]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p>最近学到数组这章，最重要的就是对数组中的元素进行排序。总结一下排序的几种写法。<br><em>java.util.array类中提供了排序的重载方法，可以直接调用相关方法进行排序，详见<a href="http://docs.oracle.com/javase/8/docs]]>
     </summary>
@@ -291,7 +436,7 @@
     <link href="http://www.whtis.com/2015/11/13/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89%E4%B8%AA%E6%95%B4%E6%95%B0%E8%BF%9B%E8%A1%8C%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
     <id>http://www.whtis.com/2015/11/13/Java学习笔记-三个整数进行比较大小的三种方法/</id>
     <published>2015-11-13T12:43:59.000Z</published>
-    <updated>2015-11-20T02:46:10.970Z</updated>
+    <updated>2016-01-10T13:37:28.926Z</updated>
     <content type="html"><![CDATA[<ul>
 <li>对abc三个整数从小到大进行排序，有以下几种方法：</li>
 </ul>
@@ -308,10 +453,7 @@
 </ul>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"> public class <span class="number">$3</span>_2 &#123;</span><br><span class="line">    public static void main(<span class="keyword">String[] </span>args) &#123;</span><br><span class="line">        int a = Integer.parseInt(JOptionPane.showInputDialog(null, <span class="string">"请输入一个整数："</span>))<span class="comment">;</span></span><br><span class="line">        int <span class="keyword">b </span>= Integer.parseInt(JOptionPane.showInputDialog(null, <span class="string">"请输入一个整数："</span>))<span class="comment">;</span></span><br><span class="line">        int c = Integer.parseInt(JOptionPane.showInputDialog(null, <span class="string">"请输入一个整数："</span>))<span class="comment">;</span></span><br><span class="line">        int tmp<span class="comment">;</span></span><br><span class="line">        <span class="keyword">boolean </span><span class="keyword">b1 </span>= a &gt;= <span class="keyword">b;</span><br><span class="line"></span>        <span class="keyword">boolean </span><span class="keyword">b2 </span>= a &gt;= c<span class="comment">;</span></span><br><span class="line">        <span class="keyword">boolean </span><span class="keyword">b3 </span>= <span class="keyword">b </span>&gt;= c<span class="comment">;</span></span><br><span class="line">         <span class="preprocessor">if</span> (<span class="keyword">b1 </span>&amp;&amp; <span class="keyword">b2 </span>&amp;&amp; <span class="keyword">b3) </span>&#123;//<span class="keyword">b3多余 </span>c&lt;<span class="label">=b</span>&lt;<span class="label">=a</span></span><br><span class="line">            tmp = a<span class="comment">;</span></span><br><span class="line">            a = c<span class="comment">;</span></span><br><span class="line">            c = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (<span class="keyword">b1 </span>&amp;&amp; <span class="keyword">b2 </span>&amp;&amp; !<span class="keyword">b3) </span>&#123; //<span class="keyword">b&lt;=c&lt;=a</span><br><span class="line"></span>            tmp = a<span class="comment">;</span></span><br><span class="line">            a = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= c<span class="comment">;</span></span><br><span class="line">            c = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (<span class="keyword">b1 </span>&amp;&amp; !<span class="keyword">b2 </span>&amp;&amp; !<span class="keyword">b3) </span>&#123; //<span class="keyword">b&lt;=a&lt;=c</span><br><span class="line"></span>            tmp = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= a<span class="comment">;</span></span><br><span class="line">            a = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (!<span class="keyword">b1 </span>&amp;&amp; <span class="keyword">b2 </span>&amp;&amp; <span class="keyword">b3) </span>&#123; //c&lt;<span class="label">=a</span>&lt;<span class="label">=b</span></span><br><span class="line">            tmp = c<span class="comment">;</span></span><br><span class="line">            c = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= a<span class="comment">;</span></span><br><span class="line">            a = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (!<span class="keyword">b1 </span>&amp;&amp; !<span class="keyword">b2 </span>&amp;&amp; <span class="keyword">b3) </span>&#123; //a&lt;<span class="label">=c</span>&lt;<span class="label">=b</span></span><br><span class="line">            tmp = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= c<span class="comment">;</span></span><br><span class="line">            c = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (!<span class="keyword">b1 </span>&amp;&amp; !<span class="keyword">b2 </span>&amp;&amp; !<span class="keyword">b3) </span>&#123; //a&lt;<span class="label">=b</span>&lt;<span class="label">=c</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"the order is "</span> + a + <span class="string">" "</span> + <span class="keyword">b </span>+ <span class="string">" "</span> + c)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
-<hr>
-<p><em>本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</em></p>
-]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<ul>
 <li>对abc三个整数从小到大进行排序，有以下几种方法：</li>
@@ -335,7 +477,7 @@
     <link href="http://www.whtis.com/2015/11/13/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-double%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%80%BC%E4%BF%9D%E7%95%99%E6%8C%87%E5%AE%9A%E5%B0%8F%E6%95%B0%E4%BD%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
     <id>http://www.whtis.com/2015/11/13/Java学习笔记-double类型的值保留指定小数位的几种方法/</id>
     <published>2015-11-13T04:56:43.000Z</published>
-    <updated>2015-11-20T02:54:18.412Z</updated>
+    <updated>2016-01-10T13:37:43.592Z</updated>
     <content type="html"><![CDATA[<p>在java语言中，double类型的变量使用64bit存储空间进行存储。两个double类型的变量进行除法运算时，如果小数位过多，就需要进行保留位数操作。保留位数操作分为<code>四舍五入</code>型和<code>非四舍五入</code>型两种。本文以保留两位数为例：</p>
 <ul>
 <li>四舍五入型<br>使用java.text类中的<code>DecimalFormat（）</code>方法可以对double类型的值进行保留位数操作。代码如下：</li>
@@ -354,41 +496,9 @@
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> test &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> x = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">double</span> y =<span class="number">3</span>;</span><br><span class="line">        <span class="keyword">double</span> z = x / y;</span><br><span class="line">        z = (<span class="keyword">int</span>) (z * <span class="number">100</span>)/<span class="number">100.00</span>;</span><br><span class="line">       System.out.println(z);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
-<hr>
-<p><em>本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</em></p>
-]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p>在java语言中，double类型的变量使用64bit存储空间进行存储。两个double类型的变量进行除法运算时，如果小数位过多，就需要进行保留位数操作。保留位数操作分为<code>四舍五入</code>型和<code>非四舍五入</code>型两种。本文以保留两位数为例：]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="java学习笔记" scheme="http://www.whtis.com/tags/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习笔记--java currentTimeMillis()和nanoTime()方法辨析]]></title>
-    <link href="http://www.whtis.com/2015/11/05/java-currentTimeMillis%E5%92%8CnanoTime%E6%96%B9%E6%B3%95%E8%BE%A8%E6%9E%90/"/>
-    <id>http://www.whtis.com/2015/11/05/java-currentTimeMillis和nanoTime方法辨析/</id>
-    <published>2015-11-05T13:13:49.000Z</published>
-    <updated>2015-11-16T07:52:47.922Z</updated>
-    <content type="html"><![CDATA[<p>currentTimeMillis（）和nanoTime都属于java.lang这个包中，其中：</p>
-<p>currentTimeMillis() 返回的是当前时间（0区时间）与<code>1970</code>年<code>1</code>月<code>1</code>日<code>0</code>时 相差的时间，返回值是long类型，以毫秒计数。可用于计算当前时间。</p>
-<p>nanoTime()返回的是一个随机的纳秒数，与系统当前时间无关，仅用于测量某一个时间段中所用的时间。</p>
-<hr>
-<p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
-<hr>
-<p><em>本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</em></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>currentTimeMillis（）和nanoTime都属于java.lang这个包中，其中：</p>
-<p>currentTimeMillis() 返回的是当前时间（0区时间）与<code>1970</code>年<code>1</code>月<code>1</code]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>
@@ -406,7 +516,7 @@
     <link href="http://www.whtis.com/2015/11/03/hexo-3-x%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%88%B0github%E5%92%8Cgitcafe%E7%9A%84%E6%96%B9%E6%B3%95/"/>
     <id>http://www.whtis.com/2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/</id>
     <published>2015-11-03T03:24:55.000Z</published>
-    <updated>2015-11-03T04:13:49.459Z</updated>
+    <updated>2016-01-10T13:35:57.572Z</updated>
     <content type="html"><![CDATA[<p>详细的hexo博客搭建教程可以参考<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">这里</a></p>
 <p>在我按照教程搭建博客的过程中，无意中看到了可以同时将博客部署到<code>github</code>和<code>gitcafe</code>上，以提高国内外的访问速度，具体操作过程可以参考<a href="http://opiece.me/2015/04/28/push-hexo-to-github-and-gitcafe/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">这里</a></p>
 <p>当按照教程修改hexo的配置文件<code>_config.yml</code>后，第二个repo里并没有更新代码，经过查阅<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">官方文档</a>，<code>_config.yml</code>正确的配置如下：</p>
@@ -414,10 +524,7 @@
 <p>现在使用<code>hexo d</code>，应该就没问题了。</p>
 <p><strong>注意，type前面的<code>-</code>不能省略。</strong></p>
 <hr>
-<p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
-<hr>
-<p><em>本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</em></p>
-]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p>详细的hexo博客搭建教程可以参考<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">这里</a></p>
 <p>在我按照教程搭建博客的过程中，无意中看]]>
@@ -436,7 +543,7 @@
     <link href="http://www.whtis.com/2015/10/29/ubuntu14-04%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85wordpress%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     <id>http://www.whtis.com/2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/</id>
     <published>2015-10-29T10:13:35.000Z</published>
-    <updated>2015-11-16T07:52:49.794Z</updated>
+    <updated>2016-01-10T13:37:59.683Z</updated>
     <content type="html"><![CDATA[<h1 id="1、安装apache2的问题">1、安装apache2的问题</h1><p>当我们使用如下语句安装apache2时：</p>
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install apache2</span><br></pre></td></tr></table></figure>
 <p>会发现启动报错：</p>
@@ -450,10 +557,7 @@
 <p><em>wordpress的默认根目录是 <strong>/var/www/html</strong> ，而不是 <strong>/var/www</strong></em></p>
 <p>因此，假如你想通过localhost访问时，你的目录结构应该是 <strong>/var/www/html/*</strong>，同理，如果你要通过localhost/wordpress访问时，你的目录结构应该是 <strong>/var/www/html/wordpress/*</strong></p>
 <hr>
-<p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
-<hr>
-<p><em>本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</em></p>
-]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="1、安装apache2的问题">1、安装apache2的问题</h1><p>当我们使用如下语句安装apache2时：</p>
 <figure class="highlight actionscript"><table><tr><td class="gutter">]]>

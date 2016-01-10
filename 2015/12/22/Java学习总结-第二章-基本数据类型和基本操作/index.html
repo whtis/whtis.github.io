@@ -55,35 +55,38 @@
 
 <meta name="description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
 
-主要内容
-复习小结
-编程练习
-  本文总阅读量次
+主要内容命名标识符的规则
+必须以字母、下划线（_）或美元符号（$）开头，不能用数字开头。
+不能是java中的关键字。
+Java区分大小写，标识符大小写有区别。java标识符选取应该“见名知意”，命名通常采用“驼峰命名法”。
 
-本文章首发www.whtis.com，转载请注明出处">
+常量和变量
+变量是用来表示特定类型的数据。变量在使用前应该用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java学习总结--第二章 基本数据类型和基本操作">
 <meta property="og:url" content="http://www.whtis.com/2015/12/22/Java学习总结-第二章-基本数据类型和基本操作/index.html">
 <meta property="og:site_name" content="whtis's blog">
 <meta property="og:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
 
-主要内容
-复习小结
-编程练习
-  本文总阅读量次
+主要内容命名标识符的规则
+必须以字母、下划线（_）或美元符号（$）开头，不能用数字开头。
+不能是java中的关键字。
+Java区分大小写，标识符大小写有区别。java标识符选取应该“见名知意”，命名通常采用“驼峰命名法”。
 
-本文章首发www.whtis.com，转载请注明出处">
-<meta property="og:updated_time" content="2015-12-22T06:11:45.872Z">
+常量和变量
+变量是用来表示特定类型的数据。变量在使用前应该用">
+<meta property="og:updated_time" content="2016-01-10T13:37:17.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习总结--第二章 基本数据类型和基本操作">
 <meta name="twitter:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
 
-主要内容
-复习小结
-编程练习
-  本文总阅读量次
+主要内容命名标识符的规则
+必须以字母、下划线（_）或美元符号（$）开头，不能用数字开头。
+不能是java中的关键字。
+Java区分大小写，标识符大小写有区别。java标识符选取应该“见名知意”，命名通常采用“驼峰命名法”。
 
-本文章首发www.whtis.com，转载请注明出处">
+常量和变量
+变量是用来表示特定类型的数据。变量在使用前应该用">
 
 
 
@@ -342,12 +345,106 @@
       
         <span itemprop="articleBody"><p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
-<h2 id="主要内容">主要内容</h2><hr>
-<h2 id="复习小结">复习小结</h2><hr>
-<h2 id="编程练习">编程练习</h2><hr>
-<p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
+<h2 id="主要内容">主要内容</h2><h3 id="命名标识符的规则">命名标识符的规则</h3><ul>
+<li>必须以字母、下划线（_）或美元符号（$）开头，不能用数字开头。</li>
+<li>不能是java中的关键字。</li>
+<li>Java区分大小写，标识符大小写有区别。<br><strong>java标识符选取应该“见名知意”，命名通常采用“驼峰命名法”。</strong></li>
+</ul>
+<h3 id="常量和变量">常量和变量</h3><ul>
+<li>变量是用来表示特定类型的数据。变量在使用前应该用“=”进行赋值，以减少编程错误。</li>
+<li>常量使用<code>final</code>关键字定义表示常量的值一旦生成就不会改变。</li>
+</ul>
+<h3 id="数值数据类型及其运算">数值数据类型及其运算</h3><ul>
+<li>整数除法的结果是整数，5/2结果是2。整型数可以精确存储而浮点数不能。</li>
+<li>默认情况下，整型直接量是十进制数。如果要写八进制数，用<code>0</code>开头，要写十六进制数，用<code>0x</code>或者<code>0X</code>开头。</li>
+<li>double型的值比float型更精确。</li>
+<li>简捷运算符<ul>
+<li><code>+=</code>,<code>-=</code>,<code>*=</code>,<code>/=</code>,<code>%=</code></li>
+<li>加一和减一（假设i=1）<ul>
+<li>a=i++； //执行完本条语句后，a=1,i=2</li>
+<li>a=++i； //执行完本条语句后，a=2,i=2</li>
+<li>a=i–； //执行完本条语句后，a=1,i=0</li>
+<li>a=–i； //执行完本条语句后，a=0,i=0</li>
+<li><h3 id="数值类型转换">数值类型转换</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>拓宽类型：将一个小范围类型的变量转换为大范围类型的变量；<br>缩窄类型：将一个大范围类型的变量转换为小范围类型的变量。<br>拓宽类型不需要明确指出，可以自动执行，缩窄类型必须明确指出。</li>
+<li>缩窄类型会导致不精确的结果。而且必须得进行显性转换，否则会出现编译错误。</li>
+</ul>
+<h3 id="字符数据类型及其运算">字符数据类型及其运算</h3><ul>
+<li>字符型直接量用单引号扩住：’A’<br>字符串类型直接量用双引号扩住：”A”<br>字符型直接量只能是单个字符，字符串直接量可以有多个字符。</li>
+<li>特殊字符的转义： 使用<code>\*</code>，其中，<code>\t</code>是制表符，<code>\b</code>是退格键，<code>\n</code>是指换行</li>
+<li>字符型数据与数值型数据之间的转换<ul>
+<li>整数转为char型：只使用整数的低16位，其余忽略。</li>
+<li>浮点数转为char型：先将浮点数转为int型，再转为char型数据。</li>
+<li>char型转换为数值型：字符的Unicode码被转换成指定的数值类型。<br><strong>如果转换结果在目标变量的范围内，可以使用隐式转换（自动转换）。例如： byte b=’0’。在十六进制表示的0到FFFF之间的任何一个正整数，都可以自动转换成char型数据。</strong></li>
+<li>当计算<code>a+b</code>时。如果b是一个数字或字符，a将会被转换成Unicode数值。如果b是个字符串，a将会以字符串参与运算。</li>
+</ul>
+</li>
+</ul>
+<h3 id="布尔数据类型及其运算">布尔数据类型及其运算</h3><ul>
+<li>比较运算符：<code>==</code>,<code>!=</code>,<code>&lt;=</code>,<code>&gt;=</code>,<code>&lt;</code>,<code>&gt;</code></li>
+<li>逻辑运算符：<code>!</code>,<code>&amp;&amp;</code>,<code>||</code>,<code>^</code></li>
+<li>条件和无条件逻辑运算符（布尔运算符，）<ul>
+<li><code>&amp;&amp;</code>,<code>||</code> 称为<code>条件</code>运算符或<code>捷径</code>运算符：假设<code>p1&amp;&amp;p2</code>中p1为false，则无需计算p2的真值。</li>
+<li><code>&amp;</code>,<code>|</code> 称为<code>无条件</code>运算符或<code>无捷径</code>运算符：假设<code>p1&amp;p2</code>中p1为false，但还是需要计算p2的真值。</li>
+</ul>
+</li>
+<li>布尔类型不能转换为其他类型。</li>
+</ul>
+<h3 id="运算符的优先级和结合方向">运算符的优先级和结合方向</h3><ul>
+<li>赋值运算符是右结合的，双目运算符是左结合的。</li>
+<li>双目运算符左边运算对象的计算先于右边运算对象任何一部分的计算。</li>
+<li>如果运算对象没有修改变量值的副作用，运算对象的运算顺序是无关紧要的。</li>
+<li>运算对象的计算顺序的优先级高于运算符的优先级规则。</li>
+</ul>
+<h3 id="格式化输出">格式化输出</h3><ul>
+<li>格式化输出：<code>System.out.printf(format,items);</code></li>
+</ul>
+<h3 id="程序错误">程序错误</h3><ul>
+<li>语法错误（编译错误）</li>
+<li>运行错误</li>
+<li>逻辑错误</li>
+</ul>
+<h3 id="编程风格">编程风格</h3><ul>
+<li>适当的注释和注释类型</li>
+<li>块的对齐方式<ul>
+<li>此行风格</li>
+<li>行尾风格</li>
+</ul>
+</li>
+</ul>
+<h3 id="调试（debug）">调试（debug）</h3><p>略。</p>
+<h2 id="复习小结">复习小结</h2><h3 id="闰年的计算方式">闰年的计算方式</h3><ul>
+<li>一个年号如果能被4整除但不能被100整除，或者能被400整除，则它是闰年。<br><code>（（year%4==0）&amp;&amp;（year%100！=0））||（year%400==0）</code></li>
+</ul>
+<h3 id="时间的计算">时间的计算</h3><ul>
+<li><p>使用System类中的currentTimeMillis（）方法得到Unix时间戳。使用如下步骤可以计算出当前时间的时、分、秒。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> totalMilliseconds = System.currentTimeMillis();</span><br><span class="line"><span class="keyword">long</span> totalSeconds = totalMilliseconds / <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">int</span> seconds = (<span class="keyword">int</span>) (totalSeconds % <span class="number">60</span>);</span><br><span class="line"><span class="keyword">long</span> totalMinutes = totalSeconds / <span class="number">60</span>;</span><br><span class="line"><span class="keyword">int</span> minutes = (<span class="keyword">int</span>) (totalMinutes % <span class="number">60</span>);</span><br><span class="line"><span class="keyword">long</span> totalHours = totalMinutes / <span class="number">60</span>;</span><br><span class="line"><span class="keyword">int</span> hours = (<span class="keyword">int</span>) (totalHours % <span class="number">24</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>java currentTimeMillis()和nanoTime()方法辨析<br> currentTimeMillis（）和nanoTime都属于java.lang这个包中，其中：</p>
+<ul>
+<li>currentTimeMillis() 返回的是当前时间（0区时间）与<code>1970</code>年<code>1</code>月<code>1</code>日<code>0</code>时 相差的时间，返回值是long类型，以毫秒计数。可用于计算当前时间。</li>
+<li>nanoTime()返回的是一个随机的纳秒数，与系统当前时间无关，仅用于测量某一个时间段中所用的时间。</li>
+</ul>
+</li>
+</ul>
+<h3 id="从控制台获取输入：">从控制台获取输入：</h3><ul>
+<li>使用Scanner类:<br><code>Scanner sc = new Scanner(System.in);</code></li>
+<li>使用args数组获得输入<br><code>java *.class args[0] args[1]</code></li>
+</ul>
+<h3 id="直接量">直接量</h3><p>  直接量并非是运算的结果，也不是I/O操作的结果，而是直接写在代码里的数据。</p>
+<h3 id="需要注意的几点">需要注意的几点</h3><ul>
+<li>int类型转换byte类型可以得到结果，但结果不精确，仅取相应字节的数据。</li>
+<li>double转换float类型会得到infinity错误，原因是浮点数存储方式不同。</li>
+<li>Java在运算时会自动的提升变量的精度来进行运算。double比float精度高，所以可以自动的从float转化至double再进行运算。</li>
+</ul>
 <hr>
-<p><em>本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</em></p>
+<h2 id="编程练习">编程练习</h2><p>课后习题1,2,3,4,5,6,7,8,9,10,11,12<br>源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter2/src" target="_blank" rel="external">chapter2</a></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
 </span>
       
     </div>
@@ -470,7 +567,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -541,7 +638,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习小结"><span class="nav-number">2.</span> <span class="nav-text">复习小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程练习"><span class="nav-number">3.</span> <span class="nav-text">编程练习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命名标识符的规则"><span class="nav-number">1.1.</span> <span class="nav-text">命名标识符的规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量和变量"><span class="nav-number">1.2.</span> <span class="nav-text">常量和变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值数据类型及其运算"><span class="nav-number">1.3.</span> <span class="nav-text">数值数据类型及其运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值类型转换"><span class="nav-number">1.4.</span> <span class="nav-text">数值类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符数据类型及其运算"><span class="nav-number">1.5.</span> <span class="nav-text">字符数据类型及其运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔数据类型及其运算"><span class="nav-number">1.6.</span> <span class="nav-text">布尔数据类型及其运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符的优先级和结合方向"><span class="nav-number">1.7.</span> <span class="nav-text">运算符的优先级和结合方向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化输出"><span class="nav-number">1.8.</span> <span class="nav-text">格式化输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序错误"><span class="nav-number">1.9.</span> <span class="nav-text">程序错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程风格"><span class="nav-number">1.10.</span> <span class="nav-text">编程风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试（debug）"><span class="nav-number">1.11.</span> <span class="nav-text">调试（debug）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习小结"><span class="nav-number">2.</span> <span class="nav-text">复习小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#闰年的计算方式"><span class="nav-number">2.1.</span> <span class="nav-text">闰年的计算方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间的计算"><span class="nav-number">2.2.</span> <span class="nav-text">时间的计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从控制台获取输入："><span class="nav-number">2.3.</span> <span class="nav-text">从控制台获取输入：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接量"><span class="nav-number">2.4.</span> <span class="nav-text">直接量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需要注意的几点"><span class="nav-number">2.5.</span> <span class="nav-text">需要注意的几点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程练习"><span class="nav-number">3.</span> <span class="nav-text">编程练习</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -568,8 +665,8 @@
 </script>
 <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2015</span>
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>
