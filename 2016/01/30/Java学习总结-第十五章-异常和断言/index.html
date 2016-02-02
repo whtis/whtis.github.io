@@ -55,26 +55,32 @@
 
 <meta name="description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
 
-主要内容面向对象程序设计把数据和属于它们的操作放入一个叫做对象（object）的整体中，所有对象都与属性和活动联系在一起，这样做使程序更容易开发和维护。本章将介绍面向对象程序设计的基本知识：声明类、创建对象、处理对象以及组织对象协调工作。
-对象和类
-对象代表现实世界中可以明确表示的一个">
+主要内容本章介绍应用异常处理来处理运行错误，以及应用断言来确保程序的正确性。
+异常和异常类型
+运行会引起异常（exception）。异常是指程序运行中出现的时间，它中断正常的程序控制流。
+异常处理（exception handing）：Java给程序员提供的稳妥处理运行错误的功能。
+异">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习总结--第六章 对象和类">
-<meta property="og:url" content="http://www.whtis.com/2016/01/26/Java学习总结-第六章-对象和类/index.html">
+<meta property="og:title" content="Java学习总结--第十五章 异常和断言">
+<meta property="og:url" content="http://www.whtis.com/2016/01/30/Java学习总结-第十五章-异常和断言/index.html">
 <meta property="og:site_name" content="whtis's blog">
 <meta property="og:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
 
-主要内容面向对象程序设计把数据和属于它们的操作放入一个叫做对象（object）的整体中，所有对象都与属性和活动联系在一起，这样做使程序更容易开发和维护。本章将介绍面向对象程序设计的基本知识：声明类、创建对象、处理对象以及组织对象协调工作。
-对象和类
-对象代表现实世界中可以明确表示的一个">
-<meta property="og:updated_time" content="2016-01-26T13:28:44.731Z">
+主要内容本章介绍应用异常处理来处理运行错误，以及应用断言来确保程序的正确性。
+异常和异常类型
+运行会引起异常（exception）。异常是指程序运行中出现的时间，它中断正常的程序控制流。
+异常处理（exception handing）：Java给程序员提供的稳妥处理运行错误的功能。
+异">
+<meta property="og:updated_time" content="2016-01-31T12:17:44.810Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习总结--第六章 对象和类">
+<meta name="twitter:title" content="Java学习总结--第十五章 异常和断言">
 <meta name="twitter:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
 
-主要内容面向对象程序设计把数据和属于它们的操作放入一个叫做对象（object）的整体中，所有对象都与属性和活动联系在一起，这样做使程序更容易开发和维护。本章将介绍面向对象程序设计的基本知识：声明类、创建对象、处理对象以及组织对象协调工作。
-对象和类
-对象代表现实世界中可以明确表示的一个">
+主要内容本章介绍应用异常处理来处理运行错误，以及应用断言来确保程序的正确性。
+异常和异常类型
+运行会引起异常（exception）。异常是指程序运行中出现的时间，它中断正常的程序控制流。
+异常处理（exception handing）：Java给程序员提供的稳妥处理运行错误的功能。
+异">
 
 
 
@@ -86,7 +92,7 @@
   };
 </script>
 
-  <title> Java学习总结--第六章 对象和类 | whtis's blog </title>
+  <title> Java学习总结--第十五章 异常和断言 | whtis's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -276,7 +282,7 @@
             
             
               
-                Java学习总结--第六章 对象和类
+                Java学习总结--第十五章 异常和断言
               
             
           </h1>
@@ -285,8 +291,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-26T17:30:41+08:00" content="2016-01-26">
-              2016-01-26
+            <time itemprop="dateCreated" datetime="2016-01-30T16:41:58+08:00" content="2016-01-30">
+              2016-01-30
             </time>
           </span>
 
@@ -311,8 +317,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/26/Java学习总结-第六章-对象和类/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/26/Java学习总结-第六章-对象和类/" itemprop="commentsCount"></span>
+                <a href="/2016/01/30/Java学习总结-第十五章-异常和断言/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/30/Java学习总结-第十五章-异常和断言/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -333,112 +339,97 @@
       
         <span itemprop="articleBody"><p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
-<h2 id="主要内容">主要内容</h2><p>面向对象程序设计把数据和属于它们的操作放入一个叫做<code>对象（object）</code>的整体中，所有对象都与属性和活动联系在一起，这样做使程序更容易开发和维护。<br>本章将介绍面向对象程序设计的基本知识：声明类、创建对象、处理对象以及组织对象协调工作。</p>
-<h3 id="对象和类">对象和类</h3><ul>
-<li>对象代表现实世界中可以明确表示的一个整体。对戏那个有自己独特的特性、状态和行为。对象的<code>状态（state）</code>是由具有当前值的<code>数据域（data field，又称为属性）</code>的集合构成的。对象的<code>行为（behavior）</code>是<code>方法（methed）</code>的集合定义的。</li>
-<li><code>类（class）</code>是定义同一类型对象的结构。在Java的类中，数据用来描述属性，方法用来定义行为。<br>类提供<code>构造方法(constructor)</code>，调用它可以创建类的对象。构造方法是用来进行初始化操作的。</li>
-<li>包含main方法的类称为<code>主类（main class）</code>。</li>
-</ul>
-<h3 id="构造方法">构造方法</h3><ul>
-<li>构造方法必须与定义它的类有完全相同的名字。构造方法可以重载，方便使用不同的初始数据值来构造对象。</li>
-<li>构造方法没有返回类型，甚至连<code>void</code>也没有。</li>
-<li>构造方法分为<code>有参构造方法</code>和<code>无参构造方法</code>。后者在类中没有明确声明构造方法时会自动生成，以避免程序出错。无参构造方法称为<code>默认构造方法</code>。</li>
-<li>构造方法的调用是在创建一个对象时使用<code>new</code>操作符进行的。<br><strong>类是一个蓝本，定义对象的数据和方法。一个对象是类的一个实例。可以从一个类中创建多个实例。创建的一个实例被称为<code>实例化（instantiation）</code>。<code>对象（object）</code>和<code>实例（instance）</code>两个词语经常互换使用。</strong></li>
-</ul>
-<h3 id="对象的访问">对象的访问</h3><ul>
-<li><p>新创建的对象在内存中占用空间，通过访问对象的<code>引用变量</code>来访问，该变量仅包含对象的引用地址。<br>一个类所定义的类型被称为<code>引用类型（reference type）</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>访问新创建的对象的数据和方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">objectRefVar.data------引用对象的数据。</span><br><span class="line">objectRefVar.method------引用对象的方法。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当创建一个对象，但不赋给这个对象任何引用变量，那么这样创建的对象称为<code>匿名（anonymous）</code>对象。</p>
-</li>
-<li>基本数据类型变量和引用类型变量的区别<ul>
-<li>基本数据类型在内存中存储时就是基本类型的数据，但是引用类型在内存中存储的是一个引用，指向对象的存储地址。</li>
-<li>将一个基本数据类型变量赋值给另一个变量时，这个变量也有了相同的值。但将一个引用类型变量赋值给另一个变量时，这个变量仅拥有原来对象的引用。</li>
+<h2 id="主要内容">主要内容</h2><p>本章介绍应用异常处理来处理运行错误，以及应用断言来确保程序的正确性。</p>
+<h3 id="异常和异常类型">异常和异常类型</h3><ul>
+<li>运行会引起<code>异常（exception）</code>。异常是指程序运行中出现的时间，它中断正常的程序控制流。</li>
+<li><code>异常处理（exception handing）</code>：Java给程序员提供的稳妥处理运行错误的功能。</li>
+<li>异常类<ul>
+<li>Java的异常是Throwable派生类的一个实例。        </li>
+<li>通过扩展Throwable或它的子类，可以创建自己的异常类。</li>
+<li>异常类可以分为三种主要类型：系统错误、异常和运行异常。<ul>
+<li><code>系统错误（system error）</code>是由Java虚拟机抛出并在Error类中描述的。Error类描述内部的系统错误。此类错误程序员一般无法处理。（LinkageError、VirtualMachineError、AWTError）</li>
+<li><code>异常（exception）</code>是由Exception类描述的。Exception类描述由程序和外部环境引起的错误，这些错误能通过程序捕获和处理。（classNotFoundException、RuntimeException、···）</li>
+<li><code>运行异常（runtime exception）</code>是由RuntimeException类描述的。RuntimeException类描述编程错误，比如不合适的转换、访问一个越界数组或数值错误等。（ArithmeticException、NullPointerException、IndexOutOfBoundsException、···）</li>
 </ul>
 </li>
 </ul>
-<h3 id="可见性修饰符、访问器和修改器">可见性修饰符、访问器和修改器</h3><p>  Java提供了几个修饰符，用来控制对数据、方法和类的访问。</p>
+</li>
+<li>必检异常和免检异常<ul>
+<li>RuntimeException、Error以及它们的子类都称为<code>免检异常（unchecked exception）</code>。所有其他异常都成为<code>必检异常（checked exception）</code>。</li>
+<li>必检异常编译器会强制程序员检查并处理它们。免检异常反映程序设计中不可重获的逻辑错误。</li>
+<li>Java语言不允许编写捕获或声明免检异常的代码。</li>
+</ul>
+</li>
+</ul>
+<h3 id="异常处理">异常处理</h3><p>Java的异常模型基于三种操作：<code>声明异常（declaring an exception）</code>、<code>抛出异常（throwing an exception）</code>和<code>捕获异常（catching an exception）</code>。</p>
 <ul>
-<li>public 使类、方法和数据域可以在任何类中访问。</li>
-<li>private 使方法和数据域只能从它自己所在类中访问。</li>
-<li>默认情况下，类、方法和数据域可以从同一个包里的任何类中访问，这时也被称为<code>包私有的（package-private）</code>或者<code>包内访问的（package-access）</code>。</li>
-<li>一个对象不能访问自己类中的私有成员。但是，如果对象是在自己类内声明的则可以。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对象在自己类中声明，正确</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> x;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Foo foo = <span class="keyword">new</span> Foo();</span><br><span class="line">		System.out.println(foo.x);</span><br><span class="line">		System.out.println(foo.convert(foo.x));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">convert</span><span class="params">(<span class="keyword">boolean</span> b)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> x?<span class="number">1</span>:-<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//对象不在自己类中声明，无法访问私有成员</span></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Foo foo = <span class="keyword">new</span> Foo();</span><br><span class="line">		System.out.println(foo.x);</span><br><span class="line">		System.out.println(foo.convert(foo.x));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>声明异常：每个方法都必须说明它可能抛出的必检异常的类型。<ul>
+<li>在Java中使用关键字<code>throws</code>声明异常，使用关键字<code>throw</code>抛出异常。</li>
 </ul>
+</li>
+<li>抛出异常：程序检查到一个错误后，创建一个适当类型异常的实例并抛出它。<ul>
+<li>一个方法总能抛出免检异常。</li>
+</ul>
+</li>
+<li><p>捕获异常：使用<code>try-catch</code>语句块捕获并处理异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="comment">//some statments</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">	<span class="comment">//do</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>修饰符private只修饰数据和方法，不修饰整个类（内部类除外）。</li>
-<li>大多数情况下，构造方法应该是公用的（public）。但是，如果不想让用户创建某个类的实例，可以使用私有的构造方法。例如：Math类。</li>
+<li>处理异常的代码称为<code>异常处理器（exception handler）</code>。寻找处理器的整个过程称为捕获异常。</li>
+<li>如果try语句块中某条语句抛出了异常，Java就会跳过try语句块中剩下的语句，开始为该异常搜索异常处理器。从第一个到最后一个逐个检查catch语句，看是否有某个catch字句中的异常类实例与该异常的类型匹配。如果有，就将该异常对象赋值给所声明的变量，执行catch子句中的代码。如果没有发现异常处理器，Java退出这个方法，把异常传递给调用该方法的方法，继续同样的过程来查找处理器。如果在调用的方法链中找不到相应的处理器，程序终止并在监视器上输出错误信息。</li>
+<li>一个异常对象包含有关异常的有价值信息，可以利用java.lang.Throwable类中的下列实例方法获取异常的信息：<ul>
+<li>public String getMessage() 返回Throwable对象的详细信息</li>
+<li>public String toString() 返回3个字符串合起来的串，它们分别是 1）异常类名的全称。2）“：”（一个冒号和空格）。3）getMessage()方法</li>
+<li>public void printStackTrace() 在控制台输出Throwable对象及其踪迹信息</li>
 </ul>
-<h3 id="数据域的封装（data_field_encapsulation）">数据域的封装（data field encapsulation）</h3><ul>
-<li>为了避免通过对象引用直接修改属性，应该使用private修饰符声明私有域。</li>
-<li>get()方法称为读取器（getter）或访问器（accessor），set()方法称为设置器（setter）或修改器（mutator）。</li>
-<li>使用数据域封装使类更加容易维护。</li>
-</ul>
-<h3 id="永久对象和类">永久对象和类</h3><ul>
-<li>如果一个对象一旦被创建，它的内容就不能再改变，那么该对象就称为<code>永久对象（immutable object）</code>，它的类称为<code>永久类（immutable class）</code>。</li>
-<li>一个类的所有数据都是私有的并且没有修改器，但它不一定是永久类。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//todo</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>要使一个类成为永久类，必须将所有数据域说明为私有的，并且不含返回引用非永久对象数据域的修改器和访问器。</p>
-<h3 id="给方法传递对象参数">给方法传递对象参数</h3><ul>
-<li>传递对象实际上是传递对象的引用（copy referance）；传递基本数据类型的参数时，传递的是实参的值。（copy value）</li>
+</li>
+<li>方法是按照线程执行的。如果一个线程发生异常没有得到处理，该线程中止，但是程序中的其他线程不受影响。</li>
 </ul>
-<h3 id="静态变量、常量和静态方法">静态变量、常量和静态方法</h3><ul>
-<li>实例变量不能被同一个类中的多个对象共享，<code>静态变量（static variavle，又称为类变量）</code>可以让一个类中的所有实例共享数据。</li>
-<li>静态变量存储在类的公用内存中，如果某个对象修改了静态变量的值，同一类中的所有对象都会受到影响。</li>
-<li>使用修饰符<code>static</code>声明静态变量或静态方法。</li>
+<h3 id="重新抛出异常">重新抛出异常</h3><ul>
+<li>当一个方法出现异常是，如果没有捕获异常，该方法就会立即退出。如果方法在退出之前需要执行某些任务，应该在该方法中捕获异常，然后按如下结构将异常重新抛出，交给调用它的方法：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	statements;</span><br><span class="line">&#125; <span class="keyword">catch</span>(TheException ex) &#123;</span><br><span class="line">	perform operations before exits;</span><br><span class="line">	<span class="keyword">throw</span> ex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h3 id="变量的作用域">变量的作用域</h3><ul>
-<li>类的实例变量和静态变量称为<code>类属变量（class&#39;s variavble，常称为类变量）</code>或<code>数据域（data field）</code>。<br>定义在方法内部的变量称为局部变量。</li>
-<li>类属变量的作用域是整个类，局部变量的作用域是方法体内。</li>
-<li>如果局部变量和一个类属变量具有相同的名字，那么局部变量优先，同名的类属变量将会被隐藏。<strong>（就近原则）</strong></li>
+<h3 id="finally子句">finally子句</h3><ul>
+<li>有时，不论异常是否出现或者是否被捕获，都希望执行某些代码。可以使用如下结构实现：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	statements;</span><br><span class="line">&#125; <span class="keyword">catch</span> (TheException ex) &#123;</span><br><span class="line">	handling ex;</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	finalStatements;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h3 id="this关键字">this关键字</h3><p>有时需要在方法中引用类属的<code>隐藏变量（hidden variable）</code>。</p>
+<p><strong>使用finally子句时可能会忽略catch子句。</strong></p>
+<h3 id="何时使用异常">何时使用异常</h3><p>当必须处理不可预料的错误时应该使用try-catch语句块，不要用try-catch块处理简单的、可预料的情况。</p>
+<h3 id="创建自己的异常类">创建自己的异常类</h3><p>可以通过扩展Exception类或其子类来创建自己的异常类。</p>
+<h3 id="断言">断言</h3><p><code>断言（assertion）</code>是Java的一个语句，它允许对程序提出一个判断（假设）。断言包含一个布尔表达式，在程序运行中它应该是真。</p>
 <ul>
-<li>隐藏的静态变量可以通过“类名.静态变量”的方式引用。隐藏的实例变量需要使用关键字<code>this</code>来引用。</li>
+<li>断言用于确保程序的正确性，避免逻辑错误。</li>
+<li>声明断言：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> assertion;</span><br><span class="line">or</span><br><span class="line"><span class="keyword">assert</span> assertion:detailMessage;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h3 id="对象数组">对象数组</h3><p>数组中的元素可以为对象，要初始化对象数组，可以使用for循环。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">	Objects[i] = <span class="keyword">new</span> Object();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="类的抽象和封装">类的抽象和封装</h3><ul>
-<li><code>类抽象（class abstraction）</code>是将类的实现和使用分离。类的创建者提供了类的描述，让使用者明白如何使用类。从类外可以访问的方法和数据域的全体，以及对这些成员如何使用的描述，合称为<code>类的合约（class&#39;s contract）</code>。</li>
-<li><code>类的封装（class encapsulation）</code>是将类的实现细节包装好，对用户隐藏起来，用户不需要知道如何实现的，仅需要知道如何使用即可。</li>
-</ul>
-<h3 id="内部类">内部类</h3><ul>
-<li><code>内部类(inner class)</code>或者叫<code>嵌入类（nested class）</code>，是一种在其他类的内部定义的类。</li>
-<li>内部类可以引用包含在它的外部类中的数据和方法。</li>
-<li>内部类只是用来支持其外部类的工作。</li>
-<li>内部类可以声明为public、protected或private，其意义与用在类的其他成员上相同。</li>
-<li>内部类可以声明为静态的static。可以使用外部类的类名来访问静态的内部类，静态内部类不能访问外部类的非静态成员。</li>
-<li><p>从另外的类中创建内部类的对象：</p>
+<p>其中assertion是一个布尔表达式，detailMessage是一个基本类型值或一个对象值。</p>
 <ul>
-<li><p>如果内部类是非静态的，必须先创建外部类的实例，然后使用如下语法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">外部类.内部类 内部类对象名 = 外部类对象.new 内部类();</span><br></pre></td></tr></table></figure>
+<li><p>运行带断言的程序</p>
+<ul>
+<li><p>默认情况下，断言在运行时不起作用。为使它们有效，使用开关<code>-enableassertions</code>或其缩写<code>-ea</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -ea xxx</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>如果内部类是静态的，使用如下语法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">外部类.内部类 内部类对象名 = <span class="keyword">new</span> 外部类对象.内部类();</span><br></pre></td></tr></table></figure>
+<li><p>断言可以有选择地激活，在类层次或包层次起作用或不起作用。使它不起作用的开关是<code>-disableassertions</code>,或其缩写<code>-da</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -ea:package1 -da:Class1 xxx</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
+</ul>
+<h3 id="使用异常处理或断言">使用异常处理或断言</h3><ul>
+<li>不应该使用断言代替异常处理。异常处理用于在程序运行期间处理非常环境，断言是要确保程序的正确性。</li>
+<li>异常处理针对程序的健壮性，而断言涉及程序的正确性。</li>
+<li>不要使用断言检测public方法的参数。传给public方法的有效参数被认为是方法合约的一部分。</li>
+<li>使用断言进一步确认假设。这将加强对程序正确的的确认。</li>
+<li>将断言放到没有缺省情况的switch语句中。</li>
 </ul>
 <hr>
 <h2 id="复习小结">复习小结</h2><ul>
-<li>在面向过程程序设计语言中，数据和方法是分离的，但是在面向对象语言中，数据和方法定义在同一个类当中。</li>
-<li>引用型数据的默认值是<code>null</code>,数值型的默认值是<code>0</code>，boolean型的默认值是<code>false</code>，char型的默认值是<code>‘\u0000’</code>。</li>
-<li>通过引用变量引用一个对象之前，必须先创建该对象。如果引用一个没有创建的对象，会引起运行错误<code>NullPointerException</code>。</li>
-<li>通过数据域的封装，原类中的数据不会被改变，仅在外部类调用时临时修改。</li>
-<li>如何判断一个变量或方法定义为实例的还是静态的？<br>如果一个变量或方法依赖于类的具体实例，应该定义为实例变量或实例方法。如果一个变量或方法不依赖羽类的具体实例，就该定义为静态变量或静态方法。</li>
-<li>如何在内存中区分对象和类？<ul>
-<li>类是静态的概念，位于代码区</li>
-<li>对象是new出来的，位于堆内存。类的每个成员变量在不同的对象中都有不同的值（除了静态变量），而方法只有一份，执行的时候才占用内存。<br>堆内存是程序运行时动态分配的内存。</li>
-</ul>
-</li>
-<li>非静态方法是依据不同的对象进行调用。</li>
-<li>静态成员变量存在于<code>data seg</code>区。</li>
+<li>从一个通用父类可以派生出多种异常类。如果一个catch子句可以捕获一个父类的异常对象，它就能捕获那个父类所有子类的异常对象。</li>
+<li>在catch字句中指定异常的顺序是非常重要的。一般遵循从子类异常到父类异常的顺序。</li>
 </ul>
 <hr>
-<h2 id="编程练习">编程练习</h2><p>习题6.1 6.3 6.5 6.7 6.8 6.11 6.12 6.13源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter6/src" target="_blank" rel="external">chapter6</a></p>
+<h2 id="编程练习">编程练习</h2><p>习题15.5源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter15/src" target="_blank" rel="external">chapter15</a></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div></span>
       
@@ -461,17 +452,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/20/Java学习总结-第五章-数组/" rel="next" title="Java学习总结--第五章 数组">
-                <i class="fa fa-chevron-left"></i> Java学习总结--第五章 数组
+              <a href="/2016/01/29/Java学习总结-第十章-面向对象建模/" rel="next" title="Java学习总结--第十章 面向对象建模">
+                <i class="fa fa-chevron-left"></i> Java学习总结--第十章 面向对象建模
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/26/Java学习总结-第七章-字符串/" rel="prev" title="Java学习总结-第七章 字符串">
-                Java学习总结-第七章 字符串 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -486,10 +473,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/01/26/Java学习总结-第六章-对象和类/"
-     data-title="Java学习总结--第六章 对象和类"
+        <div class="ds-share flat" data-thread-key="2016/01/30/Java学习总结-第十五章-异常和断言/"
+     data-title="Java学习总结--第十五章 异常和断言"
      data-content=""
-     data-url="http://www.whtis.com/2016/01/26/Java学习总结-第六章-对象和类/">
+     data-url="http://www.whtis.com/2016/01/30/Java学习总结-第十五章-异常和断言/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -517,8 +504,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/26/Java学习总结-第六章-对象和类/"
-           data-title="Java学习总结--第六章 对象和类" data-url="http://www.whtis.com/2016/01/26/Java学习总结-第六章-对象和类/">
+      <div class="ds-thread" data-thread-key="2016/01/30/Java学习总结-第十五章-异常和断言/"
+           data-title="Java学习总结--第十五章 异常和断言" data-url="http://www.whtis.com/2016/01/30/Java学习总结-第十五章-异常和断言/">
       </div>
     
   </div>
@@ -633,7 +620,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象和类"><span class="nav-number">1.1.</span> <span class="nav-text">对象和类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造方法"><span class="nav-number">1.2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的访问"><span class="nav-number">1.3.</span> <span class="nav-text">对象的访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性修饰符、访问器和修改器"><span class="nav-number">1.4.</span> <span class="nav-text">可见性修饰符、访问器和修改器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据域的封装（data_field_encapsulation）"><span class="nav-number">1.5.</span> <span class="nav-text">数据域的封装（data field encapsulation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#永久对象和类"><span class="nav-number">1.6.</span> <span class="nav-text">永久对象和类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给方法传递对象参数"><span class="nav-number">1.7.</span> <span class="nav-text">给方法传递对象参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态变量、常量和静态方法"><span class="nav-number">1.8.</span> <span class="nav-text">静态变量、常量和静态方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的作用域"><span class="nav-number">1.9.</span> <span class="nav-text">变量的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this关键字"><span class="nav-number">1.10.</span> <span class="nav-text">this关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象数组"><span class="nav-number">1.11.</span> <span class="nav-text">对象数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的抽象和封装"><span class="nav-number">1.12.</span> <span class="nav-text">类的抽象和封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部类"><span class="nav-number">1.13.</span> <span class="nav-text">内部类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习小结"><span class="nav-number">2.</span> <span class="nav-text">复习小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程练习"><span class="nav-number">3.</span> <span class="nav-text">编程练习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常和异常类型"><span class="nav-number">1.1.</span> <span class="nav-text">异常和异常类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常处理"><span class="nav-number">1.2.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新抛出异常"><span class="nav-number">1.3.</span> <span class="nav-text">重新抛出异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finally子句"><span class="nav-number">1.4.</span> <span class="nav-text">finally子句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#何时使用异常"><span class="nav-number">1.5.</span> <span class="nav-text">何时使用异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建自己的异常类"><span class="nav-number">1.6.</span> <span class="nav-text">创建自己的异常类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#断言"><span class="nav-number">1.7.</span> <span class="nav-text">断言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用异常处理或断言"><span class="nav-number">1.8.</span> <span class="nav-text">使用异常处理或断言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习小结"><span class="nav-number">2.</span> <span class="nav-text">复习小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程练习"><span class="nav-number">3.</span> <span class="nav-text">编程练习</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

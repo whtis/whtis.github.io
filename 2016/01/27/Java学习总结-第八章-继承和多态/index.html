@@ -67,7 +67,7 @@
 主要内容在面向对象程序设计中，可以由已有的类派生出子类，这叫做继承（inheritance）。本章介绍继承的概念。着重理解父类和子类、关键字super的用法以及object类，了解多态和动态绑定、一般程序设计以及对象转换，介绍修饰符protect和final。
 父类和子类
 在面向对象程">
-<meta property="og:updated_time" content="2016-01-28T05:42:42.666Z">
+<meta property="og:updated_time" content="2016-01-28T10:44:49.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习总结-第八章 继承和多态">
 <meta name="twitter:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
@@ -418,7 +418,7 @@
 <li><p>finalize()方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>当一个对象编程垃圾时，finalize方法会被该对象的垃圾回收程序调用。</li>
+<li>当一个对象变成垃圾时，finalize方法会被该对象的垃圾回收程序调用。</li>
 <li>默认情况下，finalize方法不做任何事。如果必要，子类应该覆盖finalize方法，释放系统资源或进行其他清洁工作。<br><strong>finalize方法是有Java虚拟机调用的，在自己的程序中不要书写任何调用该方法的代码。</strong></li>
 </ul>
 </li>
@@ -443,6 +443,7 @@
 <h2 id="复习小结">复习小结</h2><ul>
 <li>子类不是父类的自给，子类可以在父类的基础上进行扩展。</li>
 <li>如果一个类设计成子类，最好提供一个无参构造方法以避免程序错误。</li>
+<li>多态存在的条件：<br>1、要有继承<br>2、要有重写<br>3、父类引用指向子类对象</li>
 </ul>
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题8.2 8.4源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter8/src" target="_blank" rel="external">chapter8</a></p>
@@ -475,6 +476,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/28/Java学习总结-第九章-抽象类和接口/" rel="prev" title="Java学习总结--第九章 抽象类和接口">
+                Java学习总结--第九章 抽象类和接口 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -565,7 +570,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
