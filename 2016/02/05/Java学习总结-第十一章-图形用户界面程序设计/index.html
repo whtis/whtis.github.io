@@ -55,29 +55,28 @@
 
 <meta name="description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
 
-主要内容本章介绍了数组的基本知识。数组用于存储一个元素个数和类型固定的有序集，并提供对这些数据进行处理的各种方法。
-数组
-声明数组： 数据类型[] 数组名
-数组创建后，数组元素通过下标来访问。数组下标是基于0的（0-based），因此数组的下表最大值是arrayObject.lengt">
+主要内容本章介绍Java GUI程序设计基础。讨论GUI组件以及它们的关系，介绍容器和布局管理器、颜色、字体、以及几何图形的绘制。
+GUI组件
+重型组件(heavyweight component)：抽象窗口组件(Abstract Window Tookit,AWT)称为重型组件，因为">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习总结--第五章 数组">
-<meta property="og:url" content="http://www.whtis.com/2016/01/20/Java学习总结-第五章-数组/index.html">
+<meta property="og:title" content="Java学习总结-第十一章 图形用户界面程序设计">
+<meta property="og:url" content="http://www.whtis.com/2016/02/05/Java学习总结-第十一章-图形用户界面程序设计/index.html">
 <meta property="og:site_name" content="whtis's blog">
 <meta property="og:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
 
-主要内容本章介绍了数组的基本知识。数组用于存储一个元素个数和类型固定的有序集，并提供对这些数据进行处理的各种方法。
-数组
-声明数组： 数据类型[] 数组名
-数组创建后，数组元素通过下标来访问。数组下标是基于0的（0-based），因此数组的下表最大值是arrayObject.lengt">
-<meta property="og:updated_time" content="2016-02-08T08:26:04.546Z">
+主要内容本章介绍Java GUI程序设计基础。讨论GUI组件以及它们的关系，介绍容器和布局管理器、颜色、字体、以及几何图形的绘制。
+GUI组件
+重型组件(heavyweight component)：抽象窗口组件(Abstract Window Tookit,AWT)称为重型组件，因为">
+<meta property="og:image" content="http://www.whtis.com/GUI程序设计类层次图.jpg">
+<meta property="og:image" content="http://www.whtis.com/FontMetics类确定字体属性.jpg">
+<meta property="og:updated_time" content="2016-02-10T12:55:27.298Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习总结--第五章 数组">
+<meta name="twitter:title" content="Java学习总结-第十一章 图形用户界面程序设计">
 <meta name="twitter:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
 
-主要内容本章介绍了数组的基本知识。数组用于存储一个元素个数和类型固定的有序集，并提供对这些数据进行处理的各种方法。
-数组
-声明数组： 数据类型[] 数组名
-数组创建后，数组元素通过下标来访问。数组下标是基于0的（0-based），因此数组的下表最大值是arrayObject.lengt">
+主要内容本章介绍Java GUI程序设计基础。讨论GUI组件以及它们的关系，介绍容器和布局管理器、颜色、字体、以及几何图形的绘制。
+GUI组件
+重型组件(heavyweight component)：抽象窗口组件(Abstract Window Tookit,AWT)称为重型组件，因为">
 
 
 
@@ -89,7 +88,7 @@
   };
 </script>
 
-  <title> Java学习总结--第五章 数组 | whtis's blog </title>
+  <title> Java学习总结-第十一章 图形用户界面程序设计 | whtis's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -279,7 +278,7 @@
             
             
               
-                Java学习总结--第五章 数组
+                Java学习总结-第十一章 图形用户界面程序设计
               
             
           </h1>
@@ -288,8 +287,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-20T19:59:25+08:00" content="2016-01-20">
-              2016-01-20
+            <time itemprop="dateCreated" datetime="2016-02-05T22:17:17+08:00" content="2016-02-05">
+              2016-02-05
             </time>
           </span>
 
@@ -314,8 +313,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/20/Java学习总结-第五章-数组/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/20/Java学习总结-第五章-数组/" itemprop="commentsCount"></span>
+                <a href="/2016/02/05/Java学习总结-第十一章-图形用户界面程序设计/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/05/Java学习总结-第十一章-图形用户界面程序设计/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -336,58 +335,127 @@
       
         <span itemprop="articleBody"><p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
-<h2 id="主要内容">主要内容</h2><p>本章介绍了数组的基本知识。数组用于存储一个元素个数和类型固定的有序集，并提供对这些数据进行处理的各种方法。</p>
-<h3 id="数组">数组</h3><ul>
-<li>声明数组： 数据类型[] 数组名</li>
-<li>数组创建后，数组元素通过下标来访问。数组下标是<code>基于0的（0-based）</code>，因此数组的下表最大值是arrayObject.length-1。</li>
-<li><p>增强的for循环可以在不用下标变量的情况下访问整个数组，用法如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(elementType value:arrayRefVar) &#123;</span><br><span class="line">   <span class="comment">//process the value  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数组初始化：数据类型[] 数组变量 = {直接量1，直接量2，···，直接量n}；<br>数组初始化语句中不使用运算符new。使用时，必须将声明、创建、初始化数组都放在一个语句中。</p>
-</li>
+<h2 id="主要内容">主要内容</h2><p>本章介绍Java GUI程序设计基础。讨论GUI组件以及它们的关系，介绍容器和布局管理器、颜色、字体、以及几何图形的绘制。</p>
+<h3 id="GUI组件">GUI组件</h3><ul>
+<li><code>重型组件(heavyweight component)</code>：<code>抽象窗口组件(Abstract Window Tookit,AWT)</code>称为重型组件，因为它基于同位体的解决方案非常依赖底层平台。AWT的组件通过它们各自的代理映射成平台特性（platform-specific）的组件，这些代理称为<code>同位体(peer)</code>。</li>
+<li><code>轻型组件(lightweight component)</code>：不依赖本地GUI的<code>Swing组件库(Swing components)</code>中的组件称为轻型组件，Swing组件更少地依赖目标机器上的平台，更少使用本地的GUI资源。</li>
+<li>大多数Swing组件都是直接用Java代码绘制的，而java.awt.Window或java.awt.panel子类的组件例外，它们必须使用具体平台上的本地GUI来绘制。</li>
+<li>为了区别Swing组件和AWT组件，Swing GUI组件类的开头都有前缀字母J。</li>
 </ul>
-<h3 id="数组的复制">数组的复制</h3><ul>
-<li>可以直接使用赋值语句（=）进行数组的复制，这样操作仅能够将数组的引用进行复制。</li>
-<li>复制数组中的内容有以下三种方法:<ul>
-<li>用循环语句分别复制数组的每一个元素。</li>
-<li>使用System类中的静态方法arraycopy（）方法。</li>
-<li>使用clone（）方法复制数组。</li>
-</ul>
-</li>
-</ul>
-<h3 id="数组的排序">数组的排序</h3><ul>
-<li>选择排序法</li>
-<li>冒泡排序法</li>
-<li>插入排序法<br>具体算法见<a href="http://www.whtis.com/2015/12/03/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95/">排序的几种写法</a><br><strong>在java.util.Array类中，Java提供了几个排序的重载方法，可以用来对int型、double型、char型、short型、long型和float型数组进行排序。</strong></li>
-</ul>
-<h3 id="数组的查找">数组的查找</h3><ul>
-<li><p>线性查找</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">listSearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lists.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (lists[i] == key) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>二分法查找：前提是数组元素必须已经排序。</p>
+<h3 id="Java_GUI_API">Java GUI API</h3><p><img src="GUI程序设计类层次图.jpg" alt="Java GUI程序设计类层次图"><br>为开发GUI程序所做的Java API设计是应用类、继承性和接口的一个优秀范例。GUI类的分类如下：</p>
 <ul>
-<li><p>二分法的迭代实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">          <span class="keyword">if</span> (key == lists[(high + low) / <span class="number">2</span>]) &#123;</span><br><span class="line">              <span class="keyword">return</span> (high + low) / <span class="number">2</span>;</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key &gt; lists[(high + low) / <span class="number">2</span>]) &#123;</span><br><span class="line">              low = ((high + low) / <span class="number">2</span>) + <span class="number">1</span>;</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; lists[(high + low) / <span class="number">2</span>]) &#123;</span><br><span class="line">              high = ((high + low) / <span class="number">2</span>) - <span class="number">1</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> -low - <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<li><code>容器类(container class)</code>：如JFrame、Jpanel和Japplet等，用来包含其他组件。<ul>
+<li>Container用来组织组件。根据要求的位置和格式，布局管理器把组件定位放置到容器上。框架、面板和applet都是容器的例子。</li>
+<li>JFrame是不能包含在其他窗口内的窗口。在Java GUI应用程序中，它是包含其他Swing用户界面组件的容器。</li>
+<li>JDialog是一个弹出式信息窗口。一般用作接收用户附加信息或公告事件发生通知的临时窗口。</li>
+<li>JApplet是Applet的一个子类。要创建基于Swing的Java Applet必须扩展JApplet。</li>
+<li>Jpanel是一个存放用户界面组件的不可见容器。面板可以嵌套，可以把面板放在包含面板的容器中。Jpanel也可以作为画布来画图。</li>
+</ul>
 </li>
-<li><p>二分法的递归实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">recursiveBinarySearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (low &gt; high) &#123;</span><br><span class="line">          <span class="keyword">return</span> -low - <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">int</span> mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">      <span class="keyword">if</span> (key &lt; lists[mid]) &#123;</span><br><span class="line">          <span class="keyword">return</span> recursiveBinarySearch(lists, key, low, mid - <span class="number">1</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key == lists[mid]) &#123;</span><br><span class="line">          <span class="keyword">return</span> mid;</span><br><span class="line">      &#125; <span class="keyword">else</span></span><br><span class="line">          <span class="keyword">return</span> recursiveBinarySearch(lists, key, mid + <span class="number">1</span>, high);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<li><code>辅助类(helper class)</code>：如Graphics、Color、Font、FontMetrics和Dimension等，是组件和容器用来绘制和放置对象的。它们都不是Component的子类。<ul>
+<li>Graphics是一个抽象类，它提供一个图形环境，用于绘制字符串、直线和简单几何图形。</li>
+<li>Color类用来处理图形组件的颜色。</li>
+<li>Font指定GUI组件上文本和图形的字体。</li>
+<li>FontMetrics是一个用于获取字体属性的抽象类。</li>
+<li>Dimension将组件的宽度和高度（精度为整数）封装在单个对象中。</li>
+<li>LayoutManager是一个接口，它的实例指定组件在容器中的摆放方式。<br><strong>辅助类包含在java.awt包中。Swing组件不能取代AWT的全部类，只能替代AWT的GUI组件类，辅助类仍保持不变。</strong></li>
+</ul>
 </li>
+<li><code>组件类(component)</code>：图形用户界面（GUI）组件类，如JButton、JTextField、JTextArea、JComboBox、JList、JRadioButton和JMenu等，都是JComponent类的子类。<br><strong>JFrame、Japplet、JDialog和JComponent类及其子类都组织在javax.swing中。</strong></li>
+</ul>
+<h3 id="框架JFrame">框架JFrame</h3><ul>
+<li><p>创建框架</p>
+<ul>
+<li><p>方法一：使用JFrame的构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JFrame frame = <span class="keyword">new</span> JFrame();</span><br><span class="line"><span class="comment">// JFrame frame = new JFrame(String title);</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二：扩展JFrame框架，创建自己的框架</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其中，方法二较好，理由如下：<br>1、创建一个GUI应用程序就是要创建一个框架，所以扩展JFrame类来定义一个框架是很自然的。<br>2、如果需要的话，这个新类可以重复使用。</p>
+</li>
+<li>在框架中添加组件<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.awt.Container container = frame.getContentPane();  <span class="comment">//返回框架的内容窗格</span></span><br><span class="line">container.add(xxx);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>组件是由内容窗格的布局管理器放置在框架上的，而内容窗格默认的布局管理器是将按钮放到中央。</strong></p>
+<ul>
+<li>框架居中<br>默认情况下，框架在屏幕的左上角显示。可以使用JFrame类中的setLocation（x，y）方法调整框架位置。要使框架居中，就要知道屏幕的宽和高，这可以由java.awt.Toolkit类得到：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();</span><br><span class="line"><span class="keyword">int</span> screenWidth = screenSize.width;</span><br><span class="line"><span class="keyword">int</span> screenHeight = screenSize.height;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>java.awt.Dimension类将组件的宽和高（精度为整数）封装在单个对象中。使用<code>getWidth()</code>和<code>getHeight()</code>方法获取组件的宽和高。</p>
+<h3 id="布局管理器">布局管理器</h3><p>Java的布局管理器提供了一层抽象，自动把用户界面映射到所有的窗口系统。其它窗口系统一般使用<code>硬编码（hard-code）</code>的像素尺寸来安排用户界面组件。</p>
+<ul>
+<li>布局管理器是使用布局管理器类创建的，每一个布局管理器类都实现了LayoutManager接口。</li>
+<li>使用<code>setLayout（layoutManager）</code>方法在容器中设置布局管理器。</li>
+<li>布局管理器的种类：<ul>
+<li>FlowLayout（流式布局管理器）：按照添加的顺序，由左到右将组件排列在容器中，放满一行时，就开始新的一行。<ul>
+<li>可以使用常量来指定对齐方式：FlowLayout.RIGHT、FlowLayout.CENTER和FlowLayout.LEFT。</li>
+<li>public FlowLayout（int align，int hGap，int vGap）根据指定的对齐方式、水平间距和垂直间距构造一个新的FlowLayout对象。间距是指组件之间用像素度量的距离。</li>
+<li>public FlowLayout（int align）</li>
+<li>public FlowLayout（）使用默认的构造方法创建，默认的对齐方式是居中，默认的水平间距和垂直间距都是5个像素。</li>
+</ul>
+</li>
+<li>GridLayout（网格布局管理器）：根据构造方法定义的行数和列数，布局管理器GridLayout以网格（矩阵）的形式排列组件。<ul>
+<li>public GridLayout（int rows,int columns,int hGap,int vGap）  </li>
+<li>public GridLayout（int rows,int columns）组件在容器上的水平和垂直间距为0。  </li>
+<li>public GridLayout（）创建的新的GridLayout对象只有一行。<br><strong>行数或列数可以为零，但不能两个同时为零。如果一个为零另一个不为零，则不为零的维数已经固定，为零的维数由布局管理器动态地决定。</strong></li>
+</ul>
+</li>
+<li>BordLayout（板式布局管理器）：将窗口分为五部分：东区、南区、西区、北区和中央。由常量EAST、WEST、NORTH、SOUTH决定组件的位置。<ul>
+<li>public BorderLayout（int hGap，int vGap）</li>
+<li>public BorderLayout（） </li>
+<li>组件根据它们最合适的尺寸和在容器中的位置来放置。可以随意扩展拉伸。<br><strong>在FlowLayout和GridLayout两个布局管理器中，组件添加到容器中的顺序是很重要的，它决定了组件在容器中的位置。</strong></li>
 </ul>
 </li>
 </ul>
-<h3 id="多维数组">多维数组</h3><ul>
-<li>声明：数据类型[][] 数组引用变量<br>-数组的长度：数组的长度是指数组中元素的个数。<code>n</code>维数组是由<code>k</code>个<code>n-1</code>维数组构成，那么n维数组的个数就是<code>k</code>。例如：<br>x = new int[2][3][5],则x[0]和x[1]是二维数组，x的长度就是2。</li>
-<li>锯齿数组<br>二维数组中，每一行本身是一个数组。因而各行就可以有不同的长度，这样的数组称为锯齿数组。例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[][] x = &#123;</span><br><span class="line">	&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">5</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>布局管理器的属性<br>布局管理器的属性可以动态的改变。可以在创建后使用set方法改变其属性。</li>
+<li>validate和doLayout方法<ul>
+<li>每一时刻，一个容器只能有一个布局管理器。可以使用setLayout（aNewLayout）方法改变容器的布局管理器，然后使用validate()方法强迫容器根据新的布局管理器重新摆放其中的组件。</li>
+<li>如果使用相同布局管理器但是改变了它的属性，需要使用doLayout（）方法强迫容器根据布局管理器的新属性对组件重新放置。</li>
+</ul>
+</li>
+</ul>
+<h3 id="颜色类Color">颜色类Color</h3><ul>
+<li>颜色由红、绿、蓝三原色构成，每种原色的强度都用一个byte值表示，从0（最暗）到255（最亮）。这就是通常所说的<code>RGB模式(RGB model)</code>。</li>
+<li>java将13种标准色定义为常量，可以使用常量设定颜色。自JDK 1.4开始，新常量均为大写。</li>
+</ul>
+<h3 id="字体类Font">字体类Font</h3><ul>
+<li>使用java.awt.Font类来创建字体对象，并使用Component类中的setFont方法设置组件的字体。</li>
+<li>public Font（String name，int style，int size）</li>
+<li>可以使用系统上的其它字体创建字体对象。为了找到系统上的字体，需要使用`java.awt.GraphicsEnvironment类的静态方法getLocalGraphicsEnvironment（）类来创建它的一个实例。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();</span><br><span class="line">String[] fontnames = e.getAvailableFontFamilyNames();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; fontnames.length; i++) &#123;</span><br><span class="line">	System.out.println(fontnames[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="使用面板作子容器">使用面板作子容器</h3><ul>
+<li>使用Java用户图形界面程序设计，可以将窗口分成几个面板，面板是分组放置用户界面组件的子容器。</li>
+<li>面板不可见的，可以用作组织组件的小容器，以达到要求的布局效果。 </li>
+</ul>
+<h3 id="在面板上绘制图形">在面板上绘制图形</h3><p>要在面板上画图，需要创建一个由JPanel扩展的新类，并且覆盖paintComponent方法告知面板如何画图。虽然可以在框架或applet中使用paint方法直接画图，但是最好使用JPanel绘制字符串和图形并显示图像，用这种方法画图不会影响其他组件。</p>
+<h3 id="利用FontMetrics类居中显示">利用FontMetrics类居中显示</h3><ul>
+<li>FontMetrics类可以对特定字体的字符串测量出精确的宽度和高度。FontMetics可以度量如下属性：<ul>
+<li>Leading 文本行之间的距离</li>
+<li>Ascent 表示字符从基线到其顶端的高度</li>
+<li>Descent 表示下降字符如j、y、g等从基线到底端的距离<br><img src="FontMetics类确定字体属性.jpg" alt="FontMetics类确定字体属性"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">paintComponent</span><span class="params">(Graphics g)</span> </span>&#123;</span><br><span class="line">	FontMetrics fm = g.getFontMetrics();</span><br><span class="line">	<span class="keyword">int</span> stringWidth = fm.stringWidth(<span class="string">"Welcome to Java"</span>);</span><br><span class="line">	<span class="keyword">int</span> stringAscent = fm.getAscent();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> xCoordinate = getWidth/<span class="number">2</span> - stringWidth/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">int</span> yCoordinate = getHeight/<span class="number">2</span> + StringAscent/<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 </li>
 </ul>
 <hr>
 <h2 id="复习小结">复习小结</h2><ul>
-<li>数组变量只存储着数组的引用。</li>
-<li>越界访问数组是常见的编程错误。它出现错误时的Exception是ArrayIndexOutOfBoundsException，通常称为<code>过一错误（off-by-one error）</code></li>
-<li>使用语法new int[5][]创建数组时，第一个下标必须给定。new int[][]是错误的。</li>
+<li>Java图形界面设计应该遵循的顺序：面板（JPanel）→容器（Container）→框架（JFrame）</li>
+<li><del>面板中设置背景色似乎不起作用。（本章创建的JPanel子类MessagePanel不起作用，其它的起作用，原因未知）</del><ul>
+<li>猜测原因：MessagePanel类重写了paintComponent（）方法，该方法与repaint（）方法密切相关，导致无法重新绘制新背景。</li>
+</ul>
+</li>
+<li>java.awt.Component 是所有GUI组件的根类。</li>
+<li>java.awt.Container 是所有容器类的根类。</li>
+<li>java.awt.Dimension 是度量GUI组件尺寸的一个类。</li>
+<li>默认情况下，JFrame的布局管理器是BorderLayout，JPanel的布局管理器是FlowLayout。</li>
+<li>paintComponent()方法是Component类中的方法。</li>
 </ul>
 <hr>
-<h2 id="编程练习">编程练习</h2><p>习题5.5 5.7 5.12 5.14 5.15 5.16 5.25源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter5/src" target="_blank" rel="external">chapter5</a></p>
+<h2 id="编程练习">编程练习</h2><p>习题11.4源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter11/src" target="_blank" rel="external">chapter11</a><br><em>本章画图题较多，用到的时候再回来复习具体的东东吧~</em></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div></span>
       
@@ -410,16 +478,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/11/Java学习总结-第四章-方法/" rel="next" title="Java学习总结--第四章 方法">
-                <i class="fa fa-chevron-left"></i> Java学习总结--第四章 方法
+              <a href="/2016/01/30/Java学习总结-第十五章-异常和断言/" rel="next" title="Java学习总结--第十五章 异常和断言">
+                <i class="fa fa-chevron-left"></i> Java学习总结--第十五章 异常和断言
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/01/26/Java学习总结-第六章-对象和类/" rel="prev" title="Java学习总结--第六章 对象和类">
-                Java学习总结--第六章 对象和类 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/02/09/Java学习总结-第十二章-事件驱动程序/" rel="prev" title="Java学习总结--第十二章 事件驱动程序">
+                Java学习总结--第十二章 事件驱动程序 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -435,10 +503,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/01/20/Java学习总结-第五章-数组/"
-     data-title="Java学习总结--第五章 数组"
+        <div class="ds-share flat" data-thread-key="2016/02/05/Java学习总结-第十一章-图形用户界面程序设计/"
+     data-title="Java学习总结-第十一章 图形用户界面程序设计"
      data-content=""
-     data-url="http://www.whtis.com/2016/01/20/Java学习总结-第五章-数组/">
+     data-url="http://www.whtis.com/2016/02/05/Java学习总结-第十一章-图形用户界面程序设计/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -466,8 +534,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/20/Java学习总结-第五章-数组/"
-           data-title="Java学习总结--第五章 数组" data-url="http://www.whtis.com/2016/01/20/Java学习总结-第五章-数组/">
+      <div class="ds-thread" data-thread-key="2016/02/05/Java学习总结-第十一章-图形用户界面程序设计/"
+           data-title="Java学习总结-第十一章 图形用户界面程序设计" data-url="http://www.whtis.com/2016/02/05/Java学习总结-第十一章-图形用户界面程序设计/">
       </div>
     
   </div>
@@ -582,7 +650,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">1.1.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的复制"><span class="nav-number">1.2.</span> <span class="nav-text">数组的复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的排序"><span class="nav-number">1.3.</span> <span class="nav-text">数组的排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的查找"><span class="nav-number">1.4.</span> <span class="nav-text">数组的查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多维数组"><span class="nav-number">1.5.</span> <span class="nav-text">多维数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习小结"><span class="nav-number">2.</span> <span class="nav-text">复习小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程练习"><span class="nav-number">3.</span> <span class="nav-text">编程练习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GUI组件"><span class="nav-number">1.1.</span> <span class="nav-text">GUI组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java_GUI_API"><span class="nav-number">1.2.</span> <span class="nav-text">Java GUI API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#框架JFrame"><span class="nav-number">1.3.</span> <span class="nav-text">框架JFrame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布局管理器"><span class="nav-number">1.4.</span> <span class="nav-text">布局管理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#颜色类Color"><span class="nav-number">1.5.</span> <span class="nav-text">颜色类Color</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体类Font"><span class="nav-number">1.6.</span> <span class="nav-text">字体类Font</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用面板作子容器"><span class="nav-number">1.7.</span> <span class="nav-text">使用面板作子容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在面板上绘制图形"><span class="nav-number">1.8.</span> <span class="nav-text">在面板上绘制图形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用FontMetrics类居中显示"><span class="nav-number">1.9.</span> <span class="nav-text">利用FontMetrics类居中显示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习小结"><span class="nav-number">2.</span> <span class="nav-text">复习小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程练习"><span class="nav-number">3.</span> <span class="nav-text">编程练习</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

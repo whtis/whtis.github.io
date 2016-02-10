@@ -4,7 +4,7 @@
   <subtitle><![CDATA[点滴的记录，是变强的必经之路]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-01-31T12:17:44.810Z</updated>
+  <updated>2016-02-10T13:23:48.450Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -15,11 +15,223 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Java学习总结--第十二章 事件驱动程序]]></title>
+    <link href="http://www.whtis.com/2016/02/09/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F/"/>
+    <id>http://www.whtis.com/2016/02/09/Java学习总结-第十二章-事件驱动程序/</id>
+    <published>2016-02-09T15:19:47.000Z</published>
+    <updated>2016-02-10T13:23:48.450Z</updated>
+    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>所有非GUI程序都是按过程的顺序执行的，Java GUI程序设计是事件驱动的。本章介绍有关Java<code>事件驱动程序（event-driven programming）</code>的概念和技术。</p>
+<h3 id="事件和事件源">事件和事件源</h3><ul>
+<li><code>事件（event）</code>：程序发生的某些事情的信号。如：移动鼠标、点击鼠标、按照键盘键等。</li>
+<li>事件<code>源对象（source object）</code>：某组件上发生了事件，该组件就被称为源对象。</li>
+<li>一个事件是事件类的实例，事件类的根类是java.util.EventObject。可以使用该类中的<code>getSource()</code>方法获得事件源对象。</li>
+<li>如果一个组件能够发生某个事件，那么这个组件的任何子类都能够发生同样的事件。如Component类是所有GUI类的父类，因此所有GUI组件都可以发生<code>MouseEvent</code>、<code>keyEvent</code>、<code>FocusEvent</code>和<code>ComponentEvent</code>事件。<br><img src="Event事件类.jpg" alt="Event事件类.jpg"></li>
+</ul>
+<h3 id="事件的监听、注册和处理">事件的监听、注册和处理</h3><ul>
+<li>Java使用事件委托处理模型来处理事件：在源对象的外部用户行为触发事件，关心该事件的对象接收事件，后一个对象称为<code>监听器（listener）</code>。</li>
+<li>一个对象要成为源对象上事件的监听器，需要具备两个条件：<ul>
+<li>监听器对象的类必须实现相应的事件监听接口（xListener）。监听器接口包含处理事件的方法，这种方法称为<code>处理器（handler）</code>。</li>
+<li>监听对象必须由源对象注册。注册方法依据事件的类型而定。一个源对象拥有一个监听器列表，通过调用监听器对象上的处理器，通知所有的已注册监听器对事件做出响应。</li>
+</ul>
+</li>
+</ul>
+<h3 id="鼠标事件">鼠标事件</h3><p>在一个组件上按下、释放、点击、移动、拖动鼠标时就会产生鼠标事件。鼠标的事件对象捕获事件。</p>
+<ul>
+<li>Java提供了两个处理鼠标事件的监听器接口<code>MouseListener</code>和<code>MouseMotionListener</code>。前者监听鼠标的按下、释放、移入、移出或点击等行为，后者监听鼠标的拖动和移动等行为。</li>
+<li>java.awt.Point类封装平面上一个点的信息。可以用该类辅助处理鼠标事件。</li>
+<li>MouseEvent类继承自InputEvent类。</li>
+</ul>
+<h3 id="键盘事件">键盘事件</h3><ul>
+<li>键盘事件中捕获的键都是表示字符统一码的整数，包括字母与数字键、功能键、Tab键和回车键等。它们可以分别由<code>getKeyChar()</code>和<code>getKeyCode()</code>方法获得。</li>
+<li>当击打一个统一码字符键时，就会调用<code>KeyTyped</code>处理器。<br><strong>仅有一个焦点组件能够接收KeyEvent、要使一个组件成为焦点组件，需要将属性isFocusable设置为true。</strong></li>
+</ul>
+<h3 id="定时器类Timer">定时器类Timer</h3><p>定时器类java.swing.Timer就是一个按照预定频率触发ActionEvent事件的源组件，它不是GUI组件。<br><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Timer</span>(delay, actionEvent).start();</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>在事件处理中，忘记注册监听器是一个常见的错误。如果源对象没法通知监听器，监听器就不能响应事件。</li>
+<li>如果一个监听器被源对象注册两次，当事件发生时，监听器的处理方法将会被调用两次。</li>
+<li>源对象和监听器对象可能是相同的对象。（同一个类）</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li><p>习题12.7：<br>本题的难点在于所画的线需要从框架的中心开始。由于setvisible()方法才会调用paint()方法画图，在此之前，无论是JFrame还是JPanel，使用getWidth()和getHeight()方法得到的值都为0，因此需要想办法在框架画出来之后设置起始点的坐标。方法有两种：</p>
+<ul>
+<li><p>方法一：监听键盘事件的方法中，使用除功能键以外的键进行初始化设置，此方法不提倡；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">   <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">keyPressed</span><span class="params">(KeyEvent e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (e.getKeyCode()) &#123;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_UP:</span><br><span class="line">                y -= <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_DOWN:</span><br><span class="line">                y += <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_LEFT:</span><br><span class="line">                x -= <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_RIGHT:</span><br><span class="line">                x += <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"><span class="comment">//            default:</span></span><br><span class="line"><span class="comment">//                x = this.getWidth() / 2;</span></span><br><span class="line"><span class="comment">//                y = this.getHeight() / 2;</span></span><br><span class="line"><span class="comment">//                lineStart.move(x,y);</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二：添加窗口监听事件，这样就能确保在最开始将坐标设置好。由于JPanel是不可见的，无法实现WindowListener接口，因此在JFrame实现该接口，并在相应的方法中传入正确的框架中心坐标。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $12<span class="title">_7</span> <span class="keyword">extends</span> <span class="title">JFrame</span> <span class="keyword">implements</span> <span class="title">WindowListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> $<span class="number">12_7</span>() <span class="keyword">throws</span> HeadlessException &#123;</span><br><span class="line">      <span class="keyword">this</span>.addWindowListener(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowActivated</span><span class="params">(WindowEvent e)</span> </span>&#123;</span><br><span class="line">      PaintPanel p = <span class="keyword">new</span> PaintPanel(<span class="keyword">this</span>.getWidth() / <span class="number">2</span>, <span class="keyword">this</span>.getHeight() / <span class="number">2</span>);</span><br><span class="line">      <span class="keyword">this</span>.getContentPane().add(p);</span><br><span class="line">      p.setFocusable(<span class="keyword">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>习题12.3 12.4 12.5 12.6 12.7 12.8源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter11/src" target="_blank" rel="external">chapter11</a></p>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>所有非GUI程序都是按过程的顺序执行的，Java GUI]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Java学习总结-第十一章 图形用户界面程序设计]]></title>
+    <link href="http://www.whtis.com/2016/02/05/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://www.whtis.com/2016/02/05/Java学习总结-第十一章-图形用户界面程序设计/</id>
+    <published>2016-02-05T14:17:17.000Z</published>
+    <updated>2016-02-10T12:55:27.298Z</updated>
+    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>本章介绍Java GUI程序设计基础。讨论GUI组件以及它们的关系，介绍容器和布局管理器、颜色、字体、以及几何图形的绘制。</p>
+<h3 id="GUI组件">GUI组件</h3><ul>
+<li><code>重型组件(heavyweight component)</code>：<code>抽象窗口组件(Abstract Window Tookit,AWT)</code>称为重型组件，因为它基于同位体的解决方案非常依赖底层平台。AWT的组件通过它们各自的代理映射成平台特性（platform-specific）的组件，这些代理称为<code>同位体(peer)</code>。</li>
+<li><code>轻型组件(lightweight component)</code>：不依赖本地GUI的<code>Swing组件库(Swing components)</code>中的组件称为轻型组件，Swing组件更少地依赖目标机器上的平台，更少使用本地的GUI资源。</li>
+<li>大多数Swing组件都是直接用Java代码绘制的，而java.awt.Window或java.awt.panel子类的组件例外，它们必须使用具体平台上的本地GUI来绘制。</li>
+<li>为了区别Swing组件和AWT组件，Swing GUI组件类的开头都有前缀字母J。</li>
+</ul>
+<h3 id="Java_GUI_API">Java GUI API</h3><p><img src="GUI程序设计类层次图.jpg" alt="Java GUI程序设计类层次图"><br>为开发GUI程序所做的Java API设计是应用类、继承性和接口的一个优秀范例。GUI类的分类如下：</p>
+<ul>
+<li><code>容器类(container class)</code>：如JFrame、Jpanel和Japplet等，用来包含其他组件。<ul>
+<li>Container用来组织组件。根据要求的位置和格式，布局管理器把组件定位放置到容器上。框架、面板和applet都是容器的例子。</li>
+<li>JFrame是不能包含在其他窗口内的窗口。在Java GUI应用程序中，它是包含其他Swing用户界面组件的容器。</li>
+<li>JDialog是一个弹出式信息窗口。一般用作接收用户附加信息或公告事件发生通知的临时窗口。</li>
+<li>JApplet是Applet的一个子类。要创建基于Swing的Java Applet必须扩展JApplet。</li>
+<li>Jpanel是一个存放用户界面组件的不可见容器。面板可以嵌套，可以把面板放在包含面板的容器中。Jpanel也可以作为画布来画图。</li>
+</ul>
+</li>
+<li><code>辅助类(helper class)</code>：如Graphics、Color、Font、FontMetrics和Dimension等，是组件和容器用来绘制和放置对象的。它们都不是Component的子类。<ul>
+<li>Graphics是一个抽象类，它提供一个图形环境，用于绘制字符串、直线和简单几何图形。</li>
+<li>Color类用来处理图形组件的颜色。</li>
+<li>Font指定GUI组件上文本和图形的字体。</li>
+<li>FontMetrics是一个用于获取字体属性的抽象类。</li>
+<li>Dimension将组件的宽度和高度（精度为整数）封装在单个对象中。</li>
+<li>LayoutManager是一个接口，它的实例指定组件在容器中的摆放方式。<br><strong>辅助类包含在java.awt包中。Swing组件不能取代AWT的全部类，只能替代AWT的GUI组件类，辅助类仍保持不变。</strong></li>
+</ul>
+</li>
+<li><code>组件类(component)</code>：图形用户界面（GUI）组件类，如JButton、JTextField、JTextArea、JComboBox、JList、JRadioButton和JMenu等，都是JComponent类的子类。<br><strong>JFrame、Japplet、JDialog和JComponent类及其子类都组织在javax.swing中。</strong></li>
+</ul>
+<h3 id="框架JFrame">框架JFrame</h3><ul>
+<li><p>创建框架</p>
+<ul>
+<li><p>方法一：使用JFrame的构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JFrame frame = <span class="keyword">new</span> JFrame();</span><br><span class="line"><span class="comment">// JFrame frame = new JFrame(String title);</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二：扩展JFrame框架，创建自己的框架</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其中，方法二较好，理由如下：<br>1、创建一个GUI应用程序就是要创建一个框架，所以扩展JFrame类来定义一个框架是很自然的。<br>2、如果需要的话，这个新类可以重复使用。</p>
+</li>
+<li>在框架中添加组件<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.awt.Container container = frame.getContentPane();  <span class="comment">//返回框架的内容窗格</span></span><br><span class="line">container.add(xxx);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>组件是由内容窗格的布局管理器放置在框架上的，而内容窗格默认的布局管理器是将按钮放到中央。</strong></p>
+<ul>
+<li>框架居中<br>默认情况下，框架在屏幕的左上角显示。可以使用JFrame类中的setLocation（x，y）方法调整框架位置。要使框架居中，就要知道屏幕的宽和高，这可以由java.awt.Toolkit类得到：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();</span><br><span class="line"><span class="keyword">int</span> screenWidth = screenSize.width;</span><br><span class="line"><span class="keyword">int</span> screenHeight = screenSize.height;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>java.awt.Dimension类将组件的宽和高（精度为整数）封装在单个对象中。使用<code>getWidth()</code>和<code>getHeight()</code>方法获取组件的宽和高。</p>
+<h3 id="布局管理器">布局管理器</h3><p>Java的布局管理器提供了一层抽象，自动把用户界面映射到所有的窗口系统。其它窗口系统一般使用<code>硬编码（hard-code）</code>的像素尺寸来安排用户界面组件。</p>
+<ul>
+<li>布局管理器是使用布局管理器类创建的，每一个布局管理器类都实现了LayoutManager接口。</li>
+<li>使用<code>setLayout（layoutManager）</code>方法在容器中设置布局管理器。</li>
+<li>布局管理器的种类：<ul>
+<li>FlowLayout（流式布局管理器）：按照添加的顺序，由左到右将组件排列在容器中，放满一行时，就开始新的一行。<ul>
+<li>可以使用常量来指定对齐方式：FlowLayout.RIGHT、FlowLayout.CENTER和FlowLayout.LEFT。</li>
+<li>public FlowLayout（int align，int hGap，int vGap）根据指定的对齐方式、水平间距和垂直间距构造一个新的FlowLayout对象。间距是指组件之间用像素度量的距离。</li>
+<li>public FlowLayout（int align）</li>
+<li>public FlowLayout（）使用默认的构造方法创建，默认的对齐方式是居中，默认的水平间距和垂直间距都是5个像素。</li>
+</ul>
+</li>
+<li>GridLayout（网格布局管理器）：根据构造方法定义的行数和列数，布局管理器GridLayout以网格（矩阵）的形式排列组件。<ul>
+<li>public GridLayout（int rows,int columns,int hGap,int vGap）  </li>
+<li>public GridLayout（int rows,int columns）组件在容器上的水平和垂直间距为0。  </li>
+<li>public GridLayout（）创建的新的GridLayout对象只有一行。<br><strong>行数或列数可以为零，但不能两个同时为零。如果一个为零另一个不为零，则不为零的维数已经固定，为零的维数由布局管理器动态地决定。</strong></li>
+</ul>
+</li>
+<li>BordLayout（板式布局管理器）：将窗口分为五部分：东区、南区、西区、北区和中央。由常量EAST、WEST、NORTH、SOUTH决定组件的位置。<ul>
+<li>public BorderLayout（int hGap，int vGap）</li>
+<li>public BorderLayout（） </li>
+<li>组件根据它们最合适的尺寸和在容器中的位置来放置。可以随意扩展拉伸。<br><strong>在FlowLayout和GridLayout两个布局管理器中，组件添加到容器中的顺序是很重要的，它决定了组件在容器中的位置。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>布局管理器的属性<br>布局管理器的属性可以动态的改变。可以在创建后使用set方法改变其属性。</li>
+<li>validate和doLayout方法<ul>
+<li>每一时刻，一个容器只能有一个布局管理器。可以使用setLayout（aNewLayout）方法改变容器的布局管理器，然后使用validate()方法强迫容器根据新的布局管理器重新摆放其中的组件。</li>
+<li>如果使用相同布局管理器但是改变了它的属性，需要使用doLayout（）方法强迫容器根据布局管理器的新属性对组件重新放置。</li>
+</ul>
+</li>
+</ul>
+<h3 id="颜色类Color">颜色类Color</h3><ul>
+<li>颜色由红、绿、蓝三原色构成，每种原色的强度都用一个byte值表示，从0（最暗）到255（最亮）。这就是通常所说的<code>RGB模式(RGB model)</code>。</li>
+<li>java将13种标准色定义为常量，可以使用常量设定颜色。自JDK 1.4开始，新常量均为大写。</li>
+</ul>
+<h3 id="字体类Font">字体类Font</h3><ul>
+<li>使用java.awt.Font类来创建字体对象，并使用Component类中的setFont方法设置组件的字体。</li>
+<li>public Font（String name，int style，int size）</li>
+<li>可以使用系统上的其它字体创建字体对象。为了找到系统上的字体，需要使用`java.awt.GraphicsEnvironment类的静态方法getLocalGraphicsEnvironment（）类来创建它的一个实例。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();</span><br><span class="line">String[] fontnames = e.getAvailableFontFamilyNames();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; fontnames.length; i++) &#123;</span><br><span class="line">	System.out.println(fontnames[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="使用面板作子容器">使用面板作子容器</h3><ul>
+<li>使用Java用户图形界面程序设计，可以将窗口分成几个面板，面板是分组放置用户界面组件的子容器。</li>
+<li>面板不可见的，可以用作组织组件的小容器，以达到要求的布局效果。 </li>
+</ul>
+<h3 id="在面板上绘制图形">在面板上绘制图形</h3><p>要在面板上画图，需要创建一个由JPanel扩展的新类，并且覆盖paintComponent方法告知面板如何画图。虽然可以在框架或applet中使用paint方法直接画图，但是最好使用JPanel绘制字符串和图形并显示图像，用这种方法画图不会影响其他组件。</p>
+<h3 id="利用FontMetrics类居中显示">利用FontMetrics类居中显示</h3><ul>
+<li>FontMetrics类可以对特定字体的字符串测量出精确的宽度和高度。FontMetics可以度量如下属性：<ul>
+<li>Leading 文本行之间的距离</li>
+<li>Ascent 表示字符从基线到其顶端的高度</li>
+<li>Descent 表示下降字符如j、y、g等从基线到底端的距离<br><img src="FontMetics类确定字体属性.jpg" alt="FontMetics类确定字体属性"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">paintComponent</span><span class="params">(Graphics g)</span> </span>&#123;</span><br><span class="line">	FontMetrics fm = g.getFontMetrics();</span><br><span class="line">	<span class="keyword">int</span> stringWidth = fm.stringWidth(<span class="string">"Welcome to Java"</span>);</span><br><span class="line">	<span class="keyword">int</span> stringAscent = fm.getAscent();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> xCoordinate = getWidth/<span class="number">2</span> - stringWidth/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">int</span> yCoordinate = getHeight/<span class="number">2</span> + StringAscent/<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>Java图形界面设计应该遵循的顺序：面板（JPanel）→容器（Container）→框架（JFrame）</li>
+<li><del>面板中设置背景色似乎不起作用。（本章创建的JPanel子类MessagePanel不起作用，其它的起作用，原因未知）</del><ul>
+<li>猜测原因：MessagePanel类重写了paintComponent（）方法，该方法与repaint（）方法密切相关，导致无法重新绘制新背景。</li>
+</ul>
+</li>
+<li>java.awt.Component 是所有GUI组件的根类。</li>
+<li>java.awt.Container 是所有容器类的根类。</li>
+<li>java.awt.Dimension 是度量GUI组件尺寸的一个类。</li>
+<li>默认情况下，JFrame的布局管理器是BorderLayout，JPanel的布局管理器是FlowLayout。</li>
+<li>paintComponent()方法是Component类中的方法。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><p>习题11.4源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter11/src" target="_blank" rel="external">chapter11</a><br><em>本章画图题较多，用到的时候再回来复习具体的东东吧~</em></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>本章介绍Java GUI程序设计基础。讨论GUI组件以及]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Java学习总结--第十五章 异常和断言]]></title>
     <link href="http://www.whtis.com/2016/01/30/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0-%E5%BC%82%E5%B8%B8%E5%92%8C%E6%96%AD%E8%A8%80/"/>
     <id>http://www.whtis.com/2016/01/30/Java学习总结-第十五章-异常和断言/</id>
     <published>2016-01-30T08:41:58.000Z</published>
-    <updated>2016-01-31T12:17:44.810Z</updated>
+    <updated>2016-02-08T08:25:37.016Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章介绍应用异常处理来处理运行错误，以及应用断言来确保程序的正确性。</p>
@@ -114,7 +326,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题15.5源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter15/src" target="_blank" rel="external">chapter15</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -136,7 +348,7 @@
     <link href="http://www.whtis.com/2016/01/29/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BB%BA%E6%A8%A1/"/>
     <id>http://www.whtis.com/2016/01/29/Java学习总结-第十章-面向对象建模/</id>
     <published>2016-01-29T10:48:33.000Z</published>
-    <updated>2016-01-30T08:29:41.676Z</updated>
+    <updated>2016-02-08T08:25:29.546Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章初步介绍使用面向对象的方法开发软件系统，学习类的设计原则。</p>
@@ -221,7 +433,7 @@
 </li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -243,7 +455,7 @@
     <link href="http://www.whtis.com/2016/01/28/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/"/>
     <id>http://www.whtis.com/2016/01/28/Java学习总结-第九章-抽象类和接口/</id>
     <published>2016-01-28T09:03:02.000Z</published>
-    <updated>2016-01-28T10:46:18.987Z</updated>
+    <updated>2016-02-08T08:26:18.446Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>在继承的层次结构中，子类的出现使类变得越来越具体，而子类的父类就变得更一般、更通用。有时将一个父类设计得非常抽象，以至于它没有具体的实例，这样的类称为<code>抽象类（abstract class）</code>。<br>一个子类只能从一个父类继承，如果想要使其继承多个父类，可以使用<code>接口（interface）</code>来达到<code>多重继承（multiple inheritance）</code>的效果。<br>本章介绍抽象类和接口，并讨论如何使用基本数据类型值的包装类。</p>
@@ -311,7 +523,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题9.1 9.2 9.3 9.4 9.6 9.8 9.9 9.10程序源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter9/src" target="_blank" rel="external">chapter9</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -333,7 +545,7 @@
     <link href="http://www.whtis.com/2016/01/27/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/"/>
     <id>http://www.whtis.com/2016/01/27/Java学习总结-第八章-继承和多态/</id>
     <published>2016-01-27T13:17:29.000Z</published>
-    <updated>2016-01-28T10:44:49.901Z</updated>
+    <updated>2016-02-08T08:25:56.680Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>在面向对象程序设计中，可以由已有的类派生出子类，这叫做<code>继承（inheritance）</code>。<br>本章介绍继承的概念。着重理解父类和子类、关键字super的用法以及object类，了解多态和动态绑定、一般程序设计以及对象转换，介绍修饰符protect和final。</p>
@@ -451,7 +663,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题8.2 8.4源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter8/src" target="_blank" rel="external">chapter8</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -473,7 +685,7 @@
     <link href="http://www.whtis.com/2016/01/26/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     <id>http://www.whtis.com/2016/01/26/Java学习总结-第七章-字符串/</id>
     <published>2016-01-26T13:33:26.000Z</published>
-    <updated>2016-01-27T13:14:59.111Z</updated>
+    <updated>2016-02-08T08:26:29.717Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>Java中，将字符串看作是对象，提供了String类、StringBuffer类和StringTokenizer类来存储和处理字符串。本章总结<code>字符串(string)</code>的处理。</p>
@@ -572,7 +784,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题7.3 7.4 7.5 7.7 7.9 7.11 7.12 7.14 7.18源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter7/src" target="_blank" rel="external">chapter7</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -594,7 +806,7 @@
     <link href="http://www.whtis.com/2016/01/26/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB/"/>
     <id>http://www.whtis.com/2016/01/26/Java学习总结-第六章-对象和类/</id>
     <published>2016-01-26T09:30:41.000Z</published>
-    <updated>2016-01-26T13:28:44.731Z</updated>
+    <updated>2016-02-08T08:25:48.624Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>面向对象程序设计把数据和属于它们的操作放入一个叫做<code>对象（object）</code>的整体中，所有对象都与属性和活动联系在一起，这样做使程序更容易开发和维护。<br>本章将介绍面向对象程序设计的基本知识：声明类、创建对象、处理对象以及组织对象协调工作。</p>
@@ -704,7 +916,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题6.1 6.3 6.5 6.7 6.8 6.11 6.12 6.13源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter6/src" target="_blank" rel="external">chapter6</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -726,7 +938,7 @@
     <link href="http://www.whtis.com/2016/01/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%95%B0%E7%BB%84/"/>
     <id>http://www.whtis.com/2016/01/20/Java学习总结-第五章-数组/</id>
     <published>2016-01-20T11:59:25.000Z</published>
-    <updated>2016-01-28T06:04:05.676Z</updated>
+    <updated>2016-02-08T08:26:04.546Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章介绍了数组的基本知识。数组用于存储一个元素个数和类型固定的有序集，并提供对这些数据进行处理的各种方法。</p>
@@ -782,7 +994,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题5.5 5.7 5.12 5.14 5.15 5.16 5.25源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter5/src" target="_blank" rel="external">chapter5</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -804,7 +1016,7 @@
     <link href="http://www.whtis.com/2016/01/11/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%96%B9%E6%B3%95/"/>
     <id>http://www.whtis.com/2016/01/11/Java学习总结-第四章-方法/</id>
     <published>2016-01-11T14:16:41.000Z</published>
-    <updated>2016-01-26T13:27:50.595Z</updated>
+    <updated>2016-02-08T08:25:22.003Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章介绍了如何编写带返回值和不带返回值的方法以及如何调用含参/不含参的方法。采用这些规范可以编写递归方法，最后介绍如何使用方法抽象进行程序设计。</p>
@@ -880,7 +1092,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题4.10 4.11 4.12 4.13 4.15 4.16 4.17 4.20 4.21 4.22 4.23 4.24 4.25源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter4/src" target="_blank" rel="external">chapter4</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -902,7 +1114,7 @@
     <link href="http://www.whtis.com/2016/01/10/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
     <id>http://www.whtis.com/2016/01/10/Java学习总结-第三章-控制语句/</id>
     <published>2016-01-10T13:49:40.000Z</published>
-    <updated>2016-01-26T13:27:19.362Z</updated>
+    <updated>2016-02-08T08:26:24.257Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章介绍了java语言中循环（loop）的使用方式。</p>
@@ -938,7 +1150,7 @@
 <p>3.14 （查找两个最高分）编写程序，提示用户输入学生的数量及每个学生的名字和得分，而后显示最高分的学生。<br>解题思路：使用hashMap存入key-value，排序后显示，代码如下：(本题解法，若按照书中顺序，是无法完成的。看书时没有细想，参考了网上的解法。有时间再回来更新吧0.0)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $3<span class="title">_14</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String, Integer&gt;();</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println( <span class="string">"请输入学生的数量："</span>);</span><br><span class="line">        <span class="keyword">int</span> num = scanner.nextInt();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请输入学生的姓名： "</span>);</span><br><span class="line">            String name = scanner.next();</span><br><span class="line">            System.out.println(<span class="string">"请输入该生的成绩： "</span>);</span><br><span class="line">            <span class="keyword">int</span> hh = scanner.nextInt();</span><br><span class="line">            map.put(name, hh);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        List&lt;Map.Entry&lt;String, Integer&gt;&gt; infolds = <span class="keyword">new</span> ArrayList&lt;Map.Entry&lt;String, Integer&gt;&gt;(map.entrySet());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//排序</span></span><br><span class="line">        Collections.sort(infolds, <span class="keyword">new</span> Comparator&lt;Map.Entry&lt;String, Integer&gt;&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Map.Entry&lt;String, Integer&gt; o1, Map.Entry&lt;String, Integer&gt; o2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (o2.getValue() - o1.getValue());</span><br><span class="line"><span class="comment">//                return (o1.getKey()).toString().compareTo(o2.getKey());</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; infolds.size(); i++) &#123;</span><br><span class="line">            String id = infolds.get(i).toString();</span><br><span class="line">            System.out.println(id);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>习题3.5 3.7 3.10 3.12 3.13 3.19 3.20 3.21 3.25 3.27 3.28 3.30 3.31 3.34源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter3/src" target="_blank" rel="external">chapter3</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -960,7 +1172,7 @@
     <link href="http://www.whtis.com/2015/12/23/Premiere-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://www.whtis.com/2015/12/23/Premiere-学习笔记/</id>
     <published>2015-12-23T05:24:26.000Z</published>
-    <updated>2016-01-10T13:47:21.328Z</updated>
+    <updated>2016-02-08T08:27:27.435Z</updated>
     <content type="html"><![CDATA[<p><strong>视频教程<a href="http://www.bilibili.com/video/av1290353.html" target="_blank" rel="external">看这里</a></strong></p>
 <h3 id="导入、图片素材处理、导出视频">导入、图片素材处理、导出视频</h3><ul>
 <li>导入： ctrl+I</li>
@@ -1037,7 +1249,7 @@
 <li></li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong>视频教程<a href="http://www.bilibili.com/video/av1290353.html" target="_blank" rel="external">看这里</a></strong></p>
 <h3 id="导入、图片素材处理、]]>
@@ -1056,7 +1268,7 @@
     <link href="http://www.whtis.com/2015/12/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
     <id>http://www.whtis.com/2015/12/22/Java学习总结-第二章-基本数据类型和基本操作/</id>
     <published>2015-12-22T06:10:25.000Z</published>
-    <updated>2016-01-30T08:20:59.753Z</updated>
+    <updated>2016-02-08T08:26:10.883Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章对Java中的各种数据类型进行了介绍，并给出了互相转换的方法；本章介绍了Java的语法规则，编写规则和编程错误。</p>
@@ -1161,7 +1373,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 2.11程序源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter2/src" target="_blank" rel="external">chapter2</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>
 ]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
@@ -1184,7 +1396,7 @@
     <link href="http://www.whtis.com/2015/12/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E3%80%81%E7%A8%8B%E5%BA%8F%E5%92%8CJava%E6%A6%82%E8%BF%B0/"/>
     <id>http://www.whtis.com/2015/12/20/Java学习总结-第一章-计算机、程序和Java概述/</id>
     <published>2015-12-20T12:42:57.000Z</published>
-    <updated>2016-01-26T13:30:53.305Z</updated>
+    <updated>2016-02-08T08:26:36.583Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章简单介绍了计算机和Java有关的知识，让人有初步了解。</p>
@@ -1311,7 +1523,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>（略）</p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -1333,7 +1545,7 @@
     <link href="http://www.whtis.com/2015/12/03/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95/"/>
     <id>http://www.whtis.com/2015/12/03/java学习笔记-排序的几种写法/</id>
     <published>2015-12-03T12:00:08.000Z</published>
-    <updated>2016-01-10T13:37:36.579Z</updated>
+    <updated>2016-02-08T08:27:29.294Z</updated>
     <content type="html"><![CDATA[<p>最近学到数组这章，最重要的就是对数组中的元素进行排序。总结一下排序的几种写法。<br><em>java.util.array类中提供了排序的重载方法，可以直接调用相关方法进行排序，详见<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#sort-byte:A-" target="_blank" rel="external">API</a></em></p>
 <ul>
 <li><p>选择排序</p>
@@ -1361,7 +1573,7 @@
 </li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p>最近学到数组这章，最重要的就是对数组中的元素进行排序。总结一下排序的几种写法。<br><em>java.util.array类中提供了排序的重载方法，可以直接调用相关方法进行排序，详见<a href="http://docs.oracle.com/javase/8/docs]]>
     </summary>
@@ -1381,7 +1593,7 @@
     <link href="http://www.whtis.com/2015/11/13/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89%E4%B8%AA%E6%95%B4%E6%95%B0%E8%BF%9B%E8%A1%8C%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
     <id>http://www.whtis.com/2015/11/13/Java学习笔记-三个整数进行比较大小的三种方法/</id>
     <published>2015-11-13T12:43:59.000Z</published>
-    <updated>2016-01-10T13:37:28.926Z</updated>
+    <updated>2016-02-08T08:27:29.922Z</updated>
     <content type="html"><![CDATA[<ul>
 <li>对abc三个整数从小到大进行排序，有以下几种方法：</li>
 </ul>
@@ -1398,7 +1610,7 @@
 </ul>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"> public class <span class="number">$3</span>_2 &#123;</span><br><span class="line">    public static void main(<span class="keyword">String[] </span>args) &#123;</span><br><span class="line">        int a = Integer.parseInt(JOptionPane.showInputDialog(null, <span class="string">"请输入一个整数："</span>))<span class="comment">;</span></span><br><span class="line">        int <span class="keyword">b </span>= Integer.parseInt(JOptionPane.showInputDialog(null, <span class="string">"请输入一个整数："</span>))<span class="comment">;</span></span><br><span class="line">        int c = Integer.parseInt(JOptionPane.showInputDialog(null, <span class="string">"请输入一个整数："</span>))<span class="comment">;</span></span><br><span class="line">        int tmp<span class="comment">;</span></span><br><span class="line">        <span class="keyword">boolean </span><span class="keyword">b1 </span>= a &gt;= <span class="keyword">b;</span><br><span class="line"></span>        <span class="keyword">boolean </span><span class="keyword">b2 </span>= a &gt;= c<span class="comment">;</span></span><br><span class="line">        <span class="keyword">boolean </span><span class="keyword">b3 </span>= <span class="keyword">b </span>&gt;= c<span class="comment">;</span></span><br><span class="line">         <span class="preprocessor">if</span> (<span class="keyword">b1 </span>&amp;&amp; <span class="keyword">b2 </span>&amp;&amp; <span class="keyword">b3) </span>&#123;//<span class="keyword">b3多余 </span>c&lt;<span class="label">=b</span>&lt;<span class="label">=a</span></span><br><span class="line">            tmp = a<span class="comment">;</span></span><br><span class="line">            a = c<span class="comment">;</span></span><br><span class="line">            c = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (<span class="keyword">b1 </span>&amp;&amp; <span class="keyword">b2 </span>&amp;&amp; !<span class="keyword">b3) </span>&#123; //<span class="keyword">b&lt;=c&lt;=a</span><br><span class="line"></span>            tmp = a<span class="comment">;</span></span><br><span class="line">            a = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= c<span class="comment">;</span></span><br><span class="line">            c = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (<span class="keyword">b1 </span>&amp;&amp; !<span class="keyword">b2 </span>&amp;&amp; !<span class="keyword">b3) </span>&#123; //<span class="keyword">b&lt;=a&lt;=c</span><br><span class="line"></span>            tmp = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= a<span class="comment">;</span></span><br><span class="line">            a = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (!<span class="keyword">b1 </span>&amp;&amp; <span class="keyword">b2 </span>&amp;&amp; <span class="keyword">b3) </span>&#123; //c&lt;<span class="label">=a</span>&lt;<span class="label">=b</span></span><br><span class="line">            tmp = c<span class="comment">;</span></span><br><span class="line">            c = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= a<span class="comment">;</span></span><br><span class="line">            a = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (!<span class="keyword">b1 </span>&amp;&amp; !<span class="keyword">b2 </span>&amp;&amp; <span class="keyword">b3) </span>&#123; //a&lt;<span class="label">=c</span>&lt;<span class="label">=b</span></span><br><span class="line">            tmp = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= c<span class="comment">;</span></span><br><span class="line">            c = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (!<span class="keyword">b1 </span>&amp;&amp; !<span class="keyword">b2 </span>&amp;&amp; !<span class="keyword">b3) </span>&#123; //a&lt;<span class="label">=b</span>&lt;<span class="label">=c</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"the order is "</span> + a + <span class="string">" "</span> + <span class="keyword">b </span>+ <span class="string">" "</span> + c)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<ul>
 <li>对abc三个整数从小到大进行排序，有以下几种方法：</li>
@@ -1422,7 +1634,7 @@
     <link href="http://www.whtis.com/2015/11/13/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-double%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%80%BC%E4%BF%9D%E7%95%99%E6%8C%87%E5%AE%9A%E5%B0%8F%E6%95%B0%E4%BD%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
     <id>http://www.whtis.com/2015/11/13/Java学习笔记-double类型的值保留指定小数位的几种方法/</id>
     <published>2015-11-13T04:56:43.000Z</published>
-    <updated>2016-01-10T13:37:43.592Z</updated>
+    <updated>2016-02-08T08:27:28.561Z</updated>
     <content type="html"><![CDATA[<p>在java语言中，double类型的变量使用64bit存储空间进行存储。两个double类型的变量进行除法运算时，如果小数位过多，就需要进行保留位数操作。保留位数操作分为<code>四舍五入</code>型和<code>非四舍五入</code>型两种。本文以保留两位数为例：</p>
 <ul>
 <li>四舍五入型<br>使用java.text类中的<code>DecimalFormat（）</code>方法可以对double类型的值进行保留位数操作。代码如下：</li>
@@ -1441,7 +1653,7 @@
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> test &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> x = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">double</span> y =<span class="number">3</span>;</span><br><span class="line">        <span class="keyword">double</span> z = x / y;</span><br><span class="line">        z = (<span class="keyword">int</span>) (z * <span class="number">100</span>)/<span class="number">100.00</span>;</span><br><span class="line">       System.out.println(z);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p>在java语言中，double类型的变量使用64bit存储空间进行存储。两个double类型的变量进行除法运算时，如果小数位过多，就需要进行保留位数操作。保留位数操作分为<code>四舍五入</code>型和<code>非四舍五入</code>型两种。本文以保留两位数为例：]]>
     </summary>
@@ -1461,7 +1673,7 @@
     <link href="http://www.whtis.com/2015/11/03/hexo-3-x%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%88%B0github%E5%92%8Cgitcafe%E7%9A%84%E6%96%B9%E6%B3%95/"/>
     <id>http://www.whtis.com/2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/</id>
     <published>2015-11-03T03:24:55.000Z</published>
-    <updated>2016-01-10T13:35:57.572Z</updated>
+    <updated>2016-02-08T08:26:43.348Z</updated>
     <content type="html"><![CDATA[<p>详细的hexo博客搭建教程可以参考<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">这里</a></p>
 <p>在我按照教程搭建博客的过程中，无意中看到了可以同时将博客部署到<code>github</code>和<code>gitcafe</code>上，以提高国内外的访问速度，具体操作过程可以参考<a href="http://opiece.me/2015/04/28/push-hexo-to-github-and-gitcafe/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">这里</a></p>
 <p>当按照教程修改hexo的配置文件<code>_config.yml</code>后，第二个repo里并没有更新代码，经过查阅<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">官方文档</a>，<code>_config.yml</code>正确的配置如下：</p>
@@ -1469,7 +1681,7 @@
 <p>现在使用<code>hexo d</code>，应该就没问题了。</p>
 <p><strong>注意，type前面的<code>-</code>不能省略。</strong></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p>详细的hexo博客搭建教程可以参考<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">这里</a></p>
 <p>在我按照教程搭建博客的过程中，无意中看]]>
@@ -1488,7 +1700,7 @@
     <link href="http://www.whtis.com/2015/10/29/ubuntu14-04%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85wordpress%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     <id>http://www.whtis.com/2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/</id>
     <published>2015-10-29T10:13:35.000Z</published>
-    <updated>2016-01-20T11:23:03.961Z</updated>
+    <updated>2016-02-08T08:27:26.269Z</updated>
     <content type="html"><![CDATA[<h1 id="1、安装apache2的问题">1、安装apache2的问题</h1><p>当我们使用如下语句安装apache2时：</p>
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install apache2</span><br></pre></td></tr></table></figure>
 <p>会发现启动报错：</p>
@@ -1502,7 +1714,7 @@
 <p><em>wordpress的默认根目录是 <strong>/var/www/html</strong> ，而不是 <strong>/var/www</strong></em></p>
 <p>因此，假如你想通过localhost访问时，你的目录结构应该是 <strong>/var/www/html/*</strong>，同理，如果你要通过localhost/wordpress访问时，你的目录结构应该是 <strong>/var/www/html/wordpress/*</strong></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="www.whtis.com">http:www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<h1 id="1、安装apache2的问题">1、安装apache2的问题</h1><p>当我们使用如下语句安装apache2时：</p>
 <figure class="highlight actionscript"><table><tr><td class="gutter">]]>
