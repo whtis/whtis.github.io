@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java,原创,总结," />
+  <meta name="keywords" content="java,原创,小练习," />
 
 
 
@@ -53,28 +53,40 @@
 
 
 
-<meta name="description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
+<meta name="description" content="简易说明
+学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：
+基本的加减乘除四则运算
+连续计算
+运算结果记忆
 
-主要内容本章介绍了如何编写带返回值和不带返回值的方法以及如何调用含参/不含参的方法。采用这些规范可以编写递归方法，最后介绍如何使用方法抽象进行程序设计。
-基本方法的语法结构：1234修饰符 返回值类型 方法名 （参数列表）&amp;#123;    //方法体&amp;#125;
-调用方法创建方法时，">
+
+本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：
+显示结果的处理，包括两个整数作运算，结果应该显示为整数、浮点数显示的位数设定等。目前为了方便，统一转为了浮点数进行计算，显示的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习总结--第四章 方法">
-<meta property="og:url" content="http://www.whtis.com/2016/01/11/Java学习总结-第四章-方法/index.html">
+<meta property="og:title" content="GUI小练习-简易计算器">
+<meta property="og:url" content="http://www.whtis.com/2016/02/16/GUI小练习-简易计算器/index.html">
 <meta property="og:site_name" content="whtis's blog">
-<meta property="og:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
+<meta property="og:description" content="简易说明
+学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：
+基本的加减乘除四则运算
+连续计算
+运算结果记忆
 
-主要内容本章介绍了如何编写带返回值和不带返回值的方法以及如何调用含参/不含参的方法。采用这些规范可以编写递归方法，最后介绍如何使用方法抽象进行程序设计。
-基本方法的语法结构：1234修饰符 返回值类型 方法名 （参数列表）&amp;#123;    //方法体&amp;#125;
-调用方法创建方法时，">
-<meta property="og:updated_time" content="2016-02-10T13:37:04.871Z">
+
+本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：
+显示结果的处理，包括两个整数作运算，结果应该显示为整数、浮点数显示的位数设定等。目前为了方便，统一转为了浮点数进行计算，显示的">
+<meta property="og:updated_time" content="2016-02-16T11:39:01.418Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习总结--第四章 方法">
-<meta name="twitter:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
+<meta name="twitter:title" content="GUI小练习-简易计算器">
+<meta name="twitter:description" content="简易说明
+学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：
+基本的加减乘除四则运算
+连续计算
+运算结果记忆
 
-主要内容本章介绍了如何编写带返回值和不带返回值的方法以及如何调用含参/不含参的方法。采用这些规范可以编写递归方法，最后介绍如何使用方法抽象进行程序设计。
-基本方法的语法结构：1234修饰符 返回值类型 方法名 （参数列表）&amp;#123;    //方法体&amp;#125;
-调用方法创建方法时，">
+
+本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：
+显示结果的处理，包括两个整数作运算，结果应该显示为整数、浮点数显示的位数设定等。目前为了方便，统一转为了浮点数进行计算，显示的">
 
 
 
@@ -86,7 +98,7 @@
   };
 </script>
 
-  <title> Java学习总结--第四章 方法 | whtis's blog </title>
+  <title> GUI小练习-简易计算器 | whtis's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -276,7 +288,7 @@
             
             
               
-                Java学习总结--第四章 方法
+                GUI小练习-简易计算器
               
             
           </h1>
@@ -285,8 +297,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-11T22:16:41+08:00" content="2016-01-11">
-              2016-01-11
+            <time itemprop="dateCreated" datetime="2016-02-16T18:51:30+08:00" content="2016-02-16">
+              2016-02-16
             </time>
           </span>
 
@@ -311,8 +323,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/11/Java学习总结-第四章-方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/11/Java学习总结-第四章-方法/" itemprop="commentsCount"></span>
+                <a href="/2016/02/16/GUI小练习-简易计算器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/16/GUI小练习-简易计算器/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -331,80 +343,62 @@
       
 
       
-        <span itemprop="articleBody"><p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章介绍了如何编写带返回值和不带返回值的方法以及如何调用含参/不含参的方法。采用这些规范可以编写递归方法，最后介绍如何使用方法抽象进行程序设计。</p>
-<h3 id="基本方法的语法结构：">基本方法的语法结构：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修饰符 返回值类型 方法名 （参数列表）</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//方法体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="调用方法">调用方法</h3><p>创建方法时，定义了方法干什么。要使用方法，必须<code>调用</code>（call）或<code>引用</code>（invoke）它。</p>
-<ul>
-<li>调用堆栈：每当调用一个方法时，系统将参数、局部变量和系统寄存器存储在一个内存区域中。这个内存区域称为<code>堆栈</code>（stack）。它使用后进先出的方式存储数据。</li>
+        <span itemprop="articleBody"><h2 id="简易说明">简易说明</h2><ul>
+<li>学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：<ul>
+<li>基本的加减乘除四则运算</li>
+<li>连续计算</li>
+<li>运算结果记忆</li>
 </ul>
-<h3 id="参数传递">参数传递</h3><ul>
-<li>参数传递需要注意<code>参数顺序匹配</code>。</li>
-<li>Java中的参数传递，如果是基本数据类型，传递是值本身，如果是引用数据类型，传递的是这个引用。<br><strong>需要注意的是，实参将参数传给形参，这种传递方式称为<code>值传递</code>（pass by value）。无论形参在方法中如何改变，该实参的值不受影响。（可以通俗的理解为：实参传递给形参的这个过程，是copy了一份给形参）。</strong></li>
+</li>
+<li>本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：<ul>
+<li>显示结果的处理，包括两个整数作运算，结果应该显示为整数、浮点数显示的位数设定等。目前为了方便，统一转为了浮点数进行计算，显示的结果也是浮点数。</li>
+<li>初始设计了四个功能键，依次为<code>Ac</code>（清零）、<code>Cv</code>（小数和分数的转化）、<code>Re</code>（最近一次结果记忆），<code>←</code>（删除），目前除<code>Cv</code>外都已实现。</li>
+<li>目前显示结果为单行显示，最初考虑的是双行，但因为文本对齐和设置的问题无法处理，最终采用的JTextField进行单行显示。</li>
+<li>组件的等比例放大和缩小问题。目前只能做到自动，因此将其设置成为了不可更改大小,避免破坏布局。</li>
 </ul>
-<h3 id="重载方法">重载方法</h3><ul>
-<li>主要用于不同的构造方法。</li>
-<li>重载方法可使程序清晰易读。执行相似任务的方法应该给予相同的名称。</li>
-<li>有时一个方法调用会有两个或更多可能的匹配，编译器无法判断哪个更为合适。这成为<code>歧义匹配。</code>歧义匹配是编译错误。</li>
+</li>
 </ul>
-<h3 id="方法抽象">方法抽象</h3><ul>
-<li>方法抽象是把方法的应用同实现分离开来。</li>
-<li>在不知道方法如何实现的情况下也可以使用方法，这就是方法的<code>信息隐藏</code>或<code>封装</code>。</li>
+<h2 id="遇到的问题及解决方案记录">遇到的问题及解决方案记录</h2><h3 id="布局问题">布局问题</h3><ul>
+<li>如何拼凑无缝的界面<ul>
+<li>解决方法:略</li>
 </ul>
-<h3 id="Math类的常用方法">Math类的常用方法</h3><ul>
-<li>三角函数方法：sin、cos、tan、asin、acos、atan、toRadians、toDegrees······</li>
-<li>指数函数方法：exp、log </li>
-<li>服务型方法：pow、sqrt</li>
-<li>常量：Math.PI、Math.E</li>
-<li>取整方法：ceil、floor、rint、round</li>
-<li>min、max、abs</li>
-<li>random方法<ul>
-<li>random方法生成大于等于0.0小于1.0的double型随机数（0&lt;Math.random()&lt;1.0）。该方法十分有用，可以用它来生成任意范围的随机数。</li>
-<li>可以生成任意两个字符ch1和ch2(ch1&lt;ch2）之间之间的随机字符：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">char</span>)(ch1+Math.random()*(ch2-ch1+<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="加减乘除运算问题">加减乘除运算问题</h3><ul>
+<li>第一次就按运算符的处理<ul>
+<li>如果是初始操作，无视之</li>
+<li>判断StringBuffer对象里是否有东西，如果没有，直接设置运算符compute</li>
+</ul>
+</li>
+<li>多次按运算符的处理<ul>
+<li>创建一个string类型的值来存储运算符，但同时只能设置一个</li>
+</ul>
+</li>
+<li>连续运算的问题（貌似链表处理比较简单？没学过，布吉岛…）<ul>
+<li>计算器能够正常运行的一系列设计，包括stringbuffer、compute、result等<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">computeAction</span><span class="params">(ActionEvent e, JTextField textField)</span> </span>&#123;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="递归">递归</h3><ul>
-<li>递归是函数直接或间接调用自己的过程。</li>
-<li>所有的递归方法都用下列特征：<ul>
-<li>有一个或多个初始状态（最简单情形）用于中断递归。</li>
-<li>每次递归调用都简化原始问题，使它越来越接近初始状态，直到达到初始状态。</li>
-</ul>
+<h3 id="小数点的问题">小数点的问题</h3><ul>
+<li><p>直接按小数点应该将其设置成正确的小数形式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (stringBuffer.toString().startsWith(<span class="string">"."</span>)) &#123;</span><br><span class="line">            stringBuffer.insert(<span class="number">0</span>, <span class="string">"0"</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>递归的两个实例：</p>
-<ul>
-<li><p>计算斐波那契数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">long</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (index == <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (index == <span class="number">1</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> fib(index - <span class="number">1</span>) + fib(index - <span class="number">2</span>);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>汉诺塔问题</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">moveDisks</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">char</span> fromTower, <span class="keyword">char</span> ToTower, <span class="keyword">char</span> auxTower)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"move disk "</span> + n + <span class="string">" from "</span> + fromTower + <span class="string">" to "</span> + ToTower);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          moveDisks(n - <span class="number">1</span>, fromTower, auxTower, ToTower);</span><br><span class="line">          System.out.println(<span class="string">"move disk "</span> + n + <span class="string">" from "</span> + fromTower + <span class="string">" to "</span> + ToTower);</span><br><span class="line">          moveDisks(n - <span class="number">1</span>, auxTower, ToTower, fromTower);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<li><p>小数点在一次运算中只能出现一次，多按无效</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">"."</span>:</span><br><span class="line">      <span class="keyword">boolean</span> hasDot = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stringBuffer.length(); i++) &#123;</span><br><span class="line">          <span class="keyword">if</span> (stringBuffer.charAt(i) == <span class="string">'.'</span>) &#123;</span><br><span class="line">              hasDot = <span class="keyword">true</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!hasDot) &#123;</span><br><span class="line">          capicaty++;</span><br><span class="line">          stringBuffer.append(<span class="string">"."</span>);</span><br><span class="line">          textField.setText(stringBuffer.toString());</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-<li><p>递归与迭代</p>
-<ul>
-<li>递归是程序控制的另一种形式，本质上是不用循环控制的重复。</li>
-<li>递归和迭代相比，会耗费太多的时间并占用太多的内存。</li>
-<li>能用递归解决的问题都可以用迭代完成，递归仅在某些能够简化问题解法的情况下使用。</li>
-</ul>
+<h3 id="等于问题">等于问题</h3><ul>
+<li>仅仅在初始时输入数字，不进行任何运算，按下等于号应该显示初始输入的数字，并将result设置为相关的值，从而进行下次运算<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(capicaty&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">	textField.setText(String.valueOf(result));</span><br><span class="line">    reResult = result;</span><br><span class="line">    compute = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="包">包</h3><ul>
-<li>包用于对类进行组织。</li>
-<li>包是有层次的，使用包需要先引入。</li>
-<li>使用包可以避免命名冲突。</li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>方法是一个提供程序模块化和可重用性的结构。</li>
-<li>方法中不可以再定义方法。  </li>
-<li>歧义匹配的最典型例子就是两个方法的名称和参数列表都相同，但其返回值或者修饰符不同。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">method</span><span class="params">(<span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="除法问题">除法问题</h3><ul>
+<li>出现不合法的运算会得到Infinity，为了界面友好，显示为’0’<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">"÷"</span>:</span><br><span class="line">    result /= Double.parseDouble(stringBuffer.toString());</span><br><span class="line">    <span class="keyword">if</span> (String.valueOf(result).equals(<span class="string">"Infinity"</span>)) &#123;</span><br><span class="line">        result = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><p>习题4.10 4.11 4.12 4.13 4.15 4.16 4.17 4.20 4.21 4.22 4.23 4.24 4.25源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter4/src" target="_blank" rel="external">chapter4</a></p>
+<h2 id="代码">代码</h2><ul>
+<li>完整的代码见我的Github：<a href="https://github.com/whtis/Calculator" target="_blank" rel="external">Calculator</a></li>
+</ul>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div></span>
       
@@ -418,7 +412,7 @@
           
             <a href="/tags/原创/" rel="tag">#原创</a>
           
-            <a href="/tags/总结/" rel="tag">#总结</a>
+            <a href="/tags/小练习/" rel="tag">#小练习</a>
           
         </div>
       
@@ -427,17 +421,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/10/Java学习总结-第三章-控制语句/" rel="next" title="Java学习总结--第三章 控制语句">
-                <i class="fa fa-chevron-left"></i> Java学习总结--第三章 控制语句
+              <a href="/2016/02/15/Java学习总结-第十三章-创建图形用户界面/" rel="next" title="Java学习总结--第十三章 创建图形用户界面">
+                <i class="fa fa-chevron-left"></i> Java学习总结--第十三章 创建图形用户界面
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/20/Java学习总结-第五章-数组/" rel="prev" title="Java学习总结--第五章 数组">
-                Java学习总结--第五章 数组 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -452,10 +442,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/01/11/Java学习总结-第四章-方法/"
-     data-title="Java学习总结--第四章 方法"
+        <div class="ds-share flat" data-thread-key="2016/02/16/GUI小练习-简易计算器/"
+     data-title="GUI小练习-简易计算器"
      data-content=""
-     data-url="http://www.whtis.com/2016/01/11/Java学习总结-第四章-方法/">
+     data-url="http://www.whtis.com/2016/02/16/GUI小练习-简易计算器/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -483,8 +473,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/11/Java学习总结-第四章-方法/"
-           data-title="Java学习总结--第四章 方法" data-url="http://www.whtis.com/2016/01/11/Java学习总结-第四章-方法/">
+      <div class="ds-thread" data-thread-key="2016/02/16/GUI小练习-简易计算器/"
+           data-title="GUI小练习-简易计算器" data-url="http://www.whtis.com/2016/02/16/GUI小练习-简易计算器/">
       </div>
     
   </div>
@@ -599,7 +589,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本方法的语法结构："><span class="nav-number">1.1.</span> <span class="nav-text">基本方法的语法结构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用方法"><span class="nav-number">1.2.</span> <span class="nav-text">调用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数传递"><span class="nav-number">1.3.</span> <span class="nav-text">参数传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重载方法"><span class="nav-number">1.4.</span> <span class="nav-text">重载方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法抽象"><span class="nav-number">1.5.</span> <span class="nav-text">方法抽象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math类的常用方法"><span class="nav-number">1.6.</span> <span class="nav-text">Math类的常用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">1.7.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包"><span class="nav-number">1.8.</span> <span class="nav-text">包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习小结"><span class="nav-number">2.</span> <span class="nav-text">复习小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程练习"><span class="nav-number">3.</span> <span class="nav-text">编程练习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简易说明"><span class="nav-number">1.</span> <span class="nav-text">简易说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题及解决方案记录"><span class="nav-number">2.</span> <span class="nav-text">遇到的问题及解决方案记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#布局问题"><span class="nav-number">2.1.</span> <span class="nav-text">布局问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加减乘除运算问题"><span class="nav-number">2.2.</span> <span class="nav-text">加减乘除运算问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小数点的问题"><span class="nav-number">2.3.</span> <span class="nav-text">小数点的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#等于问题"><span class="nav-number">2.4.</span> <span class="nav-text">等于问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#除法问题"><span class="nav-number">2.5.</span> <span class="nav-text">除法问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

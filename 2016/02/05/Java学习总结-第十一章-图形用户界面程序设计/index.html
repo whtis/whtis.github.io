@@ -69,7 +69,7 @@ GUI组件
 重型组件(heavyweight component)：抽象窗口组件(Abstract Window Tookit,AWT)称为重型组件，因为">
 <meta property="og:image" content="http://www.whtis.com/GUI程序设计类层次图.jpg">
 <meta property="og:image" content="http://www.whtis.com/FontMetics类确定字体属性.jpg">
-<meta property="og:updated_time" content="2016-02-10T13:36:35.111Z">
+<meta property="og:updated_time" content="2016-02-11T08:53:20.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习总结-第十一章 图形用户界面程序设计">
 <meta name="twitter:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
@@ -445,7 +445,7 @@ GUI组件
 <h2 id="复习小结">复习小结</h2><ul>
 <li>Java图形界面设计应该遵循的顺序：面板（JPanel）→容器（Container）→框架（JFrame）</li>
 <li><del>面板中设置背景色似乎不起作用。（本章创建的JPanel子类MessagePanel不起作用，其它的起作用，原因未知）</del><ul>
-<li>猜测原因：MessagePanel类重写了paintComponent（）方法，该方法与repaint（）方法密切相关，导致无法重新绘制新背景。</li>
+<li>原因：MessagePanel类重写了paintComponent（）方法，该方法是JComponent类中的方法，但是写的时候错写成了paintComponents（）方法，该方法是Container类中的方法，因此设置字体时不起作用。</li>
 </ul>
 </li>
 <li>java.awt.Component 是所有GUI组件的根类。</li>
@@ -579,7 +579,7 @@ GUI组件
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -593,7 +593,7 @@ GUI组件
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

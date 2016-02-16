@@ -4,7 +4,7 @@
   <subtitle><![CDATA[点滴的记录，是变强的必经之路]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-02-10T13:36:42.804Z</updated>
+  <updated>2016-02-16T11:39:01.418Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -13,6 +13,265 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[GUI小练习-简易计算器]]></title>
+    <link href="http://www.whtis.com/2016/02/16/GUI%E5%B0%8F%E7%BB%83%E4%B9%A0-%E7%AE%80%E6%98%93%E8%AE%A1%E7%AE%97%E5%99%A8/"/>
+    <id>http://www.whtis.com/2016/02/16/GUI小练习-简易计算器/</id>
+    <published>2016-02-16T10:51:30.000Z</published>
+    <updated>2016-02-16T11:39:01.418Z</updated>
+    <content type="html"><![CDATA[<h2 id="简易说明">简易说明</h2><ul>
+<li>学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：<ul>
+<li>基本的加减乘除四则运算</li>
+<li>连续计算</li>
+<li>运算结果记忆</li>
+</ul>
+</li>
+<li>本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：<ul>
+<li>显示结果的处理，包括两个整数作运算，结果应该显示为整数、浮点数显示的位数设定等。目前为了方便，统一转为了浮点数进行计算，显示的结果也是浮点数。</li>
+<li>初始设计了四个功能键，依次为<code>Ac</code>（清零）、<code>Cv</code>（小数和分数的转化）、<code>Re</code>（最近一次结果记忆），<code>←</code>（删除），目前除<code>Cv</code>外都已实现。</li>
+<li>目前显示结果为单行显示，最初考虑的是双行，但因为文本对齐和设置的问题无法处理，最终采用的JTextField进行单行显示。</li>
+<li>组件的等比例放大和缩小问题。目前只能做到自动，因此将其设置成为了不可更改大小,避免破坏布局。</li>
+</ul>
+</li>
+</ul>
+<h2 id="遇到的问题及解决方案记录">遇到的问题及解决方案记录</h2><h3 id="布局问题">布局问题</h3><ul>
+<li>如何拼凑无缝的界面<ul>
+<li>解决方法:略</li>
+</ul>
+</li>
+</ul>
+<h3 id="加减乘除运算问题">加减乘除运算问题</h3><ul>
+<li>第一次就按运算符的处理<ul>
+<li>如果是初始操作，无视之</li>
+<li>判断StringBuffer对象里是否有东西，如果没有，直接设置运算符compute</li>
+</ul>
+</li>
+<li>多次按运算符的处理<ul>
+<li>创建一个string类型的值来存储运算符，但同时只能设置一个</li>
+</ul>
+</li>
+<li>连续运算的问题（貌似链表处理比较简单？没学过，布吉岛…）<ul>
+<li>计算器能够正常运行的一系列设计，包括stringbuffer、compute、result等<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">computeAction</span><span class="params">(ActionEvent e, JTextField textField)</span> </span>&#123;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="小数点的问题">小数点的问题</h3><ul>
+<li><p>直接按小数点应该将其设置成正确的小数形式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (stringBuffer.toString().startsWith(<span class="string">"."</span>)) &#123;</span><br><span class="line">            stringBuffer.insert(<span class="number">0</span>, <span class="string">"0"</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>小数点在一次运算中只能出现一次，多按无效</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">"."</span>:</span><br><span class="line">      <span class="keyword">boolean</span> hasDot = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stringBuffer.length(); i++) &#123;</span><br><span class="line">          <span class="keyword">if</span> (stringBuffer.charAt(i) == <span class="string">'.'</span>) &#123;</span><br><span class="line">              hasDot = <span class="keyword">true</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!hasDot) &#123;</span><br><span class="line">          capicaty++;</span><br><span class="line">          stringBuffer.append(<span class="string">"."</span>);</span><br><span class="line">          textField.setText(stringBuffer.toString());</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="等于问题">等于问题</h3><ul>
+<li>仅仅在初始时输入数字，不进行任何运算，按下等于号应该显示初始输入的数字，并将result设置为相关的值，从而进行下次运算<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(capicaty&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">	textField.setText(String.valueOf(result));</span><br><span class="line">    reResult = result;</span><br><span class="line">    compute = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="除法问题">除法问题</h3><ul>
+<li>出现不合法的运算会得到Infinity，为了界面友好，显示为’0’<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">"÷"</span>:</span><br><span class="line">    result /= Double.parseDouble(stringBuffer.toString());</span><br><span class="line">    <span class="keyword">if</span> (String.valueOf(result).equals(<span class="string">"Infinity"</span>)) &#123;</span><br><span class="line">        result = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="代码">代码</h2><ul>
+<li>完整的代码见我的Github：<a href="https://github.com/whtis/Calculator" target="_blank" rel="external">Calculator</a></li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="简易说明">简易说明</h2><ul>
+<li>学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：<ul>
+<li>基本的加减乘除四则运算</li>
+<li>连续计算</li>
+<li>运算结果记忆</li>
+</ul>
+</li>
+<li>本来打]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="小练习" scheme="http://www.whtis.com/tags/%E5%B0%8F%E7%BB%83%E4%B9%A0/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Java学习总结--第十三章 创建图形用户界面]]></title>
+    <link href="http://www.whtis.com/2016/02/15/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0-%E5%88%9B%E5%BB%BA%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2/"/>
+    <id>http://www.whtis.com/2016/02/15/Java学习总结-第十三章-创建图形用户界面/</id>
+    <published>2016-02-15T14:32:39.000Z</published>
+    <updated>2016-02-16T10:16:54.366Z</updated>
+    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>本章综合第十一、十二章的内容，介绍GUI编程中常用的组件。</p>
+<h3 id="Swing_GUI组件的公共特性">Swing GUI组件的公共特性</h3><ul>
+<li>Component类是所有用户界面组件和容器的根类，Jcomponent类是大多数Swing组件的根类。</li>
+<li>GUI组件都有处理字体、颜色、大小、工具提示文本和边框等属性的方法。</li>
+<li>可以在Jcomponent类的任何对象上设置边框。<ul>
+<li>TitleBorder(String title) 创建标题边框</li>
+<li>LineBorder(Color color,int width) 创建线型边框</li>
+</ul>
+</li>
+<li><strong>容器类Container类是Swing GUI组件类的父类。</strong></li>
+</ul>
+<h3 id="按钮（JButton）">按钮（JButton）</h3><p><code>按钮（button）</code>是一种点击时触发行为事件的组件。Swing提供常规按钮、开关按钮、复选框和单选按钮。</p>
+<ul>
+<li>Jbutton可以响应多种类型的事件，通常我们只需要响应ActionEvent事件。</li>
+<li>按钮可以设置工具提示文本（<code>setToolTipText(xxx)</code>）和热键（<code>setMnemonic(xxx)</code>）。</li>
+</ul>
+<h4 id="图标">图标</h4><ul>
+<li>图标是一个固定大小的图片，典型的图标体型较小，用于装饰组件。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Icon icon = <span class="keyword">new</span> ImageIcon(<span class="string">"xxx"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>java目前支持GIF、PNG、JPEG三种图像格式。</strong></p>
+<ul>
+<li>每个常规按钮有一个默认图标，一个按下图标和一个在上图标，使用如下方法进行设置：<ul>
+<li>setPressedIcon(“XXX”) 设置按钮按下的图标</li>
+<li>setRolloverIcon(“xxx”) 设置鼠标停留在按钮上时的图标</li>
+</ul>
+</li>
+</ul>
+<h4 id="对齐方式">对齐方式</h4><ul>
+<li><p><code>水平对齐（horizontal alignment）</code>指定以什么样的方式在<strong>按钮</strong>上放置文本和图标。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setHorizontalAlignment(<span class="keyword">int</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>int的取值为：SwingConstants.LEADING(LEFT、CENTER、RIGHT、TRAILING)。默认的是最后一种（右对齐）。</li>
+</ul>
+</li>
+<li><p><code>垂直对齐（vertical alignment）</code>指定以什么样的垂直方式在按钮上放置文本和图标。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setVerticalAlignment(<span class="keyword">int</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>int的取值为：SwingConstants.TOP(CENTER、BOTTOM)，默认的是CENTER。</li>
+</ul>
+</li>
+</ul>
+<h4 id="文本位置">文本位置</h4><ul>
+<li><code>水平文本位置（horizontal text position）</code>指定文本相对于图标的水平位置。</li>
+<li><code>垂直文本位置（Vertical text position）</code>指定文本相对于图标的垂直位置。</li>
+<li>设置方式和默认值与对齐方式相同。</li>
+</ul>
+<h3 id="复选框（JCheckBox）">复选框（JCheckBox）</h3><ul>
+<li>一个<code>开关按钮（toggle button）</code>有两种状态，JToggleButton类继承AbstractButton并实现了一个开关按钮。开关按钮分为两种：<br>1、JCheckBox 复选按钮（方形）<br>2、 JRadionButton 单选按钮（圆形）</li>
+<li>JCheckBox先触发的是ItemEvent事件，然后触发ActionEvent事件。要确定复选框是否被选中，使用<code>isSelected()</code>方法。</li>
+</ul>
+<h3 id="单选按钮（JRadioButton）">单选按钮（JRadioButton）</h3><ul>
+<li><code>单选按钮（radio button）</code>，或者叫<code>选择按钮(option button)</code>,让用户从一组选项中选择唯一的一个选项。</li>
+<li>单选按钮使用Java.swing.ButtonGroup类的实例进行组织，并使用add方法添加按钮<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ButtonGroup group = <span class="keyword">new</span> ButtonGroup();</span><br><span class="line">group.add(xx1);</span><br><span class="line">group.add(xx2);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果没有创建按钮组，就无法达到单选的目的。</p>
+<ul>
+<li>JRadioButton先触发的是ItemEvent事件，然后触发ActionEvent事件。要确定复选框是否被选中，使用<code>isSelected()</code>方法。</li>
+</ul>
+<h3 id="标签（JLable）">标签（JLable）</h3><ul>
+<li><code>标签（lable）</code>是显示一小段文字、一幅图片或二者皆有的区域。</li>
+<li>JLable继承自JComponent类，具有与JButton类似的属性。</li>
+</ul>
+<h3 id="文本域（JTextField）">文本域（JTextField）</h3><ul>
+<li><code>文本域（text field）</code>可以用于输入或显示字符串。（单行）</li>
+<li>JTextField继承自JTextComponent类。</li>
+<li>JTextField触发的是ActionEvent事件（回车键触发）。</li>
+</ul>
+<h3 id="文本区（JTextArea）">文本区（JTextArea）</h3><ul>
+<li>文本区用户输入多行文本。</li>
+<li>可以创建指定行列的文本区，JTextArea继承自JTextComponent类。</li>
+<li><p>JTextArea无法滚动，但可以创建一个<code>JScrollPane</code>对象处理滚动。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JScrollPane scrollPane = <span class="keyword">new</span> JScrollPane(<span class="keyword">new</span> JTextArea());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用属性</p>
+<ul>
+<li>setLineWrap（boolean b） 是否换行</li>
+<li>setWrapStyleWord（boolean b） 是否按单词换行，默认按照字符换行</li>
+<li>setEditable（boolean b） 是否可编辑</li>
+</ul>
+</li>
+</ul>
+<h3 id="组合框（JComboBox）">组合框（JComboBox）</h3><ul>
+<li><code>组合框（combo box）</code>，也叫<code>选择列表（choice list）</code>或<code>下拉式列表（drop-down list）</code>，它包含项目的一个列表，用户能够从中选择。<strong>使用它可以限制用户的选择范围并能避免对输入数据有效性的繁复检查。</strong></li>
+<li>JComboBox可以引发ActionEvent和ItemEvent事件。选中一个新的项目是，JComboBox会产生两次ItemEvent事件，一次是取消前一个项目，另一次是选中当前项目。</li>
+<li>常用方法<ul>
+<li>getSelectedItem（）方法返回已经选定的项目</li>
+<li>getSelectedIndex（） 返回选中的项目次序号</li>
+</ul>
+</li>
+</ul>
+<h3 id="列表框（JList）">列表框（JList）</h3><ul>
+<li><code>列表框（list）</code>是一个组件，与JComboBox类似，但是它允许用户选择一个或多个项目。</li>
+<li><p>选择模式属性selectionMode取值如下，默认为多区间选择</p>
+<ul>
+<li>SINGLE_SELECTION 单项选择</li>
+<li>SINGLE_INTERVAL_SETECTION 单区间选择（允许选择多项，但是必须连续）</li>
+<li>MULTIPLE_INTERVAL_SETECTION 多区间选择<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>JList不能自动滚动，可以参考文本区的方法设置滚动。</p>
+</li>
+<li>JList触发ListSelectionEvent事件。</li>
+<li>常用方法：<ul>
+<li>getSelectedIndices（） 以数组形式返回选中的次序号</li>
+<li>getSelectedValues（） 以数组形式返回选中的值</li>
+<li>getVisibleRowCount（） 返回可见行数</li>
+</ul>
+</li>
+</ul>
+<h3 id="滚动条（JScrollbar）">滚动条（JScrollbar）</h3><ul>
+<li><code>滚动条（scrollbar）</code>是一个控制器，它使用户能从值得一个范围中进行选择。</li>
+<li>JScrolBar的属性如下：<ul>
+<li>orientation（方向）：指定滚动条的水平或垂直模式。</li>
+<li>maximum（最大值）: 指滚动条的最大值。</li>
+<li>minimum（最小值）</li>
+<li>visibleAmount（宽度，也叫广度）：是指滚动块的相对宽度。滚动块在屏幕上的显示的实际宽度取决于最大值及visibleAmount的值。</li>
+<li>value：表示滚动条当前的值。</li>
+<li>blockIncrement（块增量）：是用户点击滚动条的块增加（减少）区时所增加（减少）的值。</li>
+<li>unitIncrement（单位增量）：用户点击单位增加（减少）区所增加（减少）的值。</li>
+<li>**滚动条上的宽度对应于<code>maximum+visibleAmount</code>。当滚动条设为最大值时，滚动块的左端在maximum处，右端在maximum+visibleAmount处。</li>
+</ul>
+</li>
+<li>用户改变滚动条的值时，滚动条产生AdjustmentEvent的一个实例。</li>
+<li>可以使用构造方法或者使用<code>setOrientation</code>方法来指定滚动条的方向。默认情况下，属性maximum的值为100，minimum为0，blockIncrement为10，visibleAmount为10。</li>
+</ul>
+<h3 id="滑动块（JSlider）">滑动块（JSlider）</h3><ul>
+<li>JSlider与JScrollBar类似，但是JSlider具有更多的属性和更多的显示形式。</li>
+<li>JSlider允许用户以图形方式在指定的区间中选择一个数值。滑动块可以在主标记以及次标记之间滑动。标记间的像素值是由<code>setMajorTickSpacing</code>和<code>setMinorTickSpacing</code>方法控制的。</li>
+<li>Slider可以带或不带标记，可以有或没有标签，可以水平显示或垂直显示。</li>
+<li>垂直滚动条的值从上向下增加，但是垂直滑动块的值从上向下减少。</li>
+<li>改变滑动块的值时，滑动块产生javax.swing.event.ChangeEvent的一个实例。</li>
+</ul>
+<h3 id="创建多个窗口">创建多个窗口</h3><p>新开的窗口叫做<code>子窗口（subwindow）</code>，主框架叫<code>主窗口（main window）</code>。</p>
+<ul>
+<li>从应用程序创建一个子窗口，需要创建JFrame的一个子类，用于定义任务和通知新窗口做什么。然后，在程序中创建该子类的一个实例，通过把它设为可见的即可弹出新窗口。</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>可以在任何Swing组件使用边框，边框和图标都可以共享。</li>
+<li>AbstractButton类中的常量LEFT、RIGHT……也可以被许多其他Swing组件使用。由于所有的Swing组件都实现了SwingConstants，因此各种组件都可以通过SwingConstants引用这些常量。因此<code>JButton.CENTER和SwingConstants.CENTER</code>作用是一样的。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li>习题13.1 13.4 13.5 13.8 13.10 13.14 13.15源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter13/src" target="_blank" rel="external">chapter13</a></li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>本章综合第十一、十二章的内容，介绍GUI编程中常用的组件]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Java学习总结--第十二章 事件驱动程序]]></title>
@@ -84,7 +343,7 @@
     <link href="http://www.whtis.com/2016/02/05/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/"/>
     <id>http://www.whtis.com/2016/02/05/Java学习总结-第十一章-图形用户界面程序设计/</id>
     <published>2016-02-05T14:17:17.000Z</published>
-    <updated>2016-02-10T13:36:35.111Z</updated>
+    <updated>2016-02-11T08:53:20.595Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章介绍Java GUI程序设计基础。讨论GUI组件以及它们的关系，介绍容器和布局管理器、颜色、字体、以及几何图形的绘制。</p>
@@ -197,7 +456,7 @@
 <h2 id="复习小结">复习小结</h2><ul>
 <li>Java图形界面设计应该遵循的顺序：面板（JPanel）→容器（Container）→框架（JFrame）</li>
 <li><del>面板中设置背景色似乎不起作用。（本章创建的JPanel子类MessagePanel不起作用，其它的起作用，原因未知）</del><ul>
-<li>猜测原因：MessagePanel类重写了paintComponent（）方法，该方法与repaint（）方法密切相关，导致无法重新绘制新背景。</li>
+<li>原因：MessagePanel类重写了paintComponent（）方法，该方法是JComponent类中的方法，但是写的时候错写成了paintComponents（）方法，该方法是Container类中的方法，因此设置字体时不起作用。</li>
 </ul>
 </li>
 <li>java.awt.Component 是所有GUI组件的根类。</li>
@@ -1692,43 +1951,6 @@
       <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
     
       <category term="hexo" scheme="http://www.whtis.com/categories/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[ubuntu14.04本地安装wordpress中的一些问题总结]]></title>
-    <link href="http://www.whtis.com/2015/10/29/ubuntu14-04%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85wordpress%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>http://www.whtis.com/2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/</id>
-    <published>2015-10-29T10:13:35.000Z</published>
-    <updated>2016-02-10T13:37:39.696Z</updated>
-    <content type="html"><![CDATA[<h1 id="1、安装apache2的问题">1、安装apache2的问题</h1><p>当我们使用如下语句安装apache2时：</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install apache2</span><br></pre></td></tr></table></figure>
-<p>会发现启动报错：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. <span class="operator"><span class="keyword">Set</span> the <span class="string">'ServerName'</span> directive <span class="keyword">globally</span> <span class="keyword">to</span> suppress this message</span><br><span class="line">                                                                         [ OK ]</span></span><br></pre></td></tr></table></figure>
-<p>解决方法：</p>
-<p>编辑<code>sudo nano /etc/apache2/apache2.conf</code>，在最后加上</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword"><span class="common">ServerName</span></span> localhost：80</span><br></pre></td></tr></table></figure>
-<p>再试试，apache2服务器就可以正常启动了。</p>
-<p><em><strong>请注意：apache2的默认配置文件不再是apache的httpd，而是apache2的apache2.conf</strong></em></p>
-<h1 id="2、安装wordpress时需要注意的问题">2、安装wordpress时需要注意的问题</h1><p>wordpress的下载以及配置，需要注意的只有一点：</p>
-<p><em>wordpress的默认根目录是 <strong>/var/www/html</strong> ，而不是 <strong>/var/www</strong></em></p>
-<p>因此，假如你想通过localhost访问时，你的目录结构应该是 <strong>/var/www/html/*</strong>，同理，如果你要通过localhost/wordpress访问时，你的目录结构应该是 <strong>/var/www/html/wordpress/*</strong></p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="1、安装apache2的问题">1、安装apache2的问题</h1><p>当我们使用如下语句安装apache2时：</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter">]]>
-    </summary>
-    
-      <category term="apache2" scheme="http://www.whtis.com/tags/apache2/"/>
-    
-      <category term="ubuntu" scheme="http://www.whtis.com/tags/ubuntu/"/>
-    
-      <category term="wordpress" scheme="http://www.whtis.com/tags/wordpress/"/>
-    
-      <category term="收集整理" scheme="http://www.whtis.com/tags/%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/"/>
-    
-      <category term="wordpress" scheme="http://www.whtis.com/categories/wordpress/"/>
     
   </entry>
   
