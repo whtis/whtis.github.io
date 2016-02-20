@@ -4,7 +4,7 @@
   <subtitle><![CDATA[点滴的记录，是变强的必经之路]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-02-20T07:07:17.679Z</updated>
+  <updated>2016-02-20T07:54:24.708Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.whtis.com/2016/02/18/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0-%E7%AE%80%E5%8D%95%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
     <id>http://www.whtis.com/2016/02/18/Java学习总结-第十六章-简单输入输出/</id>
     <published>2016-02-18T11:37:58.000Z</published>
-    <updated>2016-02-20T07:07:17.679Z</updated>
+    <updated>2016-02-20T07:54:24.708Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章主要讨论数据持久化的问题。一般Java程序在结束后所有存储在内存中的数据都会消失，为了保留这些数据，就要学会如何将它们存储到磁盘文件或光盘文件中。<br>本章介绍的主要是两个方面的内容：文本I/O和二进制I/O。为了知识的连贯性，需要先介绍相关的知识，以方便理解。<br><strong>计算机中所有文件都是以二进制格式来存储的。文本I/O是在二进制I/O基础上提供了一层抽象，它封装了字符的编码和解码过程，在文本I/O中自动进行编码和解码。</strong></p>
@@ -178,7 +178,7 @@
 <h3 id="对象输入输出">对象输入输出</h3><ul>
 <li>DataInputSteam类和DataOutputStream类可以实现基本数据类型与字符串的输入输出，在此基础上，ObjectInputStream类和ObjectOutputStream类还允许对象的输入输出。</li>
 <li>可以完全用ObjectInputStream类和ObjectOutputStream类替代DataInputSteam类和DataOutputStream类。</li>
-<li>ObjectInputStream扩展<code>InputStream</code>类并实现<code>ObjectInput</code>和<code>ObjectStreamConstants</code>接口,<code>ObjectInput</code>是<code>DataInput</code>的子接口；ObjectOutputStream扩展<code>OutputStream</code>类并实现<code>ObjectOutput</code>和<code>ObjectStreamConstants</code>接口,<code>ObjectOutput</code>是<code>DataOutput</code>的子接口。<code>ObjectStreamConstants</code>包含ObjectInputStream类和ObjectOutputStream类中所用的常量。<br><img src="Object输入输出类" alt="Object输入输出"></li>
+<li>ObjectInputStream扩展<code>InputStream</code>类并实现<code>ObjectInput</code>和<code>ObjectStreamConstants</code>接口,<code>ObjectInput</code>是<code>DataInput</code>的子接口；ObjectOutputStream扩展<code>OutputStream</code>类并实现<code>ObjectOutput</code>和<code>ObjectStreamConstants</code>接口,<code>ObjectOutput</code>是<code>DataOutput</code>的子接口。<code>ObjectStreamConstants</code>包含ObjectInputStream类和ObjectOutputStream类中所用的常量。<br><img src="Object输入输出类.jpg" alt="Object输入输出"></li>
 <li>常用构造方法：<ul>
 <li>public ObjectInputStream（InputStream in）</li>
 <li>public ObjectOutputStream（OutputStream out）</li>
@@ -231,7 +231,7 @@
 <li>16.1 单词统计可以使用StringTokenizer类的countTokens（）方法或者使用正则匹配。</li>
 <li>16.4 重写Java源代码格式。代码提供了行尾风格和次行风格相互转化的方法。</li>
 <li>16.5 使用字符串的<code>replaceAll()</code>方法删除字符。</li>
-<li>16.14 代码参考<a href="">GUI小练习-简易计算器</a></li>
+<li>16.14 代码参考<a href="http://www.whtis.com/2016/02/16/GUI%E5%B0%8F%E7%BB%83%E4%B9%A0-%E7%AE%80%E6%98%93%E8%AE%A1%E7%AE%97%E5%99%A8/">GUI小练习-简易计算器</a></li>
 <li>16.15 代码见文件夹AddressBook。</li>
 <li>其余习题16.7 16.8 16.10 16.11源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter16/src" target="_blank" rel="external">chapter16</a></li>
 </ul>
