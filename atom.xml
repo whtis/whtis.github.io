@@ -4,7 +4,7 @@
   <subtitle><![CDATA[点滴的记录，是变强的必经之路]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-02-16T11:39:01.418Z</updated>
+  <updated>2016-02-20T07:07:17.679Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -13,6 +13,245 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Java学习总结--第十六章 简单输入输出]]></title>
+    <link href="http://www.whtis.com/2016/02/18/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0-%E7%AE%80%E5%8D%95%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
+    <id>http://www.whtis.com/2016/02/18/Java学习总结-第十六章-简单输入输出/</id>
+    <published>2016-02-18T11:37:58.000Z</published>
+    <updated>2016-02-20T07:07:17.679Z</updated>
+    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>本章主要讨论数据持久化的问题。一般Java程序在结束后所有存储在内存中的数据都会消失，为了保留这些数据，就要学会如何将它们存储到磁盘文件或光盘文件中。<br>本章介绍的主要是两个方面的内容：文本I/O和二进制I/O。为了知识的连贯性，需要先介绍相关的知识，以方便理解。<br><strong>计算机中所有文件都是以二进制格式来存储的。文本I/O是在二进制I/O基础上提供了一层抽象，它封装了字符的编码和解码过程，在文本I/O中自动进行编码和解码。</strong></p>
+<h3 id="提前需要知道的一些知识">提前需要知道的一些知识</h3><ul>
+<li>windows和Unix文件存储目录的不同。</li>
+<li>位、字节、字符、ASCII码和统一码Unicode相关知识。<br>位，英文是bit，是用来表示计算机数据的一种计量单位，8bit为一个字节，ASCII码采用一个字节存储二进制数据，Java中统一码采用两个字节进行存储，统一码的低字节就是ASCII码，因此在Java中，字符是由两个字节构成的。</li>
+<li>Java中基本数据类型都占几个字节。如，int类型是4个字节，char类型是2个字节。</li>
+</ul>
+<h3 id="文件类File">文件类File</h3><p>无论是文本I/O还是二进制I/O的构造方法，都需要传入文件类参数或者文件名参数。</p>
+<h4 id="文件系统相关">文件系统相关</h4><ul>
+<li>目录路径与文件名全称是平台依赖的。</li>
+<li>为了解决不同平台路径与分隔符的问题，File类提供了四个常量：<ul>
+<li>File.PathSeparator </li>
+<li>File.PathSeparatorChar <code>&quot;/&quot;</code>or<code>&quot;\&quot;</code> </li>
+<li>File.Separator </li>
+<li>File.SeparatorChar <code>&quot;;&quot;</code>or<code>&quot;:&quot;</code></li>
+</ul>
+</li>
+<li><code>绝对路径（absolute path）</code>名是依赖于系统的，如果想开发平台无关的程序，一定不要用绝对路径。可以使用和平台无关的常量创建一个相对路径。（简单的方法是无论Win还是Linux，相对路径分隔符都使用”/“即可。）</li>
+</ul>
+<h4 id="File类的常用方法简录">File类的常用方法简录</h4><ul>
+<li>构造方法：<ul>
+<li>File（pathname：String）<br>······</li>
+</ul>
+</li>
+<li>常用方法<ul>
+<li>exists（） 检测文件是否存在</li>
+<li>isDirectory（）/isFile（） 是目录/文件</li>
+<li>isAbsolute（） 该文件是否由绝对路径创建</li>
+<li>getAbsolutePath（） 返回File对象的绝对路径</li>
+<li>getCanonicalPath（） 返回值与getAbsolutePath（）相同，但是删除了一些冗余符号</li>
+<li>getPath（）</li>
+<li>getParent（）<br>······</li>
+</ul>
+</li>
+</ul>
+<h3 id="文本I/O类">文本I/O类</h3><ul>
+<li>File类不提供从文件中读写数据的方法，因此需要选择适当的输入输出类来进行I/O操作。<strong>输入输出都是对于程序本身而言</strong>。<br><img src="文本IO类.jpg" alt="文本I/O类"></li>
+<li>Reader类是文本输入的根类，Writer类是文本输出的根类。</li>
+<li>Reader类常用方法：<ul>
+<li>read（） 从输入流读取下一个字符，返回值在0到65525之间，表示该字符的统一码。到达流的结尾时返回-1<br>···</li>
+</ul>
+</li>
+<li>Writer类常用方法：<ul>
+<li>flush（） 刷新该输出流，并将已经输出到缓冲区的所有字符写入文件<br>···</li>
+</ul>
+</li>
+<li>read（）方法读取字符，如果没有有效字符，那么它将阻塞线程。</li>
+<li>处理PrintWriter类，其他文本I/O类中的所有方法都声明抛出异常java.io.IOException。</li>
+</ul>
+<h4 id="FileReader类和FileWriter类">FileReader类和FileWriter类</h4><ul>
+<li>使用主机上默认的字符编码方式进行读写操作。</li>
+<li>所有方法均继承自父类，没有新的方法。</li>
+<li>FileReader类read（）方法是读取一个<strong>字节</strong></li>
+<li>FileWriter构造方法支持参数append：<ul>
+<li>FileWriter(File file,booean append) 如果原文件存在，可以通过设置append参数决定是覆盖还是追加</li>
+</ul>
+</li>
+</ul>
+<h4 id="InputStreamReader类和OutputStreamWriter类">InputStreamReader类和OutputStreamWriter类</h4><ul>
+<li>可以在构造方法中指定使用哪种编码方案进行读写操作。</li>
+<li>用于实现字符与字节之间的转化。写入OutputStreamWriter的字符用指定的编码方案翻译为字节。 </li>
+<li>除<code>getEncoding()</code>方法外，均继承自父类方法。getEncoding()方法返回这个数据流使用的编码方案名称。<br><strong>Java程序使用的是统一码（Unicode）。从FileReader流中读取一个字符时，返回该字符的统一码。字符在文件中的编码可能不是统一码，Java自动将它转化为统一码，想FileWriter流中写入字符时，Java自动的将统一码转化为文件指定编码。</strong></li>
+</ul>
+<h4 id="BufferedReader类和BufferedWriter类">BufferedReader类和BufferedWriter类</h4><ul>
+<li>用于输出字符与字符串。</li>
+<li>BufferedReader类和BufferedWriter类通过减少读写次数来加快输入输出的速度。缓冲区数据流使用一个类似高速缓冲器作用的字符数组。缓冲区默认是<code>8192</code>个字节。</li>
+<li>缓冲区输出流只有当它的缓冲区已满或调用<code>flush()</code>方法才调用写入文件的方法。</li>
+<li>BufferedReader常用方法：<ul>
+<li>readLine（） 整行读取（不带换行符的一行），到达流的末尾时，返回<code>null</code><br>···</li>
+</ul>
+</li>
+<li>BufferedWriter常用方法：<ul>
+<li>newLine（） 向文件写入一个依赖平台的换行符。以下方法可以获得系统的换行符：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> String lineSeparator = (String) java.security.AccessController.doPrivileged(<span class="keyword">new</span> sun.security.action.GetPropertyAction(<span class="string">"line.separator"</span>));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>物理输入输出的I/O设备比CPU的速度慢得多，因此读取一个大文件时，使用缓冲区能够较大地提高效率。</strong></p>
+<h4 id="PrintWriter类和PrintStream类">PrintWriter类和PrintStream类</h4><ul>
+<li>可以将对象、字符串和数值以<code>文本</code>方式输出。</li>
+<li>PrintWriter的效率比PrintStream高，功能一样，前者用于替代后者。</li>
+<li>打印数值、字符或布尔值，就是将其转化为字符串打印。打印一个对象就是打印该对象用<code>toString()</code>方法返回的描述字符串。</li>
+<li>printf（）方法用于格式化输出。</li>
+<li><em>System.out解析</em><br>out是定义在System类中类型为PrintStream的一个静态变量。默认情况下，out是标准输出设备，即屏幕。可以使用<code>setOut()</code>方法设置新的out。</li>
+<li>常用构造方法：<ul>
+<li>public PrintWriter（Writer out，boolean autoFlush） autoFlush为true，println方法会引起缓冲区刷新</li>
+</ul>
+</li>
+</ul>
+<h3 id="二进制I/O">二进制I/O</h3><ul>
+<li>二进制输入输出不需要进行文本的编码与解码操作，所以要比文本I/O效率高。向文件写入字节，就是将源字节复制到文件中，从文件读取字节，就是将文件中的字节原样返回。<br><img src="二进制IO类.jpg" alt="二进制I/O类"></li>
+<li>InputStream和OutputStream的所有方法与Reader和Writer中的方法类似，不同的是前者操作的是字节，后者操作的是字符。</li>
+<li>InputStream类和OutputStream类是抽象类。</li>
+<li>InputStream类常用方法：<ul>
+<li>read（） 从输入流中读取数据的下一个字节，返回值为0~255之间的整数，如果到达流尾，返回-1</li>
+<li>available（） 返回可以从该输入流读取的字节数</li>
+<li>mark（int readlimit） 在该输入流中标记当前位置<br>···</li>
+</ul>
+</li>
+<li>OutputStream类常用方法：<ul>
+<li>write（int b） 将指定字节写到输出流，参数b是int型，写入的值是（byte）b</li>
+<li>flush（）<br>···</li>
+</ul>
+</li>
+</ul>
+<h4 id="FileInputStream类和FileOutputStream类">FileInputStream类和FileOutputStream类</h4><ul>
+<li>继承自父类的方法，没有引进新方法</li>
+<li>输入输出均是操作的字节。</li>
+</ul>
+<h4 id="FilterInputStream类和FilterOutputStream类">FilterInputStream类和FilterOutputStream类</h4><p><code>过滤器数据流（filter stream）</code>是为某种目的过滤字节的数据流。基本字节输入流提供的读取方法只能用来读取字节，如果想要读取整数值、双精度值或字符串，需要一个过滤器类来包装输入流。</p>
+<ul>
+<li>该类是父类，如果需要处理基本数值类型数据时，可以使用DataInputSteam类和DataOutputStream类来过滤字节。</li>
+</ul>
+<h4 id="DataInputStream类和DataOutputStream类">DataInputStream类和DataOutputStream类</h4><ul>
+<li>DataInputSteam从数据流中读取字节并将它们转化为适当的基本类型值或字符串。DataOutputStream将基本类型的值或字符串转化为字节并将这些字节输出到输出数据流。</li>
+<li>DataOutputStream类和DataInputSteam类以平台无关的方式读写Java的基本类型值和字符串。</li>
+<li>可以使用<code>input.available()==0</code>方法检测读取是否已经到了结尾。</li>
+<li>DataInputSteam扩展<code>FilterInputStream</code>类并实现<code>DataInput</code>接口；DataoutputStream扩展<code>FilterOutputStream</code>类并实现<code>DataOutput</code>接口。</li>
+<li>DataInput类常用方法： <ul>
+<li>readInt（） 从输入流中读取一个int值（输入流是一个字节一个字节读入，DataInputSteam的作用就是将读入的字节4个4个组合，其他方法类似）</li>
+<li>readUTF（） 从UTF格式中读取一个字符串<br>···</li>
+</ul>
+</li>
+<li>Dataoutput类常用方法：<ul>
+<li>writeByte（int v） 将参数v的低8位（一个字节）写到输出流（如果参数v是在Java中被赋值，那么v的统一码是16位（两个字节），调用该方法只能将低字节（低8位）写到输出流）</li>
+<li>writeBytes（String s） 将字符串中字符的低8位写到输出流，适合由ASCII字符构成的字符串</li>
+<li>writeChar（char c） 向输出流中写一个字符（两个字节构成）</li>
+<li>writeChars（String s） 将字符串s中的每一个字符依次写到输出流，每个字符占两个字节</li>
+<li>writeInt（int v） 向输出流写一个int值</li>
+<li>writeUTF（String s） 用UTF格式写出一个字符串<br>···<br><strong>由此可知，如果要使用二进制I/O，必须使用相对应的输入输出方法以及正确的顺序才能得到正确的数据。</strong></li>
+</ul>
+</li>
+<li><em>UTF编码</em><ul>
+<li>UTF是一种编码方案，它可以使系统高效的同时处理统一码（Unicode）和ASCII码。ASCII码字符集是统一码字符集的一个子集。</li>
+<li>为了解决8位ASCII码转为16位统一码造成的浪费问题，提出来UTF编码。UTF编码方案分别使用1字节、2字节或3字节来存储字符。<ul>
+<li>ASCII码的值不会超过0x7F,使用一个字节编码</li>
+<li>不超过0x7FF的统一码值编码为两个字节</li>
+<li>其余编码为三个字节</li>
+</ul>
+</li>
+<li>UTF字符的开始几位表明该字符的编码是几个字节的：<ul>
+<li>首位是0,一个字节的字符</li>
+<li>前三位是110，两个字节字符的第一个字节</li>
+<li>前四位是1110，它是三字节字符的第一个字节</li>
+</ul>
+</li>
+<li>UTF字符串的前两个字节用来存储字符串中的字符个数。如：writeUTF(“ABCDEF”)写入的是8个字节</li>
+<li><strong>如果字符串的大多数字符都是普通的ASCII字符，采用UTF格式存储的效率是很高的。</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="BufferedInputStream类和BufferedOutputStream类">BufferedInputStream类和BufferedOutputStream类</h4><ul>
+<li>提供缓冲区，加快读写<code>字节</code>的效率。缓冲区默认大小为<code>512</code>个字节。</li>
+</ul>
+<h3 id="对象输入输出">对象输入输出</h3><ul>
+<li>DataInputSteam类和DataOutputStream类可以实现基本数据类型与字符串的输入输出，在此基础上，ObjectInputStream类和ObjectOutputStream类还允许对象的输入输出。</li>
+<li>可以完全用ObjectInputStream类和ObjectOutputStream类替代DataInputSteam类和DataOutputStream类。</li>
+<li>ObjectInputStream扩展<code>InputStream</code>类并实现<code>ObjectInput</code>和<code>ObjectStreamConstants</code>接口,<code>ObjectInput</code>是<code>DataInput</code>的子接口；ObjectOutputStream扩展<code>OutputStream</code>类并实现<code>ObjectOutput</code>和<code>ObjectStreamConstants</code>接口,<code>ObjectOutput</code>是<code>DataOutput</code>的子接口。<code>ObjectStreamConstants</code>包含ObjectInputStream类和ObjectOutputStream类中所用的常量。<br><img src="Object输入输出类" alt="Object输入输出"></li>
+<li>常用构造方法：<ul>
+<li>public ObjectInputStream（InputStream in）</li>
+<li>public ObjectOutputStream（OutputStream out）</li>
+</ul>
+</li>
+<li>可以向数据流中写入多个对象或基本类型数据。从对应的ObjectInputStream中读回这些对象时，必须与其存入时的类型和顺序相同。对于必要的类型，必须使用Java安全性所要求的类型转换。（显式转换）</li>
+</ul>
+<h4 id="可序列化接口Serializable">可序列化接口Serializable</h4><ul>
+<li>并不是每一个对象都可以写到输出流。可以写入到输出流中的对象称为<code>可序列化的（serializable）</code>。</li>
+<li>可序列化的对象时java.io.Serializable接口的实例，所以可序列化对象的类必须实现Serializable接口。</li>
+<li>Serializable接口是一种标记性接口。它没有方法，要实现这个接口可以启动Java机制，自动执行存储对象或数组的过程。</li>
+<li>Java提供了自动进行写对象这个过程的内在机制，这个过程称为<code>对象序列化（object serialization）</code>。与此相反，读取对象的过程称为<code>对象解读序列化（object deserialization）</code>。它是在ObjectInputStream类中实现的。</li>
+<li>存储一个可序列化对象时，会对该对象的类进行编码，编码包括类名、类的说明标志、对象实例变量的值以及任何从初始对象引用的其他对象包，但是不存储对象静态变量的值。</li>
+<li><p>如果一个对象时Serializable的实例，但它包含一个非序列化的数据域，该对象不是可序列化的。为了是该对象可序列化，可以给这些数据域加上关键字<code>transient</code>，告诉Java虚拟机将对象写入对象流时忽略这些数据域。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> v1;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">double</span> v2;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">transient</span> A v3 = <span class="keyword">new</span> A();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123; &#125; <span class="comment">//A is not serializable</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果一个对象多次写入对象流，第一次存储一个可序列化对象时，会创建一个序列号，Java虚拟机将对象的所有内容包括序列号一起写入对象输出流，以后的存储，都是存储序列号的一个拷贝，换句话说，只存储引用。</p>
+</li>
+</ul>
+<h4 id="序列化数组">序列化数组</h4><p>当数组中的元素是可序列化的时候，数组也是可序列化的。一个完整的数组可以用writeObject方法存入文件，此后使用readObject方法将它读出。</p>
+<h3 id="随机读写文件">随机读写文件</h3><ul>
+<li>Java提供了RandomAccessFile类，它允许对文件内的随机位置进行读写。</li>
+<li>RandomAccessFile类实现了DataInput和DataOutput接口。</li>
+<li>常用方法：<ul>
+<li>RandomAccessFile（File file，String mode） 以指定File和模式创建，模式可以是”r”、”rw”等</li>
+<li>getFilePointer（） 返回从文件头到发生读写位置的偏移量</li>
+<li>length（） 返回文件的字节数</li>
+<li>seek（long pos） 设置从文件头到下一次读写位置的偏移量</li>
+<li>setLength（long newLength） 给这个文件设置一个新长度<br>···</li>
+</ul>
+</li>
+<li>随机读写文件是由字节序列组成的，在其中某个字节的位置处有一个称为<code>文件指针（file pointer）</code>的特殊标记。文件的读写操作就是在文件指针所指的位置上进行的。</li>
+<li><strong>文件指针置于文件的开头。</strong></li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>本章可能出现的异常总结如下：<ul>
+<li>企图用一个不存在的文件创建FileReader/FileWriter对象，出现异常<code>FileNotFoundException</code>。</li>
+<li>到达文件尾后还想读取数据，报<code>java.io.EOFException</code>异常。</li>
+<li>readObject（）方法可能抛出<code>ClassNOtFoundException</code>异常。</li>
+</ul>
+</li>
+<li>FilterInputStream类和FilterOutputStream类的作用在于：基本的字节输入输出流只能操作字节，但是基本类型的数据如int类型是4个字节，如果想要读取正确的int值，仅靠基本的FileInputStream和FileOutputStream类是无法完成的，因此需要在这基础上包装一层Filter Stream，使用该包装类的方法可以正确存取基本类型的数据。</li>
+<li>随机读写文件常被用来处理记录型文件，因为记录型文件每条记录的大小可以设置为固定的。这样，每次操作时，就可以确定文件指针的偏移量了。</li>
+<li>随机读写虽然说是文件指针位于文件头，但显示的实际情况是：<br><em>在空文件中插入一条记录，此时文件指针位于这条记录末尾，但是显示的却是这条记录，这点要牢记。</em></li>
+<li>I/O类可分为文本I/O和二进制I/O。文本I/O将数据解释成字符的序列，二进制I/O将数据解释成原始的二进制数。文本在文件中如何存储依赖于文件的编码方式。Java对文本I/O提供自动编码与解码。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li>16.1 单词统计可以使用StringTokenizer类的countTokens（）方法或者使用正则匹配。</li>
+<li>16.4 重写Java源代码格式。代码提供了行尾风格和次行风格相互转化的方法。</li>
+<li>16.5 使用字符串的<code>replaceAll()</code>方法删除字符。</li>
+<li>16.14 代码参考<a href="">GUI小练习-简易计算器</a></li>
+<li>16.15 代码见文件夹AddressBook。</li>
+<li>其余习题16.7 16.8 16.10 16.11源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter16/src" target="_blank" rel="external">chapter16</a></li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>本章主要讨论数据持久化的问题。一般Java程序在结束后所]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[GUI小练习-简易计算器]]></title>
@@ -1924,33 +2163,6 @@
       <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
     
       <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[hexo 3.x同时部署到github和gitcafe的方法]]></title>
-    <link href="http://www.whtis.com/2015/11/03/hexo-3-x%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%88%B0github%E5%92%8Cgitcafe%E7%9A%84%E6%96%B9%E6%B3%95/"/>
-    <id>http://www.whtis.com/2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/</id>
-    <published>2015-11-03T03:24:55.000Z</published>
-    <updated>2016-02-10T13:35:24.691Z</updated>
-    <content type="html"><![CDATA[<p>详细的hexo博客搭建教程可以参考<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">这里</a></p>
-<p>在我按照教程搭建博客的过程中，无意中看到了可以同时将博客部署到<code>github</code>和<code>gitcafe</code>上，以提高国内外的访问速度，具体操作过程可以参考<a href="http://opiece.me/2015/04/28/push-hexo-to-github-and-gitcafe/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">这里</a></p>
-<p>当按照教程修改hexo的配置文件<code>_config.yml</code>后，第二个repo里并没有更新代码，经过查阅<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">官方文档</a>，<code>_config.yml</code>正确的配置如下：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:yourname/yourname.github.io.git,master</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@gitcafe</span>.<span class="attribute">com</span>:yourname/yourname.git,gitcafe-pages</span><br></pre></td></tr></table></figure>
-<p>现在使用<code>hexo d</code>，应该就没问题了。</p>
-<p><strong>注意，type前面的<code>-</code>不能省略。</strong></p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p>详细的hexo博客搭建教程可以参考<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">这里</a></p>
-<p>在我按照教程搭建博客的过程中，无意中看]]>
-    </summary>
-    
-      <category term="hexo" scheme="http://www.whtis.com/tags/hexo/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="hexo" scheme="http://www.whtis.com/categories/hexo/"/>
     
   </entry>
   
