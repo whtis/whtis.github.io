@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java,原创,总结," />
+  <meta name="keywords" content="java,原创,小练习," />
 
 
 
@@ -53,34 +53,39 @@
 
 
 
-<meta name="description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
+<meta name="description" content="功能说明及演示**Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。
+说明综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：
 
-主要内容本章综合第十一、十二章的内容，介绍GUI编程中常用的组件。
-Swing GUI组件的公共特性
-Component类是所有用户界面组件和容器的根类，Jcomponent类是大多数Swing组件的根类。
-GUI组件都有处理字体、颜色、大小、工具提示文本和边框等属性的方法。
-可以在J">
+可以自己选择密码文件的存放位置
+可以根据关键字和密码条件生成相应的密码字符，并提供MD5的显示与查看功能
+可以根据网站/网址名进行简单的查看功能
+可以同步显示所有存在的密码文件列表
+可以选择是否在执行生成按钮">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习总结--第十三章 创建图形用户界面">
-<meta property="og:url" content="http://www.whtis.com/2016/02/15/Java学习总结-第十三章-创建图形用户界面/index.html">
+<meta property="og:title" content="GUI练习之二-密码管理器">
+<meta property="og:url" content="http://www.whtis.com/2016/02/20/GUI练习之二-密码管理器/index.html">
 <meta property="og:site_name" content="whtis's blog">
-<meta property="og:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
+<meta property="og:description" content="功能说明及演示**Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。
+说明综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：
 
-主要内容本章综合第十一、十二章的内容，介绍GUI编程中常用的组件。
-Swing GUI组件的公共特性
-Component类是所有用户界面组件和容器的根类，Jcomponent类是大多数Swing组件的根类。
-GUI组件都有处理字体、颜色、大小、工具提示文本和边框等属性的方法。
-可以在J">
-<meta property="og:updated_time" content="2016-02-16T10:16:54.366Z">
+可以自己选择密码文件的存放位置
+可以根据关键字和密码条件生成相应的密码字符，并提供MD5的显示与查看功能
+可以根据网站/网址名进行简单的查看功能
+可以同步显示所有存在的密码文件列表
+可以选择是否在执行生成按钮">
+<meta property="og:image" content="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%93%8D%E4%BD%9C.gif">
+<meta property="og:image" content="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%BB%E7%95%8C%E9%9D%A2%E6%93%8D%E4%BD%9C.gif">
+<meta property="og:updated_time" content="2016-02-24T15:56:17.383Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习总结--第十三章 创建图形用户界面">
-<meta name="twitter:description" content="本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
+<meta name="twitter:title" content="GUI练习之二-密码管理器">
+<meta name="twitter:description" content="功能说明及演示**Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。
+说明综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：
 
-主要内容本章综合第十一、十二章的内容，介绍GUI编程中常用的组件。
-Swing GUI组件的公共特性
-Component类是所有用户界面组件和容器的根类，Jcomponent类是大多数Swing组件的根类。
-GUI组件都有处理字体、颜色、大小、工具提示文本和边框等属性的方法。
-可以在J">
+可以自己选择密码文件的存放位置
+可以根据关键字和密码条件生成相应的密码字符，并提供MD5的显示与查看功能
+可以根据网站/网址名进行简单的查看功能
+可以同步显示所有存在的密码文件列表
+可以选择是否在执行生成按钮">
 
 
 
@@ -92,7 +97,7 @@ GUI组件都有处理字体、颜色、大小、工具提示文本和边框等�
   };
 </script>
 
-  <title> Java学习总结--第十三章 创建图形用户界面 | whtis's blog </title>
+  <title> GUI练习之二-密码管理器 | whtis's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -282,7 +287,7 @@ GUI组件都有处理字体、颜色、大小、工具提示文本和边框等�
             
             
               
-                Java学习总结--第十三章 创建图形用户界面
+                GUI练习之二-密码管理器
               
             
           </h1>
@@ -291,8 +296,8 @@ GUI组件都有处理字体、颜色、大小、工具提示文本和边框等�
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-02-15T22:32:39+08:00" content="2016-02-15">
-              2016-02-15
+            <time itemprop="dateCreated" datetime="2016-02-20T21:31:46+08:00" content="2016-02-20">
+              2016-02-20
             </time>
           </span>
 
@@ -317,8 +322,8 @@ GUI组件都有处理字体、颜色、大小、工具提示文本和边框等�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/02/15/Java学习总结-第十三章-创建图形用户界面/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/15/Java学习总结-第十三章-创建图形用户界面/" itemprop="commentsCount"></span>
+                <a href="/2016/02/20/GUI练习之二-密码管理器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/20/GUI练习之二-密码管理器/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -337,156 +342,56 @@ GUI组件都有处理字体、颜色、大小、工具提示文本和边框等�
       
 
       
-        <span itemprop="articleBody"><p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章综合第十一、十二章的内容，介绍GUI编程中常用的组件。</p>
-<h3 id="Swing_GUI组件的公共特性">Swing GUI组件的公共特性</h3><ul>
-<li>Component类是所有用户界面组件和容器的根类，Jcomponent类是大多数Swing组件的根类。</li>
-<li>GUI组件都有处理字体、颜色、大小、工具提示文本和边框等属性的方法。</li>
-<li>可以在Jcomponent类的任何对象上设置边框。<ul>
-<li>TitleBorder(String title) 创建标题边框</li>
-<li>LineBorder(Color color,int width) 创建线型边框</li>
-</ul>
-</li>
-<li><strong>容器类Container类是Swing GUI组件类的父类。</strong></li>
-</ul>
-<h3 id="按钮（JButton）">按钮（JButton）</h3><p><code>按钮（button）</code>是一种点击时触发行为事件的组件。Swing提供常规按钮、开关按钮、复选框和单选按钮。</p>
+        <span itemprop="articleBody"><h3 id="功能说明及演示">功能说明及演示</h3><p><em>**Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。</em></p>
+<h4 id="说明">说明</h4><p>综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：</p>
 <ul>
-<li>Jbutton可以响应多种类型的事件，通常我们只需要响应ActionEvent事件。</li>
-<li>按钮可以设置工具提示文本（<code>setToolTipText(xxx)</code>）和热键（<code>setMnemonic(xxx)</code>）。</li>
+<li>可以自己选择密码文件的存放位置</li>
+<li>可以根据关键字和密码条件生成相应的密码字符，并提供MD5的显示与查看功能</li>
+<li>可以根据网站/网址名进行简单的查看功能</li>
+<li>可以同步显示所有存在的密码文件列表</li>
+<li>可以选择是否在执行生成按钮后刷新页面，方便直接书写下一个密码文件</li>
+<li>其他小功能</li>
 </ul>
-<h4 id="图标">图标</h4><ul>
-<li>图标是一个固定大小的图片，典型的图标体型较小，用于装饰组件。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Icon icon = <span class="keyword">new</span> ImageIcon(<span class="string">"xxx"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="演示">演示</h4><ul>
+<li>初始化设置，程序会在同目录下创建一个名为<code>.pmconfig.w</code>的文件，该文件将密码文件的存放路径写入供以后使用：<br><img src="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%93%8D%E4%BD%9C.gif" alt="初始化操作.gif"></li>
+<li>主界面的操作：包括密码文件的生成、查看、更新以及删除等操作：<br><img src="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%BB%E7%95%8C%E9%9D%A2%E6%93%8D%E4%BD%9C.gif" alt="主界面操作.gif"></li>
+</ul>
+<h3 id="问题记录：">问题记录：</h3><ul>
+<li>如何回车后使光标出现在下一个输入框中：<br>使用<code>requestFocus（）</code>方法</li>
+<li><p>如何创建一个文件夹:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">File fileDir = <span class="keyword">new</span> File(<span class="string">"C:\\Users\\ht\\IdeaProjects\\PasswordGenerated\\PasswdGenetated\\"</span>);</span><br><span class="line"><span class="keyword">if</span> (!fileDir.isDirectory()) &#123;</span><br><span class="line"> fileDir.mkdir();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<p><strong>java目前支持GIF、PNG、JPEG三种图像格式。</strong></p>
+<li><p>如何获取系统剪切板并设置内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();</span><br><span class="line"><span class="comment">//复制到剪切板上</span></span><br><span class="line">StringSelection ss = <span class="keyword">new</span> StringSelection(password);</span><br><span class="line">clipboard.setContents(ss, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如何获取当前系统的目录树并选取目录</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JFileChooser fileChooser = <span class="keyword">new</span> JFileChooser();</span><br><span class="line">   fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);</span><br><span class="line">   <span class="keyword">int</span> i = fileChooser.showOpenDialog(<span class="keyword">null</span>);</span><br><span class="line">   <span class="keyword">if</span> (i == fileChooser.APPROVE_OPTION) &#123;</span><br><span class="line">       String path = fileChooser.getSelectedFile().getAbsolutePath();</span><br><span class="line">       String name = fileChooser.getSelectedFile().getName();</span><br><span class="line">       System.out.println(path + name);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为了保证跨平台使用，将windows路径中的”\“替换为”/“</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.replaceAll(<span class="string">"\\\\"</span>,<span class="string">"/"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如何实现初始化界面设置密码文件位置后隐藏该界面，继而出现主界面<br>PasswordManger类中initFrame和mainFrame的先后设置。</p>
+</li>
+<li><p>如何使JList能够实时显示密码文件的个数</p>
 <ul>
-<li>每个常规按钮有一个默认图标，一个按下图标和一个在上图标，使用如下方法进行设置：<ul>
-<li>setPressedIcon(“XXX”) 设置按钮按下的图标</li>
-<li>setRolloverIcon(“xxx”) 设置鼠标停留在按钮上时的图标</li>
-</ul>
+<li><p>使用<code>setModel（ javax.swing.ListModel&lt;E&gt; model）</code>方法。该方法要求传入一个Model对象，ListModel的使用用例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileModel</span> <span class="keyword">extends</span> <span class="title">AbstractListModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String[] files;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">FileModel</span><span class="params">(String[] files)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.files = files;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">getElementAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> (index + <span class="number">1</span>) + <span class="string">"."</span> + files[index++];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> files.length;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ListModel是一个接口，如果实现该接口，需要实现一些不必要的方法：<code>void addListDataListener(ListDataListener l)</code>和<code>void removeListDataListener(ListDataListener l)</code>,但是Java提供了一个便捷类AbstractListModel，继承该类，就可以避免实现以上方法。</p>
+</li>
+<li>除了AbstractListModel类，还有其他抽象类如DefaultListModel，但是DefaultListModel实现了ListModel的所有方法，因此可以做的更改比较小。</li>
+<li>为了监听FileModel的变化，可以采用这种方法：在每次JList内容发生变化时重新创建一个FIleModel，传入的是更新后的数组，再使用JList的<code>updateUI()</code>方法，就可以动态显示JList的内容了。<br><em>可以给FileModel添加一个监听器类<code>ListDataListener</code>,并实现该接口的抽象方法。（网上介绍，未做）</em><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateJList</span><span class="params">(String fileDirPath)</span> </span>&#123;</span><br><span class="line">        String[] files = <span class="keyword">new</span> File(fileDirPath).list();</span><br><span class="line">        FileModel fileModel = <span class="keyword">new</span> FileModel(files);</span><br><span class="line">        mainFrame.getJlFileName().setModel(fileModel);</span><br><span class="line">        mainFrame.getJlFileName().updateUI();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">- 根据指定条件生成密码</span><br><span class="line">  + 我使用如下方法，返回的字符都是字符<span class="string">'A'</span></span><br><span class="line">  ```<span class="function">java</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">char</span> <span class="title">generateChar</span><span class="params">(<span class="keyword">char</span> aChar, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> c = <span class="string">'A'</span>;</span><br><span class="line">        <span class="keyword">int</span> a = aChar + <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">if</span> (a &gt;= low &amp;&amp; a &lt;= high) &#123;</span><br><span class="line">            c = (<span class="keyword">char</span>) a;</span><br><span class="line">  <span class="comment">//          return c;</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a &lt; low) &#123;</span><br><span class="line">  <span class="comment">//          return generateChar((char) (a + 6), low, high);</span></span><br><span class="line">  			  generateChar((<span class="keyword">char</span>) (a + <span class="number">6</span>), low, high);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a &gt; high) &#123;</span><br><span class="line">  <span class="comment">//          return generateChar((char) (a - 30), low, high);</span></span><br><span class="line">  		      generateChar((<span class="keyword">char</span>) (a - <span class="number">30</span>), low, high);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="对齐方式">对齐方式</h4><ul>
-<li><p><code>水平对齐（horizontal alignment）</code>指定以什么样的方式在<strong>按钮</strong>上放置文本和图标。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setHorizontalAlignment(<span class="keyword">int</span>)</span><br></pre></td></tr></table></figure>
+<p>问题原因：递归不设出口，每次递归返回的值都在递归自己这一层，无法返回到最初的一层<br>解决方法：使用注释掉的三条语句，删除相应的错误语句。<br><strong>递归不设出口毫无意义</strong></p>
 <ul>
-<li>int的取值为：SwingConstants.LEADING(LEFT、CENTER、RIGHT、TRAILING)。默认的是最后一种（右对齐）。</li>
+<li>异常<br><code>java.lang.stackOverflow</code> 堆栈溢出，原因是递归太深</li>
 </ul>
 </li>
-<li><p><code>垂直对齐（vertical alignment）</code>指定以什么样的垂直方式在按钮上放置文本和图标。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setVerticalAlignment(<span class="keyword">int</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>int的取值为：SwingConstants.TOP(CENTER、BOTTOM)，默认的是CENTER。</li>
-</ul>
+<li>生成密码的MD5值<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> MessageDigest md5 = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            md5 = MessageDigest.getInstance(<span class="string">"MD5"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">generateMD5</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] bs = md5.digest(password.getBytes());</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="number">40</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">byte</span> x : bs) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((x &amp; <span class="number">0xff</span>) &gt;&gt; <span class="number">4</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                sb.append(<span class="string">"0"</span>).append(Integer.toHexString(x &amp; <span class="number">0xff</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                sb.append(Integer.toHexString(x &amp; <span class="number">0xff</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="文本位置">文本位置</h4><ul>
-<li><code>水平文本位置（horizontal text position）</code>指定文本相对于图标的水平位置。</li>
-<li><code>垂直文本位置（Vertical text position）</code>指定文本相对于图标的垂直位置。</li>
-<li>设置方式和默认值与对齐方式相同。</li>
-</ul>
-<h3 id="复选框（JCheckBox）">复选框（JCheckBox）</h3><ul>
-<li>一个<code>开关按钮（toggle button）</code>有两种状态，JToggleButton类继承AbstractButton并实现了一个开关按钮。开关按钮分为两种：<br>1、JCheckBox 复选按钮（方形）<br>2、 JRadionButton 单选按钮（圆形）</li>
-<li>JCheckBox先触发的是ItemEvent事件，然后触发ActionEvent事件。要确定复选框是否被选中，使用<code>isSelected()</code>方法。</li>
-</ul>
-<h3 id="单选按钮（JRadioButton）">单选按钮（JRadioButton）</h3><ul>
-<li><code>单选按钮（radio button）</code>，或者叫<code>选择按钮(option button)</code>,让用户从一组选项中选择唯一的一个选项。</li>
-<li>单选按钮使用Java.swing.ButtonGroup类的实例进行组织，并使用add方法添加按钮<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ButtonGroup group = <span class="keyword">new</span> ButtonGroup();</span><br><span class="line">group.add(xx1);</span><br><span class="line">group.add(xx2);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>如果没有创建按钮组，就无法达到单选的目的。</p>
-<ul>
-<li>JRadioButton先触发的是ItemEvent事件，然后触发ActionEvent事件。要确定复选框是否被选中，使用<code>isSelected()</code>方法。</li>
-</ul>
-<h3 id="标签（JLable）">标签（JLable）</h3><ul>
-<li><code>标签（lable）</code>是显示一小段文字、一幅图片或二者皆有的区域。</li>
-<li>JLable继承自JComponent类，具有与JButton类似的属性。</li>
-</ul>
-<h3 id="文本域（JTextField）">文本域（JTextField）</h3><ul>
-<li><code>文本域（text field）</code>可以用于输入或显示字符串。（单行）</li>
-<li>JTextField继承自JTextComponent类。</li>
-<li>JTextField触发的是ActionEvent事件（回车键触发）。</li>
-</ul>
-<h3 id="文本区（JTextArea）">文本区（JTextArea）</h3><ul>
-<li>文本区用户输入多行文本。</li>
-<li>可以创建指定行列的文本区，JTextArea继承自JTextComponent类。</li>
-<li><p>JTextArea无法滚动，但可以创建一个<code>JScrollPane</code>对象处理滚动。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JScrollPane scrollPane = <span class="keyword">new</span> JScrollPane(<span class="keyword">new</span> JTextArea());</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>常用属性</p>
-<ul>
-<li>setLineWrap（boolean b） 是否换行</li>
-<li>setWrapStyleWord（boolean b） 是否按单词换行，默认按照字符换行</li>
-<li>setEditable（boolean b） 是否可编辑</li>
-</ul>
-</li>
-</ul>
-<h3 id="组合框（JComboBox）">组合框（JComboBox）</h3><ul>
-<li><code>组合框（combo box）</code>，也叫<code>选择列表（choice list）</code>或<code>下拉式列表（drop-down list）</code>，它包含项目的一个列表，用户能够从中选择。<strong>使用它可以限制用户的选择范围并能避免对输入数据有效性的繁复检查。</strong></li>
-<li>JComboBox可以引发ActionEvent和ItemEvent事件。选中一个新的项目是，JComboBox会产生两次ItemEvent事件，一次是取消前一个项目，另一次是选中当前项目。</li>
-<li>常用方法<ul>
-<li>getSelectedItem（）方法返回已经选定的项目</li>
-<li>getSelectedIndex（） 返回选中的项目次序号</li>
-</ul>
-</li>
-</ul>
-<h3 id="列表框（JList）">列表框（JList）</h3><ul>
-<li><code>列表框（list）</code>是一个组件，与JComboBox类似，但是它允许用户选择一个或多个项目。</li>
-<li><p>选择模式属性selectionMode取值如下，默认为多区间选择</p>
-<ul>
-<li>SINGLE_SELECTION 单项选择</li>
-<li>SINGLE_INTERVAL_SETECTION 单区间选择（允许选择多项，但是必须连续）</li>
-<li>MULTIPLE_INTERVAL_SETECTION 多区间选择<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>JList不能自动滚动，可以参考文本区的方法设置滚动。</p>
-</li>
-<li>JList触发ListSelectionEvent事件。</li>
-<li>常用方法：<ul>
-<li>getSelectedIndices（） 以数组形式返回选中的次序号</li>
-<li>getSelectedValues（） 以数组形式返回选中的值</li>
-<li>getVisibleRowCount（） 返回可见行数</li>
-</ul>
-</li>
-</ul>
-<h3 id="滚动条（JScrollbar）">滚动条（JScrollbar）</h3><ul>
-<li><code>滚动条（scrollbar）</code>是一个控制器，它使用户能从值得一个范围中进行选择。</li>
-<li>JScrolBar的属性如下：<ul>
-<li>orientation（方向）：指定滚动条的水平或垂直模式。</li>
-<li>maximum（最大值）: 指滚动条的最大值。</li>
-<li>minimum（最小值）</li>
-<li>visibleAmount（宽度，也叫广度）：是指滚动块的相对宽度。滚动块在屏幕上的显示的实际宽度取决于最大值及visibleAmount的值。</li>
-<li>value：表示滚动条当前的值。</li>
-<li>blockIncrement（块增量）：是用户点击滚动条的块增加（减少）区时所增加（减少）的值。</li>
-<li>unitIncrement（单位增量）：用户点击单位增加（减少）区所增加（减少）的值。</li>
-<li>**滚动条上的宽度对应于<code>maximum+visibleAmount</code>。当滚动条设为最大值时，滚动块的左端在maximum处，右端在maximum+visibleAmount处。</li>
-</ul>
-</li>
-<li>用户改变滚动条的值时，滚动条产生AdjustmentEvent的一个实例。</li>
-<li>可以使用构造方法或者使用<code>setOrientation</code>方法来指定滚动条的方向。默认情况下，属性maximum的值为100，minimum为0，blockIncrement为10，visibleAmount为10。</li>
-</ul>
-<h3 id="滑动块（JSlider）">滑动块（JSlider）</h3><ul>
-<li>JSlider与JScrollBar类似，但是JSlider具有更多的属性和更多的显示形式。</li>
-<li>JSlider允许用户以图形方式在指定的区间中选择一个数值。滑动块可以在主标记以及次标记之间滑动。标记间的像素值是由<code>setMajorTickSpacing</code>和<code>setMinorTickSpacing</code>方法控制的。</li>
-<li>Slider可以带或不带标记，可以有或没有标签，可以水平显示或垂直显示。</li>
-<li>垂直滚动条的值从上向下增加，但是垂直滑动块的值从上向下减少。</li>
-<li>改变滑动块的值时，滑动块产生javax.swing.event.ChangeEvent的一个实例。</li>
-</ul>
-<h3 id="创建多个窗口">创建多个窗口</h3><p>新开的窗口叫做<code>子窗口（subwindow）</code>，主框架叫<code>主窗口（main window）</code>。</p>
-<ul>
-<li>从应用程序创建一个子窗口，需要创建JFrame的一个子类，用于定义任务和通知新窗口做什么。然后，在程序中创建该子类的一个实例，通过把它设为可见的即可弹出新窗口。</li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>可以在任何Swing组件使用边框，边框和图标都可以共享。</li>
-<li>AbstractButton类中的常量LEFT、RIGHT……也可以被许多其他Swing组件使用。由于所有的Swing组件都实现了SwingConstants，因此各种组件都可以通过SwingConstants引用这些常量。因此<code>JButton.CENTER和SwingConstants.CENTER</code>作用是一样的。</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><ul>
-<li>习题13.1 13.4 13.5 13.8 13.10 13.14 13.15源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter13/src" target="_blank" rel="external">chapter13</a></li>
-</ul>
+<h3 id="源码">源码</h3><p>见我的GitHub：<a href="https://github.com/whtis/PasswordManager" target="_blank" rel="external">PasswordManager</a></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div></span>
       
@@ -500,7 +405,7 @@ GUI组件都有处理字体、颜色、大小、工具提示文本和边框等�
           
             <a href="/tags/原创/" rel="tag">#原创</a>
           
-            <a href="/tags/总结/" rel="tag">#总结</a>
+            <a href="/tags/小练习/" rel="tag">#小练习</a>
           
         </div>
       
@@ -509,17 +414,13 @@ GUI组件都有处理字体、颜色、大小、工具提示文本和边框等�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/09/Java学习总结-第十二章-事件驱动程序/" rel="next" title="Java学习总结--第十二章 事件驱动程序">
-                <i class="fa fa-chevron-left"></i> Java学习总结--第十二章 事件驱动程序
+              <a href="/2016/02/18/Java学习总结-第十六章-简单输入输出/" rel="next" title="Java学习总结--第十六章 简单输入输出">
+                <i class="fa fa-chevron-left"></i> Java学习总结--第十六章 简单输入输出
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/16/GUI小练习-简易计算器/" rel="prev" title="GUI小练习-简易计算器">
-                GUI小练习-简易计算器 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -534,10 +435,10 @@ GUI组件都有处理字体、颜色、大小、工具提示文本和边框等�
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/02/15/Java学习总结-第十三章-创建图形用户界面/"
-     data-title="Java学习总结--第十三章 创建图形用户界面"
+        <div class="ds-share flat" data-thread-key="2016/02/20/GUI练习之二-密码管理器/"
+     data-title="GUI练习之二-密码管理器"
      data-content=""
-     data-url="http://www.whtis.com/2016/02/15/Java学习总结-第十三章-创建图形用户界面/">
+     data-url="http://www.whtis.com/2016/02/20/GUI练习之二-密码管理器/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -565,8 +466,8 @@ GUI组件都有处理字体、颜色、大小、工具提示文本和边框等�
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/02/15/Java学习总结-第十三章-创建图形用户界面/"
-           data-title="Java学习总结--第十三章 创建图形用户界面" data-url="http://www.whtis.com/2016/02/15/Java学习总结-第十三章-创建图形用户界面/">
+      <div class="ds-thread" data-thread-key="2016/02/20/GUI练习之二-密码管理器/"
+           data-title="GUI练习之二-密码管理器" data-url="http://www.whtis.com/2016/02/20/GUI练习之二-密码管理器/">
       </div>
     
   </div>
@@ -681,7 +582,7 @@ GUI组件都有处理字体、颜色、大小、工具提示文本和边框等�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Swing_GUI组件的公共特性"><span class="nav-number">1.1.</span> <span class="nav-text">Swing GUI组件的公共特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按钮（JButton）"><span class="nav-number">1.2.</span> <span class="nav-text">按钮（JButton）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#图标"><span class="nav-number">1.2.1.</span> <span class="nav-text">图标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对齐方式"><span class="nav-number">1.2.2.</span> <span class="nav-text">对齐方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文本位置"><span class="nav-number">1.2.3.</span> <span class="nav-text">文本位置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复选框（JCheckBox）"><span class="nav-number">1.3.</span> <span class="nav-text">复选框（JCheckBox）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单选按钮（JRadioButton）"><span class="nav-number">1.4.</span> <span class="nav-text">单选按钮（JRadioButton）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标签（JLable）"><span class="nav-number">1.5.</span> <span class="nav-text">标签（JLable）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本域（JTextField）"><span class="nav-number">1.6.</span> <span class="nav-text">文本域（JTextField）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本区（JTextArea）"><span class="nav-number">1.7.</span> <span class="nav-text">文本区（JTextArea）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合框（JComboBox）"><span class="nav-number">1.8.</span> <span class="nav-text">组合框（JComboBox）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表框（JList）"><span class="nav-number">1.9.</span> <span class="nav-text">列表框（JList）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滚动条（JScrollbar）"><span class="nav-number">1.10.</span> <span class="nav-text">滚动条（JScrollbar）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滑动块（JSlider）"><span class="nav-number">1.11.</span> <span class="nav-text">滑动块（JSlider）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建多个窗口"><span class="nav-number">1.12.</span> <span class="nav-text">创建多个窗口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习小结"><span class="nav-number">2.</span> <span class="nav-text">复习小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程练习"><span class="nav-number">3.</span> <span class="nav-text">编程练习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#功能说明及演示"><span class="nav-number">1.</span> <span class="nav-text">功能说明及演示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说明"><span class="nav-number">1.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#演示"><span class="nav-number">1.2.</span> <span class="nav-text">演示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题记录："><span class="nav-number">2.</span> <span class="nav-text">问题记录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码"><span class="nav-number">3.</span> <span class="nav-text">源码</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
