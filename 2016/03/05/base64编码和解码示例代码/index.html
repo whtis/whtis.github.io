@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="apache2,ubuntu,wordpress,收集整理," />
+  <meta name="keywords" content="java,收集整理," />
 
 
 
@@ -53,25 +53,19 @@
 
 
 
-<meta name="description" content="1、安装apache2的问题当我们使用如下语句安装apache2时：
-1sudo apt-get install apache2
-会发现启动报错：
-12AH00558: apache2: Could not reliably determine the server&apos;s fully qualified domain name, using 127.0.1.1. Set the &apos;ServerNam">
+<meta name="description" content="写密码管理器时，一直在找一种加密方式，除了自己实现外，我还在网上发现了一个不错的方法，源地址在这里。这里仅作抄录：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu14.04本地安装wordpress中的一些问题总结">
-<meta property="og:url" content="http://www.whtis.com/2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/index.html">
+<meta property="og:title" content="base64编码和解码示例代码">
+<meta property="og:url" content="http://www.whtis.com/2016/03/05/base64编码和解码示例代码/index.html">
 <meta property="og:site_name" content="whtis's blog">
-<meta property="og:description" content="1、安装apache2的问题当我们使用如下语句安装apache2时：
-1sudo apt-get install apache2
-会发现启动报错：
-12AH00558: apache2: Could not reliably determine the server&apos;s fully qualified domain name, using 127.0.1.1. Set the &apos;ServerNam">
-<meta property="og:updated_time" content="2016-02-10T13:37:39.696Z">
+<meta property="og:description" content="写密码管理器时，一直在找一种加密方式，除了自己实现外，我还在网上发现了一个不错的方法，源地址在这里。这里仅作抄录：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757">
+<meta property="og:updated_time" content="2016-03-05T16:01:07.018Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu14.04本地安装wordpress中的一些问题总结">
-<meta name="twitter:description" content="1、安装apache2的问题当我们使用如下语句安装apache2时：
-1sudo apt-get install apache2
-会发现启动报错：
-12AH00558: apache2: Could not reliably determine the server&apos;s fully qualified domain name, using 127.0.1.1. Set the &apos;ServerNam">
+<meta name="twitter:title" content="base64编码和解码示例代码">
+<meta name="twitter:description" content="写密码管理器时，一直在找一种加密方式，除了自己实现外，我还在网上发现了一个不错的方法，源地址在这里。这里仅作抄录：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757">
 
 
 
@@ -83,7 +77,7 @@
   };
 </script>
 
-  <title> ubuntu14.04本地安装wordpress中的一些问题总结 | whtis's blog </title>
+  <title> base64编码和解码示例代码 | whtis's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -273,7 +267,7 @@
             
             
               
-                ubuntu14.04本地安装wordpress中的一些问题总结
+                base64编码和解码示例代码
               
             
           </h1>
@@ -282,8 +276,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-10-29T18:13:35+08:00" content="2015-10-29">
-              2015-10-29
+            <time itemprop="dateCreated" datetime="2016-03-05T23:55:01+08:00" content="2016-03-05">
+              2016-03-05
             </time>
           </span>
 
@@ -292,8 +286,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/wordpress/" itemprop="url" rel="index">
-                    <span itemprop="name">wordpress</span>
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -308,8 +302,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/" itemprop="commentsCount"></span>
+                <a href="/2016/03/05/base64编码和解码示例代码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/05/base64编码和解码示例代码/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -328,18 +322,8 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="1、安装apache2的问题">1、安装apache2的问题</h1><p>当我们使用如下语句安装apache2时：</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install apache2</span><br></pre></td></tr></table></figure>
-<p>会发现启动报错：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. <span class="operator"><span class="keyword">Set</span> the <span class="string">'ServerName'</span> directive <span class="keyword">globally</span> <span class="keyword">to</span> suppress this message</span><br><span class="line">                                                                         [ OK ]</span></span><br></pre></td></tr></table></figure>
-<p>解决方法：</p>
-<p>编辑<code>sudo nano /etc/apache2/apache2.conf</code>，在最后加上</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword"><span class="common">ServerName</span></span> localhost：80</span><br></pre></td></tr></table></figure>
-<p>再试试，apache2服务器就可以正常启动了。</p>
-<p><em><strong>请注意：apache2的默认配置文件不再是apache的httpd，而是apache2的apache2.conf</strong></em></p>
-<h1 id="2、安装wordpress时需要注意的问题">2、安装wordpress时需要注意的问题</h1><p>wordpress的下载以及配置，需要注意的只有一点：</p>
-<p><em>wordpress的默认根目录是 <strong>/var/www/html</strong> ，而不是 <strong>/var/www</strong></em></p>
-<p>因此，假如你想通过localhost访问时，你的目录结构应该是 <strong>/var/www/html/*</strong>，同理，如果你要通过localhost/wordpress访问时，你的目录结构应该是 <strong>/var/www/html/wordpress/*</strong></p>
+        <span itemprop="articleBody"><p>写密码管理器时，一直在找一种加密方式，除了自己实现外，我还在网上发现了一个不错的方法，<a href="http://www.q3060.com/list6/list144/2717.html" target="_blank" rel="external">源地址在这里</a>。这里仅作抄录：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sun.misc.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by ht on 2016/2/24.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testorigin</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        TransformBS1 transformBS = <span class="keyword">new</span> TransformBS1();</span><br><span class="line">        transformBS.testS2B();</span><br><span class="line">        transformBS.testB2S();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 今天在网上看到一个程序游戏，只要目的是为了能够将文件中的01二进制数据读取到程序然后通过base64解码，再转换成程序</span><br><span class="line"> * 所以，自己写了个程序：（1）将一段字符串进行base64处理，然后转换成二进制输出。（2）将一段二进制数据转换成字符串，然后base64解码到对应的字符串</span><br><span class="line"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TransformBS1</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * @ see 字符串进行base64编码后转换为二进制形式,如：（h(原字符)-&gt;a(编码后)-&gt;01100001010000010011110100111101(二进制形式)）</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testS2B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"=========字符串到二进制！============="</span>);</span><br><span class="line">        BASE64Encoder e = <span class="keyword">new</span> BASE64Encoder();</span><br><span class="line"><span class="comment">//编码器</span></span><br><span class="line">        String s = <span class="string">"我爱你"</span>;</span><br><span class="line">        System.out.println(<span class="string">"尚未编码的数据："</span> + s);</span><br><span class="line">        s = e.encode(s.getBytes());</span><br><span class="line"><span class="comment">//获得base64编码后的字符串</span></span><br><span class="line">        System.out.println(<span class="string">"编码后的数据："</span> + s);</span><br><span class="line">        System.out.print(<span class="string">"二进制数据："</span>);</span><br><span class="line">        String s1 = <span class="string">"whtis\n"</span> + <span class="string">"我爱你\n"</span> + s;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> c : s1.toCharArray()) &#123;</span><br><span class="line"><span class="comment">//对字符串中的字符逐个转换成二进制数据</span></span><br><span class="line">            String binaryStr = Integer.toBinaryString(c);</span><br><span class="line"><span class="comment">//单个字符转换成的二进制字符串</span></span><br><span class="line">            String format = String.format(<span class="string">"%8s"</span>, binaryStr);</span><br><span class="line"><span class="comment">//因为上面转换成二进制后的位数不够8位所以不足的前面补空格，这里是考虑到能够从数据文件批量读取。</span></span><br><span class="line">            format = format.replace(<span class="string">" "</span>, <span class="string">"0"</span>);</span><br><span class="line"><span class="comment">//高位空格替换成0，其实编码后的数据最大范围为2的6次方，首位一定是空格，不然就要用format.startWith(" ");来判断</span></span><br><span class="line">            System.out.print(format);</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\n=========字符串到二进制结束！============="</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * @ see 二进制形式转换为字符串后进行base64解码的字符串如：(01100001010000010011110100111101-&gt;a-&gt;h)</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testB2S</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"=========二进制到字符串开始！============="</span>);</span><br><span class="line">        StringBuffer results = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"><span class="comment">//保存尚未解码的数据结果</span></span><br><span class="line">        String binaryStr = <span class="string">"01110111011010000111010001101001011100110000101011000100001000111100100011000110011110110000000001010001101010110111101101001010100100011010100110100011010010111100000110101010011000011001001100111"</span>;</span><br><span class="line"><span class="comment">//二进制数据，这里是取用上面程序的最后结果</span></span><br><span class="line">        System.out.println(<span class="string">"二进制数据："</span> + binaryStr);</span><br><span class="line"><span class="comment">//这里采用正则表达式来匹配8位长度的数据，然后一个个find()</span></span><br><span class="line">        Matcher matcher = Pattern.compile(<span class="string">"\\d&#123;8&#125;"</span>).matcher(binaryStr);</span><br><span class="line"><span class="comment">//定义匹配模式并，获取模式</span></span><br><span class="line">        BASE64Decoder d = <span class="keyword">new</span> BASE64Decoder();</span><br><span class="line"><span class="comment">//解码器</span></span><br><span class="line">        <span class="keyword">while</span> (matcher.find()) &#123;</span><br><span class="line"><span class="comment">//在binaryStr中找到了8位长度的数据，依次往后面找</span></span><br><span class="line">            <span class="keyword">int</span> intVal = Integer.valueOf(matcher.group(), <span class="number">2</span>);</span><br><span class="line"><span class="comment">//matcher.group()中存储了找到匹配模式的数据，这里以2进制的形式转换为整数</span></span><br><span class="line">            results.append((<span class="keyword">char</span>) intVal);</span><br><span class="line"><span class="comment">//将整数转换为对应的字符，并添加到结果中</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"尚未解码的数据："</span> + results);</span><br><span class="line"><span class="comment">//输出尚未解码的数据</span></span><br><span class="line">        String s = <span class="keyword">new</span> String(d.decodeBuffer(results.toString()));</span><br><span class="line"><span class="comment">//得到解码后的数据</span></span><br><span class="line">        System.out.println(<span class="string">"解码后的数据："</span> + s);</span><br><span class="line"><span class="comment">//输出解码后的数据</span></span><br><span class="line">        System.out.println(<span class="string">"=========二进制到字符串结束！============="</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div></span>
       
@@ -349,11 +333,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/apache2/" rel="tag">#apache2</a>
-          
-            <a href="/tags/ubuntu/" rel="tag">#ubuntu</a>
-          
-            <a href="/tags/wordpress/" rel="tag">#wordpress</a>
+            <a href="/tags/java/" rel="tag">#java</a>
           
             <a href="/tags/收集整理/" rel="tag">#收集整理</a>
           
@@ -364,13 +344,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/02/20/GUI练习之二-密码管理器/" rel="next" title="GUI练习之二-密码管理器">
+                <i class="fa fa-chevron-left"></i> GUI练习之二-密码管理器
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/" rel="prev" title="hexo 3.x同时部署到github和gitcafe的方法">
-                hexo 3.x同时部署到github和gitcafe的方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -385,10 +365,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/"
-     data-title="ubuntu14.04本地安装wordpress中的一些问题总结"
+        <div class="ds-share flat" data-thread-key="2016/03/05/base64编码和解码示例代码/"
+     data-title="base64编码和解码示例代码"
      data-content=""
-     data-url="http://www.whtis.com/2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/">
+     data-url="http://www.whtis.com/2016/03/05/base64编码和解码示例代码/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -416,8 +396,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/"
-           data-title="ubuntu14.04本地安装wordpress中的一些问题总结" data-url="http://www.whtis.com/2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/">
+      <div class="ds-thread" data-thread-key="2016/03/05/base64编码和解码示例代码/"
+           data-title="base64编码和解码示例代码" data-url="http://www.whtis.com/2016/03/05/base64编码和解码示例代码/">
       </div>
     
   </div>
@@ -532,7 +512,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、安装apache2的问题"><span class="nav-number">1.</span> <span class="nav-text">1、安装apache2的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、安装wordpress时需要注意的问题"><span class="nav-number">2.</span> <span class="nav-text">2、安装wordpress时需要注意的问题</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
