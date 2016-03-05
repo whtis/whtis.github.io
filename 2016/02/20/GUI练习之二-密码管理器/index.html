@@ -53,39 +53,24 @@
 
 
 
-<meta name="description" content="功能说明及演示Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。
-说明综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：
+<meta name="description" content="功能说明及演示Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。北邮人论坛大神给了解决方案，链接在这，以下内容为复制粘贴：
 
-可以自己选择密码文件的存放位置
-可以选择生成的密码是否可以用文本查看器查看
-可以连续的写入新数据
-可以根据关键字和密码条件生成相应的密码字符，并提供MD5的显示与查看功能
-可以根据网站/网址名进行简单的查看功能">
+Swing不是线程安全的，但也不是大问题。只要把所有的对Swing窗体的的操作都放在专门的线程（event dispatch thread）里做就行了。有一个模式：12345SwingUtilities.invokeLater(new Runn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GUI练习之二-密码管理器">
 <meta property="og:url" content="http://www.whtis.com/2016/02/20/GUI练习之二-密码管理器/index.html">
 <meta property="og:site_name" content="whtis's blog">
-<meta property="og:description" content="功能说明及演示Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。
-说明综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：
+<meta property="og:description" content="功能说明及演示Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。北邮人论坛大神给了解决方案，链接在这，以下内容为复制粘贴：
 
-可以自己选择密码文件的存放位置
-可以选择生成的密码是否可以用文本查看器查看
-可以连续的写入新数据
-可以根据关键字和密码条件生成相应的密码字符，并提供MD5的显示与查看功能
-可以根据网站/网址名进行简单的查看功能">
+Swing不是线程安全的，但也不是大问题。只要把所有的对Swing窗体的的操作都放在专门的线程（event dispatch thread）里做就行了。有一个模式：12345SwingUtilities.invokeLater(new Runn">
 <meta property="og:image" content="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%93%8D%E4%BD%9C.gif">
 <meta property="og:image" content="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%BB%E7%95%8C%E9%9D%A2%E6%93%8D%E4%BD%9C.gif">
-<meta property="og:updated_time" content="2016-03-05T15:25:50.708Z">
+<meta property="og:updated_time" content="2016-03-05T15:42:17.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GUI练习之二-密码管理器">
-<meta name="twitter:description" content="功能说明及演示Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。
-说明综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：
+<meta name="twitter:description" content="功能说明及演示Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。北邮人论坛大神给了解决方案，链接在这，以下内容为复制粘贴：
 
-可以自己选择密码文件的存放位置
-可以选择生成的密码是否可以用文本查看器查看
-可以连续的写入新数据
-可以根据关键字和密码条件生成相应的密码字符，并提供MD5的显示与查看功能
-可以根据网站/网址名进行简单的查看功能">
+Swing不是线程安全的，但也不是大问题。只要把所有的对Swing窗体的的操作都放在专门的线程（event dispatch thread）里做就行了。有一个模式：12345SwingUtilities.invokeLater(new Runn">
 
 
 
@@ -342,7 +327,11 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="功能说明及演示">功能说明及演示</h3><p><strong>Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。</strong></p>
+        <span itemprop="articleBody"><h3 id="功能说明及演示">功能说明及演示</h3><p><del><strong>Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。</strong></del><br>北邮人论坛大神给了解决方案，<a href="http://bbs.byr.cn/#!article/Java/47997" target="_blank" rel="external">链接在这</a>，以下内容为复制粘贴：</p>
+<blockquote>
+<p>Swing不是线程安全的，但也不是大问题。只要把所有的对Swing窗体的的操作都放在专门的线程（event dispatch thread）里做就行了。有一个模式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SwingUtilities.invokeLater(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        createAndShowGUI();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这样就线程安全了。这里有详细说明： <a href="http://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html" target="_blank" rel="external">http://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html</a></p>
+</blockquote>
 <h4 id="说明">说明</h4><p>综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：</p>
 <ul>
 <li>可以自己选择密码文件的存放位置</li>
@@ -377,7 +366,7 @@
 </li>
 <li><p>如何使JList能够实时显示密码文件的个数</p>
 <ul>
-<li><p>使用<code>setModel（ javax.swing.ListModel&lt;E&gt; model）</code>方法。该方法要求传入一个Model对象，ListModel的使用用例如下：</p>
+<li><p>使用<code>setModel（javax.swing.ListModel&lt;E&gt; model）</code>方法。该方法要求传入一个Model对象，ListModel的使用用例如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileModel</span> <span class="keyword">extends</span> <span class="title">AbstractListModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String[] files;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">FileModel</span><span class="params">(String[] files)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.files = files;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">getElementAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> (index + <span class="number">1</span>) + <span class="string">"."</span> + files[index++];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> files.length;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>ListModel是一个接口，如果实现该接口，需要实现一些不必要的方法：<code>void addListDataListener(ListDataListener l)</code>和<code>void removeListDataListener(ListDataListener l)</code>,但是Java提供了一个便捷类AbstractListModel，继承该类，就可以避免实现以上方法。</p>
