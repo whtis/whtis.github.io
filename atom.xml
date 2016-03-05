@@ -4,7 +4,7 @@
   <subtitle><![CDATA[点滴的记录，是变强的必经之路]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-02-25T09:11:27.491Z</updated>
+  <updated>2016-03-05T15:25:50.708Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -19,17 +19,20 @@
     <link href="http://www.whtis.com/2016/02/20/GUI%E7%BB%83%E4%B9%A0%E4%B9%8B%E4%BA%8C-%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/"/>
     <id>http://www.whtis.com/2016/02/20/GUI练习之二-密码管理器/</id>
     <published>2016-02-20T13:31:46.000Z</published>
-    <updated>2016-02-25T09:11:27.491Z</updated>
+    <updated>2016-03-05T15:25:50.708Z</updated>
     <content type="html"><![CDATA[<h3 id="功能说明及演示">功能说明及演示</h3><p><strong>Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。</strong></p>
 <h4 id="说明">说明</h4><p>综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：</p>
 <ul>
 <li>可以自己选择密码文件的存放位置</li>
+<li>可以选择生成的密码是否可以用文本查看器查看</li>
+<li>可以连续的写入新数据</li>
 <li>可以根据关键字和密码条件生成相应的密码字符，并提供MD5的显示与查看功能</li>
 <li>可以根据网站/网址名进行简单的查看功能</li>
 <li>可以同步显示所有存在的密码文件列表</li>
 <li>可以选择是否在执行生成按钮后刷新页面，方便直接书写下一个密码文件</li>
 <li>其他小功能</li>
 </ul>
+<h4 id="实现思路">实现思路</h4><p>1、存储密码的同时，将生成密码的条件设置为常量，存储在一个整数数组中（waysOfWirte），并将这值附在生成的密码最后，取值时同时取出来，但是不显示在用户界面上。<br>2、利用文件后缀名的不同区别密码文件的存储格式（二进制存储方式后缀为.w，文本可读后缀名为.wf）。</p>
 <h4 id="演示">演示</h4><ul>
 <li>初始化设置，程序会在同目录下创建一个名为<code>.pmconfig.w</code>的文件，该文件将密码文件的存放路径写入供以后使用：<br><img src="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%93%8D%E4%BD%9C.gif" alt="初始化操作.gif"></li>
 <li>主界面的操作：包括密码文件的生成、查看、更新以及删除等操作：<br><img src="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%BB%E7%95%8C%E9%9D%A2%E6%93%8D%E4%BD%9C.gif" alt="主界面操作.gif"></li>
@@ -72,7 +75,7 @@
 <li><p>初始选取配置文件路径时若该路径存在其他文件，应该避免出现在JList中</p>
 </li>
 </ul>
-<h3 id="源码">源码</h3><p>见我的GitHub：<a href="https://github.com/whtis/PasswordManager/src" target="_blank" rel="external">PasswordManager</a></p>
+<h3 id="源码">源码</h3><p>见我的GitHub：<a href="https://github.com/whtis/PasswordManager/tree/master/src" target="_blank" rel="external">PasswordManager</a></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
