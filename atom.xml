@@ -4,7 +4,7 @@
   <subtitle><![CDATA[点滴的记录，是变强的必经之路]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-03-05T16:01:07.018Z</updated>
+  <updated>2016-03-23T13:07:52.299Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -13,6 +13,77 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Java学习总结-第十七章 面向对象数据结构]]></title>
+    <link href="http://www.whtis.com/2016/03/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>http://www.whtis.com/2016/03/22/Java学习总结-第十七章-面向对象数据结构/</id>
+    <published>2016-03-22T15:44:38.000Z</published>
+    <updated>2016-03-23T13:07:52.299Z</updated>
+    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>数据结构是按某种方式组织的数据集合。用面向对象的观点来看，一个数据结构就是一个存储着其他对象的对象，存储在数据结构内的对象称为数据或元素。因此数据结构又被称为<code>容器对象（container object）</code>或<code>集合对象（collection object）</code>。<br>本章介绍线性表、堆栈、队列和二叉树等四种动态数据结构。</p>
+<h3 id="线性表">线性表</h3><ul>
+<li>线性表是存储顺序排列的数据时最常用的数据结构。</li>
+<li>线性表可以由数组或者链表实现。这两种类具有相同的操作，但是具有不同的数据域，这些相同的操作可以由接口或抽象类生成。在设计时同时提供接口与抽象类是把它们的优点结合到一起的好策略，这样的抽象类称为<code>便利类</code>。</li>
+<li>数组线性表<ul>
+<li>数组是一种固定大小的数据结构。但仍然可以采用如下方法实现动态改变：当数组不能再存储线性表中的新元素时，创建一个更大的数组来代替当前数组。这样的数组线性表是一个动态的数据结构。</li>
+</ul>
+</li>
+<li>链表<ul>
+<li>由数据创建的线性表，在特定位置进行插入和删除操作效率是很低的，因此可以采用链表结构来提高效率。</li>
+<li>链表的遍历：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Node temp = first;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++) &#123;</span><br><span class="line">     temp = temp.next;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="栈和队列">栈和队列</h3><ul>
+<li>栈（stack）可以看做是一种特殊的线性表，访问、插入和删除它的元素只能在栈的一端（栈顶）进行。队列可以表示一个排队等待的队伍。它可以看做是一种特殊的线性表，它的元素只能从队列的末端（队列尾）插入，从开始端（队列头）访问和删除。</li>
+<li>栈：使用数组线性表来实现栈效率较高。</li>
+<li>队列：用链表实现。</li>
+</ul>
+<h3 id="二叉树">二叉树</h3><ul>
+<li>线性表、栈和队列都是由一列元素构成的线型结构。二叉树是一个层次结构，它要么是空集，要么由一个被称为<code>根（root）</code>的元素和两棵不同的子树组成，这两个子树分别称为<code>左子树（left subtree）</code>和<code>右子树（right subtree）</code>。</li>
+<li>一个结点的左（右）子树的根节点称为该结点的<code>左（右）孩子（left（right）child）</code>。没有孩子的结点称为<code>叶结点（leaf）</code>。<code>二叉搜索树（binary search tree）</code>是一种常用的特殊二叉树。二叉搜索树的特征是：对它的每一个结点来说，左子树中结点的值都小于该结点的值，右子树中的结点的值都大于该节点的值。</li>
+</ul>
+<h4 id="二叉树的遍历">二叉树的遍历</h4><ul>
+<li><p><code>中序遍历（inorder）:</code>首先访问当前结点的左子树，然后访问当前结点，最后访问该结点的右子树。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       inorder(root.left);</span><br><span class="line">       System.out.print(root.element + <span class="string">" "</span>);</span><br><span class="line">       inorder(root.right);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>后序遍历（postorder）：</code>首先访问当前结点的左子树，然后访问该结点的右子树，最后访问该结点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">postorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (root==<span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">       postorder(root.left);</span><br><span class="line">       postorder(root.right);</span><br><span class="line">       System.out.print(root.element + <span class="string">" "</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>前序遍历（preorder）：</code>首先访问当前结点，然后访问该结点的左子树，最后访问该结点的右子树。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">preorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">       System.out.print(root.element + <span class="string">" "</span>);</span><br><span class="line">       preorder(root.left);</span><br><span class="line">       preorder(root.right);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>深度优先遍历（depth-first）：</code>与前序遍历相同。</p>
+</li>
+<li><code>广度遍历法（breadth-first）：</code>一层一层的访问树的结点。<br><strong>如果元素的插入顺序不同，树看起来可能不一样，但是只要元素的集合相同，中序序列是一样的。</strong></li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>基本类型的数据不能作为对象存储，但是可以给基本数据类型值创建对应包装类的对象。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li>习题17.1、17.2、17.3、17.6源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter17/src" target="_blank" rel="external">chapter17</a></li>
+<li>写双向链表时，在执行下列方法：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    TreeNode current = first;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; index; i++) &#123;</span><br><span class="line">        current = current.next;</span><br><span class="line">    &#125;</span><br><span class="line">    TreeNode target = current.next;</span><br><span class="line">    target.pravious.next = target.next;</span><br><span class="line">    target.next.pravious = target.pravious;</span><br><span class="line">    size--;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>执行到第7行语句时：list的状态是<code>Method threw &#39;java.lang.NullPointerException&#39; exception. Cannot evaluate _17_3.DoubleLinkedList.toString()</code>,但是整个方法执行完后，不会报错，原因暂时不知道。</p>
+<ul>
+<li>习题17.6中需要写一个方法，返回二叉树的深度，深度是指二叉树最长路径的结点个数。代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">treeDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> left = treeDepth(root.left);</span><br><span class="line">    <span class="keyword">int</span> right = treeDepth(root.right);</span><br><span class="line">    <span class="keyword">return</span> left &gt; right ? (left + <span class="number">1</span>) : (right + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>数据结构是按某种方式组织的数据集合。用面向对象的观点来看]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[base64编码和解码示例代码]]></title>
@@ -2137,54 +2208,6 @@
       <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
     
       <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[java学习笔记--排序的几种写法]]></title>
-    <link href="http://www.whtis.com/2015/12/03/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95/"/>
-    <id>http://www.whtis.com/2015/12/03/java学习笔记-排序的几种写法/</id>
-    <published>2015-12-03T12:00:08.000Z</published>
-    <updated>2016-02-10T13:37:19.556Z</updated>
-    <content type="html"><![CDATA[<p>最近学到数组这章，最重要的就是对数组中的元素进行排序。总结一下排序的几种写法。<br><em>java.util.array类中提供了排序的重载方法，可以直接调用相关方法进行排序，详见<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#sort-byte:A-" target="_blank" rel="external">API</a></em></p>
-<ul>
-<li><p>选择排序</p>
-<ul>
-<li><p>写法一：遍历数组，找到数组中最大的元素，与数组最后的元素进行交换。如此进行n次，数组中的元素就按照升序排列完成了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = lists.length - <span class="number">1</span>; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">           <span class="keyword">double</span> max = lists[<span class="number">0</span>];</span><br><span class="line">           <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; j++) &#123;</span><br><span class="line">               <span class="keyword">if</span> (max &lt; lists[j]) &#123;</span><br><span class="line">                   max = lists[j];</span><br><span class="line">                   index = j;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="comment">//交换list[i]和max所在的list[index]的值</span></span><br><span class="line">           <span class="keyword">if</span> (index != i) &#123;</span><br><span class="line">               lists[index] = lists[i];</span><br><span class="line">               lists[i] = max;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>写法二：写法一的递归实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">selectionSort</span><span class="params">(<span class="keyword">double</span>[] lists, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">   <span class="comment">//length = lists.length -1</span></span><br><span class="line">       <span class="keyword">double</span> max = lists[<span class="number">0</span>];</span><br><span class="line">       <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= length; i++) &#123;</span><br><span class="line">           <span class="keyword">if</span> (max &lt; lists[i]) &#123;</span><br><span class="line">               max = lists[i];</span><br><span class="line">               index = i;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (index != length) &#123;</span><br><span class="line">           lists[index] = lists[length];</span><br><span class="line">           lists[length] = max;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">           length--;</span><br><span class="line">           selectionSort(lists, length);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>写法三：写法一的改进，优点是升序和降序排列只需要简单的修改。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lists.length; i++) &#123;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = lists.length - <span class="number">1</span>; j &gt; i; j--) &#123;</span><br><span class="line">               <span class="keyword">if</span> (lists[i] &gt; lists[j]) &#123;</span><br><span class="line">                   <span class="keyword">double</span> tmp = lists[i];</span><br><span class="line">                   lists[i] = lists[j];</span><br><span class="line">                   lists[j] = tmp;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong> 若要实现降序排列，只需将第三行的<code>&gt;</code>改为<code>&lt;</code>即可。</strong></p>
-<ul>
-<li>冒泡排序<br>冒泡排序又称为下沉排序，基本思想是在每次的遍历中，连续对相邻元素进行比较，以达到按照特定顺序排序的目的。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> changed = <span class="keyword">true</span>;  <span class="comment">//用于控制数组遍历的次数（至多lists.length-1次）</span></span><br><span class="line">       do &#123;</span><br><span class="line">           changed = <span class="keyword">false</span>;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lists.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">               <span class="keyword">if</span> (lists[i] &gt; lists[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                   <span class="keyword">double</span> tmp = lists[i];</span><br><span class="line">                   lists[i] = lists[i + <span class="number">1</span>];</span><br><span class="line">                   lists[i + <span class="number">1</span>] = tmp;</span><br><span class="line">                   changed = <span class="keyword">true</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">while</span> (changed);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong> 若要实现降序排列，只需将第三行的<code>&gt;</code>改为<code>&lt;</code>即可。</strong></p>
-<ul>
-<li>插入排序<br>基本思路是在已排好序的子数列中反复插入一个未排序的元素，直到整个数列全部排好。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; lists.length; i++) &#123;</span><br><span class="line">           <span class="keyword">double</span> currentElement = lists[i];</span><br><span class="line">           <span class="keyword">int</span> k = i - <span class="number">1</span>;</span><br><span class="line">           <span class="keyword">while</span> (k &gt;= <span class="number">0</span> &amp;&amp; lists[k] &gt; currentElement) &#123;</span><br><span class="line">               <span class="keyword">double</span> tmp = lists[k + <span class="number">1</span>];</span><br><span class="line">               lists[k + <span class="number">1</span>] = lists[k];</span><br><span class="line">               lists[k] = tmp;</span><br><span class="line">               k--;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p>最近学到数组这章，最重要的就是对数组中的元素进行排序。总结一下排序的几种写法。<br><em>java.util.array类中提供了排序的重载方法，可以直接调用相关方法进行排序，详见<a href="http://docs.oracle.com/javase/8/docs]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="java学习笔记" scheme="http://www.whtis.com/tags/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
     
       <category term="java" scheme="http://www.whtis.com/categories/java/"/>
     
