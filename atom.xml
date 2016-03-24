@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[whtis's blog]]></title>
-  <subtitle><![CDATA[点滴的记录，是变强的必经之路]]></subtitle>
+  <subtitle><![CDATA[practice makes perfect]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
   <updated>2016-03-23T13:07:52.299Z</updated>
