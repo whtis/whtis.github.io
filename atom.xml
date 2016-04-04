@@ -4,7 +4,7 @@
   <subtitle><![CDATA[practice makes perfect]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-03-23T13:07:52.299Z</updated>
+  <updated>2016-04-04T15:59:10.447Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -15,11 +15,131 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Java学习总结-第十八章 Java集合架构]]></title>
+    <link href="http://www.whtis.com/2016/04/01/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-Java%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84/"/>
+    <id>http://www.whtis.com/2016/04/01/Java学习总结-第十八章-Java集合架构/</id>
+    <published>2016-04-01T03:41:32.000Z</published>
+    <updated>2016-04-04T15:59:10.447Z</updated>
+    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>数组线性表和链表是Java中的预定义结构。除此之外，Java还引入了几种可以有效组织和处理数据的接口和类，这些接口和类组成了<code>Java集合架构（Java Collection Framework）</code>。<br>一个<code>集合（collection）</code>就是一个存储一组对象的容器，一般将这些对象称为集合的<code>元素（element）</code>。Java集合构架支持三种类型的集合：<code>规则集（set）、线性表（list）和图（map）</code>，它们分别定义在接口Set、List与Map中。Set的实例存储一组互不相同的元素，List的实例存储一组顺序排列的元素，Map的实例存储一组对象，每个对象都有一个关联的键值。</p>
+<p><img src="Set&amp;List类.png" alt="Set和List接口是Collection接口的子接口"><br><img src="Map类.png" alt="Map的实例存储一组对象以及与它们关联的键值"></p>
+<h3 id="Collection接口和AbstractCollection类">Collection接口和AbstractCollection类</h3><ul>
+<li>Collection接口是处理对象集合的根接口。它的方法详见<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Collection.html" target="_blank" rel="external">API</a>。AbstractCollection类是提供对Collection接口部分实现的便利类。除了size方法和iterator方法之外，它实现了Collection接口中的所有方法。</li>
+<li>Iterator接口提供next（）方法，可以依次访问集合中存储的元素。<br><strong>Collection接口中有些方法不能在具体子类中实现。这种情况下，这些方法会抛出异常<code>java.lang.UnsupportedOperationException</code>，该异常是RuntimeException异常的一个子类。</strong></li>
+</ul>
+<h3 id="规则集Set">规则集Set</h3><ul>
+<li>Set接口扩展Collection接口，它没有引入新的方法和常量，只规定它的实例不能包含相同的元素。</li>
+<li>AbstractSet类是一个便利类，它扩展了AbstractCollection类并实现了Set接口。</li>
+<li>Set接口的三个具体类是HashSet、LinkedHashSet和TreeSet。</li>
+</ul>
+<h4 id="散列集HashSet">散列集HashSet</h4><ul>
+<li>HashSet类可以用来存储互不相同的任何元素。考虑效率的因素，添加到散列集之中的对象必须实现hashCode方法，适当地散列分布散列码。</li>
+<li>两个不等的对象可能有相同的散列码。</li>
+</ul>
+<h4 id="链式散列集LinkedHashSet">链式散列集LinkedHashSet</h4><ul>
+<li>在HashSet中元素是没有顺序的，而在LinkedHashSet中，可以按元素插入集合的顺序进行提取。</li>
+<li>LinkedHashSet中的元素存储时保持插入的顺序，要想自定义顺序，可以使用<code>TreeHashSet</code>。<br><strong>如果不需要使元素按其插入的顺序进行存储，应该使用HashSet，它的效率要比LinkedHashSet高。</strong></li>
+</ul>
+<h4 id="树形集TreeSet">树形集TreeSet</h4><p>SortSet是Set的一个子接口，它保证规则集中的元素是有序的。TreeSet是实现SortedSet接口的一个具体类。只有当对象之间可以互相比较是，才可以将它们添加到树形集TreeSet中。</p>
+<ul>
+<li>有两种方法实现对象的比较：<ul>
+<li>使用Comparable接口。如果添加到规则集中的对象是Comparable的实例，就可以使用compareTo方法来比较。这种方法定义的序通常称为<code>自然顺序（natural order）</code>。<strong>参见习题18.7</strong></li>
+<li>如果该类不支持Comparable接口，或者在实现Comparable接口的类中不想使用compareTo方法进行比较，可以给规则集的元素创建一个比较器。这种方法定义的序称为<code>比较器顺序（order by comparator）</code>。</li>
+</ul>
+</li>
+<li>创建树形集的好的方法是使用构造方法<code>TreeSet(Collection c)</code>，这样只需要对规则集进行一次排序，效率较高。<br>**如果向树形集添加一个与集合中已有元素不可比的对象，将会发生运行错误<code>ClassCastException</code>。</li>
+</ul>
+<h3 id="比较器接口Comparator">比较器接口Comparator</h3><ul>
+<li>有时想把不同类型的元素添加到同一个树形集内，可以定义一个比较器来比较这些元素。可以创建一个<code>java.util.Comparator</code>接口的类。其方法如下：<ul>
+<li>public int compare(Object element1,Object element2)  </li>
+<li>public boolean equals(Object element)<br>**Object类也定义了equals方法，因此实现接口时不实现equals方法也不会报错，但是实现该方法可以快速的判断，提高效率。</li>
+</ul>
+</li>
+<li>树形集要想使用一个比较器，必须使用构造方法TreeSet（Comparator comparator）来创建一个有序集。</li>
+</ul>
+<h3 id="线性表List">线性表List</h3><p>线性表允许在一个集合中存储重复的元素。</p>
+<ul>
+<li>List接口扩展Collection接口，添加了<code>面向位置（position-oriented）</code>的操作，并且添加了能够双向遍历线性表的新迭代探子。（ListIterator）</li>
+</ul>
+<h4 id="数组线性表ArrayList和链表LinkedList">数组线性表ArrayList和链表LinkedList</h4><ul>
+<li>如果需要使用下标随机访问元素，并且处理在末尾之外，不在其他位置插入或删除元素，使用ArrayList。</li>
+<li>如果需要在线性表的任意位置上插入或删除元素，应该选择LinkedList。</li>
+<li>如不要求在线性表中插入或删除元素，数组是效率最高的数据结构。</li>
+</ul>
+<h4 id="向量类Vector">向量类Vector</h4><ul>
+<li>Vector类除了包含用于访问和修改向量的同步方法外，它与ArrayList是相同的。同步方法用于防止两个或多个线程同时访问向量时引起数据冲突。</li>
+<li>当不需要同步时，最好使用ArrayList，它比Vector快得多。</li>
+</ul>
+<h4 id="栈类stack">栈类stack</h4><p>栈类stack是最为Vector类的扩展实现的。</p>
+<h3 id="一般类型的使用">一般类型的使用</h3><ul>
+<li>所有的集合都支持一般类型，可以用记号<code>&lt;&gt;</code>给任一集合中的元素指定一个特定的类型。</li>
+<li>从一个只有一种指定元素类型的集合中取值时，不需要进行类型转换。</li>
+</ul>
+<h3 id="图Map">图Map</h3><ul>
+<li>Map接口建立元素和键值的一个映射关系。键值就是下标。</li>
+<li>一个图中不能有重复的键值，每个键值对应一个值。</li>
+<li>AbstractMap类是一个实现Map接口的便利类，除了entrySet()方法外，它实现了Map接口中的其他方法。SortedMap接口扩展Map接口，其中的映像是以键值升序的方式排列的。</li>
+<li>散列图HashMap、链式散列图LinkedHashMap和树形图TreeMap三种类是实现Map接口的具体类。</li>
+</ul>
+<h4 id="HashMap">HashMap</h4><p>对于定位查找一个值、插入一个映像或删除一个映像，HashMap的效率是很高的。</p>
+<h4 id="LinkedHashMap">LinkedHashMap</h4><ul>
+<li>它支持图中元素排序。在LinkedHashMap中，元素既可以按照它们插入的顺序排序（称为<code>插入排序（insertion order）</code>），也可以按它们最后一次访问时间的顺序，从最早到最晚（称为<code>访问顺序（access order）</code>）。<ul>
+<li>无参构造方法是以插入顺序创建LinkedHashMap对象的。</li>
+<li>使用构造方法LinkedHashMap（initialCapacity，loadFactor，true）可以以访问顺序创建LinkedHashMap对象。</li>
+</ul>
+</li>
+</ul>
+<h4 id="TreeMap">TreeMap</h4><ul>
+<li>它实现了SortedMap接口，它可以按照键值排好的顺序遍历图。键值可以使用Comparable接口或Comparator接口来排序。</li>
+<li>构造方法：<ul>
+<li>TreeMap（）如果实现了Comparable接口，就可以使用compareTo方法来对集合内中的元素进行排序。</li>
+<li>TreeMap（Comparator comparator）可以使用指定比较器来对图中元素进行排序。</li>
+</ul>
+</li>
+</ul>
+<p><strong>Map接口不含有迭代探子，为遍历一个图，可以用Map接口的方法<code>enrtySet()</code>来创建一个映像的规则集。该规则集内的每个元素都是一个字符串，它是由代表键值对象的字符串与其对应的映像用等号连接而成的。</strong></p>
+<h3 id="Collections类">Collections类</h3><p>Collections类包含管理集合与图、创建同步集合类、创建只读集合类等<code>静态方法</code>。</p>
+<h3 id="Arrays类">Arrays类</h3><p>Arrays类中包含对数组进行排序、查找、比较和填充元素的各种<code>静态方法</code>。它还包含了将数组转为线性表的方法。</p>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>Java集合架构中的所有具体类都实现了Cloneable和Serializable接口，所以它们的实例都是可复制和可复制的。</li>
+<li>Collections类和Arrays类提供的方法都是静态方法。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li>习题18.1 18.2 18.3 18.5 18.6 18.7 18.9源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter18/src" target="_blank" rel="external">chapter18</a></li>
+<li><p>18.5按字典升序显示单词的实现思路：使用线性表存储每个单词，使用构造方法sort（Comparator comparator）对表中的对象排序，比较器的实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DicComparable</span> <span class="keyword">implements</span> <span class="title">Comparator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Object o1, Object o2)</span> </span>&#123;</span><br><span class="line">        String s1 = ((String) (o1)).toLowerCase();</span><br><span class="line">        String s2 = ((String) (o2)).toLowerCase();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (s1.compareTo(s2) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (s1.compareTo(s2) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>18.7将单词按出现频率升序显示，实现思路：创建一个实现Comparable接口的类Wordoccurrence,该类包含两个域word和count，使用compareTo方法来比较单词的出现次数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WordOccurrence</span> <span class="keyword">implements</span> <span class="title">Comparable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String word;</span><br><span class="line">    <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WordOccurrence</span><span class="params">(String word, <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.word = word;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (count &gt; ((WordOccurrence) o).count) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (count &lt; ((WordOccurrence) o).count) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>数组线性表和链表是Java中的预定义结构。除此之外，Ja]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Java学习总结-第十七章 面向对象数据结构]]></title>
     <link href="http://www.whtis.com/2016/03/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     <id>http://www.whtis.com/2016/03/22/Java学习总结-第十七章-面向对象数据结构/</id>
     <published>2016-03-22T15:44:38.000Z</published>
-    <updated>2016-03-23T13:07:52.299Z</updated>
+    <updated>2016-04-01T04:32:59.121Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>数据结构是按某种方式组织的数据集合。用面向对象的观点来看，一个数据结构就是一个存储着其他对象的对象，存储在数据结构内的对象称为数据或元素。因此数据结构又被称为<code>容器对象（container object）</code>或<code>集合对象（collection object）</code>。<br>本章介绍线性表、堆栈、队列和二叉树等四种动态数据结构。</p>
@@ -82,6 +202,14 @@
 <hr>
 <h2 id="主要内容">主要内容</h2><p>数据结构是按某种方式组织的数据集合。用面向对象的观点来看]]>
     </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
     
   </entry>
   
@@ -2052,155 +2180,6 @@
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章对Java中的各种数据类型进行了介绍，并给出了互相转]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结--第一章 计算机、程序和Java概述]]></title>
-    <link href="http://www.whtis.com/2015/12/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E3%80%81%E7%A8%8B%E5%BA%8F%E5%92%8CJava%E6%A6%82%E8%BF%B0/"/>
-    <id>http://www.whtis.com/2015/12/20/Java学习总结-第一章-计算机、程序和Java概述/</id>
-    <published>2015-12-20T12:42:57.000Z</published>
-    <updated>2016-02-10T13:35:35.638Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章简单介绍了计算机和Java有关的知识，让人有初步了解。</p>
-<h3 id="二进制与十进制数的转换">二进制与十进制数的转换</h3><p>给定二进制数<img src="http://latex.codecogs.com/gif.latex?b_{n}b_{n-1}b_{n-2}...b_{2}b_{1}b_{0}">,与它相等的十进制数为<br><img src="http://latex.codecogs.com/gif.latex?b_{n}*2^{n}&plus;b_{n-1}*2^{n-1}&plus;b_{n-2}*2^{n-2}&plus;...&plus;b_{2}*2^{2}&plus;b_{1}*2^{1}&plus;b_{0}*2^{0}"><br>把一个十进制数d转换为二进制数，就是求满足<br><img src="http://latex.codecogs.com/gif.latex?d=b_{n}*2^{n}&plus;b_{n-1}*2^{n-1}&plus;b_{n-2}*2^{n-2}&plus;...&plus;b_{2}*2^{2}&plus;b_{1}*2^{1}&plus;b_{0}*2^{0}"><br>的位<img src="http://latex.codecogs.com/gif.latex?b_{n},b_{n-1},b_{n-2},...,b_{2},b_{1},b_{0}">。用2不断的除d，直到商为0为止，余数即为所求的位<img src="http://latex.codecogs.com/gif.latex?b_{0},b_{1},b_{2},...,b_{n-2},b_{n-1},b_{n}">。</p>
-<h3 id="十六进制与十进制数的转换">十六进制与十进制数的转换</h3><p>给定十六进制数<img src="http://latex.codecogs.com/gif.latex?h_{n}h_{n-1}h_{n-2}...h_{2}h_{1}h_{0}">,与它相等的十进制数为<br><img src="http://latex.codecogs.com/gif.latex?h_{n}*16^{n}&plus;h_{n-1}*16^{n-1}&plus;h_{n-2}*16^{n-2}&plus;...&plus;h_{2}*16^{2}&plus;h_{1}*16^{1}&plus;h_{0}*16^{0}"><br>把一个十进制数d转换为二进制数，就是求满足<br><img src="http://latex.codecogs.com/gif.latex?d=h_{n}*16^{n}&plus;h_{n-1}*16^{n-1}&plus;h_{n-2}*16^{n-2}&plus;...&plus;h_{2}*16^{2}&plus;h_{1}*16^{1}&plus;h_{0}*16^{0}"><br>的位<img src="http://latex.codecogs.com/gif.latex?h_{n},h_{n-1},h_{n-2},...,h_{2},h_{1},h_{0}">。用16不断的除d，直到商为0为止，余数即为所求的位<img src="http://latex.codecogs.com/gif.latex?h_{0},h_{1},h_{2},...,h_{n-2},h_{n-1},h_{n}">。</p>
-<h3 id="二进制数与十六进制数的转换">二进制数与十六进制数的转换</h3><p>要把一个十六进制数转换为二进制数，只需要使用下表，把十六进制数的每一位转换为四位二进制数即可。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:right">十六进制</th>
-<th style="text-align:right">二进制</th>
-<th style="text-align:right">十进制</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right">0</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">0</td>
-</tr>
-<tr>
-<td style="text-align:right">1</td>
-<td style="text-align:right">1</td>
-<td style="text-align:right">1</td>
-</tr>
-<tr>
-<td style="text-align:right">2</td>
-<td style="text-align:right">10</td>
-<td style="text-align:right">2</td>
-</tr>
-<tr>
-<td style="text-align:right">3</td>
-<td style="text-align:right">11</td>
-<td style="text-align:right">3</td>
-</tr>
-<tr>
-<td style="text-align:right">4</td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">4</td>
-</tr>
-<tr>
-<td style="text-align:right">5</td>
-<td style="text-align:right">101</td>
-<td style="text-align:right">5</td>
-</tr>
-<tr>
-<td style="text-align:right">6</td>
-<td style="text-align:right">110</td>
-<td style="text-align:right">6</td>
-</tr>
-<tr>
-<td style="text-align:right">7</td>
-<td style="text-align:right">111</td>
-<td style="text-align:right">7</td>
-</tr>
-<tr>
-<td style="text-align:right">8</td>
-<td style="text-align:right">1000</td>
-<td style="text-align:right">8</td>
-</tr>
-<tr>
-<td style="text-align:right">9</td>
-<td style="text-align:right">1001</td>
-<td style="text-align:right">9</td>
-</tr>
-<tr>
-<td style="text-align:right">A</td>
-<td style="text-align:right">1010</td>
-<td style="text-align:right">10</td>
-</tr>
-<tr>
-<td style="text-align:right">B</td>
-<td style="text-align:right">1011</td>
-<td style="text-align:right">11</td>
-</tr>
-<tr>
-<td style="text-align:right">C</td>
-<td style="text-align:right">1100</td>
-<td style="text-align:right">12</td>
-</tr>
-<tr>
-<td style="text-align:right">D</td>
-<td style="text-align:right">1101</td>
-<td style="text-align:right">13</td>
-</tr>
-<tr>
-<td style="text-align:right">E</td>
-<td style="text-align:right">1110</td>
-<td style="text-align:right">14</td>
-</tr>
-<tr>
-<td style="text-align:right">F</td>
-<td style="text-align:right">1111</td>
-<td style="text-align:right">15</td>
-</tr>
-</tbody>
-</table>
-<h3 id="Java的特点">Java的特点</h3><p><strong>简单的(simple)、面向对象的(object-oriented)、分布式的(distributed)、解释性的(interpreted)、健壮的(robust)、安全的(secure)、结构中立的(architecture-neutral)、可移植的(portable)、高效的(high-performance)、多线程的(multithreaded)、动态的(dynamic)。</strong></p>
-<h3 id="Java的编译和运行">Java的编译和运行</h3><ul>
-<li>编译：cmd下使用javac命令进行编译。</li>
-<li>运行：cmd下使用java命令运行。</li>
-</ul>
-<p>在使用cmd编译运行java程序时，需要注意如下代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    	System.out.println(<span class="string">"helloWorld"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果程序中含有包名，使用<code>java test</code>运行时会出现<strong>找不到或无法加载主类 test</strong>，解决这个问题有如下几种方法：</p>
-<ul>
-<li>方法一： 在编译路径下新建名为test的文件夹，然后将test.class文件拖入该文件夹，在编译路径下使用<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java <span class="keyword">test</span>.<span class="keyword">test</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>运行程序。<br>比如路径是 <code>C:\Users\ht\Desktop&gt;</code> ,在此路径下我使用了 <code>javac test.java</code>进行了编译，那么这路径就是编译路径，为了成功运行上面的程序，我需要新建一个test文件夹，其路径为<code>C:\Users\ht\Desktop\test</code>，再将test.class文件拖到test文件夹内，然后在<code>C:\Users\ht\Desktop&gt;</code>下使用 <code>java test.test</code>运行。</p>
-<ul>
-<li>方法二： 使用 <code>javac -d&lt;目录&gt;</code> 方式自动创建class文件路径。同样是上面的例子，在<code>C:\Users\ht\Desktop&gt;</code>路径下，使用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac -d \Users\ht\Desktop test.java</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>编译，然后使用<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java <span class="keyword">test</span>.<span class="keyword">test</span></span><br></pre></td></tr></table></figure></p>
-<p>运行即可。</p>
-<ul>
-<li>方法三： 使用集成开发环境即可避免这类问题。这里推荐<a href="http://www.jetbrains.com/idea/" target="_blank" rel="external">Intellij IDEA</a>。<br><strong>建议初学者先使用cmd进行java的学习，这样可以理解一些基础性的东西，比如上面的问题，其实就是java的classpath的问题，如果懂java编译时如何对class文件定位，解决上述问题就很简单了。</strong></li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>第一章是对Java这门语言的概述，需要了解关键字、类和方法的命名方式、Java程序的编译运行等东西。</li>
-<li>Java提供了专门的Math类来处理进制转换。</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><p>（略）</p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章简单介绍了计算机和Java有关的知识，让人有初步了解]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>
