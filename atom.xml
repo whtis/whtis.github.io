@@ -4,7 +4,7 @@
   <subtitle><![CDATA[practice makes perfect]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-04-04T15:59:10.447Z</updated>
+  <updated>2016-04-21T08:48:44.733Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -13,6 +13,278 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Java学习总结-第二十八章 网络]]></title>
+    <link href="http://www.whtis.com/2016/04/16/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E7%AB%A0-%E7%BD%91%E7%BB%9C/"/>
+    <id>http://www.whtis.com/2016/04/16/Java学习总结-第二十八章-网络/</id>
+    <published>2016-04-16T13:43:48.000Z</published>
+    <updated>2016-04-21T08:48:44.733Z</updated>
+    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p><code>基于套接字的通信</code>可以使程序通过指定的套接字进行通信。<code>套接字（socket）</code>是两个主机之间逻辑连接的端点，可以用于发送和接收数据。<br>Java支持流套接字和数据报套接字。<code>流套接字（stream socket）</code>使用传输控制协议（Transmission Control Protocol，TCP）进行数据传输，而<code>数据报套接字（datagram socket）</code>使用的是用户数据报协议（User Datagram Protocol，UDP）。</p>
+<h3 id="客户/服务器计算模式">客户/服务器计算模式</h3><ul>
+<li>服务器和客户一旦建立连接，客户和服务器就可以通过套接字进行通信。</li>
+<li><p>创建<code>服务器套接字（server socket）</code>，并把它附加到一个端口上，服务器从端口监听连接。端口标识套接字上的TCP服务，端口号的范围从0到65536，但是0到1024号是为特权服务保留的端口。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(port);</span><br><span class="line"><span class="comment">//监听</span></span><br><span class="line">Socket socket = serverSocket.accept();</span><br></pre></td></tr></table></figure>
+<p><strong>如果企图在已经使用的端口上创建服务器套接字，将会引起<code>java.net.BindException</code>异常。</strong></p>
+</li>
+<li><p>服务器的监听语句会一直等待，直到一个客户与服务器套接字建立连接。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Socket socket = <span class="keyword">new</span> Socket(serverName,port);</span><br></pre></td></tr></table></figure>
+<p>serverName是服务器的域名或IP地址。</p>
+</li>
+<li><p>通过得到socket的输入输出流，接可以进行数据传输了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">InputStream input = socket.getInputStream();</span><br><span class="line">OutputStream output = socket.getOutputStream();</span><br></pre></td></tr></table></figure>
+<p>**建议使用二进制I/O在服务器和客户间进行数据传输，以便提高效率。</p>
+</li>
+</ul>
+<h3 id="网络地址类InetAddress">网络地址类InetAddress</h3><ul>
+<li><p>可以使用类InetAddress来求得客户的主机名和IP地址。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">InetAddress inetAddress = socket.getInetAddress();</span><br><span class="line">String hostname = inetAddress.getHostName();</span><br><span class="line">String ip = inetAddress.getHostAddress();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以使用静态方法getByName通过主机名或IP地址创建InetAddress的一个实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InetAddress address = InetAddress.getByName(<span class="string">"www.google.com"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="多客户服务">多客户服务</h3><ul>
+<li><p>可以使用线程处理服务器上多个客户的同步问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">	Socket socket = serverSocket.accept();</span><br><span class="line">	Thread thread = <span class="keyword">new</span> ThreadClass(socket);</span><br><span class="line">	thread.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务器套接字可以有多个连接。while循环的每次迭代创建一个新的连接。</p>
+</li>
+</ul>
+<h3 id="发送和接收对象">发送和接收对象</h3><ul>
+<li>可以在套接字流上使用ObjectInputStream和ObjectOutputStream接收和发送对象。为了能够进行传输，这些对象必须实现<code>Serializable</code>接口。</li>
+</ul>
+<h3 id="从Web服务器上读取文件">从Web服务器上读取文件</h3><ul>
+<li>可以创建一个<code>java.net.URL</code>对象，然后打开一个输入流：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">URL url = <span class="keyword">new</span> URL(<span class="string">"www.whtis.com"</span>);</span><br><span class="line">InputStream inputStream = url.openStream();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="JEditorPanel类">JEditorPanel类</h3><ul>
+<li>Swing提供了一个名叫javax.swing.JEditorPanel的GUI组件，它能够自动地显示普通文本文件、HTML文件和RTF文件。 </li>
+<li><p>要显示文件的内容，可以使用setPage（URL）方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPage</span><span class="params">(URL url)</span> <span class="keyword">throws</span> IOException</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当单击编辑窗格中的一个超链接时，JEditorPanel产生<code>javax.swing.event.HyperLink Event</code>事件，通过该事件，我们可以得到超链接的URL，并使用setPage(url)方法显示它。</p>
+</li>
+</ul>
+<h3 id="数据报套接字">数据报套接字</h3><ul>
+<li>我们编写的有些网络通信不要求TCP提供可靠的、点对点的通道，这种情况下，数据报通信效率更高。</li>
+<li>数据是用<code>分组（packet，或称为包）</code>进行传输的。数据报套接字使用<code>用户数据报协议（User Datagram Protocol，UDP）</code>，该协议不能保证分组不会丢失、或者不会重复接收、或者接收的顺序与发送的顺序不同。</li>
+<li><code>数据报（datagram）</code>是独立的，包含自身网络上的传输信息，它的到达、到达的时间和内容都没有保证。</li>
+</ul>
+<h4 id="DatagramPacket类和DatagramSocket类">DatagramPacket类和DatagramSocket类</h4><ul>
+<li>DatagramPacket表示数据报的分组。要为来自客户的传送创建DatagramPacket对象，可以使用构造方法<code>DatagramPacket(byte[] buf,int length,InetAddress host,int prot)</code>。要创建其他所有的DatagramPacket对象，使用构造方法<code>DatagramPacket(byte[] buf,int length)</code>。一旦创建了一个数据报分组，就可以使用getData()方法和setData()方法获取和设置分组中的数据。</li>
+<li>数据报套接字类DatagramSocket表示发送和接收数据报分组的套接字。数据报套接字是分组传输服务的发送和接收点。每个在套接字上发送和接收的分组都是独立编址和路由的。<ul>
+<li>要创建服务器上的数据报套接字，使用构造方法DatagramSocket(int port),它将套接字绑定到本地主机指定的端口上。</li>
+<li>要创建客户上的数据报套接字，使用构造方法DatagramSocket()，它将套接字绑定到本地主机任意一个可用的端口上。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>流套接字的端口号和数据报套接字的端口号是互不相关的。流套接字和数据报套接字能够同时使用同一个端口号。</li>
+<li>数据报套接字使用<code>send(DatagramSocket)</code>发送分组，使用<code>receive(DatagramSocket)</code>接收分组。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li>习题28.1 28.3 28.6 28.8 28.9 28.10源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter28/src" target="_blank" rel="external">chapter28</a></li>
+<li><p>习题28.6 </p>
+<ul>
+<li><p>服务器端的输入输出流应该和客户端的对应。</p>
+<ul>
+<li><p>客户端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(socket.getInputStream());</span><br><span class="line">ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(socket.getOutputStream());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>相应的，服务器端的顺序应该为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(socket.getOutputStream());</span><br><span class="line">ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(socket.getInputStream());</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>如何判断ObjectInputStream类中readObject()方法是否到达末尾:</p>
+<ul>
+<li><p>readObject()方法读取数据流到末尾时会抛出<code>java.io.EOFException</code>异常，可以捕获到这个异常并由此判断对象数据读取完成。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"Address.dat"</span>);</span><br><span class="line">        <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ObjectInputStream InFromFile = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(file));</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            lists.add(InFromFile.readObject());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (EOFException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        jTextArea.append(<span class="string">"Data read completed!"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以在数据流中添加标识，当读取到标识后，则关闭输出流。例如：可以在写入数据完成后附加<code>null</code>作为标识。</p>
+</li>
+</ul>
+</li>
+<li>异常<code>java.io.StreamCorruptedException: invalid type code: AC</code>的出现原因及解决方案<ul>
+<li>原因：新建一个ObjecOutputStream类后，在第一次写入时，会附加一个头文件信息，随后的数据不会附加头文件。新建一个ObjectInputStream，在第一次读取时会寻找头文件，之后读取时就不会寻找头文件直接读取数据。如果写入数据时每次都附加头文件，而读取时仅第一次读取头文件，就会抛出上述异常。</li>
+<li>解决方案：写文件和读文件要统一，写文件时不能每次都附带头文件，也就是用一个输出流写数据，不要每次写入对象都新建一个输出流。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p><code>基于套接字的通信</code>可以使程序通过]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[java学习总结-第十九章 多线程]]></title>
+    <link href="http://www.whtis.com/2016/04/10/java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    <id>http://www.whtis.com/2016/04/10/java学习总结-第十九章-多线程/</id>
+    <published>2016-04-10T15:17:34.000Z</published>
+    <updated>2016-04-21T10:02:28.978Z</updated>
+    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>Java支持<code>多线程（multithreading）</code>。多线程是指在一个程序中允许同时运行多个任务的能力。</p>
+<h3 id="线程的概念">线程的概念</h3><ul>
+<li><code>一个线程（thread）</code>是指程序中完成一个任务的有始有终的执行流。使用Java，可以在一个程序中并发的运行多个线程。</li>
+<li>多线程可以使程序反应更快，交互性更强，执行效率更高。</li>
+<li>Java对多线程程序的开发和运行提供了非常好的支持，包括锁定资源以避免冲突。</li>
+<li>每个新线程都是一个对象，它的类实现<code>Runnable</code>接口或者扩展实现了<code>Runnable</code>接口，这种新对象称为<code>可运行对象（runnable object）</code>。</li>
+</ul>
+<h3 id="创建线程的两种方式">创建线程的两种方式</h3><h4 id="扩展Thread类创建线程">扩展Thread类创建线程</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//do something</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="实现runnable接口创建线程">实现runnable接口创建线程</h4><ul>
+<li><p>实现接口：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RunnThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> run &#123;</span><br><span class="line">		<span class="comment">//do something</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建线程：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> RunnThread());</span><br><span class="line">t.start();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果用户线程要实现多继承，应该选择实现Runnable接口这种方式。</p>
+</li>
+</ul>
+<h3 id="线程的控制与通信">线程的控制与通信</h3><ul>
+<li>Thread类中提供的控制线程的方法：<ul>
+<li>start()</li>
+<li>interrupt()  中断该线程。如果该线程处于阻塞状态，它就进入重新运行的就绪状态</li>
+<li>isAlive()  该方法判断线程是否正处于运行状态</li>
+<li>setPriority(int p)</li>
+<li>join()  等待该线程结束</li>
+<li>sleep(long millis)  </li>
+<li>yield()  让该线程暂停执行，允许其他线程开始运行</li>
+<li>isinterrupted()</li>
+<li>currentThread()  返回当前正在运行的线程对象的引用<br><strong>Thread类还包含stop()、suspend()和resume()。但是这些线程具有内在的不安全因素，因此不建议使用。要替代stop()方法，可以给线程变量赋值为null，指明要停止它的运行。</strong></li>
+</ul>
+</li>
+<li>方法wait()、notify()、notifyAll()定义在Object类中，也可以用于促进活动线程之间的通信。<ul>
+<li>wait()  该方法强迫线程等待，直到对调用wait方法的对象调用notify或notifyAll方法。</li>
+</ul>
+</li>
+</ul>
+<h4 id="线程的状态">线程的状态</h4><ul>
+<li>线程有五种状态：新建、就绪、运行、阻塞或结束。<br><img src="线程的状态.jpg" alt="线程的状态"></li>
+<li>有几种原因会使线程进入<code>阻塞状态（Blocked state）</code>：<ul>
+<li>可能是它自己调用了join()、sleep()或wait()方法</li>
+<li>可能是其他方法调用了如上方法</li>
+<li>可能是该线程在等待一个I/O操作的完成</li>
+</ul>
+</li>
+<li>方法interrupt按下列方式中断一个线程：当线程处于就绪状态或运行状态时，给它设置一个中断标志；当线程处于阻塞状态时，它将会被唤醒并进入就绪状态，同时抛出异常java.lang.InterruptedException。即：<strong>中断不仅打断执行过程，也可以打断不执行过程。</strong></li>
+</ul>
+<h4 id="线程的优先级">线程的优先级</h4><ul>
+<li>Java给每个线程指定一个优先级。</li>
+<li>Thread类有int型常量MIN_PRIOTITY、NORM_PRIORITY和MAX_PRIORITY，分别代表1、5、10、主线程的优先级是Thread.NORM_PRIORITY。<br><strong>如果总有一个优先级较高的线程在运行，或者有一个相同优先级的线程不退出，那么一个线程可能永远也没有运行的机会。这种情况称为<code>竞争（contention）</code>或<code>资源缺乏（starvation）</code>状态。</strong></li>
+</ul>
+<h3 id="线程组">线程组</h3><ul>
+<li>一个<code>线程组（thread group）</code>是线程的一个集合。可以同时对一个线程组进行唤醒和挂起操作。</li>
+<li>可以把一个线程组添加到另一个线程组，构成一个树形结构，除了起始组以外，树中的每个线程组都有一个父线程组。</li>
+<li>每个线程都属于一个线程组。</li>
+<li>线程组的创建：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ThreadGroup g = <span class="keyword">new</span> ThreadGroup(<span class="string">"thread group"</span>);  <span class="comment">//组名必须是唯一的字符串</span></span><br><span class="line">Thread t = <span class="keyword">new</span> Thread(g,<span class="keyword">new</span> ThreadClass(),<span class="string">"label for the thread"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>线程组里的线程必须分别启动</strong></p>
+<h3 id="线程之间的同步与协作">线程之间的同步与协作</h3><p>多个线程同时访问一个共享资源会引起<code>资源冲突（race condition）</code>。如果一个类的对象在多线程程序中没有引起资源冲突，则称这样的类为<code>线程安全的（thread-safe）</code>。</p>
+<h4 id="同步化实例与静态方法">同步化实例与静态方法</h4><ul>
+<li>为避免资源冲突，应该防止多个线程同时进入程序的某一特定部分，程序中这样的部分称为<code>临界区（critical region）</code>。</li>
+<li>可以使用关键字<code>Synchronized</code>来使方法的通信同步，以便一次只有一个线程可以访问该方法。</li>
+<li>一个同步方法在执行前需要加锁：对于实例方法，要给调用该方法的对象加锁；对于静态方法，要给这个类加锁。</li>
+</ul>
+<h4 id="同步语句">同步语句</h4><ul>
+<li><p>当执行方法中某一个代码块（也成为体）时，同步语句不仅仅可以用于获准给该对象加锁，而且可以用于要求对任何对象加锁。这个代码块称为<code>同步块（synchronized block）</code>。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (expr) &#123;  <span class="comment">//表达式expr必须能求出对象的引用</span></span><br><span class="line">	语句组；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同步语句允许对任何对象加锁，所以可以同步地访问一个对象而不仅仅是一个方法。</p>
+</li>
+<li><p>任何同步的实例方法都可以转化为同步语句。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">xMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//方法体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码等价于：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">		<span class="comment">//方法体</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="线程之间的协作">线程之间的协作</h4><ul>
+<li>通过在临界区上多个线程的相互排斥，线程同步完全可以避免资源冲突的发生，但是有时候我们还需要线程之间的相互协作。</li>
+<li>wait、notify和notifyAll方法可以用来实现线程之间的相互通信。这些方法必须在同步方法中调用，或者在接受这些方法的对象的同步块中调用；否则会抛出异常<code>IllegalMonitorStateException</code>。</li>
+</ul>
+<h4 id="死锁">死锁</h4><ul>
+<li>使用一种名为<code>资源排序（resource ordering）</code>的简单技术可以轻易的避免死锁的发生。该技术是给每一个需要锁定的对象定义一个顺序，确保每个线程都按这个顺序来锁定对象。</li>
+</ul>
+<h3 id="进程条JProcessBar">进程条JProcessBar</h3><ul>
+<li>进程条JProcessBar是一个图形组件，用来以图示的方式显示有界区间内的一个值。</li>
+<li>进程条的常用属性有orientation、minimum、value和maximum等。</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>线程对象从来不会直接引用run方法，到了执行某个线程的时候，Java虚拟机调用该线程的run方法。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li><p>习题19.2 19.3 19.4 19.6 19.7 19.8 19.9 19.11源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter19/src" target="_blank" rel="external">chapter19</a></p>
+</li>
+<li><p>习题19.7要求使用同步集合解决习题19.6多线程出现异常java.util.ConcurrentModificationException的问题。当完成这个题并且多次执行时，会出现下面这个问题，暂时不知道是否是错误：<br>向规则集添加数字时使用如下语句：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashSet.add(((<span class="keyword">int</span>) (Math.random() * <span class="number">10</span>)) + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>  控制台输出为以下结果：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>也就是说，随机数在规则集内被重新排序了，并且在使用迭代算子遍历时被打印到控制台。排序的原因猜测是同步规则集的方法导致的：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collections.synchronizedSet(hashSet);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>习题19.9要求写一个死锁程序，形成死锁的条件如下：</p>
+<ul>
+<li><blockquote>
+<p>互斥条件。即某个资源在一段时间内只能由一个进程占有，不能同时被两个或两个以上的进程占有。这种独占资源如CD-ROM驱动器，打印机等等，必须在占有该资源的进程主动释放它之后，其它进程才能占有该资源。这是由资源本身的属性所决定的。如独木桥就是一种独占资源，两方的人不能同时过桥。</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>不可抢占条件。进程所获得的资源在未使用完毕之前，资源申请者不能强行地从资源占有者手中夺取资源，而只能由该资源的占有者进程自行释放。如过独木桥的人不能强迫对方后退，也不能非法地将对方推下桥，必须是桥上的人自己过桥后空出桥面（即主动释放占有资源），对方的人才能过桥。</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>占有且申请条件。进程至少已经占有一个资源，但又申请新的资源；由于该资源已被另外进程占有，此时该进程阻塞；但是，它在等待新资源之时，仍继续占用已占有的资源。还以过独木桥为例，甲乙两人在桥上相遇。甲走过一段桥面（即占有了一些资源），还需要走其余的桥面（申请新的资源），但那部分桥面被乙占有（乙走过一段桥面）。甲过不去，前进不能，又不后退；乙也处于同样的状况。</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>循环等待条件。存在一个进程等待序列{P1，P2，…，Pn}，其中P1等待P2所占有的某一资源，P2等待P3所占有的某一源，……，而Pn等待P1所占有的的某一资源，形成一个进程循环等待环。就像前面的过独木桥问题，甲等待乙占有的桥面，而乙又等待甲占有的桥面，从而彼此循环等待。</p>
+</blockquote>
+</li>
+</ul>
+<p>根据这个原则，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $19<span class="title">_9</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      DeadThread t1 = <span class="keyword">new</span> DeadThread();</span><br><span class="line">      DeadThread t2 = <span class="keyword">new</span> DeadThread();</span><br><span class="line">      t1.flag = <span class="number">0</span>;</span><br><span class="line">      t2.flag = <span class="number">1</span>;</span><br><span class="line">      t1.start();</span><br><span class="line">      t2.start();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line">  * 线程1锁定o1后休眠1s，使得有机会执行线程2，线程2锁定o2后，等待线程1释放o1，线程1此时锁定了o1，等待线程2</span><br><span class="line">  * 释放o2，形成死锁。</span><br><span class="line">  *</span><br><span class="line">*/</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DeadThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> Object o1 = <span class="keyword">new</span> Object(), o2 = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (flag==<span class="number">0</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"flag="</span> + flag);</span><br><span class="line">          <span class="keyword">synchronized</span> (o1) &#123;</span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                  Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                  e.printStackTrace();</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">synchronized</span> (o2) &#123;</span><br><span class="line">                  System.out.println(<span class="string">"o2 locked"</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (flag==<span class="number">1</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"flag="</span> + flag);</span><br><span class="line">          <span class="keyword">synchronized</span> (o2) &#123;</span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                  Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                  e.printStackTrace();</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">synchronized</span> (o1) &#123;</span><br><span class="line">                  System.out.println(<span class="string">"o2 locked"</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>Java支持<code>多线程（multithreadi]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Java学习总结-第十八章 Java集合架构]]></title>
@@ -820,7 +1092,7 @@
     <link href="http://www.whtis.com/2016/02/09/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F/"/>
     <id>http://www.whtis.com/2016/02/09/Java学习总结-第十二章-事件驱动程序/</id>
     <published>2016-02-09T15:19:47.000Z</published>
-    <updated>2016-02-10T13:36:42.804Z</updated>
+    <updated>2016-04-10T15:18:48.169Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>所有非GUI程序都是按过程的顺序执行的，Java GUI程序设计是事件驱动的。本章介绍有关Java<code>事件驱动程序（event-driven programming）</code>的概念和技术。</p>
@@ -877,6 +1149,14 @@
 <hr>
 <h2 id="主要内容">主要内容</h2><p>所有非GUI程序都是按过程的顺序执行的，Java GUI]]>
     </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
     
   </entry>
   
@@ -1956,230 +2236,6 @@
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章介绍了java语言中循环（loop）的使用方式。</]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Premiere 学习笔记]]></title>
-    <link href="http://www.whtis.com/2015/12/23/Premiere-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://www.whtis.com/2015/12/23/Premiere-学习笔记/</id>
-    <published>2015-12-23T05:24:26.000Z</published>
-    <updated>2016-02-10T13:37:32.551Z</updated>
-    <content type="html"><![CDATA[<p><strong>视频教程<a href="http://www.bilibili.com/video/av1290353.html" target="_blank" rel="external">看这里</a></strong></p>
-<h3 id="导入、图片素材处理、导出视频">导入、图片素材处理、导出视频</h3><ul>
-<li>导入： ctrl+I</li>
-<li>时间轴缩放： +、-</li>
-<li>导出媒体： ctrl+M</li>
-</ul>
-<h3 id="视频剪辑">视频剪辑</h3><ul>
-<li>入点和出点： 标记视频，快捷键（I/O）</li>
-<li>剃刀工具： 剪辑标记段视频，快捷键C</li>
-<li>子剪辑： 剪辑下来的片段重新存储为素材</li>
-</ul>
-<h3 id="放机与录机">放机与录机</h3><ul>
-<li>全屏幕切换放机与录机： ~</li>
-<li>分离视频和音频： 右键→取消链接</li>
-<li>详细找素材：<ul>
-<li>（加速）倒放： (j)j</li>
-<li>暂停： k</li>
-<li>（加速）快进： (l)l</li>
-<li>放机中的素材插入到录机中的两种操作：<ul>
-<li>插入</li>
-<li>覆盖<br><strong>编辑视频找素材时，应该在录机和放机中寻找和剪辑，这样能够节约很多时间</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="历史记录、工作区、面板">历史记录、工作区、面板</h3><ul>
-<li>历史记录面板： 可以选择记录多少次历史状态</li>
-<li>原数据面板： 看素材属性</li>
-<li>蓝布棉门帘？</li>
-<li>自动保存： 手动以时间另存为</li>
-</ul>
-<h3 id="界面设置、快捷键">界面设置、快捷键</h3><ul>
-<li>时间轴滚动方式<ul>
-<li>不滚动</li>
-<li>页面滚动</li>
-<li>平滑滚动</li>
-</ul>
-</li>
-<li>标识帧： 在视频上定义一个标识位置</li>
-</ul>
-<h3 id="标记">标记</h3><ul>
-<li>连续视频缩览图： 时间轴面板右键可以调出</li>
-<li>标记（marker）： 标记时间轴上的某个位置，快捷键M<ul>
-<li>下一个标记： shift+M</li>
-<li>上一个标记： ctrl+shift+M</li>
-<li>可以调出标记面板进行标记的详细说明</li>
-<li>标记不仅可以在放机时间轴上使用，还可以在录机时间轴上使用</li>
-</ul>
-</li>
-</ul>
-<h3 id="速度设置">速度设置</h3><ul>
-<li>鼠标右键→速度/持续时间… 可以调整视频的速度、是否倒放： 快捷键R</li>
-<li>编辑区播放头快速定位： ↑ ↓ 箭头</li>
-</ul>
-<h3 id="节奏、序列、轨道">节奏、序列、轨道</h3><ul>
-<li>导入序列的两种方法：<ul>
-<li>新建一个序列后直接拖动： 会保留所有原始信息</li>
-<li>将序列作为嵌套或个别剪辑插入并覆盖： 仅包含序列整体的信息</li>
-</ul>
-</li>
-<li>轨道： 音频轨道和视频轨道可以分离并重新编辑（鼠标右键→取消链接）</li>
-</ul>
-<h3 id="画中画">画中画</h3><ul>
-<li>效果控件： shift+5 可以更改单个视频轨道的视频位置    </li>
-<li>视频的位置和角度可以使用数值进行精确编辑： 效果控件面板中，视频→运动</li>
-</ul>
-<h3 id="关键帧（keyframe）">关键帧（keyframe）</h3><ul>
-<li>效果控件面板，视频→运动下面的选项，都可以点击相应左侧闹钟添加、编辑关键帧</li>
-<li>通过控制关键帧的数值操作视频</li>
-</ul>
-<h3 id="淡入淡出">淡入淡出</h3><ul>
-<li>效果控件面板，视频→透明度下面的选项，都可以点击相应左侧闹钟添加、编辑关键帧</li>
-<li></li>
-</ul>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong>视频教程<a href="http://www.bilibili.com/video/av1290353.html" target="_blank" rel="external">看这里</a></strong></p>
-<h3 id="导入、图片素材处理、]]>
-    </summary>
-    
-      <category term="Premiere" scheme="http://www.whtis.com/tags/Premiere/"/>
-    
-      <category term="视频制作" scheme="http://www.whtis.com/tags/%E8%A7%86%E9%A2%91%E5%88%B6%E4%BD%9C/"/>
-    
-      <category term="Premiere" scheme="http://www.whtis.com/categories/Premiere/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结--第二章 基本数据类型和基本操作]]></title>
-    <link href="http://www.whtis.com/2015/12/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
-    <id>http://www.whtis.com/2015/12/22/Java学习总结-第二章-基本数据类型和基本操作/</id>
-    <published>2015-12-22T06:10:25.000Z</published>
-    <updated>2016-02-10T13:36:04.615Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章对Java中的各种数据类型进行了介绍，并给出了互相转换的方法；本章介绍了Java的语法规则，编写规则和编程错误。</p>
-<h3 id="命名标识符的规则">命名标识符的规则</h3><ul>
-<li>必须以字母、下划线（_）或美元符号（$）开头，不能用数字开头。</li>
-<li>不能是java中的关键字。</li>
-<li>Java区分大小写，标识符大小写有区别。<br><strong>java标识符选取应该“见名知意”，命名通常采用“驼峰命名法”。</strong></li>
-</ul>
-<h3 id="常量和变量">常量和变量</h3><ul>
-<li>变量是用来表示特定类型的数据。变量在使用前应该用“=”进行赋值，以减少编程错误。</li>
-<li>常量使用<code>final</code>关键字定义表示常量的值一旦生成就不会改变。</li>
-</ul>
-<h3 id="数值数据类型及其运算">数值数据类型及其运算</h3><ul>
-<li>整数除法的结果是整数，5/2结果是2。整型数可以精确存储而浮点数不能。</li>
-<li>默认情况下，整型直接量是十进制数。如果要写八进制数，用<code>0</code>开头，要写十六进制数，用<code>0x</code>或者<code>0X</code>开头。</li>
-<li>double型的值比float型更精确。</li>
-<li>简捷运算符<ul>
-<li><code>+=</code>,<code>-=</code>,<code>*=</code>,<code>/=</code>,<code>%=</code></li>
-<li>加一和减一（假设i=1）<ul>
-<li>a=i++； //执行完本条语句后，a=1,i=2</li>
-<li>a=++i； //执行完本条语句后，a=2,i=2</li>
-<li>a=i–； //执行完本条语句后，a=1,i=0</li>
-<li>a=–i； //执行完本条语句后，a=0,i=0</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="数值类型转换">数值类型转换</h3><ul>
-<li>拓宽类型：将一个小范围类型的变量转换为大范围类型的变量；<br>缩窄类型：将一个大范围类型的变量转换为小范围类型的变量。<br>拓宽类型不需要明确指出，可以自动执行，缩窄类型必须明确指出。</li>
-<li>缩窄类型会导致不精确的结果。而且必须得进行显性转换，否则会出现编译错误。</li>
-</ul>
-<h3 id="字符数据类型及其运算">字符数据类型及其运算</h3><ul>
-<li>字符型直接量用单引号扩住：’A’<br>字符串类型直接量用双引号扩住：”A”<br>字符型直接量只能是单个字符，字符串直接量可以有多个字符。</li>
-<li>特殊字符的转义： 使用<code>\*</code>，其中，<code>\t</code>是制表符，<code>\b</code>是退格键，<code>\n</code>是指换行</li>
-<li>字符型数据与数值型数据之间的转换<ul>
-<li>整数转为char型：只使用整数的低16位，其余忽略。</li>
-<li>浮点数转为char型：先将浮点数转为int型，再转为char型数据。</li>
-<li>char型转换为数值型：字符的Unicode码被转换成指定的数值类型。<br><strong>如果转换结果在目标变量的范围内，可以使用隐式转换（自动转换）。例如： byte b=’0’。在十六进制表示的0到FFFF之间的任何一个正整数，都可以自动转换成char型数据。</strong></li>
-<li>当计算<code>a+b</code>时。如果b是一个数字或字符，a将会被转换成Unicode数值。如果b是个字符串，a将会以字符串参与运算。</li>
-</ul>
-</li>
-</ul>
-<h3 id="布尔数据类型及其运算">布尔数据类型及其运算</h3><ul>
-<li>比较运算符：<code>==</code>,<code>!=</code>,<code>&lt;=</code>,<code>&gt;=</code>,<code>&lt;</code>,<code>&gt;</code></li>
-<li>逻辑运算符：<code>!</code>,<code>&amp;&amp;</code>,<code>||</code>,<code>^</code></li>
-<li>条件和无条件逻辑运算符（布尔运算符，）<ul>
-<li><code>&amp;&amp;</code>,<code>||</code> 称为<code>条件</code>运算符或<code>捷径</code>运算符：假设<code>p1&amp;&amp;p2</code>中p1为false，则无需计算p2的真值。</li>
-<li><code>&amp;</code>,<code>|</code> 称为<code>无条件</code>运算符或<code>无捷径</code>运算符：假设<code>p1&amp;p2</code>中p1为false，但还是需要计算p2的真值。</li>
-</ul>
-</li>
-<li>布尔类型不能转换为其他类型。</li>
-</ul>
-<h3 id="运算符的优先级和结合方向">运算符的优先级和结合方向</h3><ul>
-<li>赋值运算符是右结合的，双目运算符是左结合的。</li>
-<li>双目运算符左边运算对象的计算先于右边运算对象任何一部分的计算。</li>
-<li>如果运算对象没有修改变量值的副作用，运算对象的运算顺序是无关紧要的。</li>
-<li>运算对象的计算顺序的优先级高于运算符的优先级规则。</li>
-</ul>
-<h3 id="格式化输出">格式化输出</h3><ul>
-<li>格式化输出：<code>System.out.printf(format,items);</code></li>
-</ul>
-<h3 id="程序错误">程序错误</h3><ul>
-<li><code>语法错误（syntax error）</code>：没有遵循语言的规则，它们可以由编译器检查发现。属于编译错误。</li>
-<li><code>运行错误（runtime error）</code>：在程序运行过程中，如果环境发现了一个不可能执行的操作，就会出现运行错误。</li>
-<li><code>逻辑错误（logic error）</code>：如果程序没有按照预期的方案执行，就会发生逻辑错误。</li>
-</ul>
-<h3 id="编程风格">编程风格</h3><ul>
-<li>适当的注释和注释类型</li>
-<li>块的对齐方式<ul>
-<li>此行风格</li>
-<li>行尾风格</li>
-</ul>
-</li>
-</ul>
-<h3 id="调试（debug）">调试（debug）</h3><p>略。</p>
-<hr>
-<h2 id="复习小结">复习小结</h2><h3 id="闰年的计算方式">闰年的计算方式</h3><ul>
-<li>一个年号如果能被4整除但不能被100整除，或者能被400整除，则它是闰年。<br><code>（（year%4==0）&amp;&amp;（year%100！=0））||（year%400==0）</code></li>
-</ul>
-<h3 id="时间的计算">时间的计算</h3><ul>
-<li><p>使用System类中的currentTimeMillis（）方法得到Unix时间戳。使用如下步骤可以计算出当前时间的时、分、秒。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> totalMilliseconds = System.currentTimeMillis();</span><br><span class="line"><span class="keyword">long</span> totalSeconds = totalMilliseconds / <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">int</span> seconds = (<span class="keyword">int</span>) (totalSeconds % <span class="number">60</span>);</span><br><span class="line"><span class="keyword">long</span> totalMinutes = totalSeconds / <span class="number">60</span>;</span><br><span class="line"><span class="keyword">int</span> minutes = (<span class="keyword">int</span>) (totalMinutes % <span class="number">60</span>);</span><br><span class="line"><span class="keyword">long</span> totalHours = totalMinutes / <span class="number">60</span>;</span><br><span class="line"><span class="keyword">int</span> hours = (<span class="keyword">int</span>) (totalHours % <span class="number">24</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>java currentTimeMillis()和nanoTime()方法辨析<br> currentTimeMillis（）和nanoTime都属于java.lang这个包中，其中：</p>
-<ul>
-<li>currentTimeMillis() 返回的是当前时间（0区时间）与<code>1970</code>年<code>1</code>月<code>1</code>日<code>0</code>时 相差的时间，返回值是long类型，以毫秒计数。可用于计算当前时间。</li>
-<li>nanoTime()返回的是一个随机的纳秒数，与系统当前时间无关，仅用于测量某一个时间段中所用的时间。</li>
-</ul>
-</li>
-</ul>
-<h3 id="从控制台获取输入：">从控制台获取输入：</h3><ul>
-<li>使用Scanner类:<br><code>Scanner sc = new Scanner(System.in);</code></li>
-<li>使用args数组获得输入<br><code>java *.class args[0] args[1]</code></li>
-</ul>
-<h3 id="直接量">直接量</h3><p>  直接量并非是运算的结果，也不是I/O操作的结果，而是直接写在代码里的数据。</p>
-<h3 id="需要注意的几点">需要注意的几点</h3><ul>
-<li>int类型转换byte类型可以得到结果，但结果不精确，仅取相应字节的数据。</li>
-<li>double转换float类型会得到infinity错误，原因是浮点数存储方式不同。</li>
-<li>Java在运算时会自动的提升变量的精度来进行运算。double比float精度高，所以可以自动的从float转化至double再进行运算。</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><p>习题2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10 2.11 2.11程序源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter2/src" target="_blank" rel="external">chapter2</a></p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章对Java中的各种数据类型进行了介绍，并给出了互相转]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>
