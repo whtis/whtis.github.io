@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java,原创,小练习," />
+  <meta name="keywords" content="java,原创,总结," />
 
 
 
@@ -53,43 +53,19 @@
 
 
 
-<meta name="description" content="简易说明
-学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：
-基本的加减乘除四则运算
-连续计算
-运算结果记忆
-程序启动次数统计
-
-
-本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：
-显示结果的处理，包括两个整数作运算，结果应该显示为整数、浮点数显示的位数设定等。目前为了方便，统一转为了浮点">
+<meta name="description" content="花了大半年的时间，算是彻底从头看了一遍Java的基本知识，参考书籍是《Java语言程序设计》原书第五版，作者为Y.daniel Liang，基础篇和提高篇中的重要内容都摘录在了之前的文章中。本文就是对之前的Java总结做个分类，方便自己以后回顾。
+第一篇 程序设计基础（1~5章）第一章 计算机、程序和Java概述第二章 基本数据类型和基本操作第三章 控制语句第四章 方法第五章 数组第二篇 面向对象">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GUI小练习-简易计算器">
-<meta property="og:url" content="http://www.whtis.com/2016/02/16/GUI小练习-简易计算器/index.html">
+<meta property="og:title" content="Java阶段性总结">
+<meta property="og:url" content="http://www.whtis.com/2016/04/21/Java阶段性总结/index.html">
 <meta property="og:site_name" content="whtis's blog">
-<meta property="og:description" content="简易说明
-学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：
-基本的加减乘除四则运算
-连续计算
-运算结果记忆
-程序启动次数统计
-
-
-本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：
-显示结果的处理，包括两个整数作运算，结果应该显示为整数、浮点数显示的位数设定等。目前为了方便，统一转为了浮点">
-<meta property="og:updated_time" content="2016-02-20T09:04:38.773Z">
+<meta property="og:description" content="花了大半年的时间，算是彻底从头看了一遍Java的基本知识，参考书籍是《Java语言程序设计》原书第五版，作者为Y.daniel Liang，基础篇和提高篇中的重要内容都摘录在了之前的文章中。本文就是对之前的Java总结做个分类，方便自己以后回顾。
+第一篇 程序设计基础（1~5章）第一章 计算机、程序和Java概述第二章 基本数据类型和基本操作第三章 控制语句第四章 方法第五章 数组第二篇 面向对象">
+<meta property="og:updated_time" content="2016-04-21T12:34:04.762Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GUI小练习-简易计算器">
-<meta name="twitter:description" content="简易说明
-学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：
-基本的加减乘除四则运算
-连续计算
-运算结果记忆
-程序启动次数统计
-
-
-本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：
-显示结果的处理，包括两个整数作运算，结果应该显示为整数、浮点数显示的位数设定等。目前为了方便，统一转为了浮点">
+<meta name="twitter:title" content="Java阶段性总结">
+<meta name="twitter:description" content="花了大半年的时间，算是彻底从头看了一遍Java的基本知识，参考书籍是《Java语言程序设计》原书第五版，作者为Y.daniel Liang，基础篇和提高篇中的重要内容都摘录在了之前的文章中。本文就是对之前的Java总结做个分类，方便自己以后回顾。
+第一篇 程序设计基础（1~5章）第一章 计算机、程序和Java概述第二章 基本数据类型和基本操作第三章 控制语句第四章 方法第五章 数组第二篇 面向对象">
 
 
 
@@ -101,7 +77,7 @@
   };
 </script>
 
-  <title> GUI小练习-简易计算器 | whtis's blog </title>
+  <title> Java阶段性总结 | whtis's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -291,7 +267,7 @@
             
             
               
-                GUI小练习-简易计算器
+                Java阶段性总结
               
             
           </h1>
@@ -300,8 +276,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-02-16T18:51:30+08:00" content="2016-02-16">
-              2016-02-16
+            <time itemprop="dateCreated" datetime="2016-04-21T18:29:08+08:00" content="2016-04-21">
+              2016-04-21
             </time>
           </span>
 
@@ -326,8 +302,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/02/16/GUI小练习-简易计算器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/16/GUI小练习-简易计算器/" itemprop="commentsCount"></span>
+                <a href="/2016/04/21/Java阶段性总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/Java阶段性总结/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -346,64 +322,8 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="简易说明">简易说明</h2><ul>
-<li>学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：<ul>
-<li>基本的加减乘除四则运算</li>
-<li>连续计算</li>
-<li>运算结果记忆</li>
-<li>程序启动次数统计</li>
-</ul>
-</li>
-<li>本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：<ul>
-<li>显示结果的处理，包括两个整数作运算，结果应该显示为整数、浮点数显示的位数设定等。目前为了方便，统一转为了浮点数进行计算，显示的结果也是浮点数。</li>
-<li>初始设计了四个功能键，依次为<code>Ac</code>（清零）、<code>Cv</code>（小数和分数的转化）、<code>Re</code>（最近一次结果记忆），<code>←</code>（删除），目前除<code>Cv</code>外都已实现。</li>
-<li>目前显示结果为单行显示，最初考虑的是双行，但因为文本对齐和设置的问题无法处理，最终采用的JTextField进行单行显示。</li>
-<li>组件的等比例放大和缩小问题。目前只能做到自动，因此将其设置成为了不可更改大小,避免破坏布局。</li>
-</ul>
-</li>
-</ul>
-<h2 id="遇到的问题及解决方案记录">遇到的问题及解决方案记录</h2><h3 id="布局问题">布局问题</h3><ul>
-<li>如何拼凑无缝的界面<ul>
-<li>解决方法:略</li>
-</ul>
-</li>
-</ul>
-<h3 id="加减乘除运算问题">加减乘除运算问题</h3><ul>
-<li>第一次就按运算符的处理<ul>
-<li>如果是初始操作，无视之</li>
-<li>判断StringBuffer对象里是否有东西，如果没有，直接设置运算符compute</li>
-</ul>
-</li>
-<li>多次按运算符的处理<ul>
-<li>创建一个string类型的值来存储运算符，但同时只能设置一个</li>
-</ul>
-</li>
-<li>连续运算的问题（貌似链表处理比较简单？没学过，布吉岛…）<ul>
-<li>计算器能够正常运行的一系列设计，包括stringbuffer、compute、result等<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">computeAction</span><span class="params">(ActionEvent e, JTextField textField)</span> </span>&#123;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="小数点的问题">小数点的问题</h3><ul>
-<li><p>直接按小数点应该将其设置成正确的小数形式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (stringBuffer.toString().startsWith(<span class="string">"."</span>)) &#123;</span><br><span class="line">            stringBuffer.insert(<span class="number">0</span>, <span class="string">"0"</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>小数点在一次运算中只能出现一次，多按无效</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">"."</span>:</span><br><span class="line">      <span class="keyword">boolean</span> hasDot = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stringBuffer.length(); i++) &#123;</span><br><span class="line">          <span class="keyword">if</span> (stringBuffer.charAt(i) == <span class="string">'.'</span>) &#123;</span><br><span class="line">              hasDot = <span class="keyword">true</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!hasDot) &#123;</span><br><span class="line">          capicaty++;</span><br><span class="line">          stringBuffer.append(<span class="string">"."</span>);</span><br><span class="line">          textField.setText(stringBuffer.toString());</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="等于问题">等于问题</h3><ul>
-<li>仅仅在初始时输入数字，不进行任何运算，按下等于号应该显示初始输入的数字，并将result设置为相关的值，从而进行下次运算<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(capicaty&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">	textField.setText(String.valueOf(result));</span><br><span class="line">    reResult = result;</span><br><span class="line">    compute = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="除法问题">除法问题</h3><ul>
-<li>出现不合法的运算会得到Infinity，为了界面友好，显示为’0’<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">"÷"</span>:</span><br><span class="line">    result /= Double.parseDouble(stringBuffer.toString());</span><br><span class="line">    <span class="keyword">if</span> (String.valueOf(result).equals(<span class="string">"Infinity"</span>)) &#123;</span><br><span class="line">        result = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="代码">代码</h2><ul>
-<li>完整的代码见我的Github：<a href="https://github.com/whtis/Calculator" target="_blank" rel="external">Calculator</a></li>
-</ul>
-<hr>
+        <span itemprop="articleBody"><p>花了大半年的时间，算是彻底从头看了一遍Java的基本知识，参考书籍是《Java语言程序设计》原书第五版，作者为Y.daniel Liang，基础篇和提高篇中的重要内容都摘录在了之前的文章中。本文就是对之前的Java总结做个分类，方便自己以后回顾。</p>
+<h3 id="第一篇_程序设计基础（1~5章）">第一篇 程序设计基础（1~5章）</h3><h4 id="第一章_计算机、程序和Java概述"><a href="http://www.whtis.com/2015/12/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E3%80%81%E7%A8%8B%E5%BA%8F%E5%92%8CJava%E6%A6%82%E8%BF%B0/">第一章 计算机、程序和Java概述</a></h4><h4 id="第二章_基本数据类型和基本操作"><a href="http://www.whtis.com/2015/12/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">第二章 基本数据类型和基本操作</a></h4><h4 id="第三章_控制语句"><a href="http://www.whtis.com/2016/01/10/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">第三章 控制语句</a></h4><h4 id="第四章_方法"><a href="http://www.whtis.com/2016/01/11/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%96%B9%E6%B3%95/">第四章 方法</a></h4><h4 id="第五章_数组"><a href="http://www.whtis.com/2016/01/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%95%B0%E7%BB%84/">第五章 数组</a></h4><h3 id="第二篇_面向对象程序设计">第二篇 面向对象程序设计</h3><h4 id="第六章_对象和类"><a href="http://www.whtis.com/2016/01/26/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB/">第六章 对象和类</a></h4><h4 id="第七章_字符串"><a href="http://www.whtis.com/2016/01/26/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2/">第七章 字符串</a></h4><h4 id="第八章_继承和多态"><a href="http://www.whtis.com/2016/01/27/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/">第八章 继承和多态</a></h4><h4 id="Java学习总结–第九章_抽象类和接口"><a href="http://www.whtis.com/2016/01/28/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/">Java学习总结–第九章 抽象类和接口</a></h4><h4 id="第十章_面向对象建模"><a href="http://www.whtis.com/2016/01/29/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BB%BA%E6%A8%A1/">第十章 面向对象建模</a></h4><h3 id="第三篇_图形用户界面设计">第三篇 图形用户界面设计</h3><h4 id="第十一章_图形用户界面程序设计"><a href="http://www.whtis.com/2016/02/05/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">第十一章 图形用户界面程序设计</a></h4><h4 id="第十二章_事件驱动程序"><a href="http://www.whtis.com/2016/02/09/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F/">第十二章 事件驱动程序</a></h4><h4 id="第十三章_创建图形用户界面"><a href="http://www.whtis.com/2016/02/15/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0-%E5%88%9B%E5%BB%BA%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2/">第十三章 创建图形用户界面</a></h4><h3 id="第四篇_异常处理、I/O">第四篇 异常处理、I/O</h3><h4 id="第十五章_异常和断言"><a href="http://www.whtis.com/2016/01/30/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0-%E5%BC%82%E5%B8%B8%E5%92%8C%E6%96%AD%E8%A8%80/">第十五章 异常和断言</a></h4><h4 id="第十六章_简单输入输出"><a href="http://www.whtis.com/2016/02/18/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0-%E7%AE%80%E5%8D%95%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/">第十六章 简单输入输出</a></h4><h3 id="第五篇_数据结构与集合架构">第五篇 数据结构与集合架构</h3><h4 id="第十七章_面向对象数据结构"><a href="http://www.whtis.com/2016/03/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">第十七章 面向对象数据结构</a></h4><h4 id="第十八章_Java集合架构"><a href="http://www.whtis.com/2016/04/01/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-Java%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84/">第十八章 Java集合架构</a></h4><h3 id="第六篇_多线程">第六篇 多线程</h3><h4 id="第十九章_多线程"><a href="http://www.whtis.com/2016/04/10/java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">第十九章 多线程</a></h4><h3 id="网络">网络</h3><h4 id="第二十八章_网络"><a href="http://www.whtis.com/2016/04/16/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E7%AB%A0-%E7%BD%91%E7%BB%9C/">第二十八章 网络</a></h4><hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div></span>
       
     </div>
@@ -416,7 +336,7 @@
           
             <a href="/tags/原创/" rel="tag">#原创</a>
           
-            <a href="/tags/小练习/" rel="tag">#小练习</a>
+            <a href="/tags/总结/" rel="tag">#总结</a>
           
         </div>
       
@@ -425,17 +345,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/15/Java学习总结-第十三章-创建图形用户界面/" rel="next" title="Java学习总结--第十三章 创建图形用户界面">
-                <i class="fa fa-chevron-left"></i> Java学习总结--第十三章 创建图形用户界面
+              <a href="/2016/04/16/Java学习总结-第二十八章-网络/" rel="next" title="Java学习总结-第二十八章 网络">
+                <i class="fa fa-chevron-left"></i> Java学习总结-第二十八章 网络
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/18/Java学习总结-第十六章-简单输入输出/" rel="prev" title="Java学习总结--第十六章 简单输入输出">
-                Java学习总结--第十六章 简单输入输出 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -450,10 +366,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/02/16/GUI小练习-简易计算器/"
-     data-title="GUI小练习-简易计算器"
+        <div class="ds-share flat" data-thread-key="2016/04/21/Java阶段性总结/"
+     data-title="Java阶段性总结"
      data-content=""
-     data-url="http://www.whtis.com/2016/02/16/GUI小练习-简易计算器/">
+     data-url="http://www.whtis.com/2016/04/21/Java阶段性总结/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -481,8 +397,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/02/16/GUI小练习-简易计算器/"
-           data-title="GUI小练习-简易计算器" data-url="http://www.whtis.com/2016/02/16/GUI小练习-简易计算器/">
+      <div class="ds-thread" data-thread-key="2016/04/21/Java阶段性总结/"
+           data-title="Java阶段性总结" data-url="http://www.whtis.com/2016/04/21/Java阶段性总结/">
       </div>
     
   </div>
@@ -597,7 +513,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简易说明"><span class="nav-number">1.</span> <span class="nav-text">简易说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题及解决方案记录"><span class="nav-number">2.</span> <span class="nav-text">遇到的问题及解决方案记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#布局问题"><span class="nav-number">2.1.</span> <span class="nav-text">布局问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加减乘除运算问题"><span class="nav-number">2.2.</span> <span class="nav-text">加减乘除运算问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小数点的问题"><span class="nav-number">2.3.</span> <span class="nav-text">小数点的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#等于问题"><span class="nav-number">2.4.</span> <span class="nav-text">等于问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#除法问题"><span class="nav-number">2.5.</span> <span class="nav-text">除法问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一篇_程序设计基础（1~5章）"><span class="nav-number">1.</span> <span class="nav-text">第一篇 程序设计基础（1~5章）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一章_计算机、程序和Java概述"><span class="nav-number">1.1.</span> <span class="nav-text">第一章 计算机、程序和Java概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二章_基本数据类型和基本操作"><span class="nav-number">1.2.</span> <span class="nav-text">第二章 基本数据类型和基本操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三章_控制语句"><span class="nav-number">1.3.</span> <span class="nav-text">第三章 控制语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第四章_方法"><span class="nav-number">1.4.</span> <span class="nav-text">第四章 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第五章_数组"><span class="nav-number">1.5.</span> <span class="nav-text">第五章 数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二篇_面向对象程序设计"><span class="nav-number">2.</span> <span class="nav-text">第二篇 面向对象程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第六章_对象和类"><span class="nav-number">2.1.</span> <span class="nav-text">第六章 对象和类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第七章_字符串"><span class="nav-number">2.2.</span> <span class="nav-text">第七章 字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第八章_继承和多态"><span class="nav-number">2.3.</span> <span class="nav-text">第八章 继承和多态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java学习总结–第九章_抽象类和接口"><span class="nav-number">2.4.</span> <span class="nav-text">Java学习总结–第九章 抽象类和接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第十章_面向对象建模"><span class="nav-number">2.5.</span> <span class="nav-text">第十章 面向对象建模</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三篇_图形用户界面设计"><span class="nav-number">3.</span> <span class="nav-text">第三篇 图形用户界面设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第十一章_图形用户界面程序设计"><span class="nav-number">3.1.</span> <span class="nav-text">第十一章 图形用户界面程序设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第十二章_事件驱动程序"><span class="nav-number">3.2.</span> <span class="nav-text">第十二章 事件驱动程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第十三章_创建图形用户界面"><span class="nav-number">3.3.</span> <span class="nav-text">第十三章 创建图形用户界面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四篇_异常处理、I/O"><span class="nav-number">4.</span> <span class="nav-text">第四篇 异常处理、I/O</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第十五章_异常和断言"><span class="nav-number">4.1.</span> <span class="nav-text">第十五章 异常和断言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第十六章_简单输入输出"><span class="nav-number">4.2.</span> <span class="nav-text">第十六章 简单输入输出</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五篇_数据结构与集合架构"><span class="nav-number">5.</span> <span class="nav-text">第五篇 数据结构与集合架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第十七章_面向对象数据结构"><span class="nav-number">5.1.</span> <span class="nav-text">第十七章 面向对象数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第十八章_Java集合架构"><span class="nav-number">5.2.</span> <span class="nav-text">第十八章 Java集合架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六篇_多线程"><span class="nav-number">6.</span> <span class="nav-text">第六篇 多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第十九章_多线程"><span class="nav-number">6.1.</span> <span class="nav-text">第十九章 多线程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络"><span class="nav-number">7.</span> <span class="nav-text">网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第二十八章_网络"><span class="nav-number">7.1.</span> <span class="nav-text">第二十八章 网络</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

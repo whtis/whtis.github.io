@@ -3,12 +3,12 @@
 
     
   <url>
-    <loc>http://www.whtis.com/2016/04/10/java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2016-04-21T10:02:28.978Z</lastmod>
+    <loc>http://www.whtis.com/2016/04/21/Java%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2016-04-21T12:34:04.762Z</lastmod>
     <data>
         <display>
-        <title>java学习总结-第十九章 多线程</title>
-        <pubTime>2016-04-10T15:17:34.000Z</pubTime>
+        <title>Java阶段性总结</title>
+        <pubTime>2016-04-21T10:29:08.000Z</pubTime>
         
         <tag>java </tag>
          
@@ -28,11 +28,35 @@
     
   <url>
     <loc>http://www.whtis.com/2016/04/16/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E7%AB%A0-%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2016-04-21T08:48:44.733Z</lastmod>
+    <lastmod>2016-04-21T10:28:16.965Z</lastmod>
     <data>
         <display>
         <title>Java学习总结-第二十八章 网络</title>
         <pubTime>2016-04-16T13:43:48.000Z</pubTime>
+        
+        <tag>java </tag>
+         
+        <tag>原创 </tag>
+         
+        <tag>总结 </tag>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://www.whtis.com/categories/java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.whtis.com/2016/04/10/java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
+    <lastmod>2016-04-21T10:02:28.978Z</lastmod>
+    <data>
+        <display>
+        <title>java学习总结-第十九章 多线程</title>
+        <pubTime>2016-04-10T15:17:34.000Z</pubTime>
         
         <tag>java </tag>
          
