@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java,java学习笔记,原创," />
+  <meta name="keywords" content="HttpClient," />
 
 
 
@@ -53,31 +53,19 @@
 
 
 
-<meta name="description" content="最近学到数组这章，最重要的就是对数组中的元素进行排序。总结一下排序的几种写法。java.util.array类中提供了排序的重载方法，可以直接调用相关方法进行排序，详见API
-
-选择排序
-
-写法一：遍历数组，找到数组中最大的元素，与数组最后的元素进行交换。如此进行n次，数组中的元素就按照升序排列完成了。
-12345678910111213141516for (int i = lists.lengt">
+<meta name="description" content="最近才开始接触这个工具包，官网上目前已经更新到HttpClient4.5.2了。google的时候看到HttpClient从4.0版本改了底层，因此使用时会出现一些方法不再适用的问题，这里记录出现的一些问题以及相应替代的方法。
+1、 创建HttpClient时使用下面的语句，会出现org.apache.http.impl.client.DefaultHttpClient&amp;#39; is depre">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java学习笔记--排序的几种写法">
-<meta property="og:url" content="http://www.whtis.com/2015/12/03/java学习笔记-排序的几种写法/index.html">
+<meta property="og:title" content="HttpClient4.x使用中出现的几个问题及解决方法">
+<meta property="og:url" content="http://www.whtis.com/2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/index.html">
 <meta property="og:site_name" content="whtis's blog">
-<meta property="og:description" content="最近学到数组这章，最重要的就是对数组中的元素进行排序。总结一下排序的几种写法。java.util.array类中提供了排序的重载方法，可以直接调用相关方法进行排序，详见API
-
-选择排序
-
-写法一：遍历数组，找到数组中最大的元素，与数组最后的元素进行交换。如此进行n次，数组中的元素就按照升序排列完成了。
-12345678910111213141516for (int i = lists.lengt">
-<meta property="og:updated_time" content="2016-02-10T13:37:19.556Z">
+<meta property="og:description" content="最近才开始接触这个工具包，官网上目前已经更新到HttpClient4.5.2了。google的时候看到HttpClient从4.0版本改了底层，因此使用时会出现一些方法不再适用的问题，这里记录出现的一些问题以及相应替代的方法。
+1、 创建HttpClient时使用下面的语句，会出现org.apache.http.impl.client.DefaultHttpClient&amp;#39; is depre">
+<meta property="og:updated_time" content="2016-05-05T15:10:28.896Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java学习笔记--排序的几种写法">
-<meta name="twitter:description" content="最近学到数组这章，最重要的就是对数组中的元素进行排序。总结一下排序的几种写法。java.util.array类中提供了排序的重载方法，可以直接调用相关方法进行排序，详见API
-
-选择排序
-
-写法一：遍历数组，找到数组中最大的元素，与数组最后的元素进行交换。如此进行n次，数组中的元素就按照升序排列完成了。
-12345678910111213141516for (int i = lists.lengt">
+<meta name="twitter:title" content="HttpClient4.x使用中出现的几个问题及解决方法">
+<meta name="twitter:description" content="最近才开始接触这个工具包，官网上目前已经更新到HttpClient4.5.2了。google的时候看到HttpClient从4.0版本改了底层，因此使用时会出现一些方法不再适用的问题，这里记录出现的一些问题以及相应替代的方法。
+1、 创建HttpClient时使用下面的语句，会出现org.apache.http.impl.client.DefaultHttpClient&amp;#39; is depre">
 
 
 
@@ -89,7 +77,7 @@
   };
 </script>
 
-  <title> java学习笔记--排序的几种写法 | whtis's blog </title>
+  <title> HttpClient4.x使用中出现的几个问题及解决方法 | whtis's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -279,7 +267,7 @@
             
             
               
-                java学习笔记--排序的几种写法
+                HttpClient4.x使用中出现的几个问题及解决方法
               
             
           </h1>
@@ -288,8 +276,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-03T20:00:08+08:00" content="2015-12-03">
-              2015-12-03
+            <time itemprop="dateCreated" datetime="2016-05-05T22:38:39+08:00" content="2016-05-05">
+              2016-05-05
             </time>
           </span>
 
@@ -298,8 +286,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/Web相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Web相关</span>
                   </a>
                 </span>
 
@@ -314,8 +302,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/03/java学习笔记-排序的几种写法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/03/java学习笔记-排序的几种写法/" itemprop="commentsCount"></span>
+                <a href="/2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -334,32 +322,11 @@
       
 
       
-        <span itemprop="articleBody"><p>最近学到数组这章，最重要的就是对数组中的元素进行排序。总结一下排序的几种写法。<br><em>java.util.array类中提供了排序的重载方法，可以直接调用相关方法进行排序，详见<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#sort-byte:A-" target="_blank" rel="external">API</a></em></p>
-<ul>
-<li><p>选择排序</p>
-<ul>
-<li><p>写法一：遍历数组，找到数组中最大的元素，与数组最后的元素进行交换。如此进行n次，数组中的元素就按照升序排列完成了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = lists.length - <span class="number">1</span>; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">           <span class="keyword">double</span> max = lists[<span class="number">0</span>];</span><br><span class="line">           <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; j++) &#123;</span><br><span class="line">               <span class="keyword">if</span> (max &lt; lists[j]) &#123;</span><br><span class="line">                   max = lists[j];</span><br><span class="line">                   index = j;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="comment">//交换list[i]和max所在的list[index]的值</span></span><br><span class="line">           <span class="keyword">if</span> (index != i) &#123;</span><br><span class="line">               lists[index] = lists[i];</span><br><span class="line">               lists[i] = max;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>写法二：写法一的递归实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">selectionSort</span><span class="params">(<span class="keyword">double</span>[] lists, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">   <span class="comment">//length = lists.length -1</span></span><br><span class="line">       <span class="keyword">double</span> max = lists[<span class="number">0</span>];</span><br><span class="line">       <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= length; i++) &#123;</span><br><span class="line">           <span class="keyword">if</span> (max &lt; lists[i]) &#123;</span><br><span class="line">               max = lists[i];</span><br><span class="line">               index = i;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (index != length) &#123;</span><br><span class="line">           lists[index] = lists[length];</span><br><span class="line">           lists[length] = max;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">           length--;</span><br><span class="line">           selectionSort(lists, length);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>写法三：写法一的改进，优点是升序和降序排列只需要简单的修改。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lists.length; i++) &#123;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = lists.length - <span class="number">1</span>; j &gt; i; j--) &#123;</span><br><span class="line">               <span class="keyword">if</span> (lists[i] &gt; lists[j]) &#123;</span><br><span class="line">                   <span class="keyword">double</span> tmp = lists[i];</span><br><span class="line">                   lists[i] = lists[j];</span><br><span class="line">                   lists[j] = tmp;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong> 若要实现降序排列，只需将第三行的<code>&gt;</code>改为<code>&lt;</code>即可。</strong></p>
-<ul>
-<li>冒泡排序<br>冒泡排序又称为下沉排序，基本思想是在每次的遍历中，连续对相邻元素进行比较，以达到按照特定顺序排序的目的。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> changed = <span class="keyword">true</span>;  <span class="comment">//用于控制数组遍历的次数（至多lists.length-1次）</span></span><br><span class="line">       do &#123;</span><br><span class="line">           changed = <span class="keyword">false</span>;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lists.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">               <span class="keyword">if</span> (lists[i] &gt; lists[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                   <span class="keyword">double</span> tmp = lists[i];</span><br><span class="line">                   lists[i] = lists[i + <span class="number">1</span>];</span><br><span class="line">                   lists[i + <span class="number">1</span>] = tmp;</span><br><span class="line">                   changed = <span class="keyword">true</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">while</span> (changed);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong> 若要实现降序排列，只需将第三行的<code>&gt;</code>改为<code>&lt;</code>即可。</strong></p>
-<ul>
-<li>插入排序<br>基本思路是在已排好序的子数列中反复插入一个未排序的元素，直到整个数列全部排好。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; lists.length; i++) &#123;</span><br><span class="line">           <span class="keyword">double</span> currentElement = lists[i];</span><br><span class="line">           <span class="keyword">int</span> k = i - <span class="number">1</span>;</span><br><span class="line">           <span class="keyword">while</span> (k &gt;= <span class="number">0</span> &amp;&amp; lists[k] &gt; currentElement) &#123;</span><br><span class="line">               <span class="keyword">double</span> tmp = lists[k + <span class="number">1</span>];</span><br><span class="line">               lists[k + <span class="number">1</span>] = lists[k];</span><br><span class="line">               lists[k] = tmp;</span><br><span class="line">               k--;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+        <span itemprop="articleBody"><p>最近才开始接触这个工具包，官网上目前已经更新到<a href="http://hc.apache.org/downloads.cgi" target="_blank" rel="external">HttpClient4.5.2</a>了。google的时候看到HttpClient从4.0版本改了底层，因此使用时会出现一些方法不再适用的问题，这里记录出现的一些问题以及相应替代的方法。</p>
+<p>1、 创建HttpClient时使用下面的语句，会出现<code>org.apache.http.impl.client.DefaultHttpClient&#39; is deprecated</code><br>    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = <span class="keyword">new</span> DefaultHttpClient();</span><br></pre></td></tr></table></figure></p>
+<p>   可以使用如下语句代替：<a href="http://stackoverflow.com/questions/15336477/deprecated-java-httpclient-how-hard-can-it-be" target="_blank" rel="external">来源</a><br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = HttpClientBuilder.create().build();</span><br></pre></td></tr></table></figure></p>
+<p>   或者<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建HttpClientBuilder</span></span><br><span class="line">HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();</span><br><span class="line"><span class="comment">// HttpClient</span></span><br><span class="line">CloseableHttpClient httpClient = httpClientBuilder.build();</span><br></pre></td></tr></table></figure></p>
+<p>2、 设置代理，HttpClient4.5.2版本可以使用如下语句：<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建代理</span></span><br><span class="line">HttpHost proxy = <span class="keyword">new</span> HttpHost(<span class="string">"your proxy IP"</span>, port);</span><br><span class="line">RequestConfig config = RequestConfig.custom().setProxy(proxy).build();</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置HttpPost/HttpGet使用代理</span></span><br><span class="line">httpost.setConfig(config);</span><br></pre></td></tr></table></figure></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div></span>
       
@@ -369,11 +336,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag">#java</a>
-          
-            <a href="/tags/java学习笔记/" rel="tag">#java学习笔记</a>
-          
-            <a href="/tags/原创/" rel="tag">#原创</a>
+            <a href="/tags/HttpClient/" rel="tag">#HttpClient</a>
           
         </div>
       
@@ -382,17 +345,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/13/Java学习笔记-三个整数进行比较大小的三种方法/" rel="next" title="Java学习笔记--三个整数进行比较大小的三种方法">
-                <i class="fa fa-chevron-left"></i> Java学习笔记--三个整数进行比较大小的三种方法
+              <a href="/2016/04/21/Java阶段性总结/" rel="next" title="Java阶段性总结">
+                <i class="fa fa-chevron-left"></i> Java阶段性总结
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/20/Java学习总结-第一章-计算机、程序和Java概述/" rel="prev" title="Java学习总结--第一章 计算机、程序和Java概述">
-                Java学习总结--第一章 计算机、程序和Java概述 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -407,10 +366,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/12/03/java学习笔记-排序的几种写法/"
-     data-title="java学习笔记--排序的几种写法"
+        <div class="ds-share flat" data-thread-key="2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/"
+     data-title="HttpClient4.x使用中出现的几个问题及解决方法"
      data-content=""
-     data-url="http://www.whtis.com/2015/12/03/java学习笔记-排序的几种写法/">
+     data-url="http://www.whtis.com/2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -438,8 +397,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/03/java学习笔记-排序的几种写法/"
-           data-title="java学习笔记--排序的几种写法" data-url="http://www.whtis.com/2015/12/03/java学习笔记-排序的几种写法/">
+      <div class="ds-thread" data-thread-key="2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/"
+           data-title="HttpClient4.x使用中出现的几个问题及解决方法" data-url="http://www.whtis.com/2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/">
       </div>
     
   </div>
