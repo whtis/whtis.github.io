@@ -4,7 +4,7 @@
   <subtitle><![CDATA[practice makes perfect]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-05-05T15:10:28.896Z</updated>
+  <updated>2016-05-29T14:24:48.436Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -15,16 +15,51 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Java学习笔记--设置代理及打开外部程序]]></title>
+    <link href="http://www.whtis.com/2016/05/29/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86%E5%8F%8A%E6%89%93%E5%BC%80%E5%A4%96%E9%83%A8%E7%A8%8B%E5%BA%8F/"/>
+    <id>http://www.whtis.com/2016/05/29/Java学习笔记-设置代理及打开外部程序/</id>
+    <published>2016-05-29T12:14:59.000Z</published>
+    <updated>2016-05-29T14:24:48.436Z</updated>
+    <content type="html"><![CDATA[<h3 id="设置系统代理">设置系统代理</h3><ul>
+<li><p>系统设置全局代理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.getProperties().setProperty(<span class="string">"proxySet"</span>, <span class="string">"true"</span>);</span><br><span class="line">System.getProperties().setProperty(<span class="string">"http.proxyHost"</span>, <span class="string">"ip"</span>);</span><br><span class="line">System.getProperties().setProperty(<span class="string">"http.proxyPort"</span>, port);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用了selenium的chrome驱动，webdriver设置代理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">System.setProperty(<span class="string">"webdriver.chrome.driver"</span>, <span class="string">"filepath"</span>);</span><br><span class="line">String proxyIpAndPort = ip + <span class="string">":"</span> + port;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理配置</span></span><br><span class="line">DesiredCapabilities cap = <span class="keyword">new</span> DesiredCapabilities();</span><br><span class="line">org.openqa.selenium.Proxy proxy = <span class="keyword">new</span> org.openqa.selenium.Proxy();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置http、ftp、ssl代理（注：当前版本只支持所有的协议公用http协议，下述代码等同于只配置http）</span></span><br><span class="line">proxy.setHttpProxy(proxyIpAndPort)</span><br><span class="line">        .setFtpProxy(proxyIpAndPort)</span><br><span class="line">        .setSslProxy(proxyIpAndPort);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下三行是为了避免localhost和selenium driver的也使用代理，务必要加，否则无法与iedriver通讯</span></span><br><span class="line">cap.setCapability(CapabilityType.ForSeleniumServer.AVOIDING_PROXY, <span class="keyword">true</span>);</span><br><span class="line">cap.setCapability(CapabilityType.ForSeleniumServer.ONLY_PROXYING_SELENIUM_TRAFFIC, <span class="keyword">true</span>);</span><br><span class="line">System.setProperty(<span class="string">"http.nonProxyHosts"</span>, <span class="string">"localhost"</span>);</span><br><span class="line"></span><br><span class="line">cap.setCapability(CapabilityType.PROXY, proxy);</span><br><span class="line"></span><br><span class="line">WebDriver webDriver = <span class="keyword">new</span> ChromeDriver(cap);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="打开外部程序">打开外部程序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Process p = Runtime.getRuntime().exec(<span class="string">"cmd command"</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>如果外部程序放在一个单独的线程中执行，需要注意的是：该线程执行完并不代表着外部程序也执行完相应的任务。</strong></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="设置系统代理">设置系统代理</h3><ul>
+<li><p>系统设置全局代理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="java学习笔记" scheme="http://www.whtis.com/tags/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[HttpClient4.x使用中出现的几个问题及解决方法]]></title>
     <link href="http://www.whtis.com/2016/05/05/HttpClient4-x%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
     <id>http://www.whtis.com/2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/</id>
     <published>2016-05-05T14:38:39.000Z</published>
-    <updated>2016-05-05T15:10:28.896Z</updated>
+    <updated>2016-05-29T02:33:04.912Z</updated>
     <content type="html"><![CDATA[<p>最近才开始接触这个工具包，官网上目前已经更新到<a href="http://hc.apache.org/downloads.cgi" target="_blank" rel="external">HttpClient4.5.2</a>了。google的时候看到HttpClient从4.0版本改了底层，因此使用时会出现一些方法不再适用的问题，这里记录出现的一些问题以及相应替代的方法。</p>
 <p>1、 创建HttpClient时使用下面的语句，会出现<code>org.apache.http.impl.client.DefaultHttpClient&#39; is deprecated</code><br>    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = <span class="keyword">new</span> DefaultHttpClient();</span><br></pre></td></tr></table></figure></p>
 <p>   可以使用如下语句代替：<a href="http://stackoverflow.com/questions/15336477/deprecated-java-httpclient-how-hard-can-it-be" target="_blank" rel="external">来源</a><br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = HttpClientBuilder.create().build();</span><br></pre></td></tr></table></figure></p>
 <p>   或者<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建HttpClientBuilder</span></span><br><span class="line">HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();</span><br><span class="line"><span class="comment">// HttpClient</span></span><br><span class="line">CloseableHttpClient httpClient = httpClientBuilder.build();</span><br></pre></td></tr></table></figure></p>
 <p>2、 设置代理，HttpClient4.5.2版本可以使用如下语句：<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建代理</span></span><br><span class="line">HttpHost proxy = <span class="keyword">new</span> HttpHost(<span class="string">"your proxy IP"</span>, port);</span><br><span class="line">RequestConfig config = RequestConfig.custom().setProxy(proxy).build();</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置HttpPost/HttpGet使用代理</span></span><br><span class="line">httpost.setConfig(config);</span><br></pre></td></tr></table></figure></p>
+<p>3、get或post时，如果访问的网站是https协议的，可以用如下方式访问：信任所有证书，如果可以具体到每个证书，就更好了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">            SSLContext sslContext = <span class="keyword">new</span> SSLContextBuilder().loadTrustMaterial(<span class="keyword">null</span>, <span class="keyword">new</span> TrustStrategy() &#123;</span><br><span class="line">                <span class="comment">//信任所有</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTrusted</span><span class="params">(X509Certificate[] chain,</span><br><span class="line">                                         String authType)</span> <span class="keyword">throws</span> CertificateException </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).build();</span><br><span class="line">            SSLConnectionSocketFactory sslsf = <span class="keyword">new</span> SSLConnectionSocketFactory(sslContext);</span><br><span class="line">            <span class="keyword">return</span> HttpClients.custom().setSSLSocketFactory(sslsf).build();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeyManagementException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeyStoreException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> HttpClients.createDefault();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
@@ -2049,84 +2084,6 @@
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>面向对象程序设计把数据和属于它们的操作放入一个叫做<co]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结--第五章 数组]]></title>
-    <link href="http://www.whtis.com/2016/01/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%95%B0%E7%BB%84/"/>
-    <id>http://www.whtis.com/2016/01/20/Java学习总结-第五章-数组/</id>
-    <published>2016-01-20T11:59:25.000Z</published>
-    <updated>2016-02-10T13:36:10.901Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章介绍了数组的基本知识。数组用于存储一个元素个数和类型固定的有序集，并提供对这些数据进行处理的各种方法。</p>
-<h3 id="数组">数组</h3><ul>
-<li>声明数组： 数据类型[] 数组名</li>
-<li>数组创建后，数组元素通过下标来访问。数组下标是<code>基于0的（0-based）</code>，因此数组的下表最大值是arrayObject.length-1。</li>
-<li><p>增强的for循环可以在不用下标变量的情况下访问整个数组，用法如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(elementType value:arrayRefVar) &#123;</span><br><span class="line">   <span class="comment">//process the value  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数组初始化：数据类型[] 数组变量 = {直接量1，直接量2，···，直接量n}；<br>数组初始化语句中不使用运算符new。使用时，必须将声明、创建、初始化数组都放在一个语句中。</p>
-</li>
-</ul>
-<h3 id="数组的复制">数组的复制</h3><ul>
-<li>可以直接使用赋值语句（=）进行数组的复制，这样操作仅能够将数组的引用进行复制。</li>
-<li>复制数组中的内容有以下三种方法:<ul>
-<li>用循环语句分别复制数组的每一个元素。</li>
-<li>使用System类中的静态方法arraycopy（）方法。</li>
-<li>使用clone（）方法复制数组。</li>
-</ul>
-</li>
-</ul>
-<h3 id="数组的排序">数组的排序</h3><ul>
-<li>选择排序法</li>
-<li>冒泡排序法</li>
-<li>插入排序法<br>具体算法见<a href="http://www.whtis.com/2015/12/03/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95/">排序的几种写法</a><br><strong>在java.util.Array类中，Java提供了几个排序的重载方法，可以用来对int型、double型、char型、short型、long型和float型数组进行排序。</strong></li>
-</ul>
-<h3 id="数组的查找">数组的查找</h3><ul>
-<li><p>线性查找</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">listSearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lists.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (lists[i] == key) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>二分法查找：前提是数组元素必须已经排序。</p>
-<ul>
-<li><p>二分法的迭代实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">          <span class="keyword">if</span> (key == lists[(high + low) / <span class="number">2</span>]) &#123;</span><br><span class="line">              <span class="keyword">return</span> (high + low) / <span class="number">2</span>;</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key &gt; lists[(high + low) / <span class="number">2</span>]) &#123;</span><br><span class="line">              low = ((high + low) / <span class="number">2</span>) + <span class="number">1</span>;</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; lists[(high + low) / <span class="number">2</span>]) &#123;</span><br><span class="line">              high = ((high + low) / <span class="number">2</span>) - <span class="number">1</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> -low - <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>二分法的递归实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">recursiveBinarySearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (low &gt; high) &#123;</span><br><span class="line">          <span class="keyword">return</span> -low - <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">int</span> mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">      <span class="keyword">if</span> (key &lt; lists[mid]) &#123;</span><br><span class="line">          <span class="keyword">return</span> recursiveBinarySearch(lists, key, low, mid - <span class="number">1</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key == lists[mid]) &#123;</span><br><span class="line">          <span class="keyword">return</span> mid;</span><br><span class="line">      &#125; <span class="keyword">else</span></span><br><span class="line">          <span class="keyword">return</span> recursiveBinarySearch(lists, key, mid + <span class="number">1</span>, high);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="多维数组">多维数组</h3><ul>
-<li>声明：数据类型[][] 数组引用变量<br>-数组的长度：数组的长度是指数组中元素的个数。<code>n</code>维数组是由<code>k</code>个<code>n-1</code>维数组构成，那么n维数组的个数就是<code>k</code>。例如：<br>x = new int[2][3][5],则x[0]和x[1]是二维数组，x的长度就是2。</li>
-<li>锯齿数组<br>二维数组中，每一行本身是一个数组。因而各行就可以有不同的长度，这样的数组称为锯齿数组。例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[][] x = &#123;</span><br><span class="line">	&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">5</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>数组变量只存储着数组的引用。</li>
-<li>越界访问数组是常见的编程错误。它出现错误时的Exception是ArrayIndexOutOfBoundsException，通常称为<code>过一错误（off-by-one error）</code></li>
-<li>使用语法new int[5][]创建数组时，第一个下标必须给定。new int[][]是错误的。</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><p>习题5.5 5.7 5.12 5.14 5.15 5.16 5.25源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter5/src" target="_blank" rel="external">chapter5</a></p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章介绍了数组的基本知识。数组用于存储一个元素个数和类型]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>

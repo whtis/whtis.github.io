@@ -61,7 +61,7 @@
 <meta property="og:site_name" content="whtis's blog">
 <meta property="og:description" content="最近才开始接触这个工具包，官网上目前已经更新到HttpClient4.5.2了。google的时候看到HttpClient从4.0版本改了底层，因此使用时会出现一些方法不再适用的问题，这里记录出现的一些问题以及相应替代的方法。
 1、 创建HttpClient时使用下面的语句，会出现org.apache.http.impl.client.DefaultHttpClient&amp;#39; is depre">
-<meta property="og:updated_time" content="2016-05-05T15:10:28.896Z">
+<meta property="og:updated_time" content="2016-05-29T02:33:04.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HttpClient4.x使用中出现的几个问题及解决方法">
 <meta name="twitter:description" content="最近才开始接触这个工具包，官网上目前已经更新到HttpClient4.5.2了。google的时候看到HttpClient从4.0版本改了底层，因此使用时会出现一些方法不再适用的问题，这里记录出现的一些问题以及相应替代的方法。
@@ -327,6 +327,7 @@
 <p>   可以使用如下语句代替：<a href="http://stackoverflow.com/questions/15336477/deprecated-java-httpclient-how-hard-can-it-be" target="_blank" rel="external">来源</a><br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = HttpClientBuilder.create().build();</span><br></pre></td></tr></table></figure></p>
 <p>   或者<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建HttpClientBuilder</span></span><br><span class="line">HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();</span><br><span class="line"><span class="comment">// HttpClient</span></span><br><span class="line">CloseableHttpClient httpClient = httpClientBuilder.build();</span><br></pre></td></tr></table></figure></p>
 <p>2、 设置代理，HttpClient4.5.2版本可以使用如下语句：<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建代理</span></span><br><span class="line">HttpHost proxy = <span class="keyword">new</span> HttpHost(<span class="string">"your proxy IP"</span>, port);</span><br><span class="line">RequestConfig config = RequestConfig.custom().setProxy(proxy).build();</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置HttpPost/HttpGet使用代理</span></span><br><span class="line">httpost.setConfig(config);</span><br></pre></td></tr></table></figure></p>
+<p>3、get或post时，如果访问的网站是https协议的，可以用如下方式访问：信任所有证书，如果可以具体到每个证书，就更好了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">            SSLContext sslContext = <span class="keyword">new</span> SSLContextBuilder().loadTrustMaterial(<span class="keyword">null</span>, <span class="keyword">new</span> TrustStrategy() &#123;</span><br><span class="line">                <span class="comment">//信任所有</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTrusted</span><span class="params">(X509Certificate[] chain,</span><br><span class="line">                                         String authType)</span> <span class="keyword">throws</span> CertificateException </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).build();</span><br><span class="line">            SSLConnectionSocketFactory sslsf = <span class="keyword">new</span> SSLConnectionSocketFactory(sslContext);</span><br><span class="line">            <span class="keyword">return</span> HttpClients.custom().setSSLSocketFactory(sslsf).build();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeyManagementException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeyStoreException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> HttpClients.createDefault();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div></span>
       
@@ -352,6 +353,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/29/Java学习笔记-设置代理及打开外部程序/" rel="prev" title="Java学习笔记--设置代理及打开外部程序">
+                Java学习笔记--设置代理及打开外部程序 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -442,7 +447,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
