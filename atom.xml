@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[whtis's blog]]></title>
-  <subtitle><![CDATA[practice makes perfect]]></subtitle>
+  <subtitle><![CDATA[凡是涉及到技术的事，都不是别人的事。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-05-29T14:24:48.436Z</updated>
+  <updated>2016-05-29T14:25:53.658Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.whtis.com/2016/05/29/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86%E5%8F%8A%E6%89%93%E5%BC%80%E5%A4%96%E9%83%A8%E7%A8%8B%E5%BA%8F/"/>
     <id>http://www.whtis.com/2016/05/29/Java学习笔记-设置代理及打开外部程序/</id>
     <published>2016-05-29T12:14:59.000Z</published>
-    <updated>2016-05-29T14:24:48.436Z</updated>
+    <updated>2016-05-29T14:25:53.658Z</updated>
     <content type="html"><![CDATA[<h3 id="设置系统代理">设置系统代理</h3><ul>
 <li><p>系统设置全局代理</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.getProperties().setProperty(<span class="string">"proxySet"</span>, <span class="string">"true"</span>);</span><br><span class="line">System.getProperties().setProperty(<span class="string">"http.proxyHost"</span>, <span class="string">"ip"</span>);</span><br><span class="line">System.getProperties().setProperty(<span class="string">"http.proxyPort"</span>, port);</span><br></pre></td></tr></table></figure>
