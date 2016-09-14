@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion">
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -101,13 +101,13 @@
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: 14038351,
-      author: '海涛'
+      author: 'love everyone~'
     }
   };
 </script>
@@ -319,6 +319,341 @@
             
               
                 
+                <a class="post-title-link" href="/2016/02/18/Java学习总结-第十六章-简单输入输出/" itemprop="url">
+                  Java学习总结--第十六章 简单输入输出
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-18T19:37:58+08:00" content="2016-02-18">
+              2016-02-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/18/Java学习总结-第十六章-简单输入输出/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/18/Java学习总结-第十六章-简单输入输出/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>本章主要讨论数据持久化的问题。一般Java程序在结束后所有存储在内存中的数据都会消失，为了保留这些数据，就要学会如何将它们存储到磁盘文件或光盘文件中。<br>本章介绍的主要是两个方面的内容：文本I/O和二进制I/O。为了知识的连贯性，需要先介绍相关的知识，以方便理解。<br><strong>计算机中所有文件都是以二进制格式来存储的。文本I/O是在二进制I/O基础上提供了一层抽象，它封装了字符的编码和解码过程，在文本I/O中自动进行编码和解码。</strong></p>
+<h3 id="提前需要知道的一些知识">提前需要知道的一些知识</h3><ul>
+<li>windows和Unix文件存储目录的不同。</li>
+<li>位、字节、字符、ASCII码和统一码Unicode相关知识。<br>位，英文是bit，是用来表示计算机数据的一种计量单位，8bit为一个字节，ASCII码采用一个字节存储二进制数据，Java中统一码采用两个字节进行存储，统一码的低字节就是ASCII码，因此在Java中，字符是由两个字节构成的。</li>
+<li>Java中基本数据类型都占几个字节。如，int类型是4个字节，char类型是2个字节。</li>
+</ul>
+<h3 id="文件类File">文件类File</h3><p>无论是文本I/O还是二进制I/O的构造方法，都需要传入文件类参数或者文件名参数。</p>
+<h4 id="文件系统相关">文件系统相关</h4><ul>
+<li>目录路径与文件名全称是平台依赖的。</li>
+<li>为了解决不同平台路径与分隔符的问题，File类提供了四个常量：<ul>
+<li>File.PathSeparator </li>
+<li>File.PathSeparatorChar <code>&quot;/&quot;</code>or<code>&quot;\&quot;</code> </li>
+<li>File.Separator </li>
+<li>File.SeparatorChar <code>&quot;;&quot;</code>or<code>&quot;:&quot;</code></li>
+</ul>
+</li>
+<li><code>绝对路径（absolute path）</code>名是依赖于系统的，如果想开发平台无关的程序，一定不要用绝对路径。可以使用和平台无关的常量创建一个相对路径。（简单的方法是无论Win还是Linux，相对路径分隔符都使用”/“即可。）</li>
+</ul>
+<h4 id="File类的常用方法简录">File类的常用方法简录</h4><ul>
+<li>构造方法：<ul>
+<li>File（pathname：String）<br>······</li>
+</ul>
+</li>
+<li>常用方法<ul>
+<li>exists（） 检测文件是否存在</li>
+<li>isDirectory（）/isFile（） 是目录/文件</li>
+<li>isAbsolute（） 该文件是否由绝对路径创建</li>
+<li>getAbsolutePath（） 返回File对象的绝对路径</li>
+<li>getCanonicalPath（） 返回值与getAbsolutePath（）相同，但是删除了一些冗余符号</li>
+<li>getPath（）</li>
+<li>getParent（）<br>······</li>
+</ul>
+</li>
+</ul>
+<h3 id="文本I/O类">文本I/O类</h3><ul>
+<li>File类不提供从文件中读写数据的方法，因此需要选择适当的输入输出类来进行I/O操作。<strong>输入输出都是对于程序本身而言</strong>。<br><img src="文本IO类.jpg" alt="文本I/O类"></li>
+<li>Reader类是文本输入的根类，Writer类是文本输出的根类。</li>
+<li>Reader类常用方法：<ul>
+<li>read（） 从输入流读取下一个字符，返回值在0到65525之间，表示该字符的统一码。到达流的结尾时返回-1<br>···</li>
+</ul>
+</li>
+<li>Writer类常用方法：<ul>
+<li>flush（） 刷新该输出流，并将已经输出到缓冲区的所有字符写入文件<br>···</li>
+</ul>
+</li>
+<li>read（）方法读取字符，如果没有有效字符，那么它将阻塞线程。</li>
+<li>处理PrintWriter类，其他文本I/O类中的所有方法都声明抛出异常java.io.IOException。</li>
+</ul>
+<h4 id="FileReader类和FileWriter类">FileReader类和FileWriter类</h4><ul>
+<li>使用主机上默认的字符编码方式进行读写操作。</li>
+<li>所有方法均继承自父类，没有新的方法。</li>
+<li>FileReader类read（）方法是读取一个<strong>字节</strong></li>
+<li>FileWriter构造方法支持参数append：<ul>
+<li>FileWriter(File file,booean append) 如果原文件存在，可以通过设置append参数决定是覆盖还是追加</li>
+</ul>
+</li>
+</ul>
+<h4 id="InputStreamReader类和OutputStreamWriter类">InputStreamReader类和OutputStreamWriter类</h4><ul>
+<li>可以在构造方法中指定使用哪种编码方案进行读写操作。</li>
+<li>用于实现字符与字节之间的转化。写入OutputStreamWriter的字符用指定的编码方案翻译为字节。 </li>
+<li>除<code>getEncoding()</code>方法外，均继承自父类方法。getEncoding()方法返回这个数据流使用的编码方案名称。<br><strong>Java程序使用的是统一码（Unicode）。从FileReader流中读取一个字符时，返回该字符的统一码。字符在文件中的编码可能不是统一码，Java自动将它转化为统一码，想FileWriter流中写入字符时，Java自动的将统一码转化为文件指定编码。</strong></li>
+</ul>
+<h4 id="BufferedReader类和BufferedWriter类">BufferedReader类和BufferedWriter类</h4><ul>
+<li>用于输出字符与字符串。</li>
+<li>BufferedReader类和BufferedWriter类通过减少读写次数来加快输入输出的速度。缓冲区数据流使用一个类似高速缓冲器作用的字符数组。缓冲区默认是<code>8192</code>个字节。</li>
+<li>缓冲区输出流只有当它的缓冲区已满或调用<code>flush()</code>方法才调用写入文件的方法。</li>
+<li>BufferedReader常用方法：<ul>
+<li>readLine（） 整行读取（不带换行符的一行），到达流的末尾时，返回<code>null</code><br>···</li>
+</ul>
+</li>
+<li>BufferedWriter常用方法：<ul>
+<li>newLine（） 向文件写入一个依赖平台的换行符。以下方法可以获得系统的换行符：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> String lineSeparator = (String) java.security.AccessController.doPrivileged(<span class="keyword">new</span> sun.security.action.GetPropertyAction(<span class="string">"line.separator"</span>));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>物理输入输出的I/O设备比CPU的速度慢得多，因此读取一个大文件时，使用缓冲区能够较大地提高效率。</strong></p>
+<h4 id="PrintWriter类和PrintStream类">PrintWriter类和PrintStream类</h4><ul>
+<li>可以将对象、字符串和数值以<code>文本</code>方式输出。</li>
+<li>PrintWriter的效率比PrintStream高，功能一样，前者用于替代后者。</li>
+<li>打印数值、字符或布尔值，就是将其转化为字符串打印。打印一个对象就是打印该对象用<code>toString()</code>方法返回的描述字符串。</li>
+<li>printf（）方法用于格式化输出。</li>
+<li><em>System.out解析</em><br>out是定义在System类中类型为PrintStream的一个静态变量。默认情况下，out是标准输出设备，即屏幕。可以使用<code>setOut()</code>方法设置新的out。</li>
+<li>常用构造方法：<ul>
+<li>public PrintWriter（Writer out，boolean autoFlush） autoFlush为true，println方法会引起缓冲区刷新</li>
+</ul>
+</li>
+</ul>
+<h3 id="二进制I/O">二进制I/O</h3><ul>
+<li>二进制输入输出不需要进行文本的编码与解码操作，所以要比文本I/O效率高。向文件写入字节，就是将源字节复制到文件中，从文件读取字节，就是将文件中的字节原样返回。<br><img src="二进制IO类.jpg" alt="二进制I/O类"></li>
+<li>InputStream和OutputStream的所有方法与Reader和Writer中的方法类似，不同的是前者操作的是字节，后者操作的是字符。</li>
+<li>InputStream类和OutputStream类是抽象类。</li>
+<li>InputStream类常用方法：<ul>
+<li>read（） 从输入流中读取数据的下一个字节，返回值为0~255之间的整数，如果到达流尾，返回-1</li>
+<li>available（） 返回可以从该输入流读取的字节数</li>
+<li>mark（int readlimit） 在该输入流中标记当前位置<br>···</li>
+</ul>
+</li>
+<li>OutputStream类常用方法：<ul>
+<li>write（int b） 将指定字节写到输出流，参数b是int型，写入的值是（byte）b</li>
+<li>flush（）<br>···</li>
+</ul>
+</li>
+</ul>
+<h4 id="FileInputStream类和FileOutputStream类">FileInputStream类和FileOutputStream类</h4><ul>
+<li>继承自父类的方法，没有引进新方法</li>
+<li>输入输出均是操作的字节。</li>
+</ul>
+<h4 id="FilterInputStream类和FilterOutputStream类">FilterInputStream类和FilterOutputStream类</h4><p><code>过滤器数据流（filter stream）</code>是为某种目的过滤字节的数据流。基本字节输入流提供的读取方法只能用来读取字节，如果想要读取整数值、双精度值或字符串，需要一个过滤器类来包装输入流。</p>
+<ul>
+<li>该类是父类，如果需要处理基本数值类型数据时，可以使用DataInputSteam类和DataOutputStream类来过滤字节。</li>
+</ul>
+<h4 id="DataInputStream类和DataOutputStream类">DataInputStream类和DataOutputStream类</h4><ul>
+<li>DataInputSteam从数据流中读取字节并将它们转化为适当的基本类型值或字符串。DataOutputStream将基本类型的值或字符串转化为字节并将这些字节输出到输出数据流。</li>
+<li>DataOutputStream类和DataInputSteam类以平台无关的方式读写Java的基本类型值和字符串。</li>
+<li>可以使用<code>input.available()==0</code>方法检测读取是否已经到了结尾。</li>
+<li>DataInputSteam扩展<code>FilterInputStream</code>类并实现<code>DataInput</code>接口；DataoutputStream扩展<code>FilterOutputStream</code>类并实现<code>DataOutput</code>接口。</li>
+<li>DataInput类常用方法： <ul>
+<li>readInt（） 从输入流中读取一个int值（输入流是一个字节一个字节读入，DataInputSteam的作用就是将读入的字节4个4个组合，其他方法类似）</li>
+<li>readUTF（） 从UTF格式中读取一个字符串<br>···</li>
+</ul>
+</li>
+<li>Dataoutput类常用方法：<ul>
+<li>writeByte（int v） 将参数v的低8位（一个字节）写到输出流（如果参数v是在Java中被赋值，那么v的统一码是16位（两个字节），调用该方法只能将低字节（低8位）写到输出流）</li>
+<li>writeBytes（String s） 将字符串中字符的低8位写到输出流，适合由ASCII字符构成的字符串</li>
+<li>writeChar（char c） 向输出流中写一个字符（两个字节构成）</li>
+<li>writeChars（String s） 将字符串s中的每一个字符依次写到输出流，每个字符占两个字节</li>
+<li>writeInt（int v） 向输出流写一个int值</li>
+<li>writeUTF（String s） 用UTF格式写出一个字符串<br>···<br><strong>由此可知，如果要使用二进制I/O，必须使用相对应的输入输出方法以及正确的顺序才能得到正确的数据。</strong></li>
+</ul>
+</li>
+<li><em>UTF编码</em><ul>
+<li>UTF是一种编码方案，它可以使系统高效的同时处理统一码（Unicode）和ASCII码。ASCII码字符集是统一码字符集的一个子集。</li>
+<li>为了解决8位ASCII码转为16位统一码造成的浪费问题，提出来UTF编码。UTF编码方案分别使用1字节、2字节或3字节来存储字符。<ul>
+<li>ASCII码的值不会超过0x7F,使用一个字节编码</li>
+<li>不超过0x7FF的统一码值编码为两个字节</li>
+<li>其余编码为三个字节</li>
+</ul>
+</li>
+<li>UTF字符的开始几位表明该字符的编码是几个字节的：<ul>
+<li>首位是0,一个字节的字符</li>
+<li>前三位是110，两个字节字符的第一个字节</li>
+<li>前四位是1110，它是三字节字符的第一个字节</li>
+</ul>
+</li>
+<li>UTF字符串的前两个字节用来存储字符串中的字符个数。如：writeUTF(“ABCDEF”)写入的是8个字节</li>
+<li><strong>如果字符串的大多数字符都是普通的ASCII字符，采用UTF格式存储的效率是很高的。</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="BufferedInputStream类和BufferedOutputStream类">BufferedInputStream类和BufferedOutputStream类</h4><ul>
+<li>提供缓冲区，加快读写<code>字节</code>的效率。缓冲区默认大小为<code>512</code>个字节。</li>
+</ul>
+<h3 id="对象输入输出">对象输入输出</h3><ul>
+<li>DataInputSteam类和DataOutputStream类可以实现基本数据类型与字符串的输入输出，在此基础上，ObjectInputStream类和ObjectOutputStream类还允许对象的输入输出。</li>
+<li>可以完全用ObjectInputStream类和ObjectOutputStream类替代DataInputSteam类和DataOutputStream类。</li>
+<li>ObjectInputStream扩展<code>InputStream</code>类并实现<code>ObjectInput</code>和<code>ObjectStreamConstants</code>接口,<code>ObjectInput</code>是<code>DataInput</code>的子接口；ObjectOutputStream扩展<code>OutputStream</code>类并实现<code>ObjectOutput</code>和<code>ObjectStreamConstants</code>接口,<code>ObjectOutput</code>是<code>DataOutput</code>的子接口。<code>ObjectStreamConstants</code>包含ObjectInputStream类和ObjectOutputStream类中所用的常量。<br><img src="Object输入输出类.jpg" alt="Object输入输出"></li>
+<li>常用构造方法：<ul>
+<li>public ObjectInputStream（InputStream in）</li>
+<li>public ObjectOutputStream（OutputStream out）</li>
+</ul>
+</li>
+<li>可以向数据流中写入多个对象或基本类型数据。从对应的ObjectInputStream中读回这些对象时，必须与其存入时的类型和顺序相同。对于必要的类型，必须使用Java安全性所要求的类型转换。（显式转换）</li>
+</ul>
+<h4 id="可序列化接口Serializable">可序列化接口Serializable</h4><ul>
+<li>并不是每一个对象都可以写到输出流。可以写入到输出流中的对象称为<code>可序列化的（serializable）</code>。</li>
+<li>可序列化的对象时java.io.Serializable接口的实例，所以可序列化对象的类必须实现Serializable接口。</li>
+<li>Serializable接口是一种标记性接口。它没有方法，要实现这个接口可以启动Java机制，自动执行存储对象或数组的过程。</li>
+<li>Java提供了自动进行写对象这个过程的内在机制，这个过程称为<code>对象序列化（object serialization）</code>。与此相反，读取对象的过程称为<code>对象解读序列化（object deserialization）</code>。它是在ObjectInputStream类中实现的。</li>
+<li>存储一个可序列化对象时，会对该对象的类进行编码，编码包括类名、类的说明标志、对象实例变量的值以及任何从初始对象引用的其他对象包，但是不存储对象静态变量的值。</li>
+<li><p>如果一个对象时Serializable的实例，但它包含一个非序列化的数据域，该对象不是可序列化的。为了是该对象可序列化，可以给这些数据域加上关键字<code>transient</code>，告诉Java虚拟机将对象写入对象流时忽略这些数据域。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> v1;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">double</span> v2;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">transient</span> A v3 = <span class="keyword">new</span> A();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123; &#125; <span class="comment">//A is not serializable</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果一个对象多次写入对象流，第一次存储一个可序列化对象时，会创建一个序列号，Java虚拟机将对象的所有内容包括序列号一起写入对象输出流，以后的存储，都是存储序列号的一个拷贝，换句话说，只存储引用。</p>
+</li>
+</ul>
+<h4 id="序列化数组">序列化数组</h4><p>当数组中的元素是可序列化的时候，数组也是可序列化的。一个完整的数组可以用writeObject方法存入文件，此后使用readObject方法将它读出。</p>
+<h3 id="随机读写文件">随机读写文件</h3><ul>
+<li>Java提供了RandomAccessFile类，它允许对文件内的随机位置进行读写。</li>
+<li>RandomAccessFile类实现了DataInput和DataOutput接口。</li>
+<li>常用方法：<ul>
+<li>RandomAccessFile（File file，String mode） 以指定File和模式创建，模式可以是”r”、”rw”等</li>
+<li>getFilePointer（） 返回从文件头到发生读写位置的偏移量</li>
+<li>length（） 返回文件的字节数</li>
+<li>seek（long pos） 设置从文件头到下一次读写位置的偏移量</li>
+<li>setLength（long newLength） 给这个文件设置一个新长度<br>···</li>
+</ul>
+</li>
+<li>随机读写文件是由字节序列组成的，在其中某个字节的位置处有一个称为<code>文件指针（file pointer）</code>的特殊标记。文件的读写操作就是在文件指针所指的位置上进行的。</li>
+<li><strong>文件指针置于文件的开头。</strong></li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>本章可能出现的异常总结如下：<ul>
+<li>企图用一个不存在的文件创建FileReader/FileWriter对象，出现异常<code>FileNotFoundException</code>。</li>
+<li>到达文件尾后还想读取数据，报<code>java.io.EOFException</code>异常。</li>
+<li>readObject（）方法可能抛出<code>ClassNOtFoundException</code>异常。</li>
+</ul>
+</li>
+<li>FilterInputStream类和FilterOutputStream类的作用在于：基本的字节输入输出流只能操作字节，但是基本类型的数据如int类型是4个字节，如果想要读取正确的int值，仅靠基本的FileInputStream和FileOutputStream类是无法完成的，因此需要在这基础上包装一层Filter Stream，使用该包装类的方法可以正确存取基本类型的数据。</li>
+<li>随机读写文件常被用来处理记录型文件，因为记录型文件每条记录的大小可以设置为固定的。这样，每次操作时，就可以确定文件指针的偏移量了。</li>
+<li>随机读写虽然说是文件指针位于文件头，但显示的实际情况是：<br><em>在空文件中插入一条记录，此时文件指针位于这条记录末尾，但是显示的却是这条记录，这点要牢记。</em></li>
+<li>I/O类可分为文本I/O和二进制I/O。文本I/O将数据解释成字符的序列，二进制I/O将数据解释成原始的二进制数。文本在文件中如何存储依赖于文件的编码方式。Java对文本I/O提供自动编码与解码。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li>16.1 单词统计可以使用StringTokenizer类的countTokens（）方法或者使用正则匹配。</li>
+<li>16.4 重写Java源代码格式。代码提供了行尾风格和次行风格相互转化的方法。</li>
+<li>16.5 使用字符串的<code>replaceAll()</code>方法删除字符。</li>
+<li>16.14 代码参考<a href="http://www.whtis.com/2016/02/16/GUI%E5%B0%8F%E7%BB%83%E4%B9%A0-%E7%AE%80%E6%98%93%E8%AE%A1%E7%AE%97%E5%99%A8/">GUI小练习-简易计算器</a></li>
+<li>16.15 代码见文件夹AddressBook。</li>
+<li>其余习题16.7 16.8 16.10 16.11源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter16/src" target="_blank" rel="external">chapter16</a></li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/02/16/GUI小练习-简易计算器/" itemprop="url">
                   GUI小练习-简易计算器
                 </a>
@@ -389,23 +724,66 @@
       
         
           
-          简易说明
-学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：
-基本的加减乘除四则运算
-连续计算
-运算结果记忆
-程序启动次数统计
-
-
-本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：
-显示结果
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/16/GUI小练习-简易计算器/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <h2 id="简易说明">简易说明</h2><ul>
+<li>学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：<ul>
+<li>基本的加减乘除四则运算</li>
+<li>连续计算</li>
+<li>运算结果记忆</li>
+<li>程序启动次数统计</li>
+</ul>
+</li>
+<li>本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：<ul>
+<li>显示结果的处理，包括两个整数作运算，结果应该显示为整数、浮点数显示的位数设定等。目前为了方便，统一转为了浮点数进行计算，显示的结果也是浮点数。</li>
+<li>初始设计了四个功能键，依次为<code>Ac</code>（清零）、<code>Cv</code>（小数和分数的转化）、<code>Re</code>（最近一次结果记忆），<code>←</code>（删除），目前除<code>Cv</code>外都已实现。</li>
+<li>目前显示结果为单行显示，最初考虑的是双行，但因为文本对齐和设置的问题无法处理，最终采用的JTextField进行单行显示。</li>
+<li>组件的等比例放大和缩小问题。目前只能做到自动，因此将其设置成为了不可更改大小,避免破坏布局。</li>
+</ul>
+</li>
+</ul>
+<h2 id="遇到的问题及解决方案记录">遇到的问题及解决方案记录</h2><h3 id="布局问题">布局问题</h3><ul>
+<li>如何拼凑无缝的界面<ul>
+<li>解决方法:略</li>
+</ul>
+</li>
+</ul>
+<h3 id="加减乘除运算问题">加减乘除运算问题</h3><ul>
+<li>第一次就按运算符的处理<ul>
+<li>如果是初始操作，无视之</li>
+<li>判断StringBuffer对象里是否有东西，如果没有，直接设置运算符compute</li>
+</ul>
+</li>
+<li>多次按运算符的处理<ul>
+<li>创建一个string类型的值来存储运算符，但同时只能设置一个</li>
+</ul>
+</li>
+<li>连续运算的问题（貌似链表处理比较简单？没学过，布吉岛…）<ul>
+<li>计算器能够正常运行的一系列设计，包括stringbuffer、compute、result等<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">computeAction</span><span class="params">(ActionEvent e, JTextField textField)</span> </span>&#123;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="小数点的问题">小数点的问题</h3><ul>
+<li><p>直接按小数点应该将其设置成正确的小数形式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (stringBuffer.toString().startsWith(<span class="string">"."</span>)) &#123;</span><br><span class="line">            stringBuffer.insert(<span class="number">0</span>, <span class="string">"0"</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>小数点在一次运算中只能出现一次，多按无效</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">"."</span>:</span><br><span class="line">      <span class="keyword">boolean</span> hasDot = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stringBuffer.length(); i++) &#123;</span><br><span class="line">          <span class="keyword">if</span> (stringBuffer.charAt(i) == <span class="string">'.'</span>) &#123;</span><br><span class="line">              hasDot = <span class="keyword">true</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!hasDot) &#123;</span><br><span class="line">          capicaty++;</span><br><span class="line">          stringBuffer.append(<span class="string">"."</span>);</span><br><span class="line">          textField.setText(stringBuffer.toString());</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="等于问题">等于问题</h3><ul>
+<li>仅仅在初始时输入数字，不进行任何运算，按下等于号应该显示初始输入的数字，并将result设置为相关的值，从而进行下次运算<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(capicaty&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">	textField.setText(String.valueOf(result));</span><br><span class="line">    reResult = result;</span><br><span class="line">    compute = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="除法问题">除法问题</h3><ul>
+<li>出现不合法的运算会得到Infinity，为了界面友好，显示为’0’<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">"÷"</span>:</span><br><span class="line">    result /= Double.parseDouble(stringBuffer.toString());</span><br><span class="line">    <span class="keyword">if</span> (String.valueOf(result).equals(<span class="string">"Infinity"</span>)) &#123;</span><br><span class="line">        result = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="代码">代码</h2><ul>
+<li>完整的代码见我的Github：<a href="https://github.com/whtis/Calculator" target="_blank" rel="external">Calculator</a></li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -523,18 +901,159 @@
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容本章综合第十一、十二章的内容，介绍GUI编程中常用的组件。
-Swing GUI组件的公共特性
-Component类是所有用户界面组件和容器的根类，Jcomponent类是大多数
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/15/Java学习总结-第十三章-创建图形用户界面/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>本章综合第十一、十二章的内容，介绍GUI编程中常用的组件。</p>
+<h3 id="Swing_GUI组件的公共特性">Swing GUI组件的公共特性</h3><ul>
+<li>Component类是所有用户界面组件和容器的根类，Jcomponent类是大多数Swing组件的根类。</li>
+<li>GUI组件都有处理字体、颜色、大小、工具提示文本和边框等属性的方法。</li>
+<li>可以在Jcomponent类的任何对象上设置边框。<ul>
+<li>TitleBorder(String title) 创建标题边框</li>
+<li>LineBorder(Color color,int width) 创建线型边框</li>
+</ul>
+</li>
+<li><strong>容器类Container类是Swing GUI组件类的父类。</strong></li>
+</ul>
+<h3 id="按钮（JButton）">按钮（JButton）</h3><p><code>按钮（button）</code>是一种点击时触发行为事件的组件。Swing提供常规按钮、开关按钮、复选框和单选按钮。</p>
+<ul>
+<li>Jbutton可以响应多种类型的事件，通常我们只需要响应ActionEvent事件。</li>
+<li>按钮可以设置工具提示文本（<code>setToolTipText(xxx)</code>）和热键（<code>setMnemonic(xxx)</code>）。</li>
+</ul>
+<h4 id="图标">图标</h4><ul>
+<li>图标是一个固定大小的图片，典型的图标体型较小，用于装饰组件。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Icon icon = <span class="keyword">new</span> ImageIcon(<span class="string">"xxx"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>java目前支持GIF、PNG、JPEG三种图像格式。</strong></p>
+<ul>
+<li>每个常规按钮有一个默认图标，一个按下图标和一个在上图标，使用如下方法进行设置：<ul>
+<li>setPressedIcon(“XXX”) 设置按钮按下的图标</li>
+<li>setRolloverIcon(“xxx”) 设置鼠标停留在按钮上时的图标</li>
+</ul>
+</li>
+</ul>
+<h4 id="对齐方式">对齐方式</h4><ul>
+<li><p><code>水平对齐（horizontal alignment）</code>指定以什么样的方式在<strong>按钮</strong>上放置文本和图标。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setHorizontalAlignment(<span class="keyword">int</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>int的取值为：SwingConstants.LEADING(LEFT、CENTER、RIGHT、TRAILING)。默认的是最后一种（右对齐）。</li>
+</ul>
+</li>
+<li><p><code>垂直对齐（vertical alignment）</code>指定以什么样的垂直方式在按钮上放置文本和图标。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setVerticalAlignment(<span class="keyword">int</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>int的取值为：SwingConstants.TOP(CENTER、BOTTOM)，默认的是CENTER。</li>
+</ul>
+</li>
+</ul>
+<h4 id="文本位置">文本位置</h4><ul>
+<li><code>水平文本位置（horizontal text position）</code>指定文本相对于图标的水平位置。</li>
+<li><code>垂直文本位置（Vertical text position）</code>指定文本相对于图标的垂直位置。</li>
+<li>设置方式和默认值与对齐方式相同。</li>
+</ul>
+<h3 id="复选框（JCheckBox）">复选框（JCheckBox）</h3><ul>
+<li>一个<code>开关按钮（toggle button）</code>有两种状态，JToggleButton类继承AbstractButton并实现了一个开关按钮。开关按钮分为两种：<br>1、JCheckBox 复选按钮（方形）<br>2、 JRadionButton 单选按钮（圆形）</li>
+<li>JCheckBox先触发的是ItemEvent事件，然后触发ActionEvent事件。要确定复选框是否被选中，使用<code>isSelected()</code>方法。</li>
+</ul>
+<h3 id="单选按钮（JRadioButton）">单选按钮（JRadioButton）</h3><ul>
+<li><code>单选按钮（radio button）</code>，或者叫<code>选择按钮(option button)</code>,让用户从一组选项中选择唯一的一个选项。</li>
+<li>单选按钮使用Java.swing.ButtonGroup类的实例进行组织，并使用add方法添加按钮<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ButtonGroup group = <span class="keyword">new</span> ButtonGroup();</span><br><span class="line">group.add(xx1);</span><br><span class="line">group.add(xx2);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果没有创建按钮组，就无法达到单选的目的。</p>
+<ul>
+<li>JRadioButton先触发的是ItemEvent事件，然后触发ActionEvent事件。要确定复选框是否被选中，使用<code>isSelected()</code>方法。</li>
+</ul>
+<h3 id="标签（JLable）">标签（JLable）</h3><ul>
+<li><code>标签（lable）</code>是显示一小段文字、一幅图片或二者皆有的区域。</li>
+<li>JLable继承自JComponent类，具有与JButton类似的属性。</li>
+</ul>
+<h3 id="文本域（JTextField）">文本域（JTextField）</h3><ul>
+<li><code>文本域（text field）</code>可以用于输入或显示字符串。（单行）</li>
+<li>JTextField继承自JTextComponent类。</li>
+<li>JTextField触发的是ActionEvent事件（回车键触发）。</li>
+</ul>
+<h3 id="文本区（JTextArea）">文本区（JTextArea）</h3><ul>
+<li>文本区用户输入多行文本。</li>
+<li>可以创建指定行列的文本区，JTextArea继承自JTextComponent类。</li>
+<li><p>JTextArea无法滚动，但可以创建一个<code>JScrollPane</code>对象处理滚动。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JScrollPane scrollPane = <span class="keyword">new</span> JScrollPane(<span class="keyword">new</span> JTextArea());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用属性</p>
+<ul>
+<li>setLineWrap（boolean b） 是否换行</li>
+<li>setWrapStyleWord（boolean b） 是否按单词换行，默认按照字符换行</li>
+<li>setEditable（boolean b） 是否可编辑</li>
+</ul>
+</li>
+</ul>
+<h3 id="组合框（JComboBox）">组合框（JComboBox）</h3><ul>
+<li><code>组合框（combo box）</code>，也叫<code>选择列表（choice list）</code>或<code>下拉式列表（drop-down list）</code>，它包含项目的一个列表，用户能够从中选择。<strong>使用它可以限制用户的选择范围并能避免对输入数据有效性的繁复检查。</strong></li>
+<li>JComboBox可以引发ActionEvent和ItemEvent事件。选中一个新的项目是，JComboBox会产生两次ItemEvent事件，一次是取消前一个项目，另一次是选中当前项目。</li>
+<li>常用方法<ul>
+<li>getSelectedItem（）方法返回已经选定的项目</li>
+<li>getSelectedIndex（） 返回选中的项目次序号</li>
+</ul>
+</li>
+</ul>
+<h3 id="列表框（JList）">列表框（JList）</h3><ul>
+<li><code>列表框（list）</code>是一个组件，与JComboBox类似，但是它允许用户选择一个或多个项目。</li>
+<li><p>选择模式属性selectionMode取值如下，默认为多区间选择</p>
+<ul>
+<li>SINGLE_SELECTION 单项选择</li>
+<li>SINGLE_INTERVAL_SETECTION 单区间选择（允许选择多项，但是必须连续）</li>
+<li>MULTIPLE_INTERVAL_SETECTION 多区间选择<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>JList不能自动滚动，可以参考文本区的方法设置滚动。</p>
+</li>
+<li>JList触发ListSelectionEvent事件。</li>
+<li>常用方法：<ul>
+<li>getSelectedIndices（） 以数组形式返回选中的次序号</li>
+<li>getSelectedValues（） 以数组形式返回选中的值</li>
+<li>getVisibleRowCount（） 返回可见行数</li>
+</ul>
+</li>
+</ul>
+<h3 id="滚动条（JScrollbar）">滚动条（JScrollbar）</h3><ul>
+<li><code>滚动条（scrollbar）</code>是一个控制器，它使用户能从值得一个范围中进行选择。</li>
+<li>JScrolBar的属性如下：<ul>
+<li>orientation（方向）：指定滚动条的水平或垂直模式。</li>
+<li>maximum（最大值）: 指滚动条的最大值。</li>
+<li>minimum（最小值）</li>
+<li>visibleAmount（宽度，也叫广度）：是指滚动块的相对宽度。滚动块在屏幕上的显示的实际宽度取决于最大值及visibleAmount的值。</li>
+<li>value：表示滚动条当前的值。</li>
+<li>blockIncrement（块增量）：是用户点击滚动条的块增加（减少）区时所增加（减少）的值。</li>
+<li>unitIncrement（单位增量）：用户点击单位增加（减少）区所增加（减少）的值。</li>
+<li>**滚动条上的宽度对应于<code>maximum+visibleAmount</code>。当滚动条设为最大值时，滚动块的左端在maximum处，右端在maximum+visibleAmount处。</li>
+</ul>
+</li>
+<li>用户改变滚动条的值时，滚动条产生AdjustmentEvent的一个实例。</li>
+<li>可以使用构造方法或者使用<code>setOrientation</code>方法来指定滚动条的方向。默认情况下，属性maximum的值为100，minimum为0，blockIncrement为10，visibleAmount为10。</li>
+</ul>
+<h3 id="滑动块（JSlider）">滑动块（JSlider）</h3><ul>
+<li>JSlider与JScrollBar类似，但是JSlider具有更多的属性和更多的显示形式。</li>
+<li>JSlider允许用户以图形方式在指定的区间中选择一个数值。滑动块可以在主标记以及次标记之间滑动。标记间的像素值是由<code>setMajorTickSpacing</code>和<code>setMinorTickSpacing</code>方法控制的。</li>
+<li>Slider可以带或不带标记，可以有或没有标签，可以水平显示或垂直显示。</li>
+<li>垂直滚动条的值从上向下增加，但是垂直滑动块的值从上向下减少。</li>
+<li>改变滑动块的值时，滑动块产生javax.swing.event.ChangeEvent的一个实例。</li>
+</ul>
+<h3 id="创建多个窗口">创建多个窗口</h3><p>新开的窗口叫做<code>子窗口（subwindow）</code>，主框架叫<code>主窗口（main window）</code>。</p>
+<ul>
+<li>从应用程序创建一个子窗口，需要创建JFrame的一个子类，用于定义任务和通知新窗口做什么。然后，在程序中创建该子类的一个实例，通过把它设为可见的即可弹出新窗口。</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>可以在任何Swing组件使用边框，边框和图标都可以共享。</li>
+<li>AbstractButton类中的常量LEFT、RIGHT……也可以被许多其他Swing组件使用。由于所有的Swing组件都实现了SwingConstants，因此各种组件都可以通过SwingConstants引用这些常量。因此<code>JButton.CENTER和SwingConstants.CENTER</code>作用是一样的。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li>习题13.1 13.4 13.5 13.8 13.10 13.14 13.15源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter13/src" target="_blank" rel="external">chapter13</a></li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -652,16 +1171,58 @@ Component类是所有用户界面组件和容器的根类，Jcomponent类是大�
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容所有非GUI程序都是按过程的顺序执行的，Java GUI程序设计是事件驱动的。本章介绍有关Java事件驱动程序（event-driven programming）的概念和技术。
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/09/Java学习总结-第十二章-事件驱动程序/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>所有非GUI程序都是按过程的顺序执行的，Java GUI程序设计是事件驱动的。本章介绍有关Java<code>事件驱动程序（event-driven programming）</code>的概念和技术。</p>
+<h3 id="事件和事件源">事件和事件源</h3><ul>
+<li><code>事件（event）</code>：程序发生的某些事情的信号。如：移动鼠标、点击鼠标、按照键盘键等。</li>
+<li>事件<code>源对象（source object）</code>：某组件上发生了事件，该组件就被称为源对象。</li>
+<li>一个事件是事件类的实例，事件类的根类是java.util.EventObject。可以使用该类中的<code>getSource()</code>方法获得事件源对象。</li>
+<li>如果一个组件能够发生某个事件，那么这个组件的任何子类都能够发生同样的事件。如Component类是所有GUI类的父类，因此所有GUI组件都可以发生<code>MouseEvent</code>、<code>keyEvent</code>、<code>FocusEvent</code>和<code>ComponentEvent</code>事件。<br><img src="Event事件类.jpg" alt="Event事件类.jpg"></li>
+</ul>
+<h3 id="事件的监听、注册和处理">事件的监听、注册和处理</h3><ul>
+<li>Java使用事件委托处理模型来处理事件：在源对象的外部用户行为触发事件，关心该事件的对象接收事件，后一个对象称为<code>监听器（listener）</code>。</li>
+<li>一个对象要成为源对象上事件的监听器，需要具备两个条件：<ul>
+<li>监听器对象的类必须实现相应的事件监听接口（xListener）。监听器接口包含处理事件的方法，这种方法称为<code>处理器（handler）</code>。</li>
+<li>监听对象必须由源对象注册。注册方法依据事件的类型而定。一个源对象拥有一个监听器列表，通过调用监听器对象上的处理器，通知所有的已注册监听器对事件做出响应。</li>
+</ul>
+</li>
+</ul>
+<h3 id="鼠标事件">鼠标事件</h3><p>在一个组件上按下、释放、点击、移动、拖动鼠标时就会产生鼠标事件。鼠标的事件对象捕获事件。</p>
+<ul>
+<li>Java提供了两个处理鼠标事件的监听器接口<code>MouseListener</code>和<code>MouseMotionListener</code>。前者监听鼠标的按下、释放、移入、移出或点击等行为，后者监听鼠标的拖动和移动等行为。</li>
+<li>java.awt.Point类封装平面上一个点的信息。可以用该类辅助处理鼠标事件。</li>
+<li>MouseEvent类继承自InputEvent类。</li>
+</ul>
+<h3 id="键盘事件">键盘事件</h3><ul>
+<li>键盘事件中捕获的键都是表示字符统一码的整数，包括字母与数字键、功能键、Tab键和回车键等。它们可以分别由<code>getKeyChar()</code>和<code>getKeyCode()</code>方法获得。</li>
+<li>当击打一个统一码字符键时，就会调用<code>KeyTyped</code>处理器。<br><strong>仅有一个焦点组件能够接收KeyEvent、要使一个组件成为焦点组件，需要将属性isFocusable设置为true。</strong></li>
+</ul>
+<h3 id="定时器类Timer">定时器类Timer</h3><p>定时器类java.swing.Timer就是一个按照预定频率触发ActionEvent事件的源组件，它不是GUI组件。<br><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Timer</span>(delay, actionEvent).start();</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>在事件处理中，忘记注册监听器是一个常见的错误。如果源对象没法通知监听器，监听器就不能响应事件。</li>
+<li>如果一个监听器被源对象注册两次，当事件发生时，监听器的处理方法将会被调用两次。</li>
+<li>源对象和监听器对象可能是相同的对象。（同一个类）</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li><p>习题12.7：<br>本题的难点在于所画的线需要从框架的中心开始。由于setvisible()方法才会调用paint()方法画图，在此之前，无论是JFrame还是JPanel，使用getWidth()和getHeight()方法得到的值都为0，因此需要想办法在框架画出来之后设置起始点的坐标。方法有两种：</p>
+<ul>
+<li><p>方法一：监听键盘事件的方法中，使用除功能键以外的键进行初始化设置，此方法不提倡；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">   <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">keyPressed</span><span class="params">(KeyEvent e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (e.getKeyCode()) &#123;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_UP:</span><br><span class="line">                y -= <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_DOWN:</span><br><span class="line">                y += <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_LEFT:</span><br><span class="line">                x -= <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_RIGHT:</span><br><span class="line">                x += <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"><span class="comment">//            default:</span></span><br><span class="line"><span class="comment">//                x = this.getWidth() / 2;</span></span><br><span class="line"><span class="comment">//                y = this.getHeight() / 2;</span></span><br><span class="line"><span class="comment">//                lineStart.move(x,y);</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二：添加窗口监听事件，这样就能确保在最开始将坐标设置好。由于JPanel是不可见的，无法实现WindowListener接口，因此在JFrame实现该接口，并在相应的方法中传入正确的框架中心坐标。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $12<span class="title">_7</span> <span class="keyword">extends</span> <span class="title">JFrame</span> <span class="keyword">implements</span> <span class="title">WindowListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> $<span class="number">12_7</span>() <span class="keyword">throws</span> HeadlessException &#123;</span><br><span class="line">      <span class="keyword">this</span>.addWindowListener(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowActivated</span><span class="params">(WindowEvent e)</span> </span>&#123;</span><br><span class="line">      PaintPanel p = <span class="keyword">new</span> PaintPanel(<span class="keyword">this</span>.getWidth() / <span class="number">2</span>, <span class="keyword">this</span>.getHeight() / <span class="number">2</span>);</span><br><span class="line">      <span class="keyword">this</span>.getContentPane().add(p);</span><br><span class="line">      p.setFocusable(<span class="keyword">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>习题12.3 12.4 12.5 12.6 12.7 12.8源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter12/src" target="_blank" rel="external">chapter12</a></p>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -779,18 +1340,132 @@ Component类是所有用户界面组件和容器的根类，Jcomponent类是大�
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容本章介绍Java GUI程序设计基础。讨论GUI组件以及它们的关系，介绍容器和布局管理器、颜色、字体、以及几何图形的绘制。
-GUI组件
-重型组件(heavyweight com
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/05/Java学习总结-第十一章-图形用户界面程序设计/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>本章介绍Java GUI程序设计基础。讨论GUI组件以及它们的关系，介绍容器和布局管理器、颜色、字体、以及几何图形的绘制。</p>
+<h3 id="GUI组件">GUI组件</h3><ul>
+<li><code>重型组件(heavyweight component)</code>：<code>抽象窗口组件(Abstract Window Tookit,AWT)</code>称为重型组件，因为它基于同位体的解决方案非常依赖底层平台。AWT的组件通过它们各自的代理映射成平台特性（platform-specific）的组件，这些代理称为<code>同位体(peer)</code>。</li>
+<li><code>轻型组件(lightweight component)</code>：不依赖本地GUI的<code>Swing组件库(Swing components)</code>中的组件称为轻型组件，Swing组件更少地依赖目标机器上的平台，更少使用本地的GUI资源。</li>
+<li>大多数Swing组件都是直接用Java代码绘制的，而java.awt.Window或java.awt.panel子类的组件例外，它们必须使用具体平台上的本地GUI来绘制。</li>
+<li>为了区别Swing组件和AWT组件，Swing GUI组件类的开头都有前缀字母J。</li>
+</ul>
+<h3 id="Java_GUI_API">Java GUI API</h3><p><img src="GUI程序设计类层次图.jpg" alt="Java GUI程序设计类层次图"><br>为开发GUI程序所做的Java API设计是应用类、继承性和接口的一个优秀范例。GUI类的分类如下：</p>
+<ul>
+<li><code>容器类(container class)</code>：如JFrame、Jpanel和Japplet等，用来包含其他组件。<ul>
+<li>Container用来组织组件。根据要求的位置和格式，布局管理器把组件定位放置到容器上。框架、面板和applet都是容器的例子。</li>
+<li>JFrame是不能包含在其他窗口内的窗口。在Java GUI应用程序中，它是包含其他Swing用户界面组件的容器。</li>
+<li>JDialog是一个弹出式信息窗口。一般用作接收用户附加信息或公告事件发生通知的临时窗口。</li>
+<li>JApplet是Applet的一个子类。要创建基于Swing的Java Applet必须扩展JApplet。</li>
+<li>Jpanel是一个存放用户界面组件的不可见容器。面板可以嵌套，可以把面板放在包含面板的容器中。Jpanel也可以作为画布来画图。</li>
+</ul>
+</li>
+<li><code>辅助类(helper class)</code>：如Graphics、Color、Font、FontMetrics和Dimension等，是组件和容器用来绘制和放置对象的。它们都不是Component的子类。<ul>
+<li>Graphics是一个抽象类，它提供一个图形环境，用于绘制字符串、直线和简单几何图形。</li>
+<li>Color类用来处理图形组件的颜色。</li>
+<li>Font指定GUI组件上文本和图形的字体。</li>
+<li>FontMetrics是一个用于获取字体属性的抽象类。</li>
+<li>Dimension将组件的宽度和高度（精度为整数）封装在单个对象中。</li>
+<li>LayoutManager是一个接口，它的实例指定组件在容器中的摆放方式。<br><strong>辅助类包含在java.awt包中。Swing组件不能取代AWT的全部类，只能替代AWT的GUI组件类，辅助类仍保持不变。</strong></li>
+</ul>
+</li>
+<li><code>组件类(component)</code>：图形用户界面（GUI）组件类，如JButton、JTextField、JTextArea、JComboBox、JList、JRadioButton和JMenu等，都是JComponent类的子类。<br><strong>JFrame、Japplet、JDialog和JComponent类及其子类都组织在javax.swing中。</strong></li>
+</ul>
+<h3 id="框架JFrame">框架JFrame</h3><ul>
+<li><p>创建框架</p>
+<ul>
+<li><p>方法一：使用JFrame的构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JFrame frame = <span class="keyword">new</span> JFrame();</span><br><span class="line"><span class="comment">// JFrame frame = new JFrame(String title);</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二：扩展JFrame框架，创建自己的框架</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其中，方法二较好，理由如下：<br>1、创建一个GUI应用程序就是要创建一个框架，所以扩展JFrame类来定义一个框架是很自然的。<br>2、如果需要的话，这个新类可以重复使用。</p>
+</li>
+<li>在框架中添加组件<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.awt.Container container = frame.getContentPane();  <span class="comment">//返回框架的内容窗格</span></span><br><span class="line">container.add(xxx);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>组件是由内容窗格的布局管理器放置在框架上的，而内容窗格默认的布局管理器是将按钮放到中央。</strong></p>
+<ul>
+<li>框架居中<br>默认情况下，框架在屏幕的左上角显示。可以使用JFrame类中的setLocation（x，y）方法调整框架位置。要使框架居中，就要知道屏幕的宽和高，这可以由java.awt.Toolkit类得到：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();</span><br><span class="line"><span class="keyword">int</span> screenWidth = screenSize.width;</span><br><span class="line"><span class="keyword">int</span> screenHeight = screenSize.height;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>java.awt.Dimension类将组件的宽和高（精度为整数）封装在单个对象中。使用<code>getWidth()</code>和<code>getHeight()</code>方法获取组件的宽和高。</p>
+<h3 id="布局管理器">布局管理器</h3><p>Java的布局管理器提供了一层抽象，自动把用户界面映射到所有的窗口系统。其它窗口系统一般使用<code>硬编码（hard-code）</code>的像素尺寸来安排用户界面组件。</p>
+<ul>
+<li>布局管理器是使用布局管理器类创建的，每一个布局管理器类都实现了LayoutManager接口。</li>
+<li>使用<code>setLayout（layoutManager）</code>方法在容器中设置布局管理器。</li>
+<li>布局管理器的种类：<ul>
+<li>FlowLayout（流式布局管理器）：按照添加的顺序，由左到右将组件排列在容器中，放满一行时，就开始新的一行。<ul>
+<li>可以使用常量来指定对齐方式：FlowLayout.RIGHT、FlowLayout.CENTER和FlowLayout.LEFT。</li>
+<li>public FlowLayout（int align，int hGap，int vGap）根据指定的对齐方式、水平间距和垂直间距构造一个新的FlowLayout对象。间距是指组件之间用像素度量的距离。</li>
+<li>public FlowLayout（int align）</li>
+<li>public FlowLayout（）使用默认的构造方法创建，默认的对齐方式是居中，默认的水平间距和垂直间距都是5个像素。</li>
+</ul>
+</li>
+<li>GridLayout（网格布局管理器）：根据构造方法定义的行数和列数，布局管理器GridLayout以网格（矩阵）的形式排列组件。<ul>
+<li>public GridLayout（int rows,int columns,int hGap,int vGap）  </li>
+<li>public GridLayout（int rows,int columns）组件在容器上的水平和垂直间距为0。  </li>
+<li>public GridLayout（）创建的新的GridLayout对象只有一行。<br><strong>行数或列数可以为零，但不能两个同时为零。如果一个为零另一个不为零，则不为零的维数已经固定，为零的维数由布局管理器动态地决定。</strong></li>
+</ul>
+</li>
+<li>BordLayout（板式布局管理器）：将窗口分为五部分：东区、南区、西区、北区和中央。由常量EAST、WEST、NORTH、SOUTH决定组件的位置。<ul>
+<li>public BorderLayout（int hGap，int vGap）</li>
+<li>public BorderLayout（） </li>
+<li>组件根据它们最合适的尺寸和在容器中的位置来放置。可以随意扩展拉伸。<br><strong>在FlowLayout和GridLayout两个布局管理器中，组件添加到容器中的顺序是很重要的，它决定了组件在容器中的位置。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>布局管理器的属性<br>布局管理器的属性可以动态的改变。可以在创建后使用set方法改变其属性。</li>
+<li>validate和doLayout方法<ul>
+<li>每一时刻，一个容器只能有一个布局管理器。可以使用setLayout（aNewLayout）方法改变容器的布局管理器，然后使用validate()方法强迫容器根据新的布局管理器重新摆放其中的组件。</li>
+<li>如果使用相同布局管理器但是改变了它的属性，需要使用doLayout（）方法强迫容器根据布局管理器的新属性对组件重新放置。</li>
+</ul>
+</li>
+</ul>
+<h3 id="颜色类Color">颜色类Color</h3><ul>
+<li>颜色由红、绿、蓝三原色构成，每种原色的强度都用一个byte值表示，从0（最暗）到255（最亮）。这就是通常所说的<code>RGB模式(RGB model)</code>。</li>
+<li>java将13种标准色定义为常量，可以使用常量设定颜色。自JDK 1.4开始，新常量均为大写。</li>
+</ul>
+<h3 id="字体类Font">字体类Font</h3><ul>
+<li>使用java.awt.Font类来创建字体对象，并使用Component类中的setFont方法设置组件的字体。</li>
+<li>public Font（String name，int style，int size）</li>
+<li>可以使用系统上的其它字体创建字体对象。为了找到系统上的字体，需要使用`java.awt.GraphicsEnvironment类的静态方法getLocalGraphicsEnvironment（）类来创建它的一个实例。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();</span><br><span class="line">String[] fontnames = e.getAvailableFontFamilyNames();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; fontnames.length; i++) &#123;</span><br><span class="line">	System.out.println(fontnames[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="使用面板作子容器">使用面板作子容器</h3><ul>
+<li>使用Java用户图形界面程序设计，可以将窗口分成几个面板，面板是分组放置用户界面组件的子容器。</li>
+<li>面板不可见的，可以用作组织组件的小容器，以达到要求的布局效果。 </li>
+</ul>
+<h3 id="在面板上绘制图形">在面板上绘制图形</h3><p>要在面板上画图，需要创建一个由JPanel扩展的新类，并且覆盖paintComponent方法告知面板如何画图。虽然可以在框架或applet中使用paint方法直接画图，但是最好使用JPanel绘制字符串和图形并显示图像，用这种方法画图不会影响其他组件。</p>
+<h3 id="利用FontMetrics类居中显示">利用FontMetrics类居中显示</h3><ul>
+<li>FontMetrics类可以对特定字体的字符串测量出精确的宽度和高度。FontMetics可以度量如下属性：<ul>
+<li>Leading 文本行之间的距离</li>
+<li>Ascent 表示字符从基线到其顶端的高度</li>
+<li>Descent 表示下降字符如j、y、g等从基线到底端的距离<br><img src="FontMetics类确定字体属性.jpg" alt="FontMetics类确定字体属性"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">paintComponent</span><span class="params">(Graphics g)</span> </span>&#123;</span><br><span class="line">	FontMetrics fm = g.getFontMetrics();</span><br><span class="line">	<span class="keyword">int</span> stringWidth = fm.stringWidth(<span class="string">"Welcome to Java"</span>);</span><br><span class="line">	<span class="keyword">int</span> stringAscent = fm.getAscent();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> xCoordinate = getWidth/<span class="number">2</span> - stringWidth/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">int</span> yCoordinate = getHeight/<span class="number">2</span> + StringAscent/<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>Java图形界面设计应该遵循的顺序：面板（JPanel）→容器（Container）→框架（JFrame）</li>
+<li><del>面板中设置背景色似乎不起作用。（本章创建的JPanel子类MessagePanel不起作用，其它的起作用，原因未知）</del><ul>
+<li>原因：MessagePanel类重写了paintComponent（）方法，该方法是JComponent类中的方法，但是写的时候错写成了paintComponents（）方法，该方法是Container类中的方法，因此设置字体时不起作用。</li>
+</ul>
+</li>
+<li>java.awt.Component 是所有GUI组件的根类。</li>
+<li>java.awt.Container 是所有容器类的根类。</li>
+<li>java.awt.Dimension 是度量GUI组件尺寸的一个类。</li>
+<li>默认情况下，JFrame的布局管理器是BorderLayout，JPanel的布局管理器是FlowLayout。</li>
+<li>paintComponent()方法是Component类中的方法。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><p>习题11.4源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter11/src" target="_blank" rel="external">chapter11</a><br><em>本章画图题较多，用到的时候再回来复习具体的东东吧~</em></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -908,18 +1583,102 @@ GUI组件
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容本章介绍应用异常处理来处理运行错误，以及应用断言来确保程序的正确性。
-异常和异常类型
-运行会引起异常（exception）。异常是指程序运行中出现的时间，它中断正常的程序控制流
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/30/Java学习总结-第十五章-异常和断言/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>本章介绍应用异常处理来处理运行错误，以及应用断言来确保程序的正确性。</p>
+<h3 id="异常和异常类型">异常和异常类型</h3><ul>
+<li>运行会引起<code>异常（exception）</code>。异常是指程序运行中出现的时间，它中断正常的程序控制流。</li>
+<li><code>异常处理（exception handing）</code>：Java给程序员提供的稳妥处理运行错误的功能。</li>
+<li>异常类<ul>
+<li>Java的异常是Throwable派生类的一个实例。        </li>
+<li>通过扩展Throwable或它的子类，可以创建自己的异常类。</li>
+<li>异常类可以分为三种主要类型：系统错误、异常和运行异常。<ul>
+<li><code>系统错误（system error）</code>是由Java虚拟机抛出并在Error类中描述的。Error类描述内部的系统错误。此类错误程序员一般无法处理。（LinkageError、VirtualMachineError、AWTError）</li>
+<li><code>异常（exception）</code>是由Exception类描述的。Exception类描述由程序和外部环境引起的错误，这些错误能通过程序捕获和处理。（classNotFoundException、RuntimeException、···）</li>
+<li><code>运行异常（runtime exception）</code>是由RuntimeException类描述的。RuntimeException类描述编程错误，比如不合适的转换、访问一个越界数组或数值错误等。（ArithmeticException、NullPointerException、IndexOutOfBoundsException、···）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>必检异常和免检异常<ul>
+<li>RuntimeException、Error以及它们的子类都称为<code>免检异常（unchecked exception）</code>。所有其他异常都成为<code>必检异常（checked exception）</code>。</li>
+<li>必检异常编译器会强制程序员检查并处理它们。免检异常反映程序设计中不可重获的逻辑错误。</li>
+<li>Java语言不允许编写捕获或声明免检异常的代码。</li>
+</ul>
+</li>
+</ul>
+<h3 id="异常处理">异常处理</h3><p>Java的异常模型基于三种操作：<code>声明异常（declaring an exception）</code>、<code>抛出异常（throwing an exception）</code>和<code>捕获异常（catching an exception）</code>。</p>
+<ul>
+<li>声明异常：每个方法都必须说明它可能抛出的必检异常的类型。<ul>
+<li>在Java中使用关键字<code>throws</code>声明异常，使用关键字<code>throw</code>抛出异常。</li>
+</ul>
+</li>
+<li>抛出异常：程序检查到一个错误后，创建一个适当类型异常的实例并抛出它。<ul>
+<li>一个方法总能抛出免检异常。</li>
+</ul>
+</li>
+<li><p>捕获异常：使用<code>try-catch</code>语句块捕获并处理异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="comment">//some statments</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">	<span class="comment">//do</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>处理异常的代码称为<code>异常处理器（exception handler）</code>。寻找处理器的整个过程称为捕获异常。</li>
+<li>如果try语句块中某条语句抛出了异常，Java就会跳过try语句块中剩下的语句，开始为该异常搜索异常处理器。从第一个到最后一个逐个检查catch语句，看是否有某个catch字句中的异常类实例与该异常的类型匹配。如果有，就将该异常对象赋值给所声明的变量，执行catch子句中的代码。如果没有发现异常处理器，Java退出这个方法，把异常传递给调用该方法的方法，继续同样的过程来查找处理器。如果在调用的方法链中找不到相应的处理器，程序终止并在监视器上输出错误信息。</li>
+<li>一个异常对象包含有关异常的有价值信息，可以利用java.lang.Throwable类中的下列实例方法获取异常的信息：<ul>
+<li>public String getMessage() 返回Throwable对象的详细信息</li>
+<li>public String toString() 返回3个字符串合起来的串，它们分别是 1）异常类名的全称。2）“：”（一个冒号和空格）。3）getMessage()方法</li>
+<li>public void printStackTrace() 在控制台输出Throwable对象及其踪迹信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>方法是按照线程执行的。如果一个线程发生异常没有得到处理，该线程中止，但是程序中的其他线程不受影响。</li>
+</ul>
+<h3 id="重新抛出异常">重新抛出异常</h3><ul>
+<li>当一个方法出现异常是，如果没有捕获异常，该方法就会立即退出。如果方法在退出之前需要执行某些任务，应该在该方法中捕获异常，然后按如下结构将异常重新抛出，交给调用它的方法：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	statements;</span><br><span class="line">&#125; <span class="keyword">catch</span>(TheException ex) &#123;</span><br><span class="line">	perform operations before exits;</span><br><span class="line">	<span class="keyword">throw</span> ex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="finally子句">finally子句</h3><ul>
+<li>有时，不论异常是否出现或者是否被捕获，都希望执行某些代码。可以使用如下结构实现：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	statements;</span><br><span class="line">&#125; <span class="keyword">catch</span> (TheException ex) &#123;</span><br><span class="line">	handling ex;</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	finalStatements;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>使用finally子句时可能会忽略catch子句。</strong></p>
+<h3 id="何时使用异常">何时使用异常</h3><p>当必须处理不可预料的错误时应该使用try-catch语句块，不要用try-catch块处理简单的、可预料的情况。</p>
+<h3 id="创建自己的异常类">创建自己的异常类</h3><p>可以通过扩展Exception类或其子类来创建自己的异常类。</p>
+<h3 id="断言">断言</h3><p><code>断言（assertion）</code>是Java的一个语句，它允许对程序提出一个判断（假设）。断言包含一个布尔表达式，在程序运行中它应该是真。</p>
+<ul>
+<li>断言用于确保程序的正确性，避免逻辑错误。</li>
+<li>声明断言：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> assertion;</span><br><span class="line">or</span><br><span class="line"><span class="keyword">assert</span> assertion:detailMessage;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其中assertion是一个布尔表达式，detailMessage是一个基本类型值或一个对象值。</p>
+<ul>
+<li><p>运行带断言的程序</p>
+<ul>
+<li><p>默认情况下，断言在运行时不起作用。为使它们有效，使用开关<code>-enableassertions</code>或其缩写<code>-ea</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -ea xxx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>断言可以有选择地激活，在类层次或包层次起作用或不起作用。使它不起作用的开关是<code>-disableassertions</code>,或其缩写<code>-da</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -ea:package1 -da:Class1 xxx</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用异常处理或断言">使用异常处理或断言</h3><ul>
+<li>不应该使用断言代替异常处理。异常处理用于在程序运行期间处理非常环境，断言是要确保程序的正确性。</li>
+<li>异常处理针对程序的健壮性，而断言涉及程序的正确性。</li>
+<li>不要使用断言检测public方法的参数。传给public方法的有效参数被认为是方法合约的一部分。</li>
+<li>使用断言进一步确认假设。这将加强对程序正确的的确认。</li>
+<li>将断言放到没有缺省情况的switch语句中。</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>从一个通用父类可以派生出多种异常类。如果一个catch子句可以捕获一个父类的异常对象，它就能捕获那个父类所有子类的异常对象。</li>
+<li>在catch字句中指定异常的顺序是非常重要的。一般遵循从子类异常到父类异常的顺序。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><p>习题15.5源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter15/src" target="_blank" rel="external">chapter15</a></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -1037,21 +1796,92 @@ GUI组件
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容本章初步介绍使用面向对象的方法开发软件系统，学习类的设计原则。
-软件开发过程
-软件开发步骤：需求分析、系统分析、设计、实现、测试、发行应用和维护。
-
-分析类之间的关系
-关联(a
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/29/Java学习总结-第十章-面向对象建模/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>本章初步介绍使用面向对象的方法开发软件系统，学习类的设计原则。</p>
+<h3 id="软件开发过程">软件开发过程</h3><ul>
+<li>软件开发步骤：需求分析、系统分析、设计、实现、测试、发行应用和维护。</li>
+</ul>
+<h3 id="分析类之间的关系">分析类之间的关系</h3><ul>
+<li><code>关联(association)</code>：是一种描述两个类之间行为的一般二元关系。</li>
+<li>聚集和包容<ul>
+<li><code>聚集(aggregation)</code>：是一种特殊的关联形式，表示两个类之间的所属关系。聚集模拟<code>具有（has-a）</code>关系。</li>
+<li>如果一个对象被一个聚集对象所专有，它和聚集对象之间的关系就称为<code>包容（composition）</code>。</li>
+</ul>
+</li>
+<li>继承<br><code>继承(inheritance)</code>模拟两个类之间“是”（is-a）的关系。<code>强是(strong is-a)</code>关系描述两个类之间的直接继承关系，可以用类的继承表示。<code>弱是(weak is-a)</code>关系描述一个类具有某种属性，可以用接口表示。</li>
+</ul>
+<h3 id="类的设计原则">类的设计原则</h3><ul>
+<li>设计一个类<ul>
+<li>一个类应该描述一个单一的实体，类的所有操作应该在逻辑上相互配合，支持一个共同的目标。</li>
+<li>类经常是为了多种不同用户的使用而设计的。</li>
+<li>类是为了可重用而设计的，用户可以在不同的组合、不同的顺序和不同的环境中联合使用类。</li>
+<li>在可能的情况下，应该提供公用的无参构造方法，并且覆盖定义在Object类中的equals方法和toString方法。如果覆盖了equals方法，也应该覆盖hashcode方法。（原因是两个相等的对象必须拥有相等的散列码）</li>
+<li>给类、数据域以及方法选择有意义的名字。建议将数据的声明置于构造方法之前，将构造方法置于方法之前。</li>
+</ul>
+</li>
+<li>使用可见性修饰符public、protected和private<ul>
+<li>一个类可以提供两种合约：对类的使用者和对类的扩展者。<ul>
+<li>为了使用者，应该将数据域设为私有的（private），将访问器方法和修改器方法设为公有的（public）。</li>
+<li>为了扩展者，应该将数据域和方法都设为保护的（protected）。扩展者的合约包含使用者的合约。</li>
+</ul>
+</li>
+<li>类应该使用private修饰符隐藏其数据，以免用户直接访问它。</li>
+</ul>
+</li>
+<li>使用静态修饰符static<br>一个属性如果被类中的所有实例所共享，它应该声明为静态的。</li>
+<li>使用继承或包容<ul>
+<li>继承与包容之间的区别就是“是”（is-a）关系与“具有”（has-a）关系之间的区别。</li>
+<li>如果要求多态性，使用继承来设计。如果不需要关系多态性，包容设计会更好。因为对包容设计得类，类之间的依赖性要比使用继承设计的类弱一些。</li>
+</ul>
+</li>
+<li><p>使用接口或抽象类</p>
+<ul>
+<li>接口和抽象类都能用于描述一般性的公有特征。强是关系使用类来模拟，弱是关系使用接口来模拟。</li>
+<li>一个子类只能扩展一个父类，但是可以实现多个接口，所以接口比抽象类更灵活。</li>
+<li>要将接口和抽象类的好处结合起来，可以创建一个接口和一个实现该接口的抽象类，这样的抽象类称为<code>便利类(convenience class)</code>。</li>
+</ul>
+<h3 id="用顺序图和状态图模拟动态行为">用顺序图和状态图模拟动态行为</h3><ul>
+<li>UML图符仅仅用来描述类的属性和方法以及类之间的静态关系。</li>
+<li>顺序图：通过刻画方法调用的时间顺序来描述对象之间的交互作用。<ul>
+<li><strong>类角色（clss role）</strong>表示对象所起的作用，顺序图顶部的对象表示类角色。</li>
+<li><strong>生命线（lifeline）</strong>表示在某段时间内对象是存在的，用对象引出的垂直虚线（点线）表示。</li>
+<li><strong>激活（activation）</strong>表示对象执行一项操作所用的时间段，使用位于生命线上的窄矩形表示。</li>
+<li><strong>方法调用（method invocation）</strong>表示对象之间的通信，用标有调用方法指令的水平箭头表示。<br><a href="">!顺序图示例</a></li>
+</ul>
+</li>
+<li><code>状态图（statechart diagram）</code>用来描述对象的控制流。状态图包含下列元素：<ul>
+<li>状态（state）表示对象在生存期内的状况，包括对象满足某些条件、执行某些操作或等待某些事件发生等。每个状态都有一个名字，用圆角矩形表示它们，初始状态例外，用实心小圆表示。</li>
+<li>转移（transition）表示两个状态之间的关系，表示一个对象执行某些操作后从一种状态转变为另一种状态。用标有合适方法调用的实线箭头来表示转移。<br><a href="">!状态图示例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用Java_API在构架基础上编程">使用Java API在构架基础上编程</h3><ul>
+<li><p>Java应用程序接口（Application Program Interface，API）由许多类和接口组成。<br>java.lang包含Java核心类，每个Java程序隐含地导入该包。<br>javax.swing包含用于开发Swing GUI程序的轻型图形用户界面组件。<br>java.util包含许多工具。如StringTokenizer、Data、Calendar和GregorianCalendar等。</p>
+<hr>
+</li>
+</ul>
+<h2 id="复习小结">复习小结</h2><ul>
+<li><p>接口是一种特殊的类，因此接口也可以用来声明类型。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Comparable</span> tt = <span class="keyword">new</span> <span class="built_in">Comparable</span>() &#123;</span><br><span class="line">            <span class="annotation">@Override</span></span><br><span class="line">            public <span class="built_in">int</span> compareTo(<span class="built_in">Object</span> o) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
+<p>上述写法类似于内部类。</p>
+</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li><p>习题10.1<br>  写成如下形式：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> n = <span class="number">1</span>;</span><br><span class="line">        Rational sum = <span class="keyword">new</span> Rational();</span><br><span class="line">        <span class="keyword">while</span> (n &lt; <span class="number">100</span>) &#123;</span><br><span class="line">            Rational r = <span class="keyword">new</span> Rational(n, n + <span class="number">1</span>);</span><br><span class="line">            sum = sum.add(r);</span><br><span class="line">            n++;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>当n增加到23时，sum=2292289173/118982864,再进行运算时，会出现除零错误，原因是分子的值超出了Integer类的最大值2147483647。因此最终得不到类似<code>分子/分母</code>形式的结果。如果在每次循环结束后，将sum转换成double类型，就可以得到最后double类型的结果了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> m = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">double</span> sum1 = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">while</span> (m &lt; <span class="number">100</span>) &#123;</span><br><span class="line">          Rational r = <span class="keyword">new</span> Rational(m, m + <span class="number">1</span>);</span><br><span class="line">          sum1 += r.doubleValue();</span><br><span class="line">          m++;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其余习题10.3 10.4源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter10/src" target="_blank" rel="external">chapter10</a></p>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -1169,16 +1999,75 @@ GUI组件
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容在继承的层次结构中，子类的出现使类变得越来越具体，而子类的父类就变得更一般、更通用。有时将一个父类设计得非常抽象，以至于它没有具体的实例，这样的类称为抽象类（abstract 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/28/Java学习总结-第九章-抽象类和接口/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>在继承的层次结构中，子类的出现使类变得越来越具体，而子类的父类就变得更一般、更通用。有时将一个父类设计得非常抽象，以至于它没有具体的实例，这样的类称为<code>抽象类（abstract class）</code>。<br>一个子类只能从一个父类继承，如果想要使其继承多个父类，可以使用<code>接口（interface）</code>来达到<code>多重继承（multiple inheritance）</code>的效果。<br>本章介绍抽象类和接口，并讨论如何使用基本数据类型值的包装类。</p>
+<h3 id="抽象类">抽象类</h3><ul>
+<li>抽象类使用关键字<code>abstract</code>修饰。</li>
+<li>抽象类中可以存在抽象方法，抽象方法也使用关键字<code>abstract</code>修饰。</li>
+<li>非抽象类不能包含抽象方法，在一个由抽象类扩展出来的非抽象类中，所有抽象方法都必须实现。</li>
+<li>抽象类不能用new运算符实例化，但仍然可以定义它的构造方法。</li>
+<li>包含抽象方法的类必须是抽象的，但抽象类中可以存在非抽象方法。</li>
+<li>子类可以声明为抽象的，即使他的父类是具体的。</li>
+<li>不能用new运算符创建抽象类的实例，但是，抽象类可以用作数据类型。例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GeometricObject[] geo = <span class="keyword">new</span> GeometricObject[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="日历类Calendar和公历类GregorianCalendar">日历类Calendar和公历类GregorianCalendar</h3><p>略。</p>
+<h3 id="接口">接口</h3><ul>
+<li><code>接口(interface)</code>是一种与类相似的结构，只包含常量和抽象方法。抽象类和接口相似，但是抽象类处理包含常量和抽象方法外，还可以包含变量和具体方法。</li>
+<li>使用关键字<code>implements</code>可以实现接口。</li>
+<li>接口与抽象类<ul>
+<li>在接口中，数据必须是常量，而抽象类可以有非常量的数据域。</li>
+<li>接口中的每个方法只有一个头标志，没有实现部分，抽象类可以有具体的方法。<br><strong>在接口中，所有的数据域都是public final static的，所有的方法都是public abstract的，在书写接口时可以省略这部分内容。</strong></li>
+<li>一个接口只能扩展其他接口，不能扩展类。一个类可以扩展它的父类并实现多个接口。</li>
+</ul>
+</li>
+<li>抽象类和接口都可以用来模拟共同特征。<ul>
+<li><code>强是关系(Strong is-a relationship)</code>：明显地描述了父子关系应该使用类模拟。</li>
+<li><code>弱是关系(Weak is-a relationship)</code>：也叫<code>类属关系（is-kind of relationship）</code>，是指对象拥有某种属性。用接口来模拟。</li>
+</ul>
+</li>
+<li><p>可克隆接口Cloneable</p>
+<ul>
+<li><p>Cloneable接口在java.lang包中如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>体为空的接口称为<code>标记接口（marker interface）</code>。标记接口不包含常量或方法，它用于标明一个类具有某种必备的属性。</p>
+</li>
+</ul>
+</li>
+<li>浅复制和深复制<ul>
+<li><code>浅复制(shallow copy)</code>：如果域是一个对象，复制的是域的引用而不是域的内容。</li>
+<li><code>深复制(deep copy)</code>: 复制域的内容。需要重写clone()方法。</li>
+</ul>
+</li>
+</ul>
+<h3 id="将基本数据类型值处理为对象">将基本数据类型值处理为对象</h3><ul>
+<li>在Java中，基本类型不作为对象使用，这样做是效率原因。同时，Java也将基本数据类型并入对象或包装成对象，方便使用。对应的类称为<code>包装类（wrapper class）</code>。使用包装对象代替基本类型变量，可以进行一般程序设计。</li>
+<li>包装类的名称与对应的基本类型一样，但是第一个字母大写。Integer和Character例外。</li>
+<li>包装类没有无参构造方法；所有包装类的实例都是永久的。</li>
+<li>数值包装类的常量<ul>
+<li>MAX_VALUE</li>
+<li>MIN_VALUE</li>
+</ul>
+</li>
+<li>静态方法<code>valueOf()</code>创建一个新的对象，并将它初始化为指定字符串表示的值。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Double doubleObject = Double.valueOf(<span class="string">"12.4"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="基本类型和包装类之间的自动转换">基本类型和包装类之间的自动转换</h3><ul>
+<li>二者自JDK 1.5就可以自动转换。</li>
+<li>将基本类型的值转换为包装类对象，称为<code>装箱（boxing）</code>，相反的过程称为<code>开箱（unboxing）</code>。</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>接口仅定义了规范，实现接口的好处有：<br>1、表示多个实现类之间的弱是关系<br>2、接口可以同一标准<br>3、接口可以快速分离工作内容<br>4、接口有利于程序扩展</li>
+<li>实现接口，必须实现接口中所有的方法。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><p>习题9.1 9.2 9.3 9.4 9.6 9.8 9.9 9.10程序源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter9/src" target="_blank" rel="external">chapter9</a></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -1296,16 +2185,125 @@ GUI组件
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容在面向对象程序设计中，可以由已有的类派生出子类，这叫做继承（inheritance）。本章介绍继承的概念。着重理解父类和子类、关键字super的用法以及object类，了解多态
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/Java学习总结-第八章-继承和多态/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>在面向对象程序设计中，可以由已有的类派生出子类，这叫做<code>继承（inheritance）</code>。<br>本章介绍继承的概念。着重理解父类和子类、关键字super的用法以及object类，了解多态和动态绑定、一般程序设计以及对象转换，介绍修饰符protect和final。</p>
+<h3 id="父类和子类">父类和子类</h3><ul>
+<li>在面向对象程序设计中，从另一个类C2中派生的类C1称为<code>次类(subclass)</code>,C2则称为<code>超类(superclass)</code>。超类又称为<code>父类(parent class)</code>或<code>基类(base class)</code>,次类又称为<code>子类(child class)</code>、<code>扩展类(extend class)</code>或<code>派生类(derived class)</code>。子类从它的父类中继承可访问的数据域和方法，也可以添加新数据域和方法。</li>
+</ul>
+<h3 id="关键字super">关键字super</h3><ul>
+<li>调用父类的构造方法<ul>
+<li>super(); 或super(参数);</li>
+<li>以上语句必须出现在子类构造方法的第一行，这也是调用父类构造方法的唯一方式。</li>
+<li>构造方法链(constructor chaining)：在任何情况下，构造一个类的实例时，将会沿着继承链调用所有父类的构造方法，这叫做<code>构造方法链</code>。</li>
+</ul>
+</li>
+<li>调用父类的方法<ul>
+<li>super.方法名(参数);</li>
+</ul>
+</li>
+</ul>
+<h3 id="方法覆盖">方法覆盖</h3><ul>
+<li>有时候子类需要修改父类中定义的方法，这叫做<code>方法覆盖(method overriding)</code>。<ul>
+<li>为了覆盖方法，子类定义的方法必须与父类方法具有相同的头标志和相同的返回值类型。（使用ctrl+c、ctrl+v）</li>
+<li>实例方法仅当可访问时才能被覆盖。如果子类中定义的方法在父类中是私有的，那么这两个方法完全没有关系。</li>
+<li>静态方法也能继承，但不能被覆盖。如果父类中定义的静态方法在子类中重新定义，父类的方法将被隐藏。</li>
+</ul>
+</li>
+</ul>
+<h3 id="对象类Object">对象类Object</h3><ul>
+<li>Java中的每个类都源于java.lang.Object类。如果一个类在定义时没有指定继承谁，它的父类就是Object。</li>
+<li><p>Object类的常用实例方法</p>
+<ul>
+<li>equals()方法：检验两个对象是否相等。其默认实现为：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span> <span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (<span class="keyword">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>由此可知，Object类中的equals()方法相当于使用==运算符。因此，Object类的子类很有必要修改equals方法，以便检验两个不同的对象是否具有相同的内容。</p>
+<ul>
+<li>hashCode()方法：调用对象的hashCode()方法返回该对象的哈希代码。<ul>
+<li><code>哈希码（hash code）</code>是一个整数，用于在混杂集合中存储并能快速查找对象。</li>
+<li>编写代码时，如果两个对象相等，它们的哈希码一定相同。两个不同的对象也可能具有相同的哈希码。</li>
+<li>在程序一次运行期间，多次调用hashCode方法应该返回相同的整数，对不同的运行可以返回不同的整数。</li>
+</ul>
+</li>
+<li>toString()方法：返回一个代表该对象的字符串。默认情况下，返回一个由该对象所属的类名、at符号（@）和该对象十六进制的哈希码组成的字符串。</li>
+</ul>
+</li>
+</ul>
+<h3 id="多态性、动态绑定和一般程序设计">多态性、动态绑定和一般程序设计</h3><ul>
+<li>继承关系使一个子类继承父类的特征，并可以附加一些自己的新特征。子类是父类的某种专门化，每一个子类的实例都是父类的实例。因此对于需要父类类型的参数，总可以传入子类的实例。</li>
+<li>为父类对象设计的任何形式的代码都可以应用于子类，这个特征称为<code>多态性（polymorphism）</code>。</li>
+<li><code>动态绑定（dynamic binding）</code>：代码提供多种实现，采用哪一种实现由Java虚拟机在运行时动态决定。<ul>
+<li>动态绑定工作机制如下： //todo</li>
+</ul>
+</li>
+<li>多态性一般允许方法使用范围更广的对象参数，这称为<code>一般程序设计（generic programming）</code>。</li>
+</ul>
+<h3 id="对象类型转换和instanceof运算符">对象类型转换和instanceof运算符</h3><ul>
+<li>转换可以把一个类的对象转换为继承链中的另一个对象。</li>
+<li><p><code>隐式类型转换（implicit casting）</code>：子类的实例永远是父类的实例，因此可以将一个子类的实例转换为父类的一个变量。这称为<code>向上转换（upcasting）</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Fruit f = <span class="keyword">new</span> apple();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>显式类型转换（explicit casting）</code>：父类对象不一定是子类的实例，因此转换需要显式的告诉编译器转换的类型。把父类的实例转换成它的子类变量，这称为<code>向下转换（downcasting）</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Apple a = (Apple)f;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为了确保显式转换能成功，可以用运算符instanceof来判断：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(f <span class="keyword">instanceof</span> Apple) &#123;</span><br><span class="line">	Apple a = (Apple)f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为了能够进行一般程序设计，一个好的做法是把变量声明为父类类型，这样它可以接收任何子类类型的值。</p>
+</li>
+</ul>
+<h3 id="隐藏数据域和静态方法">隐藏数据域和静态方法</h3><ul>
+<li>可以覆盖一个实例方法，但不能覆盖一个数据域（实例或静态的）或静态方法。如果在子类中声明的数据域或静态方法与父类中的名字相同，父类中的将被隐藏，但是它依然存在。在子类中可以使用关键字super调用隐藏的数据域或静态方法，隐藏的域或方法也可以通过父类类型的引用变量来访问。</li>
+<li>使用引用变量调用实例方法时，变量所引用对象的实际类在运行时决定使用该方法的哪个实现。访问数据域或静态方法是，引用变量所声明的类型在编译时决定使用哪个数据域或静态方法。</li>
+</ul>
+<h3 id="protected数据和方法">protected数据和方法</h3><ul>
+<li>保护的（protected）修饰符可以应用于类中的数据和方法。公用类中保护的数据或方法可以被<code>它的子类或同一包中的任何类</code>访问，即使子类在不同的包中也可以。</li>
+<li>使用可见性修饰符<br>修饰符private、protected、public称为<code>可见性修饰符（visibility modifier）</code>或<code>访问性修饰符（accessible modifier）</code>，因为他们指定类和类的成员如何被访问。这些修饰符的可见性按下面的顺序递增：<pre><code>               可见性逐渐增加
+         -------------------------→
+<span class="keyword">private</span>，空（如果没有修饰符），<span class="keyword">protected</span>，<span class="keyword">public</span>
+</code></pre></li>
+</ul>
+<h3 id="final类、方法和变量">final类、方法和变量</h3><ul>
+<li>用final修饰符说明一个类是终极的（final），不能做父类。例如：Math类。</li>
+<li>也可以把方法定义为终极的，终极方法不能被它的子类覆盖。<br><strong>方法内的终极局部变量就是常量。</strong></li>
+</ul>
+<h3 id="finalize、clone和getclass方法">finalize、clone和getclass方法</h3><ul>
+<li><p>finalize()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>当一个对象变成垃圾时，finalize方法会被该对象的垃圾回收程序调用。</li>
+<li>默认情况下，finalize方法不做任何事。如果必要，子类应该覆盖finalize方法，释放系统资源或进行其他清洁工作。<br><strong>finalize方法是有Java虚拟机调用的，在自己的程序中不要书写任何调用该方法的代码。</strong></li>
+</ul>
+</li>
+<li>clone方法<ul>
+<li>要创建一个有单独内存空间的新对象，使用clone()方法。</li>
+<li>不是所有对象都可以被克隆。要成为一个可克隆的对象，它的类必须实现java.lang.Cloneable接口。</li>
+</ul>
+</li>
+<li>getClass方法<ul>
+<li>一个类在使用时必须先装入。Java虚拟机装入类是，创建一个包含类信息的对象，这些信息有类名、构造方法和方法等。这个对象是java.lang.Class的一个实例，因为它描述有关类的信息，称它为<code>元对象（meta-object）</code>。每个对象都可以使用getClass()方法返回它的元对象。</li>
+<li>一个类只有一个元对象。每个对象都有一个元对象，如果两个对象是从同一个类创建的，那么它们的元对象相同。</li>
+</ul>
+</li>
+</ul>
+<h3 id="初始化模块">初始化模块</h3><ul>
+<li><code>初始化模块（initialization block）</code>：是一个用大括号括住的语句块，它位于类的声明中，但是不在方法或构造方法内。它的作用就像把它放在了类中每个构造方法最开始的位置。</li>
+<li>一个类可以有多个初始化模块。在这种情况下，模块按照它们在类中出现的顺序执行。</li>
+<li>初始化模块分为<code>实例初始化模块（instance initialization block）</code>和<code>静态初始化模块（static initialization block）</code>。</li>
+<li>包含初始化模块的程序的执行顺序如下：<br>1、类装载：静态数据域，静态初始化模块<br>2、类创建：构造方法，实例数据域，实例初始化模块<br>3、类运行：实例方法体</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>子类不是父类的自给，子类可以在父类的基础上进行扩展。</li>
+<li>如果一个类设计成子类，最好提供一个无参构造方法以避免程序错误。</li>
+<li>多态存在的条件：<br>1、要有继承<br>2、要有重写<br>3、父类引用指向子类对象</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><p>习题8.2 8.4源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter8/src" target="_blank" rel="external">chapter8</a></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -1423,144 +2421,106 @@ GUI组件
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容Java中，将字符串看作是对象，提供了String类、StringBuffer类和StringTokenizer类来存储和处理字符串。本章总结字符串(string)的处理。
-字
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/26/Java学习总结-第七章-字符串/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/26/Java学习总结-第六章-对象和类/" itemprop="url">
-                  Java学习总结--第六章 对象和类
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-26T17:30:41+08:00" content="2016-01-26">
-              2016-01-26
-            </time>
-          </span>
-
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>Java中，将字符串看作是对象，提供了String类、StringBuffer类和StringTokenizer类来存储和处理字符串。本章总结<code>字符串(string)</code>的处理。</p>
+<h3 id="字符串类String">字符串类String</h3><ul>
+<li><p>字符串的<code>快捷初始化(shorthand initializer)</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String string = <span class="keyword">new</span> String(<span class="string">"xxx"</span>);</span><br><span class="line">String message = <span class="string">"xxx"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>永久字符串与规范字符串</p>
+<ul>
+<li>字符串是永久的。</li>
+<li>如果两个String对象是通过快捷初始化用相同的字符串直接量构造的，则Java虚拟机为了提高效率，将它们存储在同一对象中。这样的字符串称为<code>规范字符串（canonical string）</code>。</li>
+</ul>
+</li>
+<li>可以使用String对象的intern方法返回一个规范字符串，这种字符串与使用快捷初始化创建的字符串相同。</li>
+<li>String类的几个常用方法<ul>
+<li>charAt(int index) 提取指定字符</li>
+<li>length() 返回数组的长度</li>
+<li>concat（String s） 连接字符串s</li>
+<li>subString(int beginIndex) 返回从beginIndex开始到结束的字符串</li>
+<li>subString(int beginIndex，int endIndex) 返回从beginIndex开始到endIndex-1的字符串</li>
+<li>regionMathches() 比较两个字符串的某一部分是否相等</li>
+</ul>
+</li>
+<li>字符串的比较<ul>
+<li>使用”==”运算符检测两个字符串是否具有相同的引用。</li>
+<li>使用equals()方法对对象的内容进行比较。</li>
+<li>使用compareTo()方法比较两个字符串。返回值由字典序决定。</li>
+</ul>
+</li>
+<li>字符串的转换<ul>
+<li>toLowerCase() 将字符串转换成小写</li>
+<li>toUpperCase() 将字符串转换成大写</li>
+<li>trim() 删除字符串两端的空格</li>
+<li>replace(oldChar,newChar) 用新的字符替换旧的字符</li>
+<li>replaceAll(oldChar,newChar) 用新的字符替换全部旧的字符</li>
+</ul>
+</li>
+<li>获取字符串中的一个字符或子串<ul>
+<li>indexOf() 得到某个字符</li>
+<li>lastIndexOf() 得到某个字符串</li>
+</ul>
+</li>
+<li>字符串与数组之间的转换<ul>
+<li>字符串转换为数组： toCharArray() 方法</li>
+<li>数组转换为字符串： 使用构造方法String(char[])或者valueOf(char[])方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="字符类Character">字符类Character</h3><ul>
+<li>常用的方法如下：<ul>
+<li>charValue() 返回该对象的char值</li>
+<li>is<em>() 判断该字符是否是</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="字符串缓冲类StringBuffer">字符串缓冲类StringBuffer</h3><ul>
+<li>StringBuffer类比String类更加灵活，可以在字符缓冲区中添加、插入或追加新的内容。字符串一旦创建后，它的值就不再改变。</li>
+<li>常用方法如下：<ul>
+<li>append() 在字符缓冲区中追加</li>
+<li>deleteCharAt() 删除特定的字符</li>
+<li>setCharAt() 在特定位置设置一个新字符</li>
+<li>insert() 插入一个新内容</li>
+<li>reverse() 倒置字符串缓冲区中字符的顺序</li>
+<li>capacity() 返回字符串缓冲区的现有容量<br><strong>String类的方法StringBuffer类同样拥有</strong></li>
+</ul>
+</li>
+<li>字符串的长度一定小于或等于缓冲区的容量。如果字符串的长度超过了缓冲区的容量，则缓冲区的容量将会变成2*（原缓冲区容量+1），因为在计算机内部，字符串缓冲区是一个字符数组。</li>
+</ul>
+<h3 id="字符串令牌类StringTokenizer">字符串令牌类StringTokenizer</h3><ul>
+<li>该类用来将字符串分解为片段，以便提取和处理字符串中的信息。</li>
+<li>常用方法：<ul>
+<li>StringTokenizer(String s,String delim,boolean returnDelims)<br>使用指定的定界符构造字符串s的一个StringTokenizer对象。字符串delim中的每一个字符都是定界符。如果returndelims为true，那么定界符也看成令牌。</li>
+<li>StringTokenizer(String s)<br>使用默认的定界符“\t \n \sr”（空格、制表符、换行符和回车符）构造字符串s的一个StringTokenizer对象，并且定界符不能算作令牌。</li>
+<li>countTokens() 返回所包含的令牌数</li>
+<li>hasMoreTokens() 如果该对象中还有令牌，返回true</li>
+<li>nextToken() 返回下一个令牌</li>
+</ul>
+</li>
+</ul>
+<h3 id="字符串扫描类Scanner">字符串扫描类Scanner</h3><ul>
+<li>StringTokenizer中，定界符是单个字符，使用Scanner类useDelimiter()方法，来指定一个单词作为定界符。</li>
+<li>Scanner类可以实现从键盘中读取输入。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Scanner s = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="命令行参数">命令行参数</h3><ul>
+<li>使用如下命令行可以从命令行向main方法传递参数，参数保存在String[]类型的args数组中。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java className arg0 arg1 arg2 ……</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>String类重写了equals()方法，因此可以用string.equals(string1)比较两个字符串；StringBuffer没有重写equals()方法，因此不能直接使用。</li>
+<li>equals()方法最初是用来比较地址是否相等的。</li>
+<li>StringTokenizer类没有无参构造方法。一个方法是否需要有无参构造方法取决于无参构造方法是否有意义，对StringTokenizer类来说，StringTokenizer对象必须是为某个字符串而创建的，因此不需要无参构造方法。</li>
+<li>使用eclipse或者Intellij时，如果需要向main方法传递参数，乘号必须写成<code>&quot; *&quot;</code>或<code>&quot;* &quot;</code>才能正常显示结果。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><p>习题7.3 7.4 7.5 7.7 7.9 7.11 7.12 7.14 7.18源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter7/src" target="_blank" rel="external">chapter7</a></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/26/Java学习总结-第六章-对象和类/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/26/Java学习总结-第六章-对象和类/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容面向对象程序设计把数据和属于它们的操作放入一个叫做对象（object）的整体中，所有对象都与属性和活动联系在一起，这样做使程序更容易开发和维护。本章将介绍面向对象程序设计的基本
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/26/Java学习总结-第六章-对象和类/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
@@ -1632,7 +2592,7 @@ GUI组件
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1640,7 +2600,7 @@ GUI组件
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1649,7 +2609,7 @@ GUI组件
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1728,7 +2688,7 @@ GUI组件
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[凡是涉及到技术的事，都不是别人的事。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-05-29T14:25:53.658Z</updated>
+  <updated>2016-09-14T16:17:29.856Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -15,11 +15,62 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[PostgreSQL使用手记]]></title>
+    <link href="http://www.whtis.com/2016/09/14/PostgreSQL%E4%BD%BF%E7%94%A8%E6%89%8B%E8%AE%B0/"/>
+    <id>http://www.whtis.com/2016/09/14/PostgreSQL使用手记/</id>
+    <published>2016-09-14T14:29:13.000Z</published>
+    <updated>2016-09-14T16:17:29.856Z</updated>
+    <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p><blockcode><br>&emsp;&emsp;因为项目需要，要将本来的<code>mybatis+mysql</code>改为<code>mybatis+postgresql</code>,使用途中难免遇到坑，以下是我遇到的，记录下来供参考。好久没写blog，感觉都快长草了，目前在想要不要开一个分类，写点日常废话😂<br></blockcode><br>&emsp;&emsp;好了，言归正传。</p>
+<h3 id="为什么要用PostgreSQL">为什么要用PostgreSQL</h3><p>为什么要用呢,上面已经说了，项目需要。postgresql经常被拿来和mysql进行比较，postgresql可以用来存储较大的对象数据（文本、视频、图片等），符合项目要求。</p>
+<h3 id="什么是PostgreSQL">什么是PostgreSQL</h3><p>念都不知道怎么念的一个词，确实第一感觉没有mysql好。看下官方的说法：</p>
+<blockquote>
+<p>PostgreSQL支持大部分 SQL标准并且提供了许多其他现代特性：复杂查询、外键、触发器、视图、事务完整性、MVCC。同样，PostgreSQL 可以用许多方法扩展，比如， 通过增加新的数据类型、函数、操作符、聚集函数、索引。免费使用、修改、和分发 PostgreSQL，不管是私用、商用、还是学术研究使用。(摘自百度百科)</p>
+</blockquote>
+<h3 id="使用版本">使用版本</h3><p>本文总结基于PostgreSQL 9.4版本</p>
+<h3 id="安装及使用">安装及使用</h3><p>推荐下阮一峰写的这篇博客<a href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html" target="_blank" rel="external">PostgreSQL新手入门</a></p>
+<h3 id="使用中出现的错误及解决方案">使用中出现的错误及解决方案</h3><h4 id="错误一：_java-sql-SQLException:_No_suitable_driver_found_for_jdbc:postgresql://yourhost:port">错误一： <code>java.sql.SQLException: No suitable driver found for jdbc:postgresql://yourhost:port</code></h4><ul>
+<li>可能的错误原因：<ul>
+<li>使用的postgresql的驱动与当前使用的jdk版本不兼容。具体兼容情况参见官方文档，本文仅作摘录：</li>
+<li>系统环境没有配置classpath路径，使的程序无法找到驱动的位置。（使用java IDE编写代码时一般不会出现这种情况）</li>
+<li><strong>连接jdbc时url没写正确，一定要再三检查下正确的url</strong>（这一条很恶心，url错误时的提示我遇到过两种，一种是本条目列出的错误，另一种是提示字符编码有问题）</li>
+</ul>
+</li>
+</ul>
+<h4 id="错误二：_Error_querying_database-_Cause:_org-postgresql-util-PSQLException:_ERROR:_CREATE_DATABASE_cannot_run_inside_a_transaction_block">错误二： <code>Error querying database.  Cause: org.postgresql.util.PSQLException: ERROR: CREATE DATABASE cannot run inside a transaction block</code></h4><ul>
+<li><p>可能的错误原因：</p>
+<ul>
+<li><p>根据网上查到的资料，单独使用postgresql时，出现这个错误的原因是因为没有打开自动提交。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c = DriverManager.getConnection(<span class="string">"jdbc:postgresql://yourhost"</span>, <span class="string">"username"</span>, <span class="string">"password"</span>);</span><br><span class="line">     c.setAutoCommit(<span class="keyword">true</span>); <span class="comment">// 把自动提交设置为true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我在项目中单独使用Mybatis进行事务管理，管理<code>PostgreSQL</code>时也会出现这个错误，因为Mybatis封装了<code>java.sql.*</code>相关的类,因此无法按照上面方式进行更改，在Mybatis中打开一个会话时，也应该将其设置为自动提交（mysql无需设置）：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SqlSession sqlSession = sqlSessionFactory.openSession(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>总结：出现这个问题，网上给的解决方法大多是因为没有打开自动提交，但是仅仅在portgresql控制台上执行<code>SET AUTOCOMMIT = on</code>是无用的，至于为什么需要打开自动提交才能创建数据库，这个不太清楚，可能跟<code>PostgreSQL</code>自己的事务管理逻辑有关，而且这样改动后，暂时不知道会不会对之后的数据库操作造成影响</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用PostgreSQL存储大文件">使用PostgreSQL存储大文件</h3><p>待编辑</p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="写在前面">写在前面</h3><p><blockcode><br>&emsp;&emsp;因为项目需要，要将本来的<code>mybatis+mysql</code>改为<code>mybatis+postgresql</code>,使用途中难免遇到坑，以下是我遇]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="数据库，PostgreSQL" scheme="http://www.whtis.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8CPostgreSQL/"/>
+    
+      <category term="SQL" scheme="http://www.whtis.com/categories/SQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Java学习笔记--设置代理及打开外部程序]]></title>
     <link href="http://www.whtis.com/2016/05/29/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86%E5%8F%8A%E6%89%93%E5%BC%80%E5%A4%96%E9%83%A8%E7%A8%8B%E5%BA%8F/"/>
     <id>http://www.whtis.com/2016/05/29/Java学习笔记-设置代理及打开外部程序/</id>
     <published>2016-05-29T12:14:59.000Z</published>
-    <updated>2016-05-29T14:25:53.658Z</updated>
+    <updated>2016-09-14T15:50:10.235Z</updated>
     <content type="html"><![CDATA[<h3 id="设置系统代理">设置系统代理</h3><ul>
 <li><p>系统设置全局代理</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.getProperties().setProperty(<span class="string">"proxySet"</span>, <span class="string">"true"</span>);</span><br><span class="line">System.getProperties().setProperty(<span class="string">"http.proxyHost"</span>, <span class="string">"ip"</span>);</span><br><span class="line">System.getProperties().setProperty(<span class="string">"http.proxyPort"</span>, port);</span><br></pre></td></tr></table></figure>
@@ -31,7 +82,7 @@
 <h3 id="打开外部程序">打开外部程序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Process p = Runtime.getRuntime().exec(<span class="string">"cmd command"</span>);</span><br></pre></td></tr></table></figure>
 <p><strong>如果外部程序放在一个单独的线程中执行，需要注意的是：该线程执行完并不代表着外部程序也执行完相应的任务。</strong></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<h3 id="设置系统代理">设置系统代理</h3><ul>
 <li><p>系统设置全局代理</p>
@@ -53,7 +104,7 @@
     <link href="http://www.whtis.com/2016/05/05/HttpClient4-x%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
     <id>http://www.whtis.com/2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/</id>
     <published>2016-05-05T14:38:39.000Z</published>
-    <updated>2016-05-29T02:33:04.912Z</updated>
+    <updated>2016-09-14T15:46:45.590Z</updated>
     <content type="html"><![CDATA[<p>最近才开始接触这个工具包，官网上目前已经更新到<a href="http://hc.apache.org/downloads.cgi" target="_blank" rel="external">HttpClient4.5.2</a>了。google的时候看到HttpClient从4.0版本改了底层，因此使用时会出现一些方法不再适用的问题，这里记录出现的一些问题以及相应替代的方法。</p>
 <p>1、 创建HttpClient时使用下面的语句，会出现<code>org.apache.http.impl.client.DefaultHttpClient&#39; is deprecated</code><br>    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = <span class="keyword">new</span> DefaultHttpClient();</span><br></pre></td></tr></table></figure></p>
 <p>   可以使用如下语句代替：<a href="http://stackoverflow.com/questions/15336477/deprecated-java-httpclient-how-hard-can-it-be" target="_blank" rel="external">来源</a><br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = HttpClientBuilder.create().build();</span><br></pre></td></tr></table></figure></p>
@@ -61,7 +112,7 @@
 <p>2、 设置代理，HttpClient4.5.2版本可以使用如下语句：<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建代理</span></span><br><span class="line">HttpHost proxy = <span class="keyword">new</span> HttpHost(<span class="string">"your proxy IP"</span>, port);</span><br><span class="line">RequestConfig config = RequestConfig.custom().setProxy(proxy).build();</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置HttpPost/HttpGet使用代理</span></span><br><span class="line">httpost.setConfig(config);</span><br></pre></td></tr></table></figure></p>
 <p>3、get或post时，如果访问的网站是https协议的，可以用如下方式访问：信任所有证书，如果可以具体到每个证书，就更好了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">            SSLContext sslContext = <span class="keyword">new</span> SSLContextBuilder().loadTrustMaterial(<span class="keyword">null</span>, <span class="keyword">new</span> TrustStrategy() &#123;</span><br><span class="line">                <span class="comment">//信任所有</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTrusted</span><span class="params">(X509Certificate[] chain,</span><br><span class="line">                                         String authType)</span> <span class="keyword">throws</span> CertificateException </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).build();</span><br><span class="line">            SSLConnectionSocketFactory sslsf = <span class="keyword">new</span> SSLConnectionSocketFactory(sslContext);</span><br><span class="line">            <span class="keyword">return</span> HttpClients.custom().setSSLSocketFactory(sslsf).build();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeyManagementException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeyStoreException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> HttpClients.createDefault();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p>最近才开始接触这个工具包，官网上目前已经更新到<a href="http://hc.apache.org/downloads.cgi" target="_blank" rel="external">HttpClient4.5.2</a>了。google的时候看到HttpCl]]>
     </summary>
@@ -77,10 +128,10 @@
     <link href="http://www.whtis.com/2016/04/21/Java%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/"/>
     <id>http://www.whtis.com/2016/04/21/Java阶段性总结/</id>
     <published>2016-04-21T10:29:08.000Z</published>
-    <updated>2016-04-21T12:56:51.690Z</updated>
+    <updated>2016-09-14T15:50:25.355Z</updated>
     <content type="html"><![CDATA[<p>花了大半年的时间，算是彻底从头看了一遍Java的基本知识，参考书籍是《Java语言程序设计》原书第五版，作者为Y.daniel Liang，基础篇和提高篇中的重要内容都摘录在了之前的文章中。本文就是对之前的Java总结做个分类，方便自己以后回顾。</p>
 <h3 id="第一篇_程序设计基础（1~5章）">第一篇 程序设计基础（1~5章）</h3><h5 id="第一章_计算机、程序和Java概述"><a href="http://www.whtis.com/2015/12/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E3%80%81%E7%A8%8B%E5%BA%8F%E5%92%8CJava%E6%A6%82%E8%BF%B0/">第一章 计算机、程序和Java概述</a></h5><h5 id="第二章_基本数据类型和基本操作"><a href="http://www.whtis.com/2015/12/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">第二章 基本数据类型和基本操作</a></h5><h5 id="第三章_控制语句"><a href="http://www.whtis.com/2016/01/10/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">第三章 控制语句</a></h5><h5 id="第四章_方法"><a href="http://www.whtis.com/2016/01/11/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%96%B9%E6%B3%95/">第四章 方法</a></h5><h5 id="第五章_数组"><a href="http://www.whtis.com/2016/01/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%95%B0%E7%BB%84/">第五章 数组</a></h5><h3 id="第二篇_面向对象程序设计（6~10章）">第二篇 面向对象程序设计（6~10章）</h3><h5 id="第六章_对象和类"><a href="http://www.whtis.com/2016/01/26/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB/">第六章 对象和类</a></h5><h5 id="第七章_字符串"><a href="http://www.whtis.com/2016/01/26/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2/">第七章 字符串</a></h5><h5 id="第八章_继承和多态"><a href="http://www.whtis.com/2016/01/27/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/">第八章 继承和多态</a></h5><h5 id="第九章_抽象类和接口"><a href="http://www.whtis.com/2016/01/28/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/">第九章 抽象类和接口</a></h5><h5 id="第十章_面向对象建模"><a href="http://www.whtis.com/2016/01/29/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BB%BA%E6%A8%A1/">第十章 面向对象建模</a></h5><h3 id="第三篇_图形用户界面设计（11~13章）">第三篇 图形用户界面设计（11~13章）</h3><h5 id="第十一章_图形用户界面程序设计"><a href="http://www.whtis.com/2016/02/05/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">第十一章 图形用户界面程序设计</a></h5><h5 id="第十二章_事件驱动程序"><a href="http://www.whtis.com/2016/02/09/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F/">第十二章 事件驱动程序</a></h5><h5 id="第十三章_创建图形用户界面"><a href="http://www.whtis.com/2016/02/15/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0-%E5%88%9B%E5%BB%BA%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2/">第十三章 创建图形用户界面</a></h5><h3 id="第四篇_异常处理、I/O（15~16章）">第四篇 异常处理、I/O（15~16章）</h3><h5 id="第十五章_异常和断言"><a href="http://www.whtis.com/2016/01/30/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0-%E5%BC%82%E5%B8%B8%E5%92%8C%E6%96%AD%E8%A8%80/">第十五章 异常和断言</a></h5><h5 id="第十六章_简单输入输出"><a href="http://www.whtis.com/2016/02/18/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0-%E7%AE%80%E5%8D%95%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/">第十六章 简单输入输出</a></h5><h3 id="第五篇_数据结构与集合架构">第五篇 数据结构与集合架构</h3><h5 id="第十七章_面向对象数据结构"><a href="http://www.whtis.com/2016/03/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">第十七章 面向对象数据结构</a></h5><h5 id="第十八章_Java集合架构"><a href="http://www.whtis.com/2016/04/01/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-Java%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84/">第十八章 Java集合架构</a></h5><h3 id="第六篇_多线程">第六篇 多线程</h3><h5 id="第十九章_多线程"><a href="http://www.whtis.com/2016/04/10/java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">第十九章 多线程</a></h5><h3 id="网络">网络</h3><h5 id="第二十八章_网络"><a href="http://www.whtis.com/2016/04/16/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E7%AB%A0-%E7%BD%91%E7%BB%9C/">第二十八章 网络</a></h5><hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p>花了大半年的时间，算是彻底从头看了一遍Java的基本知识，参考书籍是《Java语言程序设计》原书第五版，作者为Y.daniel Liang，基础篇和提高篇中的重要内容都摘录在了之前的文章中。本文就是对之前的Java总结做个分类，方便自己以后回顾。</p>
 <h3 id="第]]>
@@ -101,7 +152,7 @@
     <link href="http://www.whtis.com/2016/04/16/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E7%AB%A0-%E7%BD%91%E7%BB%9C/"/>
     <id>http://www.whtis.com/2016/04/16/Java学习总结-第二十八章-网络/</id>
     <published>2016-04-16T13:43:48.000Z</published>
-    <updated>2016-04-21T10:28:16.965Z</updated>
+    <updated>2016-09-14T15:47:40.613Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p><code>基于套接字的通信</code>可以使程序通过指定的套接字进行通信。<code>套接字（socket）</code>是两个主机之间逻辑连接的端点，可以用于发送和接收数据。<br>Java支持流套接字和数据报套接字。<code>流套接字（stream socket）</code>使用传输控制协议（Transmission Control Protocol，TCP）进行数据传输，而<code>数据报套接字（datagram socket）</code>使用的是用户数据报协议（User Datagram Protocol，UDP）。</p>
@@ -200,7 +251,7 @@
 </li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -222,7 +273,7 @@
     <link href="http://www.whtis.com/2016/04/10/java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     <id>http://www.whtis.com/2016/04/10/java学习总结-第十九章-多线程/</id>
     <published>2016-04-10T15:17:34.000Z</published>
-    <updated>2016-04-21T12:56:34.795Z</updated>
+    <updated>2016-09-14T15:48:53.661Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>Java支持<code>多线程（multithreading）</code>。多线程是指在一个程序中允许同时运行多个任务的能力。</p>
@@ -351,7 +402,7 @@
 </li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -373,7 +424,7 @@
     <link href="http://www.whtis.com/2016/04/01/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-Java%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84/"/>
     <id>http://www.whtis.com/2016/04/01/Java学习总结-第十八章-Java集合架构/</id>
     <published>2016-04-01T03:41:32.000Z</published>
-    <updated>2016-04-04T15:59:10.447Z</updated>
+    <updated>2016-09-14T15:49:25.196Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>数组线性表和链表是Java中的预定义结构。除此之外，Java还引入了几种可以有效组织和处理数据的接口和类，这些接口和类组成了<code>Java集合架构（Java Collection Framework）</code>。<br>一个<code>集合（collection）</code>就是一个存储一组对象的容器，一般将这些对象称为集合的<code>元素（element）</code>。Java集合构架支持三种类型的集合：<code>规则集（set）、线性表（list）和图（map）</code>，它们分别定义在接口Set、List与Map中。Set的实例存储一组互不相同的元素，List的实例存储一组顺序排列的元素，Map的实例存储一组对象，每个对象都有一个关联的键值。</p>
@@ -471,7 +522,7 @@
 </li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -493,7 +544,7 @@
     <link href="http://www.whtis.com/2016/03/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     <id>http://www.whtis.com/2016/03/22/Java学习总结-第十七章-面向对象数据结构/</id>
     <published>2016-03-22T15:44:38.000Z</published>
-    <updated>2016-04-01T04:32:59.121Z</updated>
+    <updated>2016-09-14T15:48:34.332Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>数据结构是按某种方式组织的数据集合。用面向对象的观点来看，一个数据结构就是一个存储着其他对象的对象，存储在数据结构内的对象称为数据或元素。因此数据结构又被称为<code>容器对象（container object）</code>或<code>集合对象（collection object）</code>。<br>本章介绍线性表、堆栈、队列和二叉树等四种动态数据结构。</p>
@@ -550,7 +601,7 @@
 </li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -572,11 +623,11 @@
     <link href="http://www.whtis.com/2016/03/05/base64%E7%BC%96%E7%A0%81%E5%92%8C%E8%A7%A3%E7%A0%81%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81/"/>
     <id>http://www.whtis.com/2016/03/05/base64编码和解码示例代码/</id>
     <published>2016-03-05T15:55:01.000Z</published>
-    <updated>2016-03-05T16:01:07.018Z</updated>
+    <updated>2016-09-14T15:46:10.654Z</updated>
     <content type="html"><![CDATA[<p>写密码管理器时，一直在找一种加密方式，除了自己实现外，我还在网上发现了一个不错的方法，<a href="http://www.q3060.com/list6/list144/2717.html" target="_blank" rel="external">源地址在这里</a>。这里仅作抄录：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sun.misc.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by ht on 2016/2/24.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testorigin</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        TransformBS1 transformBS = <span class="keyword">new</span> TransformBS1();</span><br><span class="line">        transformBS.testS2B();</span><br><span class="line">        transformBS.testB2S();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 今天在网上看到一个程序游戏，只要目的是为了能够将文件中的01二进制数据读取到程序然后通过base64解码，再转换成程序</span><br><span class="line"> * 所以，自己写了个程序：（1）将一段字符串进行base64处理，然后转换成二进制输出。（2）将一段二进制数据转换成字符串，然后base64解码到对应的字符串</span><br><span class="line"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TransformBS1</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * @ see 字符串进行base64编码后转换为二进制形式,如：（h(原字符)-&gt;a(编码后)-&gt;01100001010000010011110100111101(二进制形式)）</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testS2B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"=========字符串到二进制！============="</span>);</span><br><span class="line">        BASE64Encoder e = <span class="keyword">new</span> BASE64Encoder();</span><br><span class="line"><span class="comment">//编码器</span></span><br><span class="line">        String s = <span class="string">"我爱你"</span>;</span><br><span class="line">        System.out.println(<span class="string">"尚未编码的数据："</span> + s);</span><br><span class="line">        s = e.encode(s.getBytes());</span><br><span class="line"><span class="comment">//获得base64编码后的字符串</span></span><br><span class="line">        System.out.println(<span class="string">"编码后的数据："</span> + s);</span><br><span class="line">        System.out.print(<span class="string">"二进制数据："</span>);</span><br><span class="line">        String s1 = <span class="string">"whtis\n"</span> + <span class="string">"我爱你\n"</span> + s;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> c : s1.toCharArray()) &#123;</span><br><span class="line"><span class="comment">//对字符串中的字符逐个转换成二进制数据</span></span><br><span class="line">            String binaryStr = Integer.toBinaryString(c);</span><br><span class="line"><span class="comment">//单个字符转换成的二进制字符串</span></span><br><span class="line">            String format = String.format(<span class="string">"%8s"</span>, binaryStr);</span><br><span class="line"><span class="comment">//因为上面转换成二进制后的位数不够8位所以不足的前面补空格，这里是考虑到能够从数据文件批量读取。</span></span><br><span class="line">            format = format.replace(<span class="string">" "</span>, <span class="string">"0"</span>);</span><br><span class="line"><span class="comment">//高位空格替换成0，其实编码后的数据最大范围为2的6次方，首位一定是空格，不然就要用format.startWith(" ");来判断</span></span><br><span class="line">            System.out.print(format);</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\n=========字符串到二进制结束！============="</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * @ see 二进制形式转换为字符串后进行base64解码的字符串如：(01100001010000010011110100111101-&gt;a-&gt;h)</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testB2S</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"=========二进制到字符串开始！============="</span>);</span><br><span class="line">        StringBuffer results = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"><span class="comment">//保存尚未解码的数据结果</span></span><br><span class="line">        String binaryStr = <span class="string">"01110111011010000111010001101001011100110000101011000100001000111100100011000110011110110000000001010001101010110111101101001010100100011010100110100011010010111100000110101010011000011001001100111"</span>;</span><br><span class="line"><span class="comment">//二进制数据，这里是取用上面程序的最后结果</span></span><br><span class="line">        System.out.println(<span class="string">"二进制数据："</span> + binaryStr);</span><br><span class="line"><span class="comment">//这里采用正则表达式来匹配8位长度的数据，然后一个个find()</span></span><br><span class="line">        Matcher matcher = Pattern.compile(<span class="string">"\\d&#123;8&#125;"</span>).matcher(binaryStr);</span><br><span class="line"><span class="comment">//定义匹配模式并，获取模式</span></span><br><span class="line">        BASE64Decoder d = <span class="keyword">new</span> BASE64Decoder();</span><br><span class="line"><span class="comment">//解码器</span></span><br><span class="line">        <span class="keyword">while</span> (matcher.find()) &#123;</span><br><span class="line"><span class="comment">//在binaryStr中找到了8位长度的数据，依次往后面找</span></span><br><span class="line">            <span class="keyword">int</span> intVal = Integer.valueOf(matcher.group(), <span class="number">2</span>);</span><br><span class="line"><span class="comment">//matcher.group()中存储了找到匹配模式的数据，这里以2进制的形式转换为整数</span></span><br><span class="line">            results.append((<span class="keyword">char</span>) intVal);</span><br><span class="line"><span class="comment">//将整数转换为对应的字符，并添加到结果中</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"尚未解码的数据："</span> + results);</span><br><span class="line"><span class="comment">//输出尚未解码的数据</span></span><br><span class="line">        String s = <span class="keyword">new</span> String(d.decodeBuffer(results.toString()));</span><br><span class="line"><span class="comment">//得到解码后的数据</span></span><br><span class="line">        System.out.println(<span class="string">"解码后的数据："</span> + s);</span><br><span class="line"><span class="comment">//输出解码后的数据</span></span><br><span class="line">        System.out.println(<span class="string">"=========二进制到字符串结束！============="</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p>写密码管理器时，一直在找一种加密方式，除了自己实现外，我还在网上发现了一个不错的方法，<a href="http://www.q3060.com/list6/list144/2717.html" target="_blank" rel="external">源地址在这里</]]>
     </summary>
@@ -594,7 +645,7 @@
     <link href="http://www.whtis.com/2016/02/20/GUI%E7%BB%83%E4%B9%A0%E4%B9%8B%E4%BA%8C-%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/"/>
     <id>http://www.whtis.com/2016/02/20/GUI练习之二-密码管理器/</id>
     <published>2016-02-20T13:31:46.000Z</published>
-    <updated>2016-03-05T15:42:17.978Z</updated>
+    <updated>2016-09-14T15:46:30.398Z</updated>
     <content type="html"><![CDATA[<h3 id="功能说明及演示">功能说明及演示</h3><p><del><strong>Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。</strong></del><br>北邮人论坛大神给了解决方案，<a href="http://bbs.byr.cn/#!article/Java/47997" target="_blank" rel="external">链接在这</a>，以下内容为复制粘贴：</p>
 <blockquote>
 <p>Swing不是线程安全的，但也不是大问题。只要把所有的对Swing窗体的的操作都放在专门的线程（event dispatch thread）里做就行了。有一个模式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SwingUtilities.invokeLater(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        createAndShowGUI();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
@@ -656,7 +707,7 @@
 </ul>
 <h3 id="源码">源码</h3><p>见我的GitHub：<a href="https://github.com/whtis/PasswordManager/tree/master/src" target="_blank" rel="external">PasswordManager</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<h3 id="功能说明及演示">功能说明及演示</h3><p><del><strong>Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。</strong></del><br>北邮人论坛大神给了解决方案，<a href="http://bbs.by]]>
     </summary>
@@ -676,7 +727,7 @@
     <link href="http://www.whtis.com/2016/02/18/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0-%E7%AE%80%E5%8D%95%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
     <id>http://www.whtis.com/2016/02/18/Java学习总结-第十六章-简单输入输出/</id>
     <published>2016-02-18T11:37:58.000Z</published>
-    <updated>2016-02-20T07:54:24.708Z</updated>
+    <updated>2016-09-14T15:49:34.036Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章主要讨论数据持久化的问题。一般Java程序在结束后所有存储在内存中的数据都会消失，为了保留这些数据，就要学会如何将它们存储到磁盘文件或光盘文件中。<br>本章介绍的主要是两个方面的内容：文本I/O和二进制I/O。为了知识的连贯性，需要先介绍相关的知识，以方便理解。<br><strong>计算机中所有文件都是以二进制格式来存储的。文本I/O是在二进制I/O基础上提供了一层抽象，它封装了字符的编码和解码过程，在文本I/O中自动进行编码和解码。</strong></p>
@@ -893,7 +944,7 @@
 <li>其余习题16.7 16.8 16.10 16.11源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter16/src" target="_blank" rel="external">chapter16</a></li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -915,7 +966,7 @@
     <link href="http://www.whtis.com/2016/02/16/GUI%E5%B0%8F%E7%BB%83%E4%B9%A0-%E7%AE%80%E6%98%93%E8%AE%A1%E7%AE%97%E5%99%A8/"/>
     <id>http://www.whtis.com/2016/02/16/GUI小练习-简易计算器/</id>
     <published>2016-02-16T10:51:30.000Z</published>
-    <updated>2016-02-20T09:04:38.773Z</updated>
+    <updated>2016-09-14T15:46:19.078Z</updated>
     <content type="html"><![CDATA[<h2 id="简易说明">简易说明</h2><ul>
 <li>学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：<ul>
 <li>基本的加减乘除四则运算</li>
@@ -974,7 +1025,7 @@
 <li>完整的代码见我的Github：<a href="https://github.com/whtis/Calculator" target="_blank" rel="external">Calculator</a></li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<h2 id="简易说明">简易说明</h2><ul>
 <li>学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：<ul>
@@ -1000,7 +1051,7 @@
     <link href="http://www.whtis.com/2016/02/15/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0-%E5%88%9B%E5%BB%BA%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2/"/>
     <id>http://www.whtis.com/2016/02/15/Java学习总结-第十三章-创建图形用户界面/</id>
     <published>2016-02-15T14:32:39.000Z</published>
-    <updated>2016-02-16T10:16:54.366Z</updated>
+    <updated>2016-09-14T15:48:42.637Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章综合第十一、十二章的内容，介绍GUI编程中常用的组件。</p>
@@ -1152,7 +1203,7 @@
 <li>习题13.1 13.4 13.5 13.8 13.10 13.14 13.15源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter13/src" target="_blank" rel="external">chapter13</a></li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -1174,7 +1225,7 @@
     <link href="http://www.whtis.com/2016/02/09/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F/"/>
     <id>http://www.whtis.com/2016/02/09/Java学习总结-第十二章-事件驱动程序/</id>
     <published>2016-02-09T15:19:47.000Z</published>
-    <updated>2016-04-21T12:34:46.778Z</updated>
+    <updated>2016-09-14T15:49:10.780Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>所有非GUI程序都是按过程的顺序执行的，Java GUI程序设计是事件驱动的。本章介绍有关Java<code>事件驱动程序（event-driven programming）</code>的概念和技术。</p>
@@ -1225,7 +1276,7 @@
 </li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -1247,7 +1298,7 @@
     <link href="http://www.whtis.com/2016/02/05/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/"/>
     <id>http://www.whtis.com/2016/02/05/Java学习总结-第十一章-图形用户界面程序设计/</id>
     <published>2016-02-05T14:17:17.000Z</published>
-    <updated>2016-02-11T08:53:20.595Z</updated>
+    <updated>2016-09-14T15:48:26.709Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章介绍Java GUI程序设计基础。讨论GUI组件以及它们的关系，介绍容器和布局管理器、颜色、字体、以及几何图形的绘制。</p>
@@ -1372,7 +1423,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题11.4源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter11/src" target="_blank" rel="external">chapter11</a><br><em>本章画图题较多，用到的时候再回来复习具体的东东吧~</em></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -1394,7 +1445,7 @@
     <link href="http://www.whtis.com/2016/01/30/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0-%E5%BC%82%E5%B8%B8%E5%92%8C%E6%96%AD%E8%A8%80/"/>
     <id>http://www.whtis.com/2016/01/30/Java学习总结-第十五章-异常和断言/</id>
     <published>2016-01-30T08:41:58.000Z</published>
-    <updated>2016-02-10T13:36:50.203Z</updated>
+    <updated>2016-09-14T15:49:17.604Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章介绍应用异常处理来处理运行错误，以及应用断言来确保程序的正确性。</p>
@@ -1489,7 +1540,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题15.5源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter15/src" target="_blank" rel="external">chapter15</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -1511,7 +1562,7 @@
     <link href="http://www.whtis.com/2016/01/29/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BB%BA%E6%A8%A1/"/>
     <id>http://www.whtis.com/2016/01/29/Java学习总结-第十章-面向对象建模/</id>
     <published>2016-01-29T10:48:33.000Z</published>
-    <updated>2016-02-10T13:36:56.994Z</updated>
+    <updated>2016-09-14T15:49:41.564Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章初步介绍使用面向对象的方法开发软件系统，学习类的设计原则。</p>
@@ -1596,7 +1647,7 @@
 </li>
 </ul>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -1618,7 +1669,7 @@
     <link href="http://www.whtis.com/2016/01/28/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/"/>
     <id>http://www.whtis.com/2016/01/28/Java学习总结-第九章-抽象类和接口/</id>
     <published>2016-01-28T09:03:02.000Z</published>
-    <updated>2016-02-10T13:35:56.683Z</updated>
+    <updated>2016-09-14T15:47:15.437Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>在继承的层次结构中，子类的出现使类变得越来越具体，而子类的父类就变得更一般、更通用。有时将一个父类设计得非常抽象，以至于它没有具体的实例，这样的类称为<code>抽象类（abstract class）</code>。<br>一个子类只能从一个父类继承，如果想要使其继承多个父类，可以使用<code>接口（interface）</code>来达到<code>多重继承（multiple inheritance）</code>的效果。<br>本章介绍抽象类和接口，并讨论如何使用基本数据类型值的包装类。</p>
@@ -1686,7 +1737,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题9.1 9.2 9.3 9.4 9.6 9.8 9.9 9.10程序源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter9/src" target="_blank" rel="external">chapter9</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -1708,7 +1759,7 @@
     <link href="http://www.whtis.com/2016/01/27/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/"/>
     <id>http://www.whtis.com/2016/01/27/Java学习总结-第八章-继承和多态/</id>
     <published>2016-01-27T13:17:29.000Z</published>
-    <updated>2016-02-10T13:36:17.166Z</updated>
+    <updated>2016-09-14T15:48:06.797Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>在面向对象程序设计中，可以由已有的类派生出子类，这叫做<code>继承（inheritance）</code>。<br>本章介绍继承的概念。着重理解父类和子类、关键字super的用法以及object类，了解多态和动态绑定、一般程序设计以及对象转换，介绍修饰符protect和final。</p>
@@ -1826,7 +1877,7 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题8.2 8.4源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter8/src" target="_blank" rel="external">chapter8</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
@@ -1848,7 +1899,7 @@
     <link href="http://www.whtis.com/2016/01/26/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     <id>http://www.whtis.com/2016/01/26/Java学习总结-第七章-字符串/</id>
     <published>2016-01-26T13:33:26.000Z</published>
-    <updated>2016-02-10T13:35:42.899Z</updated>
+    <updated>2016-09-14T15:47:00.397Z</updated>
     <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>Java中，将字符串看作是对象，提供了String类、StringBuffer类和StringTokenizer类来存储和处理字符串。本章总结<code>字符串(string)</code>的处理。</p>
@@ -1947,143 +1998,11 @@
 <hr>
 <h2 id="编程练习">编程练习</h2><p>习题7.3 7.4 7.5 7.7 7.9 7.11 7.12 7.14 7.18源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter7/src" target="_blank" rel="external">chapter7</a></p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
     <summary type="html">
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>Java中，将字符串看作是对象，提供了String类、S]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结--第六章 对象和类]]></title>
-    <link href="http://www.whtis.com/2016/01/26/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB/"/>
-    <id>http://www.whtis.com/2016/01/26/Java学习总结-第六章-对象和类/</id>
-    <published>2016-01-26T09:30:41.000Z</published>
-    <updated>2016-02-10T13:36:26.734Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>面向对象程序设计把数据和属于它们的操作放入一个叫做<code>对象（object）</code>的整体中，所有对象都与属性和活动联系在一起，这样做使程序更容易开发和维护。<br>本章将介绍面向对象程序设计的基本知识：声明类、创建对象、处理对象以及组织对象协调工作。</p>
-<h3 id="对象和类">对象和类</h3><ul>
-<li>对象代表现实世界中可以明确表示的一个整体。对戏那个有自己独特的特性、状态和行为。对象的<code>状态（state）</code>是由具有当前值的<code>数据域（data field，又称为属性）</code>的集合构成的。对象的<code>行为（behavior）</code>是<code>方法（methed）</code>的集合定义的。</li>
-<li><code>类（class）</code>是定义同一类型对象的结构。在Java的类中，数据用来描述属性，方法用来定义行为。<br>类提供<code>构造方法(constructor)</code>，调用它可以创建类的对象。构造方法是用来进行初始化操作的。</li>
-<li>包含main方法的类称为<code>主类（main class）</code>。</li>
-</ul>
-<h3 id="构造方法">构造方法</h3><ul>
-<li>构造方法必须与定义它的类有完全相同的名字。构造方法可以重载，方便使用不同的初始数据值来构造对象。</li>
-<li>构造方法没有返回类型，甚至连<code>void</code>也没有。</li>
-<li>构造方法分为<code>有参构造方法</code>和<code>无参构造方法</code>。后者在类中没有明确声明构造方法时会自动生成，以避免程序出错。无参构造方法称为<code>默认构造方法</code>。</li>
-<li>构造方法的调用是在创建一个对象时使用<code>new</code>操作符进行的。<br><strong>类是一个蓝本，定义对象的数据和方法。一个对象是类的一个实例。可以从一个类中创建多个实例。创建的一个实例被称为<code>实例化（instantiation）</code>。<code>对象（object）</code>和<code>实例（instance）</code>两个词语经常互换使用。</strong></li>
-</ul>
-<h3 id="对象的访问">对象的访问</h3><ul>
-<li><p>新创建的对象在内存中占用空间，通过访问对象的<code>引用变量</code>来访问，该变量仅包含对象的引用地址。<br>一个类所定义的类型被称为<code>引用类型（reference type）</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>访问新创建的对象的数据和方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">objectRefVar.data------引用对象的数据。</span><br><span class="line">objectRefVar.method------引用对象的方法。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当创建一个对象，但不赋给这个对象任何引用变量，那么这样创建的对象称为<code>匿名（anonymous）</code>对象。</p>
-</li>
-<li>基本数据类型变量和引用类型变量的区别<ul>
-<li>基本数据类型在内存中存储时就是基本类型的数据，但是引用类型在内存中存储的是一个引用，指向对象的存储地址。</li>
-<li>将一个基本数据类型变量赋值给另一个变量时，这个变量也有了相同的值。但将一个引用类型变量赋值给另一个变量时，这个变量仅拥有原来对象的引用。</li>
-</ul>
-</li>
-</ul>
-<h3 id="可见性修饰符、访问器和修改器">可见性修饰符、访问器和修改器</h3><p>  Java提供了几个修饰符，用来控制对数据、方法和类的访问。</p>
-<ul>
-<li>public 使类、方法和数据域可以在任何类中访问。</li>
-<li>private 使方法和数据域只能从它自己所在类中访问。</li>
-<li>默认情况下，类、方法和数据域可以从同一个包里的任何类中访问，这时也被称为<code>包私有的（package-private）</code>或者<code>包内访问的（package-access）</code>。</li>
-<li>一个对象不能访问自己类中的私有成员。但是，如果对象是在自己类内声明的则可以。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对象在自己类中声明，正确</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> x;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Foo foo = <span class="keyword">new</span> Foo();</span><br><span class="line">		System.out.println(foo.x);</span><br><span class="line">		System.out.println(foo.convert(foo.x));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">convert</span><span class="params">(<span class="keyword">boolean</span> b)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> x?<span class="number">1</span>:-<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//对象不在自己类中声明，无法访问私有成员</span></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Foo foo = <span class="keyword">new</span> Foo();</span><br><span class="line">		System.out.println(foo.x);</span><br><span class="line">		System.out.println(foo.convert(foo.x));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>修饰符private只修饰数据和方法，不修饰整个类（内部类除外）。</li>
-<li>大多数情况下，构造方法应该是公用的（public）。但是，如果不想让用户创建某个类的实例，可以使用私有的构造方法。例如：Math类。</li>
-</ul>
-<h3 id="数据域的封装（data_field_encapsulation）">数据域的封装（data field encapsulation）</h3><ul>
-<li>为了避免通过对象引用直接修改属性，应该使用private修饰符声明私有域。</li>
-<li>get()方法称为读取器（getter）或访问器（accessor），set()方法称为设置器（setter）或修改器（mutator）。</li>
-<li>使用数据域封装使类更加容易维护。</li>
-</ul>
-<h3 id="永久对象和类">永久对象和类</h3><ul>
-<li>如果一个对象一旦被创建，它的内容就不能再改变，那么该对象就称为<code>永久对象（immutable object）</code>，它的类称为<code>永久类（immutable class）</code>。</li>
-<li>一个类的所有数据都是私有的并且没有修改器，但它不一定是永久类。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//todo</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>要使一个类成为永久类，必须将所有数据域说明为私有的，并且不含返回引用非永久对象数据域的修改器和访问器。</p>
-<h3 id="给方法传递对象参数">给方法传递对象参数</h3><ul>
-<li>传递对象实际上是传递对象的引用（copy referance）；传递基本数据类型的参数时，传递的是实参的值。（copy value）</li>
-</ul>
-<h3 id="静态变量、常量和静态方法">静态变量、常量和静态方法</h3><ul>
-<li>实例变量不能被同一个类中的多个对象共享，<code>静态变量（static variavle，又称为类变量）</code>可以让一个类中的所有实例共享数据。</li>
-<li>静态变量存储在类的公用内存中，如果某个对象修改了静态变量的值，同一类中的所有对象都会受到影响。</li>
-<li>使用修饰符<code>static</code>声明静态变量或静态方法。</li>
-</ul>
-<h3 id="变量的作用域">变量的作用域</h3><ul>
-<li>类的实例变量和静态变量称为<code>类属变量（class&#39;s variavble，常称为类变量）</code>或<code>数据域（data field）</code>。<br>定义在方法内部的变量称为局部变量。</li>
-<li>类属变量的作用域是整个类，局部变量的作用域是方法体内。</li>
-<li>如果局部变量和一个类属变量具有相同的名字，那么局部变量优先，同名的类属变量将会被隐藏。<strong>（就近原则）</strong></li>
-</ul>
-<h3 id="this关键字">this关键字</h3><p>有时需要在方法中引用类属的<code>隐藏变量（hidden variable）</code>。</p>
-<ul>
-<li>隐藏的静态变量可以通过“类名.静态变量”的方式引用。隐藏的实例变量需要使用关键字<code>this</code>来引用。</li>
-</ul>
-<h3 id="对象数组">对象数组</h3><p>数组中的元素可以为对象，要初始化对象数组，可以使用for循环。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">	Objects[i] = <span class="keyword">new</span> Object();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="类的抽象和封装">类的抽象和封装</h3><ul>
-<li><code>类抽象（class abstraction）</code>是将类的实现和使用分离。类的创建者提供了类的描述，让使用者明白如何使用类。从类外可以访问的方法和数据域的全体，以及对这些成员如何使用的描述，合称为<code>类的合约（class&#39;s contract）</code>。</li>
-<li><code>类的封装（class encapsulation）</code>是将类的实现细节包装好，对用户隐藏起来，用户不需要知道如何实现的，仅需要知道如何使用即可。</li>
-</ul>
-<h3 id="内部类">内部类</h3><ul>
-<li><code>内部类(inner class)</code>或者叫<code>嵌入类（nested class）</code>，是一种在其他类的内部定义的类。</li>
-<li>内部类可以引用包含在它的外部类中的数据和方法。</li>
-<li>内部类只是用来支持其外部类的工作。</li>
-<li>内部类可以声明为public、protected或private，其意义与用在类的其他成员上相同。</li>
-<li>内部类可以声明为静态的static。可以使用外部类的类名来访问静态的内部类，静态内部类不能访问外部类的非静态成员。</li>
-<li><p>从另外的类中创建内部类的对象：</p>
-<ul>
-<li><p>如果内部类是非静态的，必须先创建外部类的实例，然后使用如下语法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">外部类.内部类 内部类对象名 = 外部类对象.new 内部类();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果内部类是静态的，使用如下语法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">外部类.内部类 内部类对象名 = <span class="keyword">new</span> 外部类对象.内部类();</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>在面向过程程序设计语言中，数据和方法是分离的，但是在面向对象语言中，数据和方法定义在同一个类当中。</li>
-<li>引用型数据的默认值是<code>null</code>,数值型的默认值是<code>0</code>，boolean型的默认值是<code>false</code>，char型的默认值是<code>‘\u0000’</code>。</li>
-<li>通过引用变量引用一个对象之前，必须先创建该对象。如果引用一个没有创建的对象，会引起运行错误<code>NullPointerException</code>。</li>
-<li>通过数据域的封装，原类中的数据不会被改变，仅在外部类调用时临时修改。</li>
-<li>如何判断一个变量或方法定义为实例的还是静态的？<br>如果一个变量或方法依赖于类的具体实例，应该定义为实例变量或实例方法。如果一个变量或方法不依赖羽类的具体实例，就该定义为静态变量或静态方法。</li>
-<li>如何在内存中区分对象和类？<ul>
-<li>类是静态的概念，位于代码区</li>
-<li>对象是new出来的，位于堆内存。类的每个成员变量在不同的对象中都有不同的值（除了静态变量），而方法只有一份，执行的时候才占用内存。<br>堆内存是程序运行时动态分配的内存。</li>
-</ul>
-</li>
-<li>非静态方法是依据不同的对象进行调用。</li>
-<li>静态成员变量存在于<code>data seg</code>区。</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><p>习题6.1 6.3 6.5 6.7 6.8 6.11 6.12 6.13源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter6/src" target="_blank" rel="external">chapter6</a></p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><span id="busuanzi_container_page_pv">文章已被阅读<span id="busuanzi_value_page_pv"></span>次</span><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>面向对象程序设计把数据和属于它们的操作放入一个叫做<co]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>

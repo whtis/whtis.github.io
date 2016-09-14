@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion">
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -101,13 +101,13 @@
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: 14038351,
-      author: '海涛'
+      author: 'love everyone~'
     }
   };
 </script>
@@ -319,6 +319,157 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/14/PostgreSQL使用手记/" itemprop="url">
+                  PostgreSQL使用手记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T22:29:13+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/PostgreSQL使用手记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/PostgreSQL使用手记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="写在前面">写在前面</h3><p><blockcode><br>&emsp;&emsp;因为项目需要，要将本来的<code>mybatis+mysql</code>改为<code>mybatis+postgresql</code>,使用途中难免遇到坑，以下是我遇到的，记录下来供参考。好久没写blog，感觉都快长草了，目前在想要不要开一个分类，写点日常废话😂<br></blockcode><br>&emsp;&emsp;好了，言归正传。</p>
+<h3 id="为什么要用PostgreSQL">为什么要用PostgreSQL</h3><p>为什么要用呢,上面已经说了，项目需要。postgresql经常被拿来和mysql进行比较，postgresql可以用来存储较大的对象数据（文本、视频、图片等），符合项目要求。</p>
+<h3 id="什么是PostgreSQL">什么是PostgreSQL</h3><p>念都不知道怎么念的一个词，确实第一感觉没有mysql好。看下官方的说法：</p>
+<blockquote>
+<p>PostgreSQL支持大部分 SQL标准并且提供了许多其他现代特性：复杂查询、外键、触发器、视图、事务完整性、MVCC。同样，PostgreSQL 可以用许多方法扩展，比如， 通过增加新的数据类型、函数、操作符、聚集函数、索引。免费使用、修改、和分发 PostgreSQL，不管是私用、商用、还是学术研究使用。(摘自百度百科)</p>
+</blockquote>
+<h3 id="使用版本">使用版本</h3><p>本文总结基于PostgreSQL 9.4版本</p>
+<h3 id="安装及使用">安装及使用</h3><p>推荐下阮一峰写的这篇博客<a href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html" target="_blank" rel="external">PostgreSQL新手入门</a></p>
+<h3 id="使用中出现的错误及解决方案">使用中出现的错误及解决方案</h3><h4 id="错误一：_java-sql-SQLException:_No_suitable_driver_found_for_jdbc:postgresql://yourhost:port">错误一： <code>java.sql.SQLException: No suitable driver found for jdbc:postgresql://yourhost:port</code></h4><ul>
+<li>可能的错误原因：<ul>
+<li>使用的postgresql的驱动与当前使用的jdk版本不兼容。具体兼容情况参见官方文档，本文仅作摘录：</li>
+<li>系统环境没有配置classpath路径，使的程序无法找到驱动的位置。（使用java IDE编写代码时一般不会出现这种情况）</li>
+<li><strong>连接jdbc时url没写正确，一定要再三检查下正确的url</strong>（这一条很恶心，url错误时的提示我遇到过两种，一种是本条目列出的错误，另一种是提示字符编码有问题）</li>
+</ul>
+</li>
+</ul>
+<h4 id="错误二：_Error_querying_database-_Cause:_org-postgresql-util-PSQLException:_ERROR:_CREATE_DATABASE_cannot_run_inside_a_transaction_block">错误二： <code>Error querying database.  Cause: org.postgresql.util.PSQLException: ERROR: CREATE DATABASE cannot run inside a transaction block</code></h4><ul>
+<li><p>可能的错误原因：</p>
+<ul>
+<li><p>根据网上查到的资料，单独使用postgresql时，出现这个错误的原因是因为没有打开自动提交。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c = DriverManager.getConnection(<span class="string">"jdbc:postgresql://yourhost"</span>, <span class="string">"username"</span>, <span class="string">"password"</span>);</span><br><span class="line">     c.setAutoCommit(<span class="keyword">true</span>); <span class="comment">// 把自动提交设置为true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我在项目中单独使用Mybatis进行事务管理，管理<code>PostgreSQL</code>时也会出现这个错误，因为Mybatis封装了<code>java.sql.*</code>相关的类,因此无法按照上面方式进行更改，在Mybatis中打开一个会话时，也应该将其设置为自动提交（mysql无需设置）：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SqlSession sqlSession = sqlSessionFactory.openSession(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>总结：出现这个问题，网上给的解决方法大多是因为没有打开自动提交，但是仅仅在portgresql控制台上执行<code>SET AUTOCOMMIT = on</code>是无用的，至于为什么需要打开自动提交才能创建数据库，这个不太清楚，可能跟<code>PostgreSQL</code>自己的事务管理逻辑有关，而且这样改动后，暂时不知道会不会对之后的数据库操作造成影响</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用PostgreSQL存储大文件">使用PostgreSQL存储大文件</h3><p>待编辑</p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/29/Java学习笔记-设置代理及打开外部程序/" itemprop="url">
                   Java学习笔记--设置代理及打开外部程序
                 </a>
@@ -389,16 +540,19 @@
       
         
           
-          设置系统代理
-系统设置全局代理
-123System.getProperties().setProperty("proxySet", "true");System.getProperties().setProperty("http.proxyHost", "ip");System.getPropert
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/29/Java学习笔记-设置代理及打开外部程序/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <h3 id="设置系统代理">设置系统代理</h3><ul>
+<li><p>系统设置全局代理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.getProperties().setProperty(<span class="string">"proxySet"</span>, <span class="string">"true"</span>);</span><br><span class="line">System.getProperties().setProperty(<span class="string">"http.proxyHost"</span>, <span class="string">"ip"</span>);</span><br><span class="line">System.getProperties().setProperty(<span class="string">"http.proxyPort"</span>, port);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用了selenium的chrome驱动，webdriver设置代理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">System.setProperty(<span class="string">"webdriver.chrome.driver"</span>, <span class="string">"filepath"</span>);</span><br><span class="line">String proxyIpAndPort = ip + <span class="string">":"</span> + port;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理配置</span></span><br><span class="line">DesiredCapabilities cap = <span class="keyword">new</span> DesiredCapabilities();</span><br><span class="line">org.openqa.selenium.Proxy proxy = <span class="keyword">new</span> org.openqa.selenium.Proxy();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置http、ftp、ssl代理（注：当前版本只支持所有的协议公用http协议，下述代码等同于只配置http）</span></span><br><span class="line">proxy.setHttpProxy(proxyIpAndPort)</span><br><span class="line">        .setFtpProxy(proxyIpAndPort)</span><br><span class="line">        .setSslProxy(proxyIpAndPort);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下三行是为了避免localhost和selenium driver的也使用代理，务必要加，否则无法与iedriver通讯</span></span><br><span class="line">cap.setCapability(CapabilityType.ForSeleniumServer.AVOIDING_PROXY, <span class="keyword">true</span>);</span><br><span class="line">cap.setCapability(CapabilityType.ForSeleniumServer.ONLY_PROXYING_SELENIUM_TRAFFIC, <span class="keyword">true</span>);</span><br><span class="line">System.setProperty(<span class="string">"http.nonProxyHosts"</span>, <span class="string">"localhost"</span>);</span><br><span class="line"></span><br><span class="line">cap.setCapability(CapabilityType.PROXY, proxy);</span><br><span class="line"></span><br><span class="line">WebDriver webDriver = <span class="keyword">new</span> ChromeDriver(cap);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="打开外部程序">打开外部程序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Process p = Runtime.getRuntime().exec(<span class="string">"cmd command"</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>如果外部程序放在一个单独的线程中执行，需要注意的是：该线程执行完并不代表着外部程序也执行完相应的任务。</strong></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -516,15 +670,15 @@
       
         
           
-          最近才开始接触这个工具包，官网上目前已经更新到HttpClient4.5.2了。google的时候看到HttpClient从4.0版本改了底层，因此使用时会出现一些方法不再适用的问题，这里记录出现的一些问题以及相应替代的方法。
-1、 创建HttpClient时使用下面的语句，会出现org.apach
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p>最近才开始接触这个工具包，官网上目前已经更新到<a href="http://hc.apache.org/downloads.cgi" target="_blank" rel="external">HttpClient4.5.2</a>了。google的时候看到HttpClient从4.0版本改了底层，因此使用时会出现一些方法不再适用的问题，这里记录出现的一些问题以及相应替代的方法。</p>
+<p>1、 创建HttpClient时使用下面的语句，会出现<code>org.apache.http.impl.client.DefaultHttpClient&#39; is deprecated</code><br>    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = <span class="keyword">new</span> DefaultHttpClient();</span><br></pre></td></tr></table></figure></p>
+<p>   可以使用如下语句代替：<a href="http://stackoverflow.com/questions/15336477/deprecated-java-httpclient-how-hard-can-it-be" target="_blank" rel="external">来源</a><br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpClient httpClient = HttpClientBuilder.create().build();</span><br></pre></td></tr></table></figure></p>
+<p>   或者<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建HttpClientBuilder</span></span><br><span class="line">HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();</span><br><span class="line"><span class="comment">// HttpClient</span></span><br><span class="line">CloseableHttpClient httpClient = httpClientBuilder.build();</span><br></pre></td></tr></table></figure></p>
+<p>2、 设置代理，HttpClient4.5.2版本可以使用如下语句：<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建代理</span></span><br><span class="line">HttpHost proxy = <span class="keyword">new</span> HttpHost(<span class="string">"your proxy IP"</span>, port);</span><br><span class="line">RequestConfig config = RequestConfig.custom().setProxy(proxy).build();</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置HttpPost/HttpGet使用代理</span></span><br><span class="line">httpost.setConfig(config);</span><br></pre></td></tr></table></figure></p>
+<p>3、get或post时，如果访问的网站是https协议的，可以用如下方式访问：信任所有证书，如果可以具体到每个证书，就更好了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">            SSLContext sslContext = <span class="keyword">new</span> SSLContextBuilder().loadTrustMaterial(<span class="keyword">null</span>, <span class="keyword">new</span> TrustStrategy() &#123;</span><br><span class="line">                <span class="comment">//信任所有</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTrusted</span><span class="params">(X509Certificate[] chain,</span><br><span class="line">                                         String authType)</span> <span class="keyword">throws</span> CertificateException </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).build();</span><br><span class="line">            SSLConnectionSocketFactory sslsf = <span class="keyword">new</span> SSLConnectionSocketFactory(sslContext);</span><br><span class="line">            <span class="keyword">return</span> HttpClients.custom().setSSLSocketFactory(sslsf).build();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeyManagementException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (KeyStoreException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> HttpClients.createDefault();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -642,15 +796,10 @@
       
         
           
-          花了大半年的时间，算是彻底从头看了一遍Java的基本知识，参考书籍是《Java语言程序设计》原书第五版，作者为Y.daniel Liang，基础篇和提高篇中的重要内容都摘录在了之前的文章中。本文就是对之前的Java总结做个分类，方便自己以后回顾。
-第一篇 程序设计基础（1~5章）第一章 计算机、程序
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/21/Java阶段性总结/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p>花了大半年的时间，算是彻底从头看了一遍Java的基本知识，参考书籍是《Java语言程序设计》原书第五版，作者为Y.daniel Liang，基础篇和提高篇中的重要内容都摘录在了之前的文章中。本文就是对之前的Java总结做个分类，方便自己以后回顾。</p>
+<h3 id="第一篇_程序设计基础（1~5章）">第一篇 程序设计基础（1~5章）</h3><h5 id="第一章_计算机、程序和Java概述"><a href="http://www.whtis.com/2015/12/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E3%80%81%E7%A8%8B%E5%BA%8F%E5%92%8CJava%E6%A6%82%E8%BF%B0/">第一章 计算机、程序和Java概述</a></h5><h5 id="第二章_基本数据类型和基本操作"><a href="http://www.whtis.com/2015/12/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">第二章 基本数据类型和基本操作</a></h5><h5 id="第三章_控制语句"><a href="http://www.whtis.com/2016/01/10/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">第三章 控制语句</a></h5><h5 id="第四章_方法"><a href="http://www.whtis.com/2016/01/11/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%96%B9%E6%B3%95/">第四章 方法</a></h5><h5 id="第五章_数组"><a href="http://www.whtis.com/2016/01/20/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%95%B0%E7%BB%84/">第五章 数组</a></h5><h3 id="第二篇_面向对象程序设计（6~10章）">第二篇 面向对象程序设计（6~10章）</h3><h5 id="第六章_对象和类"><a href="http://www.whtis.com/2016/01/26/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB/">第六章 对象和类</a></h5><h5 id="第七章_字符串"><a href="http://www.whtis.com/2016/01/26/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2/">第七章 字符串</a></h5><h5 id="第八章_继承和多态"><a href="http://www.whtis.com/2016/01/27/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/">第八章 继承和多态</a></h5><h5 id="第九章_抽象类和接口"><a href="http://www.whtis.com/2016/01/28/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/">第九章 抽象类和接口</a></h5><h5 id="第十章_面向对象建模"><a href="http://www.whtis.com/2016/01/29/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BB%BA%E6%A8%A1/">第十章 面向对象建模</a></h5><h3 id="第三篇_图形用户界面设计（11~13章）">第三篇 图形用户界面设计（11~13章）</h3><h5 id="第十一章_图形用户界面程序设计"><a href="http://www.whtis.com/2016/02/05/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">第十一章 图形用户界面程序设计</a></h5><h5 id="第十二章_事件驱动程序"><a href="http://www.whtis.com/2016/02/09/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F/">第十二章 事件驱动程序</a></h5><h5 id="第十三章_创建图形用户界面"><a href="http://www.whtis.com/2016/02/15/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0-%E5%88%9B%E5%BB%BA%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2/">第十三章 创建图形用户界面</a></h5><h3 id="第四篇_异常处理、I/O（15~16章）">第四篇 异常处理、I/O（15~16章）</h3><h5 id="第十五章_异常和断言"><a href="http://www.whtis.com/2016/01/30/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0-%E5%BC%82%E5%B8%B8%E5%92%8C%E6%96%AD%E8%A8%80/">第十五章 异常和断言</a></h5><h5 id="第十六章_简单输入输出"><a href="http://www.whtis.com/2016/02/18/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0-%E7%AE%80%E5%8D%95%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/">第十六章 简单输入输出</a></h5><h3 id="第五篇_数据结构与集合架构">第五篇 数据结构与集合架构</h3><h5 id="第十七章_面向对象数据结构"><a href="http://www.whtis.com/2016/03/22/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">第十七章 面向对象数据结构</a></h5><h5 id="第十八章_Java集合架构"><a href="http://www.whtis.com/2016/04/01/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-Java%E9%9B%86%E5%90%88%E6%9E%B6%E6%9E%84/">第十八章 Java集合架构</a></h5><h3 id="第六篇_多线程">第六篇 多线程</h3><h5 id="第十九章_多线程"><a href="http://www.whtis.com/2016/04/10/java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">第十九章 多线程</a></h5><h3 id="网络">网络</h3><h5 id="第二十八章_网络"><a href="http://www.whtis.com/2016/04/16/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E7%AB%A0-%E7%BD%91%E7%BB%9C/">第二十八章 网络</a></h5><hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -768,16 +917,106 @@
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容基于套接字的通信可以使程序通过指定的套接字进行通信。套接字（socket）是两个主机之间逻辑连接的端点，可以用于发送和接收数据。Java支持流套接字和数据报套接字。流套接字（s
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/16/Java学习总结-第二十八章-网络/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p><code>基于套接字的通信</code>可以使程序通过指定的套接字进行通信。<code>套接字（socket）</code>是两个主机之间逻辑连接的端点，可以用于发送和接收数据。<br>Java支持流套接字和数据报套接字。<code>流套接字（stream socket）</code>使用传输控制协议（Transmission Control Protocol，TCP）进行数据传输，而<code>数据报套接字（datagram socket）</code>使用的是用户数据报协议（User Datagram Protocol，UDP）。</p>
+<h3 id="客户/服务器计算模式">客户/服务器计算模式</h3><ul>
+<li>服务器和客户一旦建立连接，客户和服务器就可以通过套接字进行通信。</li>
+<li><p>创建<code>服务器套接字（server socket）</code>，并把它附加到一个端口上，服务器从端口监听连接。端口标识套接字上的TCP服务，端口号的范围从0到65536，但是0到1024号是为特权服务保留的端口。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(port);</span><br><span class="line"><span class="comment">//监听</span></span><br><span class="line">Socket socket = serverSocket.accept();</span><br></pre></td></tr></table></figure>
+<p><strong>如果企图在已经使用的端口上创建服务器套接字，将会引起<code>java.net.BindException</code>异常。</strong></p>
+</li>
+<li><p>服务器的监听语句会一直等待，直到一个客户与服务器套接字建立连接。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Socket socket = <span class="keyword">new</span> Socket(serverName,port);</span><br></pre></td></tr></table></figure>
+<p>serverName是服务器的域名或IP地址。</p>
+</li>
+<li><p>通过得到socket的输入输出流，接可以进行数据传输了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">InputStream input = socket.getInputStream();</span><br><span class="line">OutputStream output = socket.getOutputStream();</span><br></pre></td></tr></table></figure>
+<p><strong>建议使用二进制I/O在服务器和客户间进行数据传输，以便提高效率。</strong></p>
+</li>
+</ul>
+<h3 id="网络地址类InetAddress">网络地址类InetAddress</h3><ul>
+<li><p>可以使用类InetAddress来求得客户的主机名和IP地址。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">InetAddress inetAddress = socket.getInetAddress();</span><br><span class="line">String hostname = inetAddress.getHostName();</span><br><span class="line">String ip = inetAddress.getHostAddress();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以使用静态方法getByName通过主机名或IP地址创建InetAddress的一个实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InetAddress address = InetAddress.getByName(<span class="string">"www.google.com"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="多客户服务">多客户服务</h3><ul>
+<li><p>可以使用线程处理服务器上多个客户的同步问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">	Socket socket = serverSocket.accept();</span><br><span class="line">	Thread thread = <span class="keyword">new</span> ThreadClass(socket);</span><br><span class="line">	thread.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务器套接字可以有多个连接。while循环的每次迭代创建一个新的连接。</p>
+</li>
+</ul>
+<h3 id="发送和接收对象">发送和接收对象</h3><ul>
+<li>可以在套接字流上使用ObjectInputStream和ObjectOutputStream接收和发送对象。为了能够进行传输，这些对象必须实现<code>Serializable</code>接口。</li>
+</ul>
+<h3 id="从Web服务器上读取文件">从Web服务器上读取文件</h3><ul>
+<li>可以创建一个<code>java.net.URL</code>对象，然后打开一个输入流：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">URL url = <span class="keyword">new</span> URL(<span class="string">"www.whtis.com"</span>);</span><br><span class="line">InputStream inputStream = url.openStream();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="JEditorPanel类">JEditorPanel类</h3><ul>
+<li>Swing提供了一个名叫javax.swing.JEditorPanel的GUI组件，它能够自动地显示普通文本文件、HTML文件和RTF文件。 </li>
+<li><p>要显示文件的内容，可以使用setPage（URL）方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPage</span><span class="params">(URL url)</span> <span class="keyword">throws</span> IOException</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当单击编辑窗格中的一个超链接时，JEditorPanel产生<code>javax.swing.event.HyperLink Event</code>事件，通过该事件，我们可以得到超链接的URL，并使用setPage(url)方法显示它。</p>
+</li>
+</ul>
+<h3 id="数据报套接字">数据报套接字</h3><ul>
+<li>我们编写的有些网络通信不要求TCP提供可靠的、点对点的通道，这种情况下，数据报通信效率更高。</li>
+<li>数据是用<code>分组（packet，或称为包）</code>进行传输的。数据报套接字使用<code>用户数据报协议（User Datagram Protocol，UDP）</code>，该协议不能保证分组不会丢失、或者不会重复接收、或者接收的顺序与发送的顺序不同。</li>
+<li><code>数据报（datagram）</code>是独立的，包含自身网络上的传输信息，它的到达、到达的时间和内容都没有保证。</li>
+</ul>
+<h4 id="DatagramPacket类和DatagramSocket类">DatagramPacket类和DatagramSocket类</h4><ul>
+<li>DatagramPacket表示数据报的分组。要为来自客户的传送创建DatagramPacket对象，可以使用构造方法<code>DatagramPacket(byte[] buf,int length,InetAddress host,int prot)</code>。要创建其他所有的DatagramPacket对象，使用构造方法<code>DatagramPacket(byte[] buf,int length)</code>。一旦创建了一个数据报分组，就可以使用getData()方法和setData()方法获取和设置分组中的数据。</li>
+<li>数据报套接字类DatagramSocket表示发送和接收数据报分组的套接字。数据报套接字是分组传输服务的发送和接收点。每个在套接字上发送和接收的分组都是独立编址和路由的。<ul>
+<li>要创建服务器上的数据报套接字，使用构造方法DatagramSocket(int port),它将套接字绑定到本地主机指定的端口上。</li>
+<li>要创建客户上的数据报套接字，使用构造方法DatagramSocket()，它将套接字绑定到本地主机任意一个可用的端口上。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>流套接字的端口号和数据报套接字的端口号是互不相关的。流套接字和数据报套接字能够同时使用同一个端口号。</li>
+<li>数据报套接字使用<code>send(DatagramSocket)</code>发送分组，使用<code>receive(DatagramSocket)</code>接收分组。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li>习题28.1 28.3 28.6 28.8 28.9 28.10源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter28/src" target="_blank" rel="external">chapter28</a></li>
+<li><p>习题28.6 </p>
+<ul>
+<li><p>服务器端的输入输出流应该和客户端的对应。</p>
+<ul>
+<li><p>客户端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(socket.getInputStream());</span><br><span class="line">ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(socket.getOutputStream());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>相应的，服务器端的顺序应该为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(socket.getOutputStream());</span><br><span class="line">ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(socket.getInputStream());</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>如何判断ObjectInputStream类中readObject()方法是否到达末尾:</p>
+<ul>
+<li><p>readObject()方法读取数据流到末尾时会抛出<code>java.io.EOFException</code>异常，可以捕获到这个异常并由此判断对象数据读取完成。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"Address.dat"</span>);</span><br><span class="line">        <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ObjectInputStream InFromFile = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(file));</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            lists.add(InFromFile.readObject());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (EOFException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        jTextArea.append(<span class="string">"Data read completed!"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以在数据流中添加标识，当读取到标识后，则关闭输出流。例如：可以在写入数据完成后附加<code>null</code>作为标识。</p>
+</li>
+</ul>
+</li>
+<li>异常<code>java.io.StreamCorruptedException: invalid type code: AC</code>的出现原因及解决方案<ul>
+<li>原因：新建一个ObjecOutputStream类后，在第一次写入时，会附加一个头文件信息，随后的数据不会附加头文件。新建一个ObjectInputStream，在第一次读取时会寻找头文件，之后读取时就不会寻找头文件直接读取数据。如果写入数据时每次都附加头文件，而读取时仅第一次读取头文件，就会抛出上述异常。</li>
+<li>解决方案：写文件和读文件要统一，写文件时不能每次都附带头文件，也就是用一个输出流写数据，不要每次写入对象都新建一个输出流。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -895,18 +1134,136 @@
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容Java支持多线程（multithreading）。多线程是指在一个程序中允许同时运行多个任务的能力。
-线程的概念
-一个线程（thread）是指程序中完成一个任务的有始有终的执
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/10/java学习总结-第十九章-多线程/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>Java支持<code>多线程（multithreading）</code>。多线程是指在一个程序中允许同时运行多个任务的能力。</p>
+<h3 id="线程的概念">线程的概念</h3><ul>
+<li><code>一个线程（thread）</code>是指程序中完成一个任务的有始有终的执行流。使用Java，可以在一个程序中并发的运行多个线程。</li>
+<li>多线程可以使程序反应更快，交互性更强，执行效率更高。</li>
+<li>Java对多线程程序的开发和运行提供了非常好的支持，包括锁定资源以避免冲突。</li>
+<li>每个新线程都是一个对象，它的类实现<code>Runnable</code>接口或者扩展实现了<code>Runnable</code>接口，这种新对象称为<code>可运行对象（runnable object）</code>。</li>
+</ul>
+<h3 id="创建线程的两种方式">创建线程的两种方式</h3><h4 id="扩展Thread类创建线程">扩展Thread类创建线程</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//do something</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="实现runnable接口创建线程">实现runnable接口创建线程</h4><ul>
+<li><p>实现接口：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RunnThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> run &#123;</span><br><span class="line">		<span class="comment">//do something</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建线程：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> RunnThread());</span><br><span class="line">t.start();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果用户线程要实现多继承，应该选择实现Runnable接口这种方式。</p>
+</li>
+</ul>
+<h3 id="线程的控制与通信">线程的控制与通信</h3><ul>
+<li>Thread类中提供的控制线程的方法：<ul>
+<li>start()</li>
+<li>interrupt()  中断该线程。如果该线程处于阻塞状态，它就进入重新运行的就绪状态</li>
+<li>isAlive()  该方法判断线程是否正处于运行状态</li>
+<li>setPriority(int p)</li>
+<li>join()  等待该线程结束</li>
+<li>sleep(long millis)  </li>
+<li>yield()  让该线程暂停执行，允许其他线程开始运行</li>
+<li>isinterrupted()</li>
+<li>currentThread()  返回当前正在运行的线程对象的引用<br><strong>Thread类还包含stop()、suspend()和resume()。但是这些线程具有内在的不安全因素，因此不建议使用。要替代stop()方法，可以给线程变量赋值为null，指明要停止它的运行。</strong></li>
+</ul>
+</li>
+<li>方法wait()、notify()、notifyAll()定义在Object类中，也可以用于促进活动线程之间的通信。<ul>
+<li>wait()  该方法强迫线程等待，直到对调用wait方法的对象调用notify或notifyAll方法。</li>
+</ul>
+</li>
+</ul>
+<h4 id="线程的状态">线程的状态</h4><ul>
+<li>线程有五种状态：新建、就绪、运行、阻塞或结束。<br><img src="线程的状态.jpg" alt="线程的状态"></li>
+<li>有几种原因会使线程进入<code>阻塞状态（Blocked state）</code>：<ul>
+<li>可能是它自己调用了join()、sleep()或wait()方法</li>
+<li>可能是其他方法调用了如上方法</li>
+<li>可能是该线程在等待一个I/O操作的完成</li>
+</ul>
+</li>
+<li>方法interrupt按下列方式中断一个线程：当线程处于就绪状态或运行状态时，给它设置一个中断标志；当线程处于阻塞状态时，它将会被唤醒并进入就绪状态，同时抛出异常java.lang.InterruptedException。即：<strong>中断不仅打断执行过程，也可以打断不执行过程。</strong></li>
+</ul>
+<h4 id="线程的优先级">线程的优先级</h4><ul>
+<li>Java给每个线程指定一个优先级。</li>
+<li>Thread类有int型常量MIN_PRIOTITY、NORM_PRIORITY和MAX_PRIORITY，分别代表1、5、10、主线程的优先级是Thread.NORM_PRIORITY。<br><strong>如果总有一个优先级较高的线程在运行，或者有一个相同优先级的线程不退出，那么一个线程可能永远也没有运行的机会。这种情况称为<code>竞争（contention）</code>或<code>资源缺乏（starvation）</code>状态。</strong></li>
+</ul>
+<h3 id="线程组">线程组</h3><ul>
+<li>一个<code>线程组（thread group）</code>是线程的一个集合。可以同时对一个线程组进行唤醒和挂起操作。</li>
+<li>可以把一个线程组添加到另一个线程组，构成一个树形结构，除了起始组以外，树中的每个线程组都有一个父线程组。</li>
+<li>每个线程都属于一个线程组。</li>
+<li>线程组的创建：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ThreadGroup g = <span class="keyword">new</span> ThreadGroup(<span class="string">"thread group"</span>);  <span class="comment">//组名必须是唯一的字符串</span></span><br><span class="line">Thread t = <span class="keyword">new</span> Thread(g,<span class="keyword">new</span> ThreadClass(),<span class="string">"label for the thread"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>线程组里的线程必须分别启动</strong></p>
+<h3 id="线程之间的同步与协作">线程之间的同步与协作</h3><p>多个线程同时访问一个共享资源会引起<code>资源冲突（race condition）</code>。如果一个类的对象在多线程程序中没有引起资源冲突，则称这样的类为<code>线程安全的（thread-safe）</code>。</p>
+<h4 id="同步化实例与静态方法">同步化实例与静态方法</h4><ul>
+<li>为避免资源冲突，应该防止多个线程同时进入程序的某一特定部分，程序中这样的部分称为<code>临界区（critical region）</code>。</li>
+<li>可以使用关键字<code>Synchronized</code>来使方法的通信同步，以便一次只有一个线程可以访问该方法。</li>
+<li>一个同步方法在执行前需要加锁：对于实例方法，要给调用该方法的对象加锁；对于静态方法，要给这个类加锁。</li>
+</ul>
+<h4 id="同步语句">同步语句</h4><ul>
+<li><p>当执行方法中某一个代码块（也成为体）时，同步语句不仅仅可以用于获准给该对象加锁，而且可以用于要求对任何对象加锁。这个代码块称为<code>同步块（synchronized block）</code>。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (expr) &#123;  <span class="comment">//表达式expr必须能求出对象的引用</span></span><br><span class="line">	语句组；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同步语句允许对任何对象加锁，所以可以同步地访问一个对象而不仅仅是一个方法。</p>
+</li>
+<li><p>任何同步的实例方法都可以转化为同步语句。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">xMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//方法体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码等价于：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">		<span class="comment">//方法体</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="线程之间的协作">线程之间的协作</h4><ul>
+<li>通过在临界区上多个线程的相互排斥，线程同步完全可以避免资源冲突的发生，但是有时候我们还需要线程之间的相互协作。</li>
+<li>wait、notify和notifyAll方法可以用来实现线程之间的相互通信。这些方法必须在同步方法中调用，或者在接受这些方法的对象的同步块中调用；否则会抛出异常<code>IllegalMonitorStateException</code>。</li>
+</ul>
+<h4 id="死锁">死锁</h4><ul>
+<li>使用一种名为<code>资源排序（resource ordering）</code>的简单技术可以轻易的避免死锁的发生。该技术是给每一个需要锁定的对象定义一个顺序，确保每个线程都按这个顺序来锁定对象。</li>
+</ul>
+<h3 id="进程条JProcessBar">进程条JProcessBar</h3><ul>
+<li>进程条JProcessBar是一个图形组件，用来以图示的方式显示有界区间内的一个值。</li>
+<li>进程条的常用属性有orientation、minimum、value和maximum等。</li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>线程对象从来不会直接引用run方法，到了执行某个线程的时候，Java虚拟机调用该线程的run方法。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li><p>习题19.2 19.3 19.4 19.6 19.7 19.8 19.9 19.11源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter19/src" target="_blank" rel="external">chapter19</a></p>
+</li>
+<li><p>习题19.7要求使用同步集合解决习题19.6多线程出现异常java.util.ConcurrentModificationException的问题。当完成这个题并且多次执行时，会出现下面这个问题，暂时不知道是否是错误：<br>向规则集添加数字时使用如下语句：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashSet.add(((<span class="keyword">int</span>) (Math.random() * <span class="number">10</span>)) + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>  控制台输出为以下结果：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>也就是说，随机数在规则集内被重新排序了，并且在使用迭代算子遍历时被打印到控制台。排序的原因猜测是同步规则集的方法导致的：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collections.synchronizedSet(hashSet);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>习题19.9要求写一个死锁程序，形成死锁的条件如下：</p>
+<ul>
+<li><blockquote>
+<p>互斥条件。即某个资源在一段时间内只能由一个进程占有，不能同时被两个或两个以上的进程占有。这种独占资源如CD-ROM驱动器，打印机等等，必须在占有该资源的进程主动释放它之后，其它进程才能占有该资源。这是由资源本身的属性所决定的。如独木桥就是一种独占资源，两方的人不能同时过桥。</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>不可抢占条件。进程所获得的资源在未使用完毕之前，资源申请者不能强行地从资源占有者手中夺取资源，而只能由该资源的占有者进程自行释放。如过独木桥的人不能强迫对方后退，也不能非法地将对方推下桥，必须是桥上的人自己过桥后空出桥面（即主动释放占有资源），对方的人才能过桥。</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>占有且申请条件。进程至少已经占有一个资源，但又申请新的资源；由于该资源已被另外进程占有，此时该进程阻塞；但是，它在等待新资源之时，仍继续占用已占有的资源。还以过独木桥为例，甲乙两人在桥上相遇。甲走过一段桥面（即占有了一些资源），还需要走其余的桥面（申请新的资源），但那部分桥面被乙占有（乙走过一段桥面）。甲过不去，前进不能，又不后退；乙也处于同样的状况。</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>循环等待条件。存在一个进程等待序列{P1，P2，…，Pn}，其中P1等待P2所占有的某一资源，P2等待P3所占有的某一源，……，而Pn等待P1所占有的的某一资源，形成一个进程循环等待环。就像前面的过独木桥问题，甲等待乙占有的桥面，而乙又等待甲占有的桥面，从而彼此循环等待。</p>
+</blockquote>
+</li>
+</ul>
+<p>根据这个原则，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $19<span class="title">_9</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      DeadThread t1 = <span class="keyword">new</span> DeadThread();</span><br><span class="line">      DeadThread t2 = <span class="keyword">new</span> DeadThread();</span><br><span class="line">      t1.flag = <span class="number">0</span>;</span><br><span class="line">      t2.flag = <span class="number">1</span>;</span><br><span class="line">      t1.start();</span><br><span class="line">      t2.start();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line">  * 线程1锁定o1后休眠1s，使得有机会执行线程2，线程2锁定o2后，等待线程1释放o1，线程1此时锁定了o1，等待线程2</span><br><span class="line">  * 释放o2，形成死锁。</span><br><span class="line">  *</span><br><span class="line">*/</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DeadThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> Object o1 = <span class="keyword">new</span> Object(), o2 = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (flag==<span class="number">0</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"flag="</span> + flag);</span><br><span class="line">          <span class="keyword">synchronized</span> (o1) &#123;</span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                  Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                  e.printStackTrace();</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">synchronized</span> (o2) &#123;</span><br><span class="line">                  System.out.println(<span class="string">"o2 locked"</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (flag==<span class="number">1</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"flag="</span> + flag);</span><br><span class="line">          <span class="keyword">synchronized</span> (o2) &#123;</span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                  Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                  e.printStackTrace();</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">synchronized</span> (o1) &#123;</span><br><span class="line">                  System.out.println(<span class="string">"o2 locked"</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -1024,16 +1381,105 @@
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容数组线性表和链表是Java中的预定义结构。除此之外，Java还引入了几种可以有效组织和处理数据的接口和类，这些接口和类组成了Java集合架构（Java Collection F
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/01/Java学习总结-第十八章-Java集合架构/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>数组线性表和链表是Java中的预定义结构。除此之外，Java还引入了几种可以有效组织和处理数据的接口和类，这些接口和类组成了<code>Java集合架构（Java Collection Framework）</code>。<br>一个<code>集合（collection）</code>就是一个存储一组对象的容器，一般将这些对象称为集合的<code>元素（element）</code>。Java集合构架支持三种类型的集合：<code>规则集（set）、线性表（list）和图（map）</code>，它们分别定义在接口Set、List与Map中。Set的实例存储一组互不相同的元素，List的实例存储一组顺序排列的元素，Map的实例存储一组对象，每个对象都有一个关联的键值。</p>
+<p><img src="Set&amp;List类.png" alt="Set和List接口是Collection接口的子接口"><br><img src="Map类.png" alt="Map的实例存储一组对象以及与它们关联的键值"></p>
+<h3 id="Collection接口和AbstractCollection类">Collection接口和AbstractCollection类</h3><ul>
+<li>Collection接口是处理对象集合的根接口。它的方法详见<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Collection.html" target="_blank" rel="external">API</a>。AbstractCollection类是提供对Collection接口部分实现的便利类。除了size方法和iterator方法之外，它实现了Collection接口中的所有方法。</li>
+<li>Iterator接口提供next（）方法，可以依次访问集合中存储的元素。<br><strong>Collection接口中有些方法不能在具体子类中实现。这种情况下，这些方法会抛出异常<code>java.lang.UnsupportedOperationException</code>，该异常是RuntimeException异常的一个子类。</strong></li>
+</ul>
+<h3 id="规则集Set">规则集Set</h3><ul>
+<li>Set接口扩展Collection接口，它没有引入新的方法和常量，只规定它的实例不能包含相同的元素。</li>
+<li>AbstractSet类是一个便利类，它扩展了AbstractCollection类并实现了Set接口。</li>
+<li>Set接口的三个具体类是HashSet、LinkedHashSet和TreeSet。</li>
+</ul>
+<h4 id="散列集HashSet">散列集HashSet</h4><ul>
+<li>HashSet类可以用来存储互不相同的任何元素。考虑效率的因素，添加到散列集之中的对象必须实现hashCode方法，适当地散列分布散列码。</li>
+<li>两个不等的对象可能有相同的散列码。</li>
+</ul>
+<h4 id="链式散列集LinkedHashSet">链式散列集LinkedHashSet</h4><ul>
+<li>在HashSet中元素是没有顺序的，而在LinkedHashSet中，可以按元素插入集合的顺序进行提取。</li>
+<li>LinkedHashSet中的元素存储时保持插入的顺序，要想自定义顺序，可以使用<code>TreeHashSet</code>。<br><strong>如果不需要使元素按其插入的顺序进行存储，应该使用HashSet，它的效率要比LinkedHashSet高。</strong></li>
+</ul>
+<h4 id="树形集TreeSet">树形集TreeSet</h4><p>SortSet是Set的一个子接口，它保证规则集中的元素是有序的。TreeSet是实现SortedSet接口的一个具体类。只有当对象之间可以互相比较是，才可以将它们添加到树形集TreeSet中。</p>
+<ul>
+<li>有两种方法实现对象的比较：<ul>
+<li>使用Comparable接口。如果添加到规则集中的对象是Comparable的实例，就可以使用compareTo方法来比较。这种方法定义的序通常称为<code>自然顺序（natural order）</code>。<strong>参见习题18.7</strong></li>
+<li>如果该类不支持Comparable接口，或者在实现Comparable接口的类中不想使用compareTo方法进行比较，可以给规则集的元素创建一个比较器。这种方法定义的序称为<code>比较器顺序（order by comparator）</code>。</li>
+</ul>
+</li>
+<li>创建树形集的好的方法是使用构造方法<code>TreeSet(Collection c)</code>，这样只需要对规则集进行一次排序，效率较高。<br>**如果向树形集添加一个与集合中已有元素不可比的对象，将会发生运行错误<code>ClassCastException</code>。</li>
+</ul>
+<h3 id="比较器接口Comparator">比较器接口Comparator</h3><ul>
+<li>有时想把不同类型的元素添加到同一个树形集内，可以定义一个比较器来比较这些元素。可以创建一个<code>java.util.Comparator</code>接口的类。其方法如下：<ul>
+<li>public int compare(Object element1,Object element2)  </li>
+<li>public boolean equals(Object element)<br>**Object类也定义了equals方法，因此实现接口时不实现equals方法也不会报错，但是实现该方法可以快速的判断，提高效率。</li>
+</ul>
+</li>
+<li>树形集要想使用一个比较器，必须使用构造方法TreeSet（Comparator comparator）来创建一个有序集。</li>
+</ul>
+<h3 id="线性表List">线性表List</h3><p>线性表允许在一个集合中存储重复的元素。</p>
+<ul>
+<li>List接口扩展Collection接口，添加了<code>面向位置（position-oriented）</code>的操作，并且添加了能够双向遍历线性表的新迭代探子。（ListIterator）</li>
+</ul>
+<h4 id="数组线性表ArrayList和链表LinkedList">数组线性表ArrayList和链表LinkedList</h4><ul>
+<li>如果需要使用下标随机访问元素，并且处理在末尾之外，不在其他位置插入或删除元素，使用ArrayList。</li>
+<li>如果需要在线性表的任意位置上插入或删除元素，应该选择LinkedList。</li>
+<li>如不要求在线性表中插入或删除元素，数组是效率最高的数据结构。</li>
+</ul>
+<h4 id="向量类Vector">向量类Vector</h4><ul>
+<li>Vector类除了包含用于访问和修改向量的同步方法外，它与ArrayList是相同的。同步方法用于防止两个或多个线程同时访问向量时引起数据冲突。</li>
+<li>当不需要同步时，最好使用ArrayList，它比Vector快得多。</li>
+</ul>
+<h4 id="栈类stack">栈类stack</h4><p>栈类stack是最为Vector类的扩展实现的。</p>
+<h3 id="一般类型的使用">一般类型的使用</h3><ul>
+<li>所有的集合都支持一般类型，可以用记号<code>&lt;&gt;</code>给任一集合中的元素指定一个特定的类型。</li>
+<li>从一个只有一种指定元素类型的集合中取值时，不需要进行类型转换。</li>
+</ul>
+<h3 id="图Map">图Map</h3><ul>
+<li>Map接口建立元素和键值的一个映射关系。键值就是下标。</li>
+<li>一个图中不能有重复的键值，每个键值对应一个值。</li>
+<li>AbstractMap类是一个实现Map接口的便利类，除了entrySet()方法外，它实现了Map接口中的其他方法。SortedMap接口扩展Map接口，其中的映像是以键值升序的方式排列的。</li>
+<li>散列图HashMap、链式散列图LinkedHashMap和树形图TreeMap三种类是实现Map接口的具体类。</li>
+</ul>
+<h4 id="HashMap">HashMap</h4><p>对于定位查找一个值、插入一个映像或删除一个映像，HashMap的效率是很高的。</p>
+<h4 id="LinkedHashMap">LinkedHashMap</h4><ul>
+<li>它支持图中元素排序。在LinkedHashMap中，元素既可以按照它们插入的顺序排序（称为<code>插入排序（insertion order）</code>），也可以按它们最后一次访问时间的顺序，从最早到最晚（称为<code>访问顺序（access order）</code>）。<ul>
+<li>无参构造方法是以插入顺序创建LinkedHashMap对象的。</li>
+<li>使用构造方法LinkedHashMap（initialCapacity，loadFactor，true）可以以访问顺序创建LinkedHashMap对象。</li>
+</ul>
+</li>
+</ul>
+<h4 id="TreeMap">TreeMap</h4><ul>
+<li>它实现了SortedMap接口，它可以按照键值排好的顺序遍历图。键值可以使用Comparable接口或Comparator接口来排序。</li>
+<li>构造方法：<ul>
+<li>TreeMap（）如果实现了Comparable接口，就可以使用compareTo方法来对集合内中的元素进行排序。</li>
+<li>TreeMap（Comparator comparator）可以使用指定比较器来对图中元素进行排序。</li>
+</ul>
+</li>
+</ul>
+<p><strong>Map接口不含有迭代探子，为遍历一个图，可以用Map接口的方法<code>enrtySet()</code>来创建一个映像的规则集。该规则集内的每个元素都是一个字符串，它是由代表键值对象的字符串与其对应的映像用等号连接而成的。</strong></p>
+<h3 id="Collections类">Collections类</h3><p>Collections类包含管理集合与图、创建同步集合类、创建只读集合类等<code>静态方法</code>。</p>
+<h3 id="Arrays类">Arrays类</h3><p>Arrays类中包含对数组进行排序、查找、比较和填充元素的各种<code>静态方法</code>。它还包含了将数组转为线性表的方法。</p>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>Java集合架构中的所有具体类都实现了Cloneable和Serializable接口，所以它们的实例都是可复制和可复制的。</li>
+<li>Collections类和Arrays类提供的方法都是静态方法。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li>习题18.1 18.2 18.3 18.5 18.6 18.7 18.9源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter18/src" target="_blank" rel="external">chapter18</a></li>
+<li><p>18.5按字典升序显示单词的实现思路：使用线性表存储每个单词，使用构造方法sort（Comparator comparator）对表中的对象排序，比较器的实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DicComparable</span> <span class="keyword">implements</span> <span class="title">Comparator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Object o1, Object o2)</span> </span>&#123;</span><br><span class="line">        String s1 = ((String) (o1)).toLowerCase();</span><br><span class="line">        String s2 = ((String) (o2)).toLowerCase();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (s1.compareTo(s2) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (s1.compareTo(s2) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>18.7将单词按出现频率升序显示，实现思路：创建一个实现Comparable接口的类Wordoccurrence,该类包含两个域word和count，使用compareTo方法来比较单词的出现次数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WordOccurrence</span> <span class="keyword">implements</span> <span class="title">Comparable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String word;</span><br><span class="line">    <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WordOccurrence</span><span class="params">(String word, <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.word = word;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (count &gt; ((WordOccurrence) o).count) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (count &lt; ((WordOccurrence) o).count) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -1151,16 +1597,64 @@
       
         
           
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容数据结构是按某种方式组织的数据集合。用面向对象的观点来看，一个数据结构就是一个存储着其他对象的对象，存储在数据结构内的对象称为数据或元素。因此数据结构又被称为容器对象（cont
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/22/Java学习总结-第十七章-面向对象数据结构/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
+<hr>
+<h2 id="主要内容">主要内容</h2><p>数据结构是按某种方式组织的数据集合。用面向对象的观点来看，一个数据结构就是一个存储着其他对象的对象，存储在数据结构内的对象称为数据或元素。因此数据结构又被称为<code>容器对象（container object）</code>或<code>集合对象（collection object）</code>。<br>本章介绍线性表、堆栈、队列和二叉树等四种动态数据结构。</p>
+<h3 id="线性表">线性表</h3><ul>
+<li>线性表是存储顺序排列的数据时最常用的数据结构。</li>
+<li>线性表可以由数组或者链表实现。这两种类具有相同的操作，但是具有不同的数据域，这些相同的操作可以由接口或抽象类生成。在设计时同时提供接口与抽象类是把它们的优点结合到一起的好策略，这样的抽象类称为<code>便利类</code>。</li>
+<li>数组线性表<ul>
+<li>数组是一种固定大小的数据结构。但仍然可以采用如下方法实现动态改变：当数组不能再存储线性表中的新元素时，创建一个更大的数组来代替当前数组。这样的数组线性表是一个动态的数据结构。</li>
+</ul>
+</li>
+<li>链表<ul>
+<li>由数据创建的线性表，在特定位置进行插入和删除操作效率是很低的，因此可以采用链表结构来提高效率。</li>
+<li>链表的遍历：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Node temp = first;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++) &#123;</span><br><span class="line">     temp = temp.next;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="栈和队列">栈和队列</h3><ul>
+<li>栈（stack）可以看做是一种特殊的线性表，访问、插入和删除它的元素只能在栈的一端（栈顶）进行。队列可以表示一个排队等待的队伍。它可以看做是一种特殊的线性表，它的元素只能从队列的末端（队列尾）插入，从开始端（队列头）访问和删除。</li>
+<li>栈：使用数组线性表来实现栈效率较高。</li>
+<li>队列：用链表实现。</li>
+</ul>
+<h3 id="二叉树">二叉树</h3><ul>
+<li>线性表、栈和队列都是由一列元素构成的线型结构。二叉树是一个层次结构，它要么是空集，要么由一个被称为<code>根（root）</code>的元素和两棵不同的子树组成，这两个子树分别称为<code>左子树（left subtree）</code>和<code>右子树（right subtree）</code>。</li>
+<li>一个结点的左（右）子树的根节点称为该结点的<code>左（右）孩子（left（right）child）</code>。没有孩子的结点称为<code>叶结点（leaf）</code>。<code>二叉搜索树（binary search tree）</code>是一种常用的特殊二叉树。二叉搜索树的特征是：对它的每一个结点来说，左子树中结点的值都小于该结点的值，右子树中的结点的值都大于该节点的值。</li>
+</ul>
+<h4 id="二叉树的遍历">二叉树的遍历</h4><ul>
+<li><p><code>中序遍历（inorder）:</code>首先访问当前结点的左子树，然后访问当前结点，最后访问该结点的右子树。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       inorder(root.left);</span><br><span class="line">       System.out.print(root.element + <span class="string">" "</span>);</span><br><span class="line">       inorder(root.right);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>后序遍历（postorder）：</code>首先访问当前结点的左子树，然后访问该结点的右子树，最后访问该结点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">postorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (root==<span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">       postorder(root.left);</span><br><span class="line">       postorder(root.right);</span><br><span class="line">       System.out.print(root.element + <span class="string">" "</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>前序遍历（preorder）：</code>首先访问当前结点，然后访问该结点的左子树，最后访问该结点的右子树。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">preorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">       System.out.print(root.element + <span class="string">" "</span>);</span><br><span class="line">       preorder(root.left);</span><br><span class="line">       preorder(root.right);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>深度优先遍历（depth-first）：</code>与前序遍历相同。</p>
+</li>
+<li><code>广度遍历法（breadth-first）：</code>一层一层的访问树的结点。<br><strong>如果元素的插入顺序不同，树看起来可能不一样，但是只要元素的集合相同，中序序列是一样的。</strong></li>
+</ul>
+<hr>
+<h2 id="复习小结">复习小结</h2><ul>
+<li>基本类型的数据不能作为对象存储，但是可以给基本数据类型值创建对应包装类的对象。</li>
+</ul>
+<hr>
+<h2 id="编程练习">编程练习</h2><ul>
+<li>习题17.1、17.2、17.3、17.6源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter17/src" target="_blank" rel="external">chapter17</a></li>
+<li>写双向链表时，在执行下列方法：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    TreeNode current = first;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; index; i++) &#123;</span><br><span class="line">        current = current.next;</span><br><span class="line">    &#125;</span><br><span class="line">    TreeNode target = current.next;</span><br><span class="line">    target.pravious.next = target.next;</span><br><span class="line">    target.next.pravious = target.pravious;</span><br><span class="line">    size--;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>执行到第7行语句时：list的状态是<code>Method threw &#39;java.lang.NullPointerException&#39; exception. Cannot evaluate _17_3.DoubleLinkedList.toString()</code>,但是整个方法执行完后，不会报错，原因暂时不知道。</p>
+<ul>
+<li>习题17.6中需要写一个方法，返回二叉树的深度，深度是指二叉树最长路径的结点个数。代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">treeDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> left = treeDepth(root.left);</span><br><span class="line">    <span class="keyword">int</span> right = treeDepth(root.right);</span><br><span class="line">    <span class="keyword">return</span> left &gt; right ? (left + <span class="number">1</span>) : (right + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -1278,15 +1772,11 @@
       
         
           
-          写密码管理器时，一直在找一种加密方式，除了自己实现外，我还在网上发现了一个不错的方法，源地址在这里。这里仅作抄录：
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/05/base64编码和解码示例代码/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p>写密码管理器时，一直在找一种加密方式，除了自己实现外，我还在网上发现了一个不错的方法，<a href="http://www.q3060.com/list6/list144/2717.html" target="_blank" rel="external">源地址在这里</a>。这里仅作抄录：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sun.misc.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by ht on 2016/2/24.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testorigin</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        TransformBS1 transformBS = <span class="keyword">new</span> TransformBS1();</span><br><span class="line">        transformBS.testS2B();</span><br><span class="line">        transformBS.testB2S();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 今天在网上看到一个程序游戏，只要目的是为了能够将文件中的01二进制数据读取到程序然后通过base64解码，再转换成程序</span><br><span class="line"> * 所以，自己写了个程序：（1）将一段字符串进行base64处理，然后转换成二进制输出。（2）将一段二进制数据转换成字符串，然后base64解码到对应的字符串</span><br><span class="line"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TransformBS1</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * @ see 字符串进行base64编码后转换为二进制形式,如：（h(原字符)-&gt;a(编码后)-&gt;01100001010000010011110100111101(二进制形式)）</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testS2B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"=========字符串到二进制！============="</span>);</span><br><span class="line">        BASE64Encoder e = <span class="keyword">new</span> BASE64Encoder();</span><br><span class="line"><span class="comment">//编码器</span></span><br><span class="line">        String s = <span class="string">"我爱你"</span>;</span><br><span class="line">        System.out.println(<span class="string">"尚未编码的数据："</span> + s);</span><br><span class="line">        s = e.encode(s.getBytes());</span><br><span class="line"><span class="comment">//获得base64编码后的字符串</span></span><br><span class="line">        System.out.println(<span class="string">"编码后的数据："</span> + s);</span><br><span class="line">        System.out.print(<span class="string">"二进制数据："</span>);</span><br><span class="line">        String s1 = <span class="string">"whtis\n"</span> + <span class="string">"我爱你\n"</span> + s;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> c : s1.toCharArray()) &#123;</span><br><span class="line"><span class="comment">//对字符串中的字符逐个转换成二进制数据</span></span><br><span class="line">            String binaryStr = Integer.toBinaryString(c);</span><br><span class="line"><span class="comment">//单个字符转换成的二进制字符串</span></span><br><span class="line">            String format = String.format(<span class="string">"%8s"</span>, binaryStr);</span><br><span class="line"><span class="comment">//因为上面转换成二进制后的位数不够8位所以不足的前面补空格，这里是考虑到能够从数据文件批量读取。</span></span><br><span class="line">            format = format.replace(<span class="string">" "</span>, <span class="string">"0"</span>);</span><br><span class="line"><span class="comment">//高位空格替换成0，其实编码后的数据最大范围为2的6次方，首位一定是空格，不然就要用format.startWith(" ");来判断</span></span><br><span class="line">            System.out.print(format);</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\n=========字符串到二进制结束！============="</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * @ see 二进制形式转换为字符串后进行base64解码的字符串如：(01100001010000010011110100111101-&gt;a-&gt;h)</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testB2S</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"=========二进制到字符串开始！============="</span>);</span><br><span class="line">        StringBuffer results = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"><span class="comment">//保存尚未解码的数据结果</span></span><br><span class="line">        String binaryStr = <span class="string">"01110111011010000111010001101001011100110000101011000100001000111100100011000110011110110000000001010001101010110111101101001010100100011010100110100011010010111100000110101010011000011001001100111"</span>;</span><br><span class="line"><span class="comment">//二进制数据，这里是取用上面程序的最后结果</span></span><br><span class="line">        System.out.println(<span class="string">"二进制数据："</span> + binaryStr);</span><br><span class="line"><span class="comment">//这里采用正则表达式来匹配8位长度的数据，然后一个个find()</span></span><br><span class="line">        Matcher matcher = Pattern.compile(<span class="string">"\\d&#123;8&#125;"</span>).matcher(binaryStr);</span><br><span class="line"><span class="comment">//定义匹配模式并，获取模式</span></span><br><span class="line">        BASE64Decoder d = <span class="keyword">new</span> BASE64Decoder();</span><br><span class="line"><span class="comment">//解码器</span></span><br><span class="line">        <span class="keyword">while</span> (matcher.find()) &#123;</span><br><span class="line"><span class="comment">//在binaryStr中找到了8位长度的数据，依次往后面找</span></span><br><span class="line">            <span class="keyword">int</span> intVal = Integer.valueOf(matcher.group(), <span class="number">2</span>);</span><br><span class="line"><span class="comment">//matcher.group()中存储了找到匹配模式的数据，这里以2进制的形式转换为整数</span></span><br><span class="line">            results.append((<span class="keyword">char</span>) intVal);</span><br><span class="line"><span class="comment">//将整数转换为对应的字符，并添加到结果中</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"尚未解码的数据："</span> + results);</span><br><span class="line"><span class="comment">//输出尚未解码的数据</span></span><br><span class="line">        String s = <span class="keyword">new</span> String(d.decodeBuffer(results.toString()));</span><br><span class="line"><span class="comment">//得到解码后的数据</span></span><br><span class="line">        System.out.println(<span class="string">"解码后的数据："</span> + s);</span><br><span class="line"><span class="comment">//输出解码后的数据</span></span><br><span class="line">        System.out.println(<span class="string">"=========二进制到字符串结束！============="</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
         
       
     </div>
@@ -1404,143 +1894,69 @@
       
         
           
-          功能说明及演示Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。北邮人论坛大神给了解决方案，链接在这，以下内容为复制粘贴：
-
-Swing不是线程安全的，但也不是大问题。只要把所有的对Swing窗体的的操作都放在专门的线程（event dispatch thread）里做
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/20/GUI练习之二-密码管理器/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/18/Java学习总结-第十六章-简单输入输出/" itemprop="url">
-                  Java学习总结--第十六章 简单输入输出
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-18T19:37:58+08:00" content="2016-02-18">
-              2016-02-18
-            </time>
-          </span>
-
+            <h3 id="功能说明及演示">功能说明及演示</h3><p><del><strong>Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。</strong></del><br>北邮人论坛大神给了解决方案，<a href="http://bbs.byr.cn/#!article/Java/47997" target="_blank" rel="external">链接在这</a>，以下内容为复制粘贴：</p>
+<blockquote>
+<p>Swing不是线程安全的，但也不是大问题。只要把所有的对Swing窗体的的操作都放在专门的线程（event dispatch thread）里做就行了。有一个模式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SwingUtilities.invokeLater(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        createAndShowGUI();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这样就线程安全了。这里有详细说明： <a href="http://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html" target="_blank" rel="external">http://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html</a></p>
+</blockquote>
+<h4 id="说明">说明</h4><p>综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：</p>
+<ul>
+<li>可以自己选择密码文件的存放位置</li>
+<li>可以选择生成的密码是否可以用文本查看器查看</li>
+<li>可以连续的写入新数据</li>
+<li>可以根据关键字和密码条件生成相应的密码字符，并提供MD5的显示与查看功能</li>
+<li>可以根据网站/网址名进行简单的查看功能</li>
+<li>可以同步显示所有存在的密码文件列表</li>
+<li>可以选择是否在执行生成按钮后刷新页面，方便直接书写下一个密码文件</li>
+<li>其他小功能</li>
+</ul>
+<h4 id="实现思路">实现思路</h4><p>1、存储密码的同时，将生成密码的条件设置为常量，存储在一个整数数组中（waysOfWirte），并将这值附在生成的密码最后，取值时同时取出来，但是不显示在用户界面上。<br>2、利用文件后缀名的不同区别密码文件的存储格式（二进制存储方式后缀为.w，文本可读后缀名为.wf）。</p>
+<h4 id="演示">演示</h4><ul>
+<li>初始化设置，程序会在同目录下创建一个名为<code>.pmconfig.w</code>的文件，该文件将密码文件的存放路径写入供以后使用：<br><img src="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%93%8D%E4%BD%9C.gif" alt="初始化操作.gif"></li>
+<li>主界面的操作：包括密码文件的生成、查看、更新以及删除等操作：<br><img src="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%BB%E7%95%8C%E9%9D%A2%E6%93%8D%E4%BD%9C.gif" alt="主界面操作.gif"></li>
+</ul>
+<h3 id="问题记录">问题记录</h3><ul>
+<li>如何回车后使光标出现在下一个输入框中：<br>使用<code>requestFocus（）</code>方法</li>
+<li><p>如何创建一个文件夹:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">File fileDir = <span class="keyword">new</span> File(<span class="string">"C:\\Users\\ht\\IdeaProjects\\PasswordGenerated\\PasswdGenetated\\"</span>);</span><br><span class="line"><span class="keyword">if</span> (!fileDir.isDirectory()) &#123;</span><br><span class="line"> fileDir.mkdir();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如何获取系统剪切板并设置内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();</span><br><span class="line"><span class="comment">//复制到剪切板上</span></span><br><span class="line">StringSelection ss = <span class="keyword">new</span> StringSelection(password);</span><br><span class="line">clipboard.setContents(ss, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如何获取当前系统的目录树并选取目录</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JFileChooser fileChooser = <span class="keyword">new</span> JFileChooser();</span><br><span class="line">   fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);</span><br><span class="line">   <span class="keyword">int</span> i = fileChooser.showOpenDialog(<span class="keyword">null</span>);</span><br><span class="line">   <span class="keyword">if</span> (i == fileChooser.APPROVE_OPTION) &#123;</span><br><span class="line">       String path = fileChooser.getSelectedFile().getAbsolutePath();</span><br><span class="line">       String name = fileChooser.getSelectedFile().getName();</span><br><span class="line">       System.out.println(path + name);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为了保证跨平台使用，将windows路径中的”\“替换为”/“</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.replaceAll(<span class="string">"\\\\"</span>,<span class="string">"/"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如何实现初始化界面设置密码文件位置后隐藏该界面，继而出现主界面<br>PasswordManger类中initFrame和mainFrame的先后设置。</p>
+</li>
+<li><p>如何使JList能够实时显示密码文件的个数</p>
+<ul>
+<li><p>使用<code>setModel（javax.swing.ListModel&lt;E&gt; model）</code>方法。该方法要求传入一个Model对象，ListModel的使用用例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileModel</span> <span class="keyword">extends</span> <span class="title">AbstractListModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String[] files;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">FileModel</span><span class="params">(String[] files)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.files = files;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">getElementAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> (index + <span class="number">1</span>) + <span class="string">"."</span> + files[index++];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> files.length;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ListModel是一个接口，如果实现该接口，需要实现一些不必要的方法：<code>void addListDataListener(ListDataListener l)</code>和<code>void removeListDataListener(ListDataListener l)</code>,但是Java提供了一个便捷类AbstractListModel，继承该类，就可以避免实现以上方法。</p>
+</li>
+<li>除了AbstractListModel类，还有其他抽象类如DefaultListModel，但是DefaultListModel实现了ListModel的所有方法，因此可以做的更改比较小。</li>
+<li>为了监听FileModel的变化，可以采用这种方法：在每次JList内容发生变化时重新创建一个FIleModel，传入的是更新后的数组，再使用JList的<code>updateUI()</code>方法，就可以动态显示JList的内容了。<br><em>可以给FileModel添加一个监听器类<code>ListDataListener</code>,并实现该接口的抽象方法。（网上介绍，未做）</em><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateJList</span><span class="params">(String fileDirPath)</span> </span>&#123;</span><br><span class="line">        String[] files = <span class="keyword">new</span> File(fileDirPath).list();</span><br><span class="line">        FileModel fileModel = <span class="keyword">new</span> FileModel(files);</span><br><span class="line">        mainFrame.getJlFileName().setModel(fileModel);</span><br><span class="line">        mainFrame.getJlFileName().updateUI();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">- 根据指定条件生成密码</span><br><span class="line">  + 我使用如下方法，返回的字符都是字符<span class="string">'A'</span></span><br><span class="line">  ```<span class="function">java</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">char</span> <span class="title">generateChar</span><span class="params">(<span class="keyword">char</span> aChar, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> c = <span class="string">'A'</span>;</span><br><span class="line">        <span class="keyword">int</span> a = aChar + <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">if</span> (a &gt;= low &amp;&amp; a &lt;= high) &#123;</span><br><span class="line">            c = (<span class="keyword">char</span>) a;</span><br><span class="line">  <span class="comment">//          return c;</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a &lt; low) &#123;</span><br><span class="line">  <span class="comment">//          return generateChar((char) (a + 6), low, high);</span></span><br><span class="line">  			  generateChar((<span class="keyword">char</span>) (a + <span class="number">6</span>), low, high);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a &gt; high) &#123;</span><br><span class="line">  <span class="comment">//          return generateChar((char) (a - 30), low, high);</span></span><br><span class="line">  		      generateChar((<span class="keyword">char</span>) (a - <span class="number">30</span>), low, high);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>问题原因：递归不设出口，每次递归返回的值都在递归自己这一层，无法返回到最初的一层<br>解决方法：使用注释掉的三条语句，删除相应的错误语句。<br><strong>递归不设出口毫无意义</strong></p>
+<ul>
+<li>异常<br><code>java.lang.stackOverflow</code> 堆栈溢出，原因是递归太深</li>
+</ul>
+</li>
+<li><p>生成密码的MD5值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> MessageDigest md5 = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            md5 = MessageDigest.getInstance(<span class="string">"MD5"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">generateMD5</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] bs = md5.digest(password.getBytes());</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="number">40</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">byte</span> x : bs) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((x &amp; <span class="number">0xff</span>) &gt;&gt; <span class="number">4</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                sb.append(<span class="string">"0"</span>).append(Integer.toHexString(x &amp; <span class="number">0xff</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                sb.append(Integer.toHexString(x &amp; <span class="number">0xff</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始选取配置文件路径时若该路径存在其他文件，应该避免出现在JList中</p>
+</li>
+</ul>
+<h3 id="源码">源码</h3><p>见我的GitHub：<a href="https://github.com/whtis/PasswordManager/tree/master/src" target="_blank" rel="external">PasswordManager</a></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/18/Java学习总结-第十六章-简单输入输出/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/18/Java学习总结-第十六章-简单输入输出/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-           本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。
-
-主要内容本章主要讨论数据持久化的问题。一般Java程序在结束后所有存储在内存中的数据都会消失，为了保留这些数据，就要学会如何将它们存储到磁盘文件或光盘文件中。本章介绍的主要是两个方面的
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/18/Java学习总结-第十六章-简单输入输出/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
@@ -1612,7 +2028,7 @@ Swing不是线程安全的，但也不是大问题。只要把所有的对Swing�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1620,7 +2036,7 @@ Swing不是线程安全的，但也不是大问题。只要把所有的对Swing�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1629,7 +2045,7 @@ Swing不是线程安全的，但也不是大问题。只要把所有的对Swing�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1708,7 +2124,7 @@ Swing不是线程安全的，但也不是大问题。只要把所有的对Swing�
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 

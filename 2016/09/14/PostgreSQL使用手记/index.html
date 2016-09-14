@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java,数据库，PostgreSQL," />
 
 
 
@@ -86,15 +86,19 @@
 
 
 
-<meta name="description" content="点滴的记录，是变强的必经之路">
-<meta property="og:type" content="website">
-<meta property="og:title" content="whtis's blog">
-<meta property="og:url" content="http://www.whtis.com/page/4/index.html">
+<meta name="description" content="写在前面&amp;emsp;&amp;emsp;因为项目需要，要将本来的mybatis+mysql改为mybatis+postgresql,使用途中难免遇到坑，以下是我遇到的，记录下来供参考。好久没写blog，感觉都快长草了，目前在想要不要开一个分类，写点日常废话😂&amp;emsp;&amp;emsp;好了，言归正传。
+为什么要用PostgreSQL为什么要用呢,上面已经说了，项目需要。postgresql经常被拿来和mys">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PostgreSQL使用手记">
+<meta property="og:url" content="http://www.whtis.com/2016/09/14/PostgreSQL使用手记/index.html">
 <meta property="og:site_name" content="whtis's blog">
-<meta property="og:description" content="点滴的记录，是变强的必经之路">
+<meta property="og:description" content="写在前面&amp;emsp;&amp;emsp;因为项目需要，要将本来的mybatis+mysql改为mybatis+postgresql,使用途中难免遇到坑，以下是我遇到的，记录下来供参考。好久没写blog，感觉都快长草了，目前在想要不要开一个分类，写点日常废话😂&amp;emsp;&amp;emsp;好了，言归正传。
+为什么要用PostgreSQL为什么要用呢,上面已经说了，项目需要。postgresql经常被拿来和mys">
+<meta property="og:updated_time" content="2016-09-14T16:17:29.856Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="whtis's blog">
-<meta name="twitter:description" content="点滴的记录，是变强的必经之路">
+<meta name="twitter:title" content="PostgreSQL使用手记">
+<meta name="twitter:description" content="写在前面&amp;emsp;&amp;emsp;因为项目需要，要将本来的mybatis+mysql改为mybatis+postgresql,使用途中难免遇到坑，以下是我遇到的，记录下来供参考。好久没写blog，感觉都快长草了，目前在想要不要开一个分类，写点日常废话😂&amp;emsp;&amp;emsp;好了，言归正传。
+为什么要用PostgreSQL为什么要用呢,上面已经说了，项目需要。postgresql经常被拿来和mys">
 
 
 
@@ -115,9 +119,9 @@
 
 
 
-  <link rel="canonical" href="http://www.whtis.com/page/4/"/>
+  <link rel="canonical" href="http://www.whtis.com/2016/09/14/PostgreSQL使用手记/"/>
 
-  <title> whtis's blog </title>
+  <title> PostgreSQL使用手记 | whtis's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -157,9 +161,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -296,9 +298,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -318,10 +320,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/" itemprop="url">
-                  hexo 3.x同时部署到github和gitcafe的方法
-                </a>
+                PostgreSQL使用手记
               
             
           </h1>
@@ -333,8 +332,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-03T11:24:55+08:00" content="2015-11-03">
-              2015-11-03
+            <time itemprop="dateCreated" datetime="2016-09-14T22:29:13+08:00" content="2016-09-14">
+              2016-09-14
             </time>
           </span>
 
@@ -347,8 +346,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
                   </a>
                 </span>
 
@@ -363,8 +362,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/03/hexo-3-x同时部署到github和gitcafe的方法/" itemprop="commentsCount"></span>
+                <a href="/2016/09/14/PostgreSQL使用手记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/PostgreSQL使用手记/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -376,131 +375,10 @@
           
 
           
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>详细的hexo博客搭建教程可以参考<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">这里</a></p>
-<p>在我按照教程搭建博客的过程中，无意中看到了可以同时将博客部署到<code>github</code>和<code>gitcafe</code>上，以提高国内外的访问速度，具体操作过程可以参考<a href="http://opiece.me/2015/04/28/push-hexo-to-github-and-gitcafe/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">这里</a></p>
-<p>当按照教程修改hexo的配置文件<code>_config.yml</code>后，第二个repo里并没有更新代码，经过查阅<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">官方文档</a>，<code>_config.yml</code>正确的配置如下：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:yourname/yourname.github.io.git,master</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@gitcafe</span>.<span class="attribute">com</span>:yourname/yourname.git,gitcafe-pages</span><br></pre></td></tr></table></figure>
-<p>现在使用<code>hexo d</code>，应该就没问题了。</p>
-<p><strong>注意，type前面的<code>-</code>不能省略。</strong></p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/" itemprop="url">
-                  ubuntu14.04本地安装wordpress中的一些问题总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-29T18:13:35+08:00" content="2015-10-29">
-              2015-10-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
               &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
               </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/wordpress/" itemprop="url" rel="index">
-                    <span itemprop="name">wordpress</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/29/ubuntu14-04本地安装wordpress中的一些问题总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
           
         </div>
       </header>
@@ -513,63 +391,152 @@
       
 
       
-        
-          
-            <h1 id="1、安装apache2的问题">1、安装apache2的问题</h1><p>当我们使用如下语句安装apache2时：</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install apache2</span><br></pre></td></tr></table></figure>
-<p>会发现启动报错：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. <span class="operator"><span class="keyword">Set</span> the <span class="string">'ServerName'</span> directive <span class="keyword">globally</span> <span class="keyword">to</span> suppress this message</span><br><span class="line">                                                                         [ OK ]</span></span><br></pre></td></tr></table></figure>
-<p>解决方法：</p>
-<p>编辑<code>sudo nano /etc/apache2/apache2.conf</code>，在最后加上</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword"><span class="common">ServerName</span></span> localhost：80</span><br></pre></td></tr></table></figure>
-<p>再试试，apache2服务器就可以正常启动了。</p>
-<p><em><strong>请注意：apache2的默认配置文件不再是apache的httpd，而是apache2的apache2.conf</strong></em></p>
-<h1 id="2、安装wordpress时需要注意的问题">2、安装wordpress时需要注意的问题</h1><p>wordpress的下载以及配置，需要注意的只有一点：</p>
-<p><em>wordpress的默认根目录是 <strong>/var/www/html</strong> ，而不是 <strong>/var/www</strong></em></p>
-<p>因此，假如你想通过localhost访问时，你的目录结构应该是 <strong>/var/www/html/*</strong>，同理，如果你要通过localhost/wordpress访问时，你的目录结构应该是 <strong>/var/www/html/wordpress/*</strong></p>
+        <h3 id="写在前面">写在前面</h3><p><blockcode><br>&emsp;&emsp;因为项目需要，要将本来的<code>mybatis+mysql</code>改为<code>mybatis+postgresql</code>,使用途中难免遇到坑，以下是我遇到的，记录下来供参考。好久没写blog，感觉都快长草了，目前在想要不要开一个分类，写点日常废话😂<br></blockcode><br>&emsp;&emsp;好了，言归正传。</p>
+<h3 id="为什么要用PostgreSQL">为什么要用PostgreSQL</h3><p>为什么要用呢,上面已经说了，项目需要。postgresql经常被拿来和mysql进行比较，postgresql可以用来存储较大的对象数据（文本、视频、图片等），符合项目要求。</p>
+<h3 id="什么是PostgreSQL">什么是PostgreSQL</h3><p>念都不知道怎么念的一个词，确实第一感觉没有mysql好。看下官方的说法：</p>
+<blockquote>
+<p>PostgreSQL支持大部分 SQL标准并且提供了许多其他现代特性：复杂查询、外键、触发器、视图、事务完整性、MVCC。同样，PostgreSQL 可以用许多方法扩展，比如， 通过增加新的数据类型、函数、操作符、聚集函数、索引。免费使用、修改、和分发 PostgreSQL，不管是私用、商用、还是学术研究使用。(摘自百度百科)</p>
+</blockquote>
+<h3 id="使用版本">使用版本</h3><p>本文总结基于PostgreSQL 9.4版本</p>
+<h3 id="安装及使用">安装及使用</h3><p>推荐下阮一峰写的这篇博客<a href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html" target="_blank" rel="external">PostgreSQL新手入门</a></p>
+<h3 id="使用中出现的错误及解决方案">使用中出现的错误及解决方案</h3><h4 id="错误一：_java-sql-SQLException:_No_suitable_driver_found_for_jdbc:postgresql://yourhost:port">错误一： <code>java.sql.SQLException: No suitable driver found for jdbc:postgresql://yourhost:port</code></h4><ul>
+<li>可能的错误原因：<ul>
+<li>使用的postgresql的驱动与当前使用的jdk版本不兼容。具体兼容情况参见官方文档，本文仅作摘录：</li>
+<li>系统环境没有配置classpath路径，使的程序无法找到驱动的位置。（使用java IDE编写代码时一般不会出现这种情况）</li>
+<li><strong>连接jdbc时url没写正确，一定要再三检查下正确的url</strong>（这一条很恶心，url错误时的提示我遇到过两种，一种是本条目列出的错误，另一种是提示字符编码有问题）</li>
+</ul>
+</li>
+</ul>
+<h4 id="错误二：_Error_querying_database-_Cause:_org-postgresql-util-PSQLException:_ERROR:_CREATE_DATABASE_cannot_run_inside_a_transaction_block">错误二： <code>Error querying database.  Cause: org.postgresql.util.PSQLException: ERROR: CREATE DATABASE cannot run inside a transaction block</code></h4><ul>
+<li><p>可能的错误原因：</p>
+<ul>
+<li><p>根据网上查到的资料，单独使用postgresql时，出现这个错误的原因是因为没有打开自动提交。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c = DriverManager.getConnection(<span class="string">"jdbc:postgresql://yourhost"</span>, <span class="string">"username"</span>, <span class="string">"password"</span>);</span><br><span class="line">     c.setAutoCommit(<span class="keyword">true</span>); <span class="comment">// 把自动提交设置为true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我在项目中单独使用Mybatis进行事务管理，管理<code>PostgreSQL</code>时也会出现这个错误，因为Mybatis封装了<code>java.sql.*</code>相关的类,因此无法按照上面方式进行更改，在Mybatis中打开一个会话时，也应该将其设置为自动提交（mysql无需设置）：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SqlSession sqlSession = sqlSessionFactory.openSession(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>总结：出现这个问题，网上给的解决方法大多是因为没有打开自动提交，但是仅仅在portgresql控制台上执行<code>SET AUTOCOMMIT = on</code>是无用的，至于为什么需要打开自动提交才能创建数据库，这个不太清楚，可能跟<code>PostgreSQL</code>自己的事务管理逻辑有关，而且这样改动后，暂时不知道会不会对之后的数据库操作造成影响</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用PostgreSQL存储大文件">使用PostgreSQL存储大文件</h3><p>待编辑</p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得这篇文章还有用的话，请我喝杯饮料呗~~</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xnttb.com1.z0.glb.clouddn.com/mm_facetoface_collect_qrcode_1471188145871.png" alt="whtis WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xnttb.com1.z0.glb.clouddn.com/zhufubao_qcode.jpg" alt="whtis Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
     </div>
+  </div>
 
-    <div>
+
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/数据库，PostgreSQL/" rel="tag">#数据库，PostgreSQL</a>
+          
+        </div>
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/29/Java学习笔记-设置代理及打开外部程序/" rel="next" title="Java学习笔记--设置代理及打开外部程序">
+                <i class="fa fa-chevron-left"></i> Java学习笔记--设置代理及打开外部程序
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-  </nav>
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/14/PostgreSQL使用手记/"
+     data-title="PostgreSQL使用手记"
+     data-content=""
+     data-url="http://www.whtis.com/2016/09/14/PostgreSQL使用手记/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
 
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
 
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/14/PostgreSQL使用手记/"
+           data-title="PostgreSQL使用手记" data-url="http://www.whtis.com/2016/09/14/PostgreSQL使用手记/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -589,8 +556,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://7xnttb.com1.z0.glb.clouddn.com/author.png"
@@ -667,6 +643,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用PostgreSQL"><span class="nav-number">2.</span> <span class="nav-text">为什么要用PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是PostgreSQL"><span class="nav-number">3.</span> <span class="nav-text">什么是PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用版本"><span class="nav-number">4.</span> <span class="nav-text">使用版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装及使用"><span class="nav-number">5.</span> <span class="nav-text">安装及使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用中出现的错误及解决方案"><span class="nav-number">6.</span> <span class="nav-text">使用中出现的错误及解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#错误一：_java-sql-SQLException:_No_suitable_driver_found_for_jdbc:postgresql://yourhost:port"><span class="nav-number">6.1.</span> <span class="nav-text">错误一： java.sql.SQLException: No suitable driver found for jdbc:postgresql://yourhost:port</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误二：_Error_querying_database-_Cause:_org-postgresql-util-PSQLException:_ERROR:_CREATE_DATABASE_cannot_run_inside_a_transaction_block"><span class="nav-number">6.2.</span> <span class="nav-text">错误二： Error querying database.  Cause: org.postgresql.util.PSQLException: ERROR: CREATE DATABASE cannot run inside a transaction block</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用PostgreSQL存储大文件"><span class="nav-number">7.</span> <span class="nav-text">使用PostgreSQL存储大文件</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
       <br />
 
@@ -778,6 +765,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
