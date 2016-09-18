@@ -173,7 +173,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">凡是涉及到技术的事，都不是别人的事。</p>
+  <p class="site-subtitle"></p>
 </div>
 
 <div class="site-nav-toggle">
@@ -297,6 +297,278 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/13/Java学习笔记-三个整数进行比较大小的三种方法/" itemprop="url">
+                  Java学习笔记--三个整数进行比较大小的三种方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-13T20:43:59+08:00" content="2015-11-13">
+              2015-11-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/13/Java学习笔记-三个整数进行比较大小的三种方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/13/Java学习笔记-三个整数进行比较大小的三种方法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>对abc三个整数从小到大进行排序，有以下几种方法：</li>
+</ul>
+<ul>
+<li>方法一：首先对a和b进行比较排序，使得<code>a&lt;=b</code>,再对b和c排序，使得<code>b&lt;=c</code>，最后再对a和b进行比较，就可以得到正确的顺序了。代码如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $3<span class="title">_2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = Integer.parseInt(JOptionPane.showInputDialog(<span class="keyword">null</span>, <span class="string">"请输入一个整数："</span>));</span><br><span class="line">        <span class="keyword">int</span> b = Integer.parseInt(JOptionPane.showInputDialog(<span class="keyword">null</span>, <span class="string">"请输入一个整数："</span>));</span><br><span class="line">        <span class="keyword">int</span> c = Integer.parseInt(JOptionPane.showInputDialog(<span class="keyword">null</span>, <span class="string">"请输入一个整数："</span>));</span><br><span class="line">        <span class="keyword">int</span> tmp;</span><br><span class="line">        <span class="keyword">if</span> (a &gt;= b) &#123;</span><br><span class="line">            tmp = b;</span><br><span class="line">            b = a;</span><br><span class="line">            a = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (b &gt;= c) &#123;</span><br><span class="line">            tmp = c;</span><br><span class="line">            c = b;</span><br><span class="line">            b = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (a &gt;= b) &#123;</span><br><span class="line">            tmp = b;</span><br><span class="line">            b = a;</span><br><span class="line">            a = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"the order is "</span> + a + <span class="string">" "</span> + b + <span class="string">" "</span> + c);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法二：使用嵌套的if循环，讨论当<code>a&gt;=b</code>以及<code>a&lt;b</code>的情况。代码如下：</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">$3_2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="type">String</span>[] args) &#123;</span><br><span class="line">        int a = <span class="type">Integer</span>.parseInt(<span class="type">JOptionPane</span>.showInputDialog(null, <span class="string">"请输入一个整数："</span>));</span><br><span class="line">        int b = <span class="type">Integer</span>.parseInt(<span class="type">JOptionPane</span>.showInputDialog(null, <span class="string">"请输入一个整数："</span>));</span><br><span class="line">        int <span class="built_in">c</span> = <span class="type">Integer</span>.parseInt(<span class="type">JOptionPane</span>.showInputDialog(null, <span class="string">"请输入一个整数："</span>));</span><br><span class="line">        int tmp;</span><br><span class="line">        <span class="keyword">if</span> (a &gt;= b) &#123;</span><br><span class="line">            <span class="keyword">if</span> (b &gt;= <span class="built_in">c</span>) &#123;</span><br><span class="line">                <span class="comment">//c&lt;=b&lt;=a</span></span><br><span class="line">                tmp = a;</span><br><span class="line">                a = <span class="built_in">c</span>;</span><br><span class="line">                <span class="built_in">c</span> = tmp;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (a &gt;= <span class="built_in">c</span>) &#123;</span><br><span class="line">                    <span class="comment">//b&lt;=c&lt;=a</span></span><br><span class="line">                    tmp = a;</span><br><span class="line">                    a = b;</span><br><span class="line">                    b = <span class="built_in">c</span>;</span><br><span class="line">                    <span class="built_in">c</span> = tmp;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//b&lt;=a&lt;=c</span></span><br><span class="line">                    tmp = b;</span><br><span class="line">                    b = a;</span><br><span class="line">                    a = tmp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (b &gt;= <span class="built_in">c</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (a &lt;= <span class="built_in">c</span>) &#123;</span><br><span class="line">                    <span class="comment">//a&lt;=c&lt;=b</span></span><br><span class="line">                    tmp = <span class="built_in">c</span>;</span><br><span class="line">                    <span class="built_in">c</span> = b;</span><br><span class="line">                    b = tmp;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//c&lt;=a&lt;=b</span></span><br><span class="line">                    tmp = b;</span><br><span class="line">                    b = a;</span><br><span class="line">                    a = <span class="built_in">c</span>;</span><br><span class="line">                    <span class="built_in">c</span> = tmp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">System</span>.out.<span class="built_in">println</span>(<span class="string">"the order is "</span> + a + <span class="string">" "</span> + b + <span class="string">" "</span> + <span class="built_in">c</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法三：使用三个boolean类型的值表示<code>a&gt;=b</code>、<code>b&gt;=c</code>、<code>a&gt;=c</code>,并分别进行讨论。八种情况中有两种不成立，故舍去。代码如下：</li>
+</ul>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"> public class <span class="number">$3</span>_2 &#123;</span><br><span class="line">    public static void main(<span class="keyword">String[] </span>args) &#123;</span><br><span class="line">        int a = Integer.parseInt(JOptionPane.showInputDialog(null, <span class="string">"请输入一个整数："</span>))<span class="comment">;</span></span><br><span class="line">        int <span class="keyword">b </span>= Integer.parseInt(JOptionPane.showInputDialog(null, <span class="string">"请输入一个整数："</span>))<span class="comment">;</span></span><br><span class="line">        int c = Integer.parseInt(JOptionPane.showInputDialog(null, <span class="string">"请输入一个整数："</span>))<span class="comment">;</span></span><br><span class="line">        int tmp<span class="comment">;</span></span><br><span class="line">        <span class="keyword">boolean </span><span class="keyword">b1 </span>= a &gt;= <span class="keyword">b;</span><br><span class="line"></span>        <span class="keyword">boolean </span><span class="keyword">b2 </span>= a &gt;= c<span class="comment">;</span></span><br><span class="line">        <span class="keyword">boolean </span><span class="keyword">b3 </span>= <span class="keyword">b </span>&gt;= c<span class="comment">;</span></span><br><span class="line">         <span class="preprocessor">if</span> (<span class="keyword">b1 </span>&amp;&amp; <span class="keyword">b2 </span>&amp;&amp; <span class="keyword">b3) </span>&#123;//<span class="keyword">b3多余 </span>c&lt;<span class="label">=b</span>&lt;<span class="label">=a</span></span><br><span class="line">            tmp = a<span class="comment">;</span></span><br><span class="line">            a = c<span class="comment">;</span></span><br><span class="line">            c = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (<span class="keyword">b1 </span>&amp;&amp; <span class="keyword">b2 </span>&amp;&amp; !<span class="keyword">b3) </span>&#123; //<span class="keyword">b&lt;=c&lt;=a</span><br><span class="line"></span>            tmp = a<span class="comment">;</span></span><br><span class="line">            a = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= c<span class="comment">;</span></span><br><span class="line">            c = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (<span class="keyword">b1 </span>&amp;&amp; !<span class="keyword">b2 </span>&amp;&amp; !<span class="keyword">b3) </span>&#123; //<span class="keyword">b&lt;=a&lt;=c</span><br><span class="line"></span>            tmp = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= a<span class="comment">;</span></span><br><span class="line">            a = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (!<span class="keyword">b1 </span>&amp;&amp; <span class="keyword">b2 </span>&amp;&amp; <span class="keyword">b3) </span>&#123; //c&lt;<span class="label">=a</span>&lt;<span class="label">=b</span></span><br><span class="line">            tmp = c<span class="comment">;</span></span><br><span class="line">            c = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= a<span class="comment">;</span></span><br><span class="line">            a = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (!<span class="keyword">b1 </span>&amp;&amp; !<span class="keyword">b2 </span>&amp;&amp; <span class="keyword">b3) </span>&#123; //a&lt;<span class="label">=c</span>&lt;<span class="label">=b</span></span><br><span class="line">            tmp = <span class="keyword">b;</span><br><span class="line"></span>            <span class="keyword">b </span>= c<span class="comment">;</span></span><br><span class="line">            c = tmp<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="preprocessor">if</span> (!<span class="keyword">b1 </span>&amp;&amp; !<span class="keyword">b2 </span>&amp;&amp; !<span class="keyword">b3) </span>&#123; //a&lt;<span class="label">=b</span>&lt;<span class="label">=c</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"the order is "</span> + a + <span class="string">" "</span> + <span class="keyword">b </span>+ <span class="string">" "</span> + c)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/13/Java学习笔记-double类型的值保留指定小数位的几种方法/" itemprop="url">
+                  Java学习笔记--double类型的值保留指定小数位的几种方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-13T12:56:43+08:00" content="2015-11-13">
+              2015-11-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/13/Java学习笔记-double类型的值保留指定小数位的几种方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/13/Java学习笔记-double类型的值保留指定小数位的几种方法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在java语言中，double类型的变量使用64bit存储空间进行存储。两个double类型的变量进行除法运算时，如果小数位过多，就需要进行保留位数操作。保留位数操作分为<code>四舍五入</code>型和<code>非四舍五入</code>型两种。本文以保留两位数为例：</p>
+<ul>
+<li>四舍五入型<br>使用java.text类中的<code>DecimalFormat（）</code>方法可以对double类型的值进行保留位数操作。代码如下：</li>
+</ul>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> class test &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">        <span class="keyword">double</span> x = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">double</span> y =<span class="number">3</span>;</span><br><span class="line">        <span class="keyword">double</span> z = x / y;</span><br><span class="line">        DecimalFormat decimalFormat = <span class="keyword">new</span> DecimalFormat(<span class="string">"####.##"</span>);</span><br><span class="line">        <span class="keyword">String</span> <span class="built_in">str</span> = decimalFormat.format(z);</span><br><span class="line">        System.out.<span class="built_in">println</span>(<span class="built_in">str</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong> <code>DecimalFormat</code>的<code>serRoundMode（）</code>方法，可以智能的设置小数位的处理方法，详见<a href="http://docs.oracle.com/javase/7/docs/api/java/math/RoundingMode.html" target="_blank" rel="external">API</a> </strong></p>
+<ul>
+<li>非四舍五入型<ul>
+<li>方法一：使用String类的<code>valueOf()</code>方法将double类型的值转变成String类型，之后使用<code>indexOf()</code>方法，确定小数点的位置，取此位置之后两位的substring即可。代码如下：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">public</span> class test &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">        <span class="keyword">double</span> x = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">double</span> y =<span class="number">3</span>;</span><br><span class="line">        <span class="keyword">double</span> z = x / y;</span><br><span class="line">        <span class="keyword">String</span> <span class="built_in">str</span> = <span class="keyword">String</span>.valueOf(z);</span><br><span class="line">        <span class="built_in">int</span> situation = <span class="built_in">str</span>.indexOf(<span class="string">"."</span>);   <span class="comment">//查找小数点的位置并将其值赋给situation</span></span><br><span class="line">        <span class="built_in">str</span> = <span class="built_in">str</span>.substring(<span class="number">0</span>, situation + <span class="number">3</span>);</span><br><span class="line">       System.out.<span class="built_in">println</span>(<span class="built_in">str</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法二：先使double类型的值乘以100，之后转变成int类型再除以100.00，得到包含两位小数的double值。代码如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> test &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> x = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">double</span> y =<span class="number">3</span>;</span><br><span class="line">        <span class="keyword">double</span> z = x / y;</span><br><span class="line">        z = (<span class="keyword">int</span>) (z * <span class="number">100</span>)/<span class="number">100.00</span>;</span><br><span class="line">       System.out.println(z);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -601,7 +873,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -609,7 +881,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -618,7 +890,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

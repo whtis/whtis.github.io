@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[whtis's blog]]></title>
-  <subtitle><![CDATA[凡是涉及到技术的事，都不是别人的事。]]></subtitle>
+  
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-09-14T16:17:29.856Z</updated>
+  <updated>2016-09-18T17:00:40.363Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -13,6 +13,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[最近要做的几件事]]></title>
+    <link href="http://www.whtis.com/2016/09/19/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/"/>
+    <id>http://www.whtis.com/2016/09/19/最近要做的几件事/</id>
+    <published>2016-09-18T17:00:40.363Z</published>
+    <updated>2016-09-18T17:00:40.363Z</updated>
+    <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>有时候想到要做一些跟技术有关的东西，但很多时候都会忘记。一直觉得<strong>兴趣是最好的老师</strong>这句话很对，既然有兴趣，那么最好动手做一做。写这篇文章，提醒自己的同时也是希望认识志同道合的朋友，虽然刚开始做的东西很low，但慢慢积累，总能获得成就感不是？<br><br>这篇文章会不断更新，我也想看看，我最后到底能做几件自己喜欢的事情，嘻嘻(●’◡’●)</p>
+<h5 id="2016-09-19日晚">2016-09-19日晚</h5><ul>
+<li>学习安卓开发，写一个app，具体需求如下：<ul>
+<li>能够实现实时监测手机短信的功能。当手机A收到新短信后，能立刻调用系统短信app将短信内容发送给B</li>
+<li>如果有可能，转发这一步调用微信完成（省钱啊）</li>
+<li>界面，能凑合用就行，别出bug就行</li>
+</ul>
+</li>
+<li>给这博客添加几个功能：<ul>
+<li>添加网易云音乐插件</li>
+<li>添加一个新分区，类似于微信朋友圈或者qq空间发状态的功能。（因为自己有时候有些话憋不住，按照博文发出来又太短了=。=）</li>
+<li>之前好像见过博客同步instagram的功能，如果上面两个都完成了，可以在博客上添加一个专门的图片分区</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="写在前面">写在前面</h3><p>有时候想到要做一些跟技术有关的东西，但很多时候都会忘记。一直觉得<strong>兴趣是最好的老师</strong>这句话很对，既然有兴趣，那么最好动手做一做。写这篇文章，提醒自己的同时也是希望认识志同道合的朋友，虽然刚开始做的东]]>
+    </summary>
+    
+      <category term="待完成" scheme="http://www.whtis.com/tags/%E5%BE%85%E5%AE%8C%E6%88%90/"/>
+    
+      <category term="未完成" scheme="http://www.whtis.com/categories/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[将百度搜索结果的长url链接转换为真实的url地址]]></title>
+    <link href="http://www.whtis.com/2016/09/19/%E5%B0%86%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C%E7%9A%84%E9%95%BFurl%E9%93%BE%E6%8E%A5%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%9C%9F%E5%AE%9E%E7%9A%84url%E5%9C%B0%E5%9D%80/"/>
+    <id>http://www.whtis.com/2016/09/19/将百度搜索结果的长url链接转换为真实的url地址/</id>
+    <published>2016-09-18T16:37:15.000Z</published>
+    <updated>2016-09-18T16:40:18.106Z</updated>
+    <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>最近写爬虫的时候，想调用百度的搜索结果，于是有了这个问题。需要注意的是，本篇内容转化是仅针对百度跳转到非百度链接的，百度内部链接的跳转，如百度搜索主入口跳转到百度知道、百度文库，</p>
+<h3 id="问题描述">问题描述</h3><ul>
+<li>百度搜索入口：<code>https://www.baidu.com/s?wd=</code>,后面加上需要的搜索内容即可。如需要进行更加精确的搜索，可以使用百度的<a href="http://imgs.xinhuanet.com/js/baidu/gj.htm" target="_blank" rel="external">高级搜索</a>功能。</li>
+<li>百度搜索结果示例：<code>https://www.baidu.com/link?url=NsJrxOylR5il9kO2p7IJZu9RdvqdWgobSo1W7n29FIu&amp;amp;wd=&amp;amp;eqid=e4c01daf0006800b0000000357debb6c</code>,实际的url为<code>www.whtis.com</code>。</li>
+<li>原因：百度为什么要实行加密跳转，网上有很多有意思的文章，感兴趣可以看看。这里仅从技术角度进行说明。<br><br>百度的这种跳转采用的是302重定向。虽然有时候状态码不是302，但原理差不多一样：当你点击了百度的加密链接后，会向百度内部的服务器发送请求，这个时候服务器会根据你提交的百度链接使用重定向技术自动跳转到相应的真实url。</li>
+</ul>
+<h3 id="拿到真实的URL链接">拿到真实的URL链接</h3><p>网上有很多博客都提到过这事，既然知道了302跳转的原理，那么可以采用这种思路拿到真实的URL：模拟一个请求，在百度服务器进行重定向的时候获得重定向的地址即可。<br><br>原理很简单，但是我在网上找了很多，基本都是互相抄，抄的代码怎么说呢，用的工具都是httpclient，但是都是httpclient已经废弃的方法，虽然不报错，但是没法实现这功能了。所以这也告诉我们写博客的人，一定要注明自己的代码基于的是哪个版本的工具，虽然这只是一点小事，但却能让自己和他人节约很多时间。<br><br>下面上代码：</p>
+<p><strong>使用版本：httpclient 4.3.3</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getRealUrl</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String realUrl = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">        HttpClient client = HttpClientBuilder.create().build();</span><br><span class="line">        RequestConfig config = RequestConfig.custom()</span><br><span class="line">        <span class="comment">//禁止自动重定向</span></span><br><span class="line">                .setRedirectsEnabled(<span class="keyword">false</span>)</span><br><span class="line">                .build();</span><br><span class="line"><span class="comment">//302跳转</span></span><br><span class="line">        HttpGet get = <span class="keyword">new</span> HttpGet(url);</span><br><span class="line">        get.setConfig(config);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="comment">//对url进行utf-8解码</span></span><br><span class="line">            url = URLDecoder.decode(url, <span class="string">"utf-8"</span>);</span><br><span class="line">            HttpResponse rs = client.execute(get);</span><br><span class="line">            Header h = rs.getFirstHeader(<span class="string">"Location"</span>);</span><br><span class="line">            realUrl = h.getValue().trim();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printstacktrace();</span><br><span class="line">            <span class="keyword">return</span> url;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (realUrl.equals(<span class="string">""</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> url;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> realUrl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="写在前面">写在前面</h3><p>最近写爬虫的时候，想调用百度的搜索结果，于是有了这个问题。需要注意的是，本篇内容转化是仅针对百度跳转到非百度链接的，百度内部链接的跳转，如百度搜索主入口跳转到百度知道、百度文库，</p>
+<h3 id="问题描述">问题描述</]]>
+    </summary>
+    
+      <category term="java，原创" scheme="http://www.whtis.com/tags/java%EF%BC%8C%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[PostgreSQL使用手记]]></title>
@@ -1742,267 +1804,6 @@
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>在继承的层次结构中，子类的出现使类变得越来越具体，而子类]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结-第八章 继承和多态]]></title>
-    <link href="http://www.whtis.com/2016/01/27/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/"/>
-    <id>http://www.whtis.com/2016/01/27/Java学习总结-第八章-继承和多态/</id>
-    <published>2016-01-27T13:17:29.000Z</published>
-    <updated>2016-09-14T15:48:06.797Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>在面向对象程序设计中，可以由已有的类派生出子类，这叫做<code>继承（inheritance）</code>。<br>本章介绍继承的概念。着重理解父类和子类、关键字super的用法以及object类，了解多态和动态绑定、一般程序设计以及对象转换，介绍修饰符protect和final。</p>
-<h3 id="父类和子类">父类和子类</h3><ul>
-<li>在面向对象程序设计中，从另一个类C2中派生的类C1称为<code>次类(subclass)</code>,C2则称为<code>超类(superclass)</code>。超类又称为<code>父类(parent class)</code>或<code>基类(base class)</code>,次类又称为<code>子类(child class)</code>、<code>扩展类(extend class)</code>或<code>派生类(derived class)</code>。子类从它的父类中继承可访问的数据域和方法，也可以添加新数据域和方法。</li>
-</ul>
-<h3 id="关键字super">关键字super</h3><ul>
-<li>调用父类的构造方法<ul>
-<li>super(); 或super(参数);</li>
-<li>以上语句必须出现在子类构造方法的第一行，这也是调用父类构造方法的唯一方式。</li>
-<li>构造方法链(constructor chaining)：在任何情况下，构造一个类的实例时，将会沿着继承链调用所有父类的构造方法，这叫做<code>构造方法链</code>。</li>
-</ul>
-</li>
-<li>调用父类的方法<ul>
-<li>super.方法名(参数);</li>
-</ul>
-</li>
-</ul>
-<h3 id="方法覆盖">方法覆盖</h3><ul>
-<li>有时候子类需要修改父类中定义的方法，这叫做<code>方法覆盖(method overriding)</code>。<ul>
-<li>为了覆盖方法，子类定义的方法必须与父类方法具有相同的头标志和相同的返回值类型。（使用ctrl+c、ctrl+v）</li>
-<li>实例方法仅当可访问时才能被覆盖。如果子类中定义的方法在父类中是私有的，那么这两个方法完全没有关系。</li>
-<li>静态方法也能继承，但不能被覆盖。如果父类中定义的静态方法在子类中重新定义，父类的方法将被隐藏。</li>
-</ul>
-</li>
-</ul>
-<h3 id="对象类Object">对象类Object</h3><ul>
-<li>Java中的每个类都源于java.lang.Object类。如果一个类在定义时没有指定继承谁，它的父类就是Object。</li>
-<li><p>Object类的常用实例方法</p>
-<ul>
-<li>equals()方法：检验两个对象是否相等。其默认实现为：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span> <span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (<span class="keyword">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>由此可知，Object类中的equals()方法相当于使用==运算符。因此，Object类的子类很有必要修改equals方法，以便检验两个不同的对象是否具有相同的内容。</p>
-<ul>
-<li>hashCode()方法：调用对象的hashCode()方法返回该对象的哈希代码。<ul>
-<li><code>哈希码（hash code）</code>是一个整数，用于在混杂集合中存储并能快速查找对象。</li>
-<li>编写代码时，如果两个对象相等，它们的哈希码一定相同。两个不同的对象也可能具有相同的哈希码。</li>
-<li>在程序一次运行期间，多次调用hashCode方法应该返回相同的整数，对不同的运行可以返回不同的整数。</li>
-</ul>
-</li>
-<li>toString()方法：返回一个代表该对象的字符串。默认情况下，返回一个由该对象所属的类名、at符号（@）和该对象十六进制的哈希码组成的字符串。</li>
-</ul>
-</li>
-</ul>
-<h3 id="多态性、动态绑定和一般程序设计">多态性、动态绑定和一般程序设计</h3><ul>
-<li>继承关系使一个子类继承父类的特征，并可以附加一些自己的新特征。子类是父类的某种专门化，每一个子类的实例都是父类的实例。因此对于需要父类类型的参数，总可以传入子类的实例。</li>
-<li>为父类对象设计的任何形式的代码都可以应用于子类，这个特征称为<code>多态性（polymorphism）</code>。</li>
-<li><code>动态绑定（dynamic binding）</code>：代码提供多种实现，采用哪一种实现由Java虚拟机在运行时动态决定。<ul>
-<li>动态绑定工作机制如下： //todo</li>
-</ul>
-</li>
-<li>多态性一般允许方法使用范围更广的对象参数，这称为<code>一般程序设计（generic programming）</code>。</li>
-</ul>
-<h3 id="对象类型转换和instanceof运算符">对象类型转换和instanceof运算符</h3><ul>
-<li>转换可以把一个类的对象转换为继承链中的另一个对象。</li>
-<li><p><code>隐式类型转换（implicit casting）</code>：子类的实例永远是父类的实例，因此可以将一个子类的实例转换为父类的一个变量。这称为<code>向上转换（upcasting）</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Fruit f = <span class="keyword">new</span> apple();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>显式类型转换（explicit casting）</code>：父类对象不一定是子类的实例，因此转换需要显式的告诉编译器转换的类型。把父类的实例转换成它的子类变量，这称为<code>向下转换（downcasting）</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Apple a = (Apple)f;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>为了确保显式转换能成功，可以用运算符instanceof来判断：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(f <span class="keyword">instanceof</span> Apple) &#123;</span><br><span class="line">	Apple a = (Apple)f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>为了能够进行一般程序设计，一个好的做法是把变量声明为父类类型，这样它可以接收任何子类类型的值。</p>
-</li>
-</ul>
-<h3 id="隐藏数据域和静态方法">隐藏数据域和静态方法</h3><ul>
-<li>可以覆盖一个实例方法，但不能覆盖一个数据域（实例或静态的）或静态方法。如果在子类中声明的数据域或静态方法与父类中的名字相同，父类中的将被隐藏，但是它依然存在。在子类中可以使用关键字super调用隐藏的数据域或静态方法，隐藏的域或方法也可以通过父类类型的引用变量来访问。</li>
-<li>使用引用变量调用实例方法时，变量所引用对象的实际类在运行时决定使用该方法的哪个实现。访问数据域或静态方法是，引用变量所声明的类型在编译时决定使用哪个数据域或静态方法。</li>
-</ul>
-<h3 id="protected数据和方法">protected数据和方法</h3><ul>
-<li>保护的（protected）修饰符可以应用于类中的数据和方法。公用类中保护的数据或方法可以被<code>它的子类或同一包中的任何类</code>访问，即使子类在不同的包中也可以。</li>
-<li>使用可见性修饰符<br>修饰符private、protected、public称为<code>可见性修饰符（visibility modifier）</code>或<code>访问性修饰符（accessible modifier）</code>，因为他们指定类和类的成员如何被访问。这些修饰符的可见性按下面的顺序递增：<pre><code>               可见性逐渐增加
-         -------------------------→
-<span class="keyword">private</span>，空（如果没有修饰符），<span class="keyword">protected</span>，<span class="keyword">public</span>
-</code></pre></li>
-</ul>
-<h3 id="final类、方法和变量">final类、方法和变量</h3><ul>
-<li>用final修饰符说明一个类是终极的（final），不能做父类。例如：Math类。</li>
-<li>也可以把方法定义为终极的，终极方法不能被它的子类覆盖。<br><strong>方法内的终极局部变量就是常量。</strong></li>
-</ul>
-<h3 id="finalize、clone和getclass方法">finalize、clone和getclass方法</h3><ul>
-<li><p>finalize()方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>当一个对象变成垃圾时，finalize方法会被该对象的垃圾回收程序调用。</li>
-<li>默认情况下，finalize方法不做任何事。如果必要，子类应该覆盖finalize方法，释放系统资源或进行其他清洁工作。<br><strong>finalize方法是有Java虚拟机调用的，在自己的程序中不要书写任何调用该方法的代码。</strong></li>
-</ul>
-</li>
-<li>clone方法<ul>
-<li>要创建一个有单独内存空间的新对象，使用clone()方法。</li>
-<li>不是所有对象都可以被克隆。要成为一个可克隆的对象，它的类必须实现java.lang.Cloneable接口。</li>
-</ul>
-</li>
-<li>getClass方法<ul>
-<li>一个类在使用时必须先装入。Java虚拟机装入类是，创建一个包含类信息的对象，这些信息有类名、构造方法和方法等。这个对象是java.lang.Class的一个实例，因为它描述有关类的信息，称它为<code>元对象（meta-object）</code>。每个对象都可以使用getClass()方法返回它的元对象。</li>
-<li>一个类只有一个元对象。每个对象都有一个元对象，如果两个对象是从同一个类创建的，那么它们的元对象相同。</li>
-</ul>
-</li>
-</ul>
-<h3 id="初始化模块">初始化模块</h3><ul>
-<li><code>初始化模块（initialization block）</code>：是一个用大括号括住的语句块，它位于类的声明中，但是不在方法或构造方法内。它的作用就像把它放在了类中每个构造方法最开始的位置。</li>
-<li>一个类可以有多个初始化模块。在这种情况下，模块按照它们在类中出现的顺序执行。</li>
-<li>初始化模块分为<code>实例初始化模块（instance initialization block）</code>和<code>静态初始化模块（static initialization block）</code>。</li>
-<li>包含初始化模块的程序的执行顺序如下：<br>1、类装载：静态数据域，静态初始化模块<br>2、类创建：构造方法，实例数据域，实例初始化模块<br>3、类运行：实例方法体</li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>子类不是父类的自给，子类可以在父类的基础上进行扩展。</li>
-<li>如果一个类设计成子类，最好提供一个无参构造方法以避免程序错误。</li>
-<li>多态存在的条件：<br>1、要有继承<br>2、要有重写<br>3、父类引用指向子类对象</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><p>习题8.2 8.4源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter8/src" target="_blank" rel="external">chapter8</a></p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>在面向对象程序设计中，可以由已有的类派生出子类，这叫做<]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结-第七章 字符串]]></title>
-    <link href="http://www.whtis.com/2016/01/26/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    <id>http://www.whtis.com/2016/01/26/Java学习总结-第七章-字符串/</id>
-    <published>2016-01-26T13:33:26.000Z</published>
-    <updated>2016-09-14T15:47:00.397Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>Java中，将字符串看作是对象，提供了String类、StringBuffer类和StringTokenizer类来存储和处理字符串。本章总结<code>字符串(string)</code>的处理。</p>
-<h3 id="字符串类String">字符串类String</h3><ul>
-<li><p>字符串的<code>快捷初始化(shorthand initializer)</code>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String string = <span class="keyword">new</span> String(<span class="string">"xxx"</span>);</span><br><span class="line">String message = <span class="string">"xxx"</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>永久字符串与规范字符串</p>
-<ul>
-<li>字符串是永久的。</li>
-<li>如果两个String对象是通过快捷初始化用相同的字符串直接量构造的，则Java虚拟机为了提高效率，将它们存储在同一对象中。这样的字符串称为<code>规范字符串（canonical string）</code>。</li>
-</ul>
-</li>
-<li>可以使用String对象的intern方法返回一个规范字符串，这种字符串与使用快捷初始化创建的字符串相同。</li>
-<li>String类的几个常用方法<ul>
-<li>charAt(int index) 提取指定字符</li>
-<li>length() 返回数组的长度</li>
-<li>concat（String s） 连接字符串s</li>
-<li>subString(int beginIndex) 返回从beginIndex开始到结束的字符串</li>
-<li>subString(int beginIndex，int endIndex) 返回从beginIndex开始到endIndex-1的字符串</li>
-<li>regionMathches() 比较两个字符串的某一部分是否相等</li>
-</ul>
-</li>
-<li>字符串的比较<ul>
-<li>使用”==”运算符检测两个字符串是否具有相同的引用。</li>
-<li>使用equals()方法对对象的内容进行比较。</li>
-<li>使用compareTo()方法比较两个字符串。返回值由字典序决定。</li>
-</ul>
-</li>
-<li>字符串的转换<ul>
-<li>toLowerCase() 将字符串转换成小写</li>
-<li>toUpperCase() 将字符串转换成大写</li>
-<li>trim() 删除字符串两端的空格</li>
-<li>replace(oldChar,newChar) 用新的字符替换旧的字符</li>
-<li>replaceAll(oldChar,newChar) 用新的字符替换全部旧的字符</li>
-</ul>
-</li>
-<li>获取字符串中的一个字符或子串<ul>
-<li>indexOf() 得到某个字符</li>
-<li>lastIndexOf() 得到某个字符串</li>
-</ul>
-</li>
-<li>字符串与数组之间的转换<ul>
-<li>字符串转换为数组： toCharArray() 方法</li>
-<li>数组转换为字符串： 使用构造方法String(char[])或者valueOf(char[])方法</li>
-</ul>
-</li>
-</ul>
-<h3 id="字符类Character">字符类Character</h3><ul>
-<li>常用的方法如下：<ul>
-<li>charValue() 返回该对象的char值</li>
-<li>is<em>() 判断该字符是否是</em></li>
-</ul>
-</li>
-</ul>
-<h3 id="字符串缓冲类StringBuffer">字符串缓冲类StringBuffer</h3><ul>
-<li>StringBuffer类比String类更加灵活，可以在字符缓冲区中添加、插入或追加新的内容。字符串一旦创建后，它的值就不再改变。</li>
-<li>常用方法如下：<ul>
-<li>append() 在字符缓冲区中追加</li>
-<li>deleteCharAt() 删除特定的字符</li>
-<li>setCharAt() 在特定位置设置一个新字符</li>
-<li>insert() 插入一个新内容</li>
-<li>reverse() 倒置字符串缓冲区中字符的顺序</li>
-<li>capacity() 返回字符串缓冲区的现有容量<br><strong>String类的方法StringBuffer类同样拥有</strong></li>
-</ul>
-</li>
-<li>字符串的长度一定小于或等于缓冲区的容量。如果字符串的长度超过了缓冲区的容量，则缓冲区的容量将会变成2*（原缓冲区容量+1），因为在计算机内部，字符串缓冲区是一个字符数组。</li>
-</ul>
-<h3 id="字符串令牌类StringTokenizer">字符串令牌类StringTokenizer</h3><ul>
-<li>该类用来将字符串分解为片段，以便提取和处理字符串中的信息。</li>
-<li>常用方法：<ul>
-<li>StringTokenizer(String s,String delim,boolean returnDelims)<br>使用指定的定界符构造字符串s的一个StringTokenizer对象。字符串delim中的每一个字符都是定界符。如果returndelims为true，那么定界符也看成令牌。</li>
-<li>StringTokenizer(String s)<br>使用默认的定界符“\t \n \sr”（空格、制表符、换行符和回车符）构造字符串s的一个StringTokenizer对象，并且定界符不能算作令牌。</li>
-<li>countTokens() 返回所包含的令牌数</li>
-<li>hasMoreTokens() 如果该对象中还有令牌，返回true</li>
-<li>nextToken() 返回下一个令牌</li>
-</ul>
-</li>
-</ul>
-<h3 id="字符串扫描类Scanner">字符串扫描类Scanner</h3><ul>
-<li>StringTokenizer中，定界符是单个字符，使用Scanner类useDelimiter()方法，来指定一个单词作为定界符。</li>
-<li>Scanner类可以实现从键盘中读取输入。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Scanner s = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="命令行参数">命令行参数</h3><ul>
-<li>使用如下命令行可以从命令行向main方法传递参数，参数保存在String[]类型的args数组中。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java className arg0 arg1 arg2 ……</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>String类重写了equals()方法，因此可以用string.equals(string1)比较两个字符串；StringBuffer没有重写equals()方法，因此不能直接使用。</li>
-<li>equals()方法最初是用来比较地址是否相等的。</li>
-<li>StringTokenizer类没有无参构造方法。一个方法是否需要有无参构造方法取决于无参构造方法是否有意义，对StringTokenizer类来说，StringTokenizer对象必须是为某个字符串而创建的，因此不需要无参构造方法。</li>
-<li>使用eclipse或者Intellij时，如果需要向main方法传递参数，乘号必须写成<code>&quot; *&quot;</code>或<code>&quot;* &quot;</code>才能正常显示结果。</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><p>习题7.3 7.4 7.5 7.7 7.9 7.11 7.12 7.14 7.18源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter7/src" target="_blank" rel="external">chapter7</a></p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>Java中，将字符串看作是对象，提供了String类、S]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>
