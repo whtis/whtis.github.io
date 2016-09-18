@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-09-18T17:00:40.363Z</updated>
+  <updated>2016-09-18T17:10:05.997Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -18,10 +18,10 @@
     <title><![CDATA[最近要做的几件事]]></title>
     <link href="http://www.whtis.com/2016/09/19/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/"/>
     <id>http://www.whtis.com/2016/09/19/最近要做的几件事/</id>
-    <published>2016-09-18T17:00:40.363Z</published>
-    <updated>2016-09-18T17:00:40.363Z</updated>
+    <published>2016-09-18T17:10:05.997Z</published>
+    <updated>2016-09-18T17:10:05.997Z</updated>
     <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>有时候想到要做一些跟技术有关的东西，但很多时候都会忘记。一直觉得<strong>兴趣是最好的老师</strong>这句话很对，既然有兴趣，那么最好动手做一做。写这篇文章，提醒自己的同时也是希望认识志同道合的朋友，虽然刚开始做的东西很low，但慢慢积累，总能获得成就感不是？<br><br>这篇文章会不断更新，我也想看看，我最后到底能做几件自己喜欢的事情，嘻嘻(●’◡’●)</p>
-<h5 id="2016-09-19日晚">2016-09-19日晚</h5><ul>
+<h5 id="2016-09-19日凌晨">2016-09-19日凌晨</h5><ul>
 <li>学习安卓开发，写一个app，具体需求如下：<ul>
 <li>能够实现实时监测手机短信的功能。当手机A收到新短信后，能立刻调用系统短信app将短信内容发送给B</li>
 <li>如果有可能，转发这一步调用微信完成（省钱啊）</li>
