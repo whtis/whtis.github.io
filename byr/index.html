@@ -1,1 +1,125 @@
-<html><br><head><br>  <!-- Standard Meta --><br>  <meta charset="utf-8"><br>  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><br>  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><br><br>  <!-- Site Properties --><br>  <title>北邮人导航 &middot; BYR-Wiki</title><br>  <meta name="author" content="whtis"><br>  <meta name="description" content="BYR-Wiki"><br>  <meta name="keywords" content="BYR-Wiki, BYR, BUPT, Wiki, Navigation"><br><br>  <!-- Semantic UI CSS --><br>  <link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css"><br><br>  <!-- Customized CSS --><br>  <link rel="stylesheet" type="text/css" href="/css/customize.css"><br><br>  <!-- Favicons --><br>  <link rel="apple-touch-icon" href="./apple-touch-icon.png"><br>  <link rel="icon" href="./favicon.ico"><br></head><br><body><br>  <!-- Following Menu --><br>  <div class="ui large top fixed hidden menu"><br>    <div class="ui container"><br>      <a class="active item" href="/"><i class="wikipedia icon"></i> 北邮人导航</a><br>      <div class="right menu"><br>        <a class="item" href="https://github.com/iROCKBUNNY/BYR-Wiki" target="_blank"><i class="github icon"></i> GitHub</a><br>      </div><br>    </div><br>  </div><br><br>  <!-- Sidebar Menu --><br>  <div class="ui vertical inverted sidebar menu"><br>    <a class="active item" href="/"><i class="wikipedia icon"></i> 北邮人导航</a><br>    <a class="right item" href="https://github.com/iROCKBUNNY/BYR-Wiki" target="_blank"><i class="github icon"></i> GitHub</a><br>  </div><br><br><br>  <!-- Page Contents --><br>  <div class="pusher"><br>    <div class="ui Colored teal inverted vertical masthead center aligned segment"><br>      <div class="ui text container"><br>        <h1>北邮人导航 &middot; BYR-whtis</h1><br>        <h2 class="ui inverted header"><i class="star icon"></i></h2><br>        <div class="ui inverted fluid left icon action input"><br>          <i class="search icon"></i><br>          <input id="search-query" type="text" placeholder="输入关键字，立即搜索"><br>          <select class="ui compact selection dropdown" id="search-services"></select><br>          <div id="search-button" type="submit" class="ui button">Go</div><br>        </div><br>      </div><br>    </div><br><br>    <div id="links"><br>      <div class="ui Colored blue secondary inverted vertical stripe links segment"><br>          <div class="ui equal width stackable internally celled grid"><br>              <div class="center aligned row" id="pub-links"></div><br>          </div><br>      </div><br>      <div class="ui Colored blue tertiary inverted vertical stripe links segment"><br>          <div class="ui equal width stackable internally celled grid"><br>              <div class="center aligned row" id="byr-links"></div><br>          </div><br>      </div><br>    </div><br><br>    <div class="ui secondary inverted vertical footer segment"><br>      <div class="ui container"><br>        <div class="ui stackable inverted divided equal height stackable grid"><br>          <div class="three wide column"><br>            <h4 class="ui inverted header">Powered by</h4><br>            <div class="ui inverted link list"><br>              <a class="item" href="http://semantic-ui.com/" target="_blank">Semantic UI</a><br>              <a class="item" href="http://jquery.com/" target="_blank">jQuery</a><br>              <a class="item" href="http://fontawesome.io/" target="_blank">Font Awesome</a><br>              <a class="item" href="https://pages.github.com/" target="_blank">GitHub Pages</a><br>            </div><br>          </div><br>          <div class="three wide column"><br>            <h4 class="ui inverted header">About</h4><br>            <div class="ui inverted link list"><br>              <a class="item" href="http://life.zhangxingqiu.cn/" target="_blank">夏小正</a><br>              <a class="item" href="http://irockbunny.com/" target="_blank">iROCKBUNNY</a><br>              <a class="item" href="http://www.whtis.com/" target="_blank">whtis</a><br>            </div><br>          </div><br>          <div class="seven wide column"><br>            <h4 class="ui inverted header">北邮人导航 &middot; BYR-Wiki</h4><br>            <div class="ui inverted link list"><br>              <div id="copyright" class="item"></div><br>              <a class="item" href="https://github.com/Byrwiki/Byrwiki.github.io" target="_blank">forked from Byrwiki/Byrwiki.github.io</a><br>            </div><br>          </div><br>        </div><br>      </div><br>    </div><br>  </div><br><br>  <!-- jQuery --><br>  <script src="/js/jquery-3.1.0.min.js"></script><br>  <script src="/js/jquery-migrate-3.0.0.min.js"></script><br><br>  <!-- Semantic UI JS --><br>  <script src="/semantic/semantic.min.js"></script><br><br>  <!-- Cutomized JS --><br>  <script src="/js/customize-data.js"></script><br>  <script src="/js/customize.js"></script><br><br></body><br><br></html>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+  <!-- Site Properties -->
+  <title>北邮人导航 &middot; BYR-Wiki</title>
+  <meta name="author" content="whtis" />
+  <meta name="description" content="BYR-Wiki" />
+  <meta name="keywords" content="BYR-Wiki, BYR, BUPT, Wiki, Navigation" />
+
+  <!-- Semantic UI CSS -->
+  <link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css">
+
+  <!-- Customized CSS -->
+  <link rel="stylesheet" type="text/css" href="/css/customize.css">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="icon" href="./favicon.ico">
+</head>
+<body>
+  <!-- Following Menu -->
+  <div class="ui large top fixed hidden menu">
+    <div class="ui container">
+      <a class="active item" href="./"><i class="wikipedia icon"></i> 北邮人导航</a>
+      <div class="right menu">
+        <a class="item" href="https://github.com/whtis/byrIndex" target="_blank"><i class="github icon"></i> GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a class="active item" href="./"><i class="wikipedia icon"></i> 北邮人导航</a>
+    <a class="right item" href="https://github.com/whtis/byrIndex" target="_blank"><i class="github icon"></i> GitHub</a>
+  </div>
+
+
+  <!-- Page Contents -->
+  <div class="pusher">
+    <div class="ui Colored teal inverted vertical masthead center aligned segment">
+      <div class="ui container">
+        <div class="ui large inverted pointing menu">
+          <a class="left item" href=""><i class="wikipedia icon"></i> 北邮人导航 &middot; BYR-whtis</a>
+          <a class="right item" href="https://github.com/whtis/byrIndex" target="_blank"><i class="github icon"></i> GitHub</a>
+        </div>
+      </div>
+      <div class="ui text container">
+      </br>
+        <h2 class="ui inverted header"><i class="star icon"></i></h2>
+        <div class="ui inverted fluid left icon action input">
+          <i class="search icon"></i>
+          <input id="search-query" type="text" placeholder="输入关键字，立即搜索">
+          <select class="ui compact selection dropdown" id="search-services"></select>
+          <div id="search-button" type="submit" class="ui button">Go</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="links">
+      <div class="ui Colored blue secondary inverted vertical stripe links segment">
+          <div class="ui equal width stackable internally celled grid">
+              <div class="center aligned row" id="pub-links"></div>
+          </div>
+      </div>
+      <div class="ui Colored blue tertiary inverted vertical stripe links segment">
+          <div class="ui equal width stackable internally celled grid">
+              <div class="center aligned row" id="byr-links"></div>
+          </div>
+      </div>
+    </div>
+
+    <div class="ui secondary inverted vertical footer segment">
+      <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+          <div class="three wide column">
+            <h4 class="ui inverted header">Powered by</h4>
+            <div class="ui inverted link list">
+              <a class="item" href="http://semantic-ui.com/" target="_blank">Semantic UI</a>
+              <a class="item" href="http://jquery.com/" target="_blank">jQuery</a>
+              <a class="item" href="http://fontawesome.io/" target="_blank">Font Awesome</a>
+              <a class="item" href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </div>
+          </div>
+          <div class="three wide column">
+            <h4 class="ui inverted header">About</h4>
+            <div class="ui inverted link list">
+              <a class="item" href="http://life.zhangxingqiu.cn/" target="_blank">夏小正</a>
+              <a class="item" href="http://irockbunny.com/" target="_blank">iROCKBUNNY</a>
+              <a class="item" href="http://www.whtis.com/" target="_blank">whtis</a>
+            </div>
+          </div>
+          <div class="seven wide column">
+            <h4 class="ui inverted header">北邮人导航 &middot; BYR-Wiki</h4>
+            <div class="ui inverted link list">
+              <div id="copyright" class="item"></div>
+              <a class="item" href="https://github.com/Byrwiki/Byrwiki.github.io" target="_blank">forked from Byrwiki/Byrwiki.github.io</a>
+              <a class="item" href="">changed by a guy who is bored In the National Day</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="/js/jquery-3.1.0.min.js"></script>
+  <script src="/js/jquery-migrate-3.0.0.min.js"></script>
+
+  <!-- Semantic UI JS -->
+  <script src="/semantic/semantic.min.js"></script>
+
+  <!-- Cutomized JS -->
+  <script src="/js/customize-data.js"></script>
+  <script src="/js/customize.js"></script>
+
+</body>
+</center>
+
+</html>
