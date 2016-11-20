@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-11-06T16:22:51.222Z</updated>
+  <updated>2016-11-20T13:21:22.658Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -13,6 +13,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[hexo博客主题--material折腾笔记]]></title>
+    <link href="http://www.whtis.com/2016/11/20/hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98-material%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0/"/>
+    <id>http://www.whtis.com/2016/11/20/hexo博客主题-material折腾笔记/</id>
+    <published>2016-11-20T12:56:17.000Z</published>
+    <updated>2016-11-20T13:21:22.658Z</updated>
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;好久没怎么照看博客了，昨天突然发现，以前用的<code>Next</code>主题挂了。因为用的别人的东西，不知道问题。本着折腾的想法，重新换了一个主题<code>material</code>。该主题算是满足了我大部分的需求吧。但还是有吐槽的地方……（虽然不会写js，不妨碍我吐槽。。原作者看到估计会气的吐血）</p>
+<h4 id="添加谷歌和百度统计代码">添加谷歌和百度统计代码</h4><p>按照<a href="https://material.vss.im/expert/" target="_blank" rel="external">使用文档</a>可以自行添加代码，但我添加百度统计代码时报错，所以直接把百度统计代码写到<code>layout/_partial/head.ejs</code>文件中了。</p>
+<h4 id="在文章详情页添加回主页的方法">在文章详情页添加回主页的方法</h4><ul>
+<li>可以直接点击缩略图返回首页</li>
+<li>分享按钮下增加回主页</li>
+</ul>
+<h4 id="此主题的一些想法">此主题的一些想法</h4><ul>
+<li>好的方面<ul>
+<li>背景支持bing图片，这个想法点赞</li>
+<li>每篇文章都提供缩略图<code>thumbnail</code>的设置，很棒</li>
+</ul>
+</li>
+<li>可以改进的地方<ul>
+<li>侧边栏很不完美。包括样式和调出方式（鼠标点击改为鼠标滑过会好很多，尝试过更改，然而太菜，没有找到正确修改的方法）</li>
+<li>缺少文章分类页，看github上的issue，感觉作者根本没想到这个需求，但我之前用的主题都有，强迫症伤不起</li>
+</ul>
+</li>
+</ul>
+<p>突然想到，改了作者的文件，以后<code>pull</code>的时候又有得折腾了。anyway，自己菜就得忍受这些问题了。</p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>&nbsp;&nbsp;好久没怎么照看博客了，昨天突然发现，以前用的<code>Next</code>主题挂了。因为用的别人的东西，不知道问题。本着折腾的想法，重新换了一个主题<code>material</code>。该主题算是满足了我大部分的需求吧。但还是有吐槽的地方…]]>
+    </summary>
+    
+      <category term="hexo" scheme="http://www.whtis.com/tags/hexo/"/>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="hexo" scheme="http://www.whtis.com/categories/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[最近要做的几件事]]></title>
@@ -1718,96 +1758,6 @@
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章初步介绍使用面向对象的方法开发软件系统，学习类的设计]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结--第九章 抽象类和接口]]></title>
-    <link href="http://www.whtis.com/2016/01/28/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/"/>
-    <id>http://www.whtis.com/2016/01/28/Java学习总结-第九章-抽象类和接口/</id>
-    <published>2016-01-28T09:03:02.000Z</published>
-    <updated>2016-09-14T15:47:15.437Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>在继承的层次结构中，子类的出现使类变得越来越具体，而子类的父类就变得更一般、更通用。有时将一个父类设计得非常抽象，以至于它没有具体的实例，这样的类称为<code>抽象类（abstract class）</code>。<br>一个子类只能从一个父类继承，如果想要使其继承多个父类，可以使用<code>接口（interface）</code>来达到<code>多重继承（multiple inheritance）</code>的效果。<br>本章介绍抽象类和接口，并讨论如何使用基本数据类型值的包装类。</p>
-<h3 id="抽象类">抽象类</h3><ul>
-<li>抽象类使用关键字<code>abstract</code>修饰。</li>
-<li>抽象类中可以存在抽象方法，抽象方法也使用关键字<code>abstract</code>修饰。</li>
-<li>非抽象类不能包含抽象方法，在一个由抽象类扩展出来的非抽象类中，所有抽象方法都必须实现。</li>
-<li>抽象类不能用new运算符实例化，但仍然可以定义它的构造方法。</li>
-<li>包含抽象方法的类必须是抽象的，但抽象类中可以存在非抽象方法。</li>
-<li>子类可以声明为抽象的，即使他的父类是具体的。</li>
-<li>不能用new运算符创建抽象类的实例，但是，抽象类可以用作数据类型。例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GeometricObject[] geo = <span class="keyword">new</span> GeometricObject[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="日历类Calendar和公历类GregorianCalendar">日历类Calendar和公历类GregorianCalendar</h3><p>略。</p>
-<h3 id="接口">接口</h3><ul>
-<li><code>接口(interface)</code>是一种与类相似的结构，只包含常量和抽象方法。抽象类和接口相似，但是抽象类处理包含常量和抽象方法外，还可以包含变量和具体方法。</li>
-<li>使用关键字<code>implements</code>可以实现接口。</li>
-<li>接口与抽象类<ul>
-<li>在接口中，数据必须是常量，而抽象类可以有非常量的数据域。</li>
-<li>接口中的每个方法只有一个头标志，没有实现部分，抽象类可以有具体的方法。<br><strong>在接口中，所有的数据域都是public final static的，所有的方法都是public abstract的，在书写接口时可以省略这部分内容。</strong></li>
-<li>一个接口只能扩展其他接口，不能扩展类。一个类可以扩展它的父类并实现多个接口。</li>
-</ul>
-</li>
-<li>抽象类和接口都可以用来模拟共同特征。<ul>
-<li><code>强是关系(Strong is-a relationship)</code>：明显地描述了父子关系应该使用类模拟。</li>
-<li><code>弱是关系(Weak is-a relationship)</code>：也叫<code>类属关系（is-kind of relationship）</code>，是指对象拥有某种属性。用接口来模拟。</li>
-</ul>
-</li>
-<li><p>可克隆接口Cloneable</p>
-<ul>
-<li><p>Cloneable接口在java.lang包中如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>体为空的接口称为<code>标记接口（marker interface）</code>。标记接口不包含常量或方法，它用于标明一个类具有某种必备的属性。</p>
-</li>
-</ul>
-</li>
-<li>浅复制和深复制<ul>
-<li><code>浅复制(shallow copy)</code>：如果域是一个对象，复制的是域的引用而不是域的内容。</li>
-<li><code>深复制(deep copy)</code>: 复制域的内容。需要重写clone()方法。</li>
-</ul>
-</li>
-</ul>
-<h3 id="将基本数据类型值处理为对象">将基本数据类型值处理为对象</h3><ul>
-<li>在Java中，基本类型不作为对象使用，这样做是效率原因。同时，Java也将基本数据类型并入对象或包装成对象，方便使用。对应的类称为<code>包装类（wrapper class）</code>。使用包装对象代替基本类型变量，可以进行一般程序设计。</li>
-<li>包装类的名称与对应的基本类型一样，但是第一个字母大写。Integer和Character例外。</li>
-<li>包装类没有无参构造方法；所有包装类的实例都是永久的。</li>
-<li>数值包装类的常量<ul>
-<li>MAX_VALUE</li>
-<li>MIN_VALUE</li>
-</ul>
-</li>
-<li>静态方法<code>valueOf()</code>创建一个新的对象，并将它初始化为指定字符串表示的值。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Double doubleObject = Double.valueOf(<span class="string">"12.4"</span>);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="基本类型和包装类之间的自动转换">基本类型和包装类之间的自动转换</h3><ul>
-<li>二者自JDK 1.5就可以自动转换。</li>
-<li>将基本类型的值转换为包装类对象，称为<code>装箱（boxing）</code>，相反的过程称为<code>开箱（unboxing）</code>。</li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>接口仅定义了规范，实现接口的好处有：<br>1、表示多个实现类之间的弱是关系<br>2、接口可以同一标准<br>3、接口可以快速分离工作内容<br>4、接口有利于程序扩展</li>
-<li>实现接口，必须实现接口中所有的方法。</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><p>习题9.1 9.2 9.3 9.4 9.6 9.8 9.9 9.10程序源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter9/src" target="_blank" rel="external">chapter9</a></p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>在继承的层次结构中，子类的出现使类变得越来越具体，而子类]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>
