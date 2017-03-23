@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2016-11-20T13:21:22.658Z</updated>
+  <updated>2017-03-23T08:09:26.572Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -13,6 +13,70 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[一个可以链式使用正则的类]]></title>
+    <link href="http://www.whtis.com/2017/03/23/%E4%B8%80%E4%B8%AA%E5%8F%AF%E4%BB%A5%E9%93%BE%E5%BC%8F%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E7%9A%84%E7%B1%BB/"/>
+    <id>http://www.whtis.com/2017/03/23/一个可以链式使用正则的类/</id>
+    <published>2017-03-23T07:52:01.000Z</published>
+    <updated>2017-03-23T08:09:26.572Z</updated>
+    <content type="html"><![CDATA[<p>最近使用webMgaic爬虫框架的时候，发现链式调用真的很好用，能省掉很多套路性的代码，所以也自己动手写了一个可以链式调用进行正则筛选的工具类。下面上代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by wht on 2017/3/18.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RexString</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>  String string = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RexString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RexString</span><span class="params">(String string)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.string = string;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RexString <span class="title">getRex</span><span class="params">(String rex)</span> </span>&#123;</span><br><span class="line">        Pattern p = Pattern.compile(rex);</span><br><span class="line">        Matcher m = p.matcher(string);</span><br><span class="line">        <span class="keyword">if</span> (m.find()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> RexString(m.group());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RexString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.string;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用：<br>```java<br>    RexString rexString = new RexString(“xxx”);<br>    RexString rs = rexString.getRex(rex1).getRex(rex2).getRex(rex3) ···</p>
+<pre><code><span class="type">String</span> <span class="literal">result</span> = rs.toString();
+</code></pre><hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>最近使用webMgaic爬虫框架的时候，发现链式调用真的很好用，能省掉很多套路性的代码，所以也自己动手写了一个可以链式调用进行正则筛选的工具类。下面上代码：</p>
+<figure class="highlight java"><table><tr><td class="g]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="总结，原创" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[最近要做的几件事]]></title>
+    <link href="http://www.whtis.com/2017/01/28/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/"/>
+    <id>http://www.whtis.com/2017/01/28/最近要做的几件事/</id>
+    <published>2017-01-28T15:14:49.696Z</published>
+    <updated>2016-11-06T16:22:51.222Z</updated>
+    <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>有时候想到要做一些跟技术有关的东西，但很多时候都会忘记。一直觉得<strong>兴趣是最好的老师</strong>这句话很对，既然有兴趣，那么最好动手做一做。写这篇文章，提醒自己的同时也是希望认识志同道合的朋友，虽然刚开始做的东西很low，但慢慢积累，总能获得成就感不是？<br><br>这篇文章会不断更新，我也想看看，我最后到底能做几件自己喜欢的事情，嘻嘻(●’◡’●)</p>
+<h5 id="2016-09-19日凌晨">2016-09-19日凌晨</h5><ul>
+<li>学习安卓开发，写一个app，具体需求如下：（已实现第一步）<ul>
+<li><del>能够实现实时监测手机短信的功能。当手机A收到新短信后，能立刻调用系统短信app将短信内容发送给B</del></li>
+<li>如果有可能，转发这一步调用微信完成（省钱啊）</li>
+<li><del>界面，能凑合用就行，别出bug就行（没写。。）</del></li>
+</ul>
+</li>
+<li>给这博客添加几个功能：<ul>
+<li><del>添加网易云音乐插件（最终还是觉得不加好一些）</del></li>
+<li><del>添加一个新分区，类似于微信朋友圈或者qq空间发状态的功能。（因为自己有时候有些话憋不住，按照博文发出来又太短了=。=）</del></li>
+<li><del>之前好像见过博客同步instagram的功能，如果上面两个都完成了，可以在博客上添加一个专门的图片分区（看过效果，类似于图床，没啥实用性，还是直接上传instagram，等积累到一定量直接放链接就行）</del></li>
+</ul>
+</li>
+</ul>
+<h5 id="2016-11-07日夜">2016-11-07日夜</h5><ul>
+<li>续上次的需求，学习微信公众号开发（转发手机短信到公众号再下发）</li>
+<li>学习javascript，自己写一个简易的网站（博客新分区的提高要求）</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="写在前面">写在前面</h3><p>有时候想到要做一些跟技术有关的东西，但很多时候都会忘记。一直觉得<strong>兴趣是最好的老师</strong>这句话很对，既然有兴趣，那么最好动手做一做。写这篇文章，提醒自己的同时也是希望认识志同道合的朋友，虽然刚开始做的东]]>
+    </summary>
+    
+      <category term="待完成" scheme="http://www.whtis.com/tags/%E5%BE%85%E5%AE%8C%E6%88%90/"/>
+    
+      <category term="未完成" scheme="http://www.whtis.com/categories/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[hexo博客主题--material折腾笔记]]></title>
@@ -55,50 +119,12 @@
   </entry>
   
   <entry>
-    <title><![CDATA[最近要做的几件事]]></title>
-    <link href="http://www.whtis.com/2016/11/07/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/"/>
-    <id>http://www.whtis.com/2016/11/07/最近要做的几件事/</id>
-    <published>2016-11-06T16:22:51.222Z</published>
-    <updated>2016-11-06T16:22:51.222Z</updated>
-    <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>有时候想到要做一些跟技术有关的东西，但很多时候都会忘记。一直觉得<strong>兴趣是最好的老师</strong>这句话很对，既然有兴趣，那么最好动手做一做。写这篇文章，提醒自己的同时也是希望认识志同道合的朋友，虽然刚开始做的东西很low，但慢慢积累，总能获得成就感不是？<br><br>这篇文章会不断更新，我也想看看，我最后到底能做几件自己喜欢的事情，嘻嘻(●’◡’●)</p>
-<h5 id="2016-09-19日凌晨">2016-09-19日凌晨</h5><ul>
-<li>学习安卓开发，写一个app，具体需求如下：（已实现第一步）<ul>
-<li><del>能够实现实时监测手机短信的功能。当手机A收到新短信后，能立刻调用系统短信app将短信内容发送给B</del></li>
-<li>如果有可能，转发这一步调用微信完成（省钱啊）</li>
-<li><del>界面，能凑合用就行，别出bug就行（没写。。）</del></li>
-</ul>
-</li>
-<li>给这博客添加几个功能：<ul>
-<li><del>添加网易云音乐插件（最终还是觉得不加好一些）</del></li>
-<li><del>添加一个新分区，类似于微信朋友圈或者qq空间发状态的功能。（因为自己有时候有些话憋不住，按照博文发出来又太短了=。=）</del></li>
-<li><del>之前好像见过博客同步instagram的功能，如果上面两个都完成了，可以在博客上添加一个专门的图片分区（看过效果，类似于图床，没啥实用性，还是直接上传instagram，等积累到一定量直接放链接就行）</del></li>
-</ul>
-</li>
-</ul>
-<h5 id="2016-11-07日夜">2016-11-07日夜</h5><ul>
-<li>续上次的需求，学习微信公众号开发（转发手机短信到公众号再下发）</li>
-<li>学习javascript，自己写一个简易的网站（博客新分区的提高要求）</li>
-</ul>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h3 id="写在前面">写在前面</h3><p>有时候想到要做一些跟技术有关的东西，但很多时候都会忘记。一直觉得<strong>兴趣是最好的老师</strong>这句话很对，既然有兴趣，那么最好动手做一做。写这篇文章，提醒自己的同时也是希望认识志同道合的朋友，虽然刚开始做的东]]>
-    </summary>
-    
-      <category term="待完成" scheme="http://www.whtis.com/tags/%E5%BE%85%E5%AE%8C%E6%88%90/"/>
-    
-      <category term="未完成" scheme="http://www.whtis.com/categories/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[将百度搜索结果的长url链接转换为真实的url地址]]></title>
     <link href="http://www.whtis.com/2016/09/19/%E5%B0%86%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C%E7%9A%84%E9%95%BFurl%E9%93%BE%E6%8E%A5%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%9C%9F%E5%AE%9E%E7%9A%84url%E5%9C%B0%E5%9D%80/"/>
     <id>http://www.whtis.com/2016/09/19/将百度搜索结果的长url链接转换为真实的url地址/</id>
     <published>2016-09-18T16:37:15.000Z</published>
-    <updated>2016-09-18T16:40:18.106Z</updated>
-    <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>最近写爬虫的时候，想调用百度的搜索结果，于是有了这个问题。需要注意的是，本篇内容转化是仅针对百度跳转到非百度链接的，百度内部链接的跳转，如百度搜索主入口跳转到百度知道、百度文库，</p>
+    <updated>2017-02-09T14:45:49.696Z</updated>
+    <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>最近写爬虫的时候，想调用百度的搜索结果，于是有了这个问题。需要注意的是，本篇内容转化是仅针对百度跳转到非百度链接的，百度内部链接的跳转，如百度搜索主入口跳转到百度知道、百度文库等情况不再讨论之列。</p>
 <h3 id="问题描述">问题描述</h3><ul>
 <li>百度搜索入口：<code>https://www.baidu.com/s?wd=</code>,后面加上需要的搜索内容即可。如需要进行更加精确的搜索，可以使用百度的<a href="http://imgs.xinhuanet.com/js/baidu/gj.htm" target="_blank" rel="external">高级搜索</a>功能。</li>
 <li>百度搜索结果示例：<code>https://www.baidu.com/link?url=NsJrxOylR5il9kO2p7IJZu9RdvqdWgobSo1W7n29FIu&amp;amp;wd=&amp;amp;eqid=e4c01daf0006800b0000000357debb6c</code>,实际的url为<code>www.whtis.com</code>。</li>
@@ -110,8 +136,8 @@
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h3 id="写在前面">写在前面</h3><p>最近写爬虫的时候，想调用百度的搜索结果，于是有了这个问题。需要注意的是，本篇内容转化是仅针对百度跳转到非百度链接的，百度内部链接的跳转，如百度搜索主入口跳转到百度知道、百度文库，</p>
-<h3 id="问题描述">问题描述</]]>
+    <![CDATA[<h3 id="写在前面">写在前面</h3><p>最近写爬虫的时候，想调用百度的搜索结果，于是有了这个问题。需要注意的是，本篇内容转化是仅针对百度跳转到非百度链接的，百度内部链接的跳转，如百度搜索主入口跳转到百度知道、百度文库等情况不再讨论之列。</p>
+<h3 id="问题描]]>
     </summary>
     
       <category term="java，原创" scheme="http://www.whtis.com/tags/java%EF%BC%8C%E5%8E%9F%E5%88%9B/"/>
@@ -125,7 +151,7 @@
     <link href="http://www.whtis.com/2016/09/14/PostgreSQL%E4%BD%BF%E7%94%A8%E6%89%8B%E8%AE%B0/"/>
     <id>http://www.whtis.com/2016/09/14/PostgreSQL使用手记/</id>
     <published>2016-09-14T14:29:13.000Z</published>
-    <updated>2016-09-14T16:17:29.856Z</updated>
+    <updated>2017-03-23T09:58:18.424Z</updated>
     <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p><blockcode><br>&emsp;&emsp;因为项目需要，要将本来的<code>mybatis+mysql</code>改为<code>mybatis+postgresql</code>,使用途中难免遇到坑，以下是我遇到的，记录下来供参考。好久没写blog，感觉都快长草了，目前在想要不要开一个分类，写点日常废话😂<br></blockcode><br>&emsp;&emsp;好了，言归正传。</p>
 <h3 id="为什么要用PostgreSQL">为什么要用PostgreSQL</h3><p>为什么要用呢,上面已经说了，项目需要。postgresql经常被拿来和mysql进行比较，postgresql可以用来存储较大的对象数据（文本、视频、图片等），符合项目要求。</p>
 <h3 id="什么是PostgreSQL">什么是PostgreSQL</h3><p>念都不知道怎么念的一个词，确实第一感觉没有mysql好。看下官方的说法：</p>
@@ -156,9 +182,21 @@
 </ul>
 </li>
 </ul>
+<h4 id="错误三：在拷贝excel中数据到pgsql中时，使用语句时有以下问题需要注意：">错误三：在拷贝excel中数据到pgsql中时，使用语句时有以下问题需要注意：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY excel.csv FROM <span class="string">'address'</span> WITH (FORMAT CSV, HEADER TRUE, QUOTE <span class="string">'"'</span>, DELIMITER <span class="string">','</span>, ENCODING <span class="string">'UTF8'</span> );</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>ERROR: must be superuser to COPY to or from a file,建议：Anyone can COPY to stdout or from stdin. psql&#39;s copy command also works for anyone.</code><ul>
+<li>这是因为当前登陆pgsql的用户不具有向数据库copy数据的权限所致。需要切换到superuser进行此操作。</li>
+</ul>
+</li>
+<li><code>ERROR: invalid input syntax for integer:</code><ul>
+<li>这个错误是网上使用<code>COPY excel.csv FROM &#39;address&#39; WITH DELIMITER &#39;,&#39;</code>所致，如果在copy命令中指定选项header为true. 另外，将format指定为csv, 文件格式指定为utf8，就能避免这错误。</li>
+</ul>
+</li>
+</ul>
 <h3 id="使用PostgreSQL存储大文件">使用PostgreSQL存储大文件</h3><p>待编辑</p>
 <hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+]]></content>
     <summary type="html">
     <![CDATA[<h3 id="写在前面">写在前面</h3><p><blockcode><br>&emsp;&emsp;因为项目需要，要将本来的<code>mybatis+mysql</code>改为<code>mybatis+postgresql</code>,使用途中难免遇到坑，以下是我遇]]>
     </summary>
@@ -1651,113 +1689,6 @@
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章介绍应用异常处理来处理运行错误，以及应用断言来确保程]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结--第十章 面向对象建模]]></title>
-    <link href="http://www.whtis.com/2016/01/29/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BB%BA%E6%A8%A1/"/>
-    <id>http://www.whtis.com/2016/01/29/Java学习总结-第十章-面向对象建模/</id>
-    <published>2016-01-29T10:48:33.000Z</published>
-    <updated>2016-09-14T15:49:41.564Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章初步介绍使用面向对象的方法开发软件系统，学习类的设计原则。</p>
-<h3 id="软件开发过程">软件开发过程</h3><ul>
-<li>软件开发步骤：需求分析、系统分析、设计、实现、测试、发行应用和维护。</li>
-</ul>
-<h3 id="分析类之间的关系">分析类之间的关系</h3><ul>
-<li><code>关联(association)</code>：是一种描述两个类之间行为的一般二元关系。</li>
-<li>聚集和包容<ul>
-<li><code>聚集(aggregation)</code>：是一种特殊的关联形式，表示两个类之间的所属关系。聚集模拟<code>具有（has-a）</code>关系。</li>
-<li>如果一个对象被一个聚集对象所专有，它和聚集对象之间的关系就称为<code>包容（composition）</code>。</li>
-</ul>
-</li>
-<li>继承<br><code>继承(inheritance)</code>模拟两个类之间“是”（is-a）的关系。<code>强是(strong is-a)</code>关系描述两个类之间的直接继承关系，可以用类的继承表示。<code>弱是(weak is-a)</code>关系描述一个类具有某种属性，可以用接口表示。</li>
-</ul>
-<h3 id="类的设计原则">类的设计原则</h3><ul>
-<li>设计一个类<ul>
-<li>一个类应该描述一个单一的实体，类的所有操作应该在逻辑上相互配合，支持一个共同的目标。</li>
-<li>类经常是为了多种不同用户的使用而设计的。</li>
-<li>类是为了可重用而设计的，用户可以在不同的组合、不同的顺序和不同的环境中联合使用类。</li>
-<li>在可能的情况下，应该提供公用的无参构造方法，并且覆盖定义在Object类中的equals方法和toString方法。如果覆盖了equals方法，也应该覆盖hashcode方法。（原因是两个相等的对象必须拥有相等的散列码）</li>
-<li>给类、数据域以及方法选择有意义的名字。建议将数据的声明置于构造方法之前，将构造方法置于方法之前。</li>
-</ul>
-</li>
-<li>使用可见性修饰符public、protected和private<ul>
-<li>一个类可以提供两种合约：对类的使用者和对类的扩展者。<ul>
-<li>为了使用者，应该将数据域设为私有的（private），将访问器方法和修改器方法设为公有的（public）。</li>
-<li>为了扩展者，应该将数据域和方法都设为保护的（protected）。扩展者的合约包含使用者的合约。</li>
-</ul>
-</li>
-<li>类应该使用private修饰符隐藏其数据，以免用户直接访问它。</li>
-</ul>
-</li>
-<li>使用静态修饰符static<br>一个属性如果被类中的所有实例所共享，它应该声明为静态的。</li>
-<li>使用继承或包容<ul>
-<li>继承与包容之间的区别就是“是”（is-a）关系与“具有”（has-a）关系之间的区别。</li>
-<li>如果要求多态性，使用继承来设计。如果不需要关系多态性，包容设计会更好。因为对包容设计得类，类之间的依赖性要比使用继承设计的类弱一些。</li>
-</ul>
-</li>
-<li><p>使用接口或抽象类</p>
-<ul>
-<li>接口和抽象类都能用于描述一般性的公有特征。强是关系使用类来模拟，弱是关系使用接口来模拟。</li>
-<li>一个子类只能扩展一个父类，但是可以实现多个接口，所以接口比抽象类更灵活。</li>
-<li>要将接口和抽象类的好处结合起来，可以创建一个接口和一个实现该接口的抽象类，这样的抽象类称为<code>便利类(convenience class)</code>。</li>
-</ul>
-<h3 id="用顺序图和状态图模拟动态行为">用顺序图和状态图模拟动态行为</h3><ul>
-<li>UML图符仅仅用来描述类的属性和方法以及类之间的静态关系。</li>
-<li>顺序图：通过刻画方法调用的时间顺序来描述对象之间的交互作用。<ul>
-<li><strong>类角色（clss role）</strong>表示对象所起的作用，顺序图顶部的对象表示类角色。</li>
-<li><strong>生命线（lifeline）</strong>表示在某段时间内对象是存在的，用对象引出的垂直虚线（点线）表示。</li>
-<li><strong>激活（activation）</strong>表示对象执行一项操作所用的时间段，使用位于生命线上的窄矩形表示。</li>
-<li><strong>方法调用（method invocation）</strong>表示对象之间的通信，用标有调用方法指令的水平箭头表示。<br><a href="">!顺序图示例</a></li>
-</ul>
-</li>
-<li><code>状态图（statechart diagram）</code>用来描述对象的控制流。状态图包含下列元素：<ul>
-<li>状态（state）表示对象在生存期内的状况，包括对象满足某些条件、执行某些操作或等待某些事件发生等。每个状态都有一个名字，用圆角矩形表示它们，初始状态例外，用实心小圆表示。</li>
-<li>转移（transition）表示两个状态之间的关系，表示一个对象执行某些操作后从一种状态转变为另一种状态。用标有合适方法调用的实线箭头来表示转移。<br><a href="">!状态图示例</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="使用Java_API在构架基础上编程">使用Java API在构架基础上编程</h3><ul>
-<li><p>Java应用程序接口（Application Program Interface，API）由许多类和接口组成。<br>java.lang包含Java核心类，每个Java程序隐含地导入该包。<br>javax.swing包含用于开发Swing GUI程序的轻型图形用户界面组件。<br>java.util包含许多工具。如StringTokenizer、Data、Calendar和GregorianCalendar等。</p>
-<hr>
-</li>
-</ul>
-<h2 id="复习小结">复习小结</h2><ul>
-<li><p>接口是一种特殊的类，因此接口也可以用来声明类型。</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Comparable</span> tt = <span class="keyword">new</span> <span class="built_in">Comparable</span>() &#123;</span><br><span class="line">            <span class="annotation">@Override</span></span><br><span class="line">            public <span class="built_in">int</span> compareTo(<span class="built_in">Object</span> o) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
-<p>上述写法类似于内部类。</p>
-</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><ul>
-<li><p>习题10.1<br>  写成如下形式：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> n = <span class="number">1</span>;</span><br><span class="line">        Rational sum = <span class="keyword">new</span> Rational();</span><br><span class="line">        <span class="keyword">while</span> (n &lt; <span class="number">100</span>) &#123;</span><br><span class="line">            Rational r = <span class="keyword">new</span> Rational(n, n + <span class="number">1</span>);</span><br><span class="line">            sum = sum.add(r);</span><br><span class="line">            n++;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>当n增加到23时，sum=2292289173/118982864,再进行运算时，会出现除零错误，原因是分子的值超出了Integer类的最大值2147483647。因此最终得不到类似<code>分子/分母</code>形式的结果。如果在每次循环结束后，将sum转换成double类型，就可以得到最后double类型的结果了：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> m = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">double</span> sum1 = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">while</span> (m &lt; <span class="number">100</span>) &#123;</span><br><span class="line">          Rational r = <span class="keyword">new</span> Rational(m, m + <span class="number">1</span>);</span><br><span class="line">          sum1 += r.doubleValue();</span><br><span class="line">          m++;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其余习题10.3 10.4源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter10/src" target="_blank" rel="external">chapter10</a></p>
-</li>
-</ul>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章初步介绍使用面向对象的方法开发软件系统，学习类的设计]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>

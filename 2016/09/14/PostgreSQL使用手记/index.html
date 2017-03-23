@@ -227,7 +227,7 @@ ga('create', 'UA-69300841-1', 'auto'); ga('send', 'pageview');
 	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
 		for="post-toc-trigger-btn">
 			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#写在前面"><span class="post-toc-number">1.</span> <span class="post-toc-text">写在前面</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么要用PostgreSQL"><span class="post-toc-number">2.</span> <span class="post-toc-text">为什么要用PostgreSQL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是PostgreSQL"><span class="post-toc-number">3.</span> <span class="post-toc-text">什么是PostgreSQL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用版本"><span class="post-toc-number">4.</span> <span class="post-toc-text">使用版本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装及使用"><span class="post-toc-number">5.</span> <span class="post-toc-text">安装及使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用中出现的错误及解决方案"><span class="post-toc-number">6.</span> <span class="post-toc-text">使用中出现的错误及解决方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#错误一：_java-sql-SQLException:_No_suitable_driver_found_for_jdbc:postgresql://yourhost:port"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">错误一： java.sql.SQLException: No suitable driver found for jdbc:postgresql://yourhost:port</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#错误二：_Error_querying_database-_Cause:_org-postgresql-util-PSQLException:_ERROR:_CREATE_DATABASE_cannot_run_inside_a_transaction_block"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">错误二： Error querying database.  Cause: org.postgresql.util.PSQLException: ERROR: CREATE DATABASE cannot run inside a transaction block</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用PostgreSQL存储大文件"><span class="post-toc-number">7.</span> <span class="post-toc-text">使用PostgreSQL存储大文件</span></a></li></ol>
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#写在前面"><span class="post-toc-number">1.</span> <span class="post-toc-text">写在前面</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么要用PostgreSQL"><span class="post-toc-number">2.</span> <span class="post-toc-text">为什么要用PostgreSQL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是PostgreSQL"><span class="post-toc-number">3.</span> <span class="post-toc-text">什么是PostgreSQL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用版本"><span class="post-toc-number">4.</span> <span class="post-toc-text">使用版本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装及使用"><span class="post-toc-number">5.</span> <span class="post-toc-text">安装及使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用中出现的错误及解决方案"><span class="post-toc-number">6.</span> <span class="post-toc-text">使用中出现的错误及解决方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#错误一：_java-sql-SQLException:_No_suitable_driver_found_for_jdbc:postgresql://yourhost:port"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">错误一： java.sql.SQLException: No suitable driver found for jdbc:postgresql://yourhost:port</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#错误二：_Error_querying_database-_Cause:_org-postgresql-util-PSQLException:_ERROR:_CREATE_DATABASE_cannot_run_inside_a_transaction_block"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">错误二： Error querying database.  Cause: org.postgresql.util.PSQLException: ERROR: CREATE DATABASE cannot run inside a transaction block</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#错误三：在拷贝excel中数据到pgsql中时，使用语句时有以下问题需要注意："><span class="post-toc-number">6.3.</span> <span class="post-toc-text">错误三：在拷贝excel中数据到pgsql中时，使用语句时有以下问题需要注意：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用PostgreSQL存储大文件"><span class="post-toc-number">7.</span> <span class="post-toc-text">使用PostgreSQL存储大文件</span></a></li></ol>
 		
 <!--			<li class="mdl-menu__item">Some Action</li>-->
 	</ul>
@@ -393,9 +393,21 @@ window.onload = function(){
 </ul>
 </li>
 </ul>
+<h4 id="错误三：在拷贝excel中数据到pgsql中时，使用语句时有以下问题需要注意：">错误三：在拷贝excel中数据到pgsql中时，使用语句时有以下问题需要注意：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY excel.csv FROM <span class="string">'address'</span> WITH (FORMAT CSV, HEADER TRUE, QUOTE <span class="string">'"'</span>, DELIMITER <span class="string">','</span>, ENCODING <span class="string">'UTF8'</span> );</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>ERROR: must be superuser to COPY to or from a file,建议：Anyone can COPY to stdout or from stdin. psql&#39;s copy command also works for anyone.</code><ul>
+<li>这是因为当前登陆pgsql的用户不具有向数据库copy数据的权限所致。需要切换到superuser进行此操作。</li>
+</ul>
+</li>
+<li><code>ERROR: invalid input syntax for integer:</code><ul>
+<li>这个错误是网上使用<code>COPY excel.csv FROM &#39;address&#39; WITH DELIMITER &#39;,&#39;</code>所致，如果在copy命令中指定选项header为true. 另外，将format指定为csv, 文件格式指定为utf8，就能避免这错误。</li>
+</ul>
+</li>
+</ul>
 <h3 id="使用PostgreSQL存储大文件">使用PostgreSQL存储大文件</h3><p>待编辑</p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+
 	
 	
 	
@@ -538,7 +550,7 @@ window.onload = function(){
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
         </ul>
     </li>
 
@@ -571,7 +583,7 @@ window.onload = function(){
     <li>
         <a href="/archives">
              文章总数
-             <span class="sidebar-badge">35</span>
+             <span class="sidebar-badge">36</span>
         </a>
     </li>
 </ul>
