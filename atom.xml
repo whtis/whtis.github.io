@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2017-03-23T10:05:49.678Z</updated>
+  <updated>2017-04-08T08:55:00.633Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -13,6 +13,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ubuntu16.04删除当前用户密码文件/etc/shadow后无法进入系统的解决方法]]></title>
+    <link href="http://www.whtis.com/2017/04/08/ubuntu16-04%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E6%96%87%E4%BB%B6-etc-shadow%E5%90%8E%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>http://www.whtis.com/2017/04/08/ubuntu16-04删除当前用户密码文件-etc-shadow后无法进入系统的解决方法/</id>
+    <published>2017-04-08T07:48:02.000Z</published>
+    <updated>2017-04-08T08:55:00.633Z</updated>
+    <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>最近项目用到了dspace，在windows中向dspace中导入item时会报解压错误的<code>error</code>,后来经过排查，确定是windows平台编码问题导致。于是转战ubuntu，在安装了16.04版本，配置了<code>java</code>环境、安装编译器等等一系列工作、差不多可以进行开发的时候，我手贱删除了这个文件<code>/etc/shadow</code>，为什么会删除它，这就涉及到安装shadowsocks了，这里不详说。反正是在编辑<code>/etc/shadowsocks.json</code>文件时，我觉得<code>/etc/shadow</code>可能是个临时文件，就用root权限删除了。这样一删不要紧，重启机器以后傻眼了，输入正确的用户名密码后，无法登陆到图形界面，提示也是说密码不对。类似于下图：<br><img src="http://7xnttb.com1.z0.glb.clouddn.com//558d1f9e0e1dcda9c9001b15c0b4d63d.png" alt="ubuntu密码错误"></p>
+<h4 id="原因">原因</h4><p>解决这个问题之前，需要了解下ubuntu登陆图形界面时的用户认证过程。以下是个人理解，可能会有错误，还请指正。</p>
+<ul>
+<li>ubuntu会在<code>/etc</code>目录下保存用户的登陆信息，当然是加密后的，但是不像我们认为的那样只有一个文件，而是包含两个文件：<code>/etc/passwd</code>、<code>/etc/shadow</code>，登陆时ubuntu会自动比对两个文件的信息，如果一直则允许用户登陆，否则就会拒绝。我因为删除了<code>/etc/shadow</code>这个文件，所以在比对时会出错。</li>
+</ul>
+<h4 id="解决">解决</h4><p>找到了原因，就很好办了。网上有很多遗忘了ubuntu密码后找回的教程，但是很遗憾，我所能找到的没有一个教程是完全正确的，因为大多数都是互相抄，这种现象确实可悲。以下解决思路是我本人亲测，转载时请附带ubuntu版本信息及出处。</p>
+<ul>
+<li><del>第一种解决方法：既然我是误删了<code>/etc/shadow</code>，那么我想办法在命令行登陆，拷贝<code>/etc/passwd</code>文件为<code>/etc/shadow</code>不就可以绕过俩文件校验了么？（事实证明这个想法行不通，如果你查看两个文件的内容，你会发现实际上两个文件的内容是不同的，但登陆时具体怎么校验的，没有深入研究过）</del></li>
+<li><del>第二种方法：想办法在命令行登陆，使用命令行更改用户密码，然后就可以使用原用户名+新密码登陆了（这种方法看似可行，而且命令行中更改密码时也会提示更改成功，但仍然无法登陆图形界面。ps：此时可以在shell中登陆）</del></li>
+<li>第三种方法：想办法在命令行登陆，然后创建一个新的用户，将老用户文件拷贝到新用户目录下，重启后就可以使用新用户登陆了。（事实证明这种方法可行，唯一的问题是之前用户的某些配置会丢失，这也没办法了。。）</li>
+</ul>
+<h5 id="实际操作">实际操作</h5><p>可能有人注意到，上面的解决方法都有一点是相同的，<strong>想办法在命令行登陆</strong>。但当机器出现这问题时，<code>CTRL+ALT+F2~F6</code>都已经无法进入命令行了。下面说下正确的做法，截图来自网络。<br>1、开机按ESC，出现如下界面<br><img src="http://7xnttb.com1.z0.glb.clouddn.com//ef0ff36421090d6e1227c8c3cdfabefb.png" alt="ubuntu开机画面"></p>
+<p>2、按回车键进入如下界面，然后选中有recovery mode的选项<br><img src="http://7xnttb.com1.z0.glb.clouddn.com//5ce0970a7d9d6cc2bcd68b4ae256fb47.png" alt="ubuntu-recovery-mode"></p>
+<p>3、这一步不要按回车，按下<code>e</code>进行编辑状态，找到图中红色框的<code>recovery nomodeset</code>并删除，修改<code>ro</code>为<code>rw</code>（不改的话进入命令行无法输入命令）,并在后面输入<code>quiet splash rw init=/bin/bash</code>后，按<code>F10</code>或<code>CTRL+X</code>重启<br><img src="http://7xnttb.com1.z0.glb.clouddn.com//e512c666c1780ade758e424890e8973c.png" alt="edit-grub"><br><strong>注意，网上大多数教程就是这一步操作不对，导致重启后要么无法进入命令行，要么无法编辑</strong></p>
+<p>4、重启后如果看到下图，则说明我们可以开始尝试上面提到的三种方法了。<br><img src="http://7xnttb.com1.z0.glb.clouddn.com//4c37c3c29de17d562411db499f3a3bd1.png" alt="root-temp"></p>
+<h4 id="后记">后记</h4><ul>
+<li>请注意本文全程的解决是基于ubuntu没有开启<code>root</code>用户图形界面登陆的前提，关于如何开启root用户登陆，可以自行<code>google</code>。如果开启了<code>root</code>用户，则以上的讨论都可以省略，因为以<code>root</code>用户登陆后，更改用户等操作都不会遇到任何困难。因此强烈建议：<code>使用ubuntu桌面版时请开启root用户登陆，方便遇到问题后能及时解决。</code></li>
+<li>附上我在测试以上三种方法时，使用的一些<code>ubuntu</code>指令：<ul>
+<li>递归拷贝用户目录：<code>sudo cp -r sourceFold_path targetFold_path</code></li>
+<li>递归指定用户目录所有者：<code>sudo chown user usergroup</code></li>
+<li>增加用户并且在<code>/home</code>目录下生成相应文件夹：<code>sudo adduser user</code>，该命令会自动创建用户主目录，创建用户同名的组</li>
+<li>修改密码：<code>sudo passwd</code>，然后输入两次密码即可。如果要修改特定用户的密码，可以在后面加上用户名 <code>sudo passwd user</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="写在前面">写在前面</h3><p>最近项目用到了dspace，在windows中向dspace中导入item时会报解压错误的<code>error</code>,后来经过排查，确定是windows平台编码问题导致。于是转战ubuntu，在安装了16.04版本，配]]>
+    </summary>
+    
+      <category term="ubuntu" scheme="http://www.whtis.com/tags/ubuntu/"/>
+    
+      <category term="搜集整理" scheme="http://www.whtis.com/tags/%E6%90%9C%E9%9B%86%E6%95%B4%E7%90%86/"/>
+    
+      <category term="ubuntu" scheme="http://www.whtis.com/categories/ubuntu/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[一个可以链式使用正则的类]]></title>
@@ -1572,123 +1618,6 @@
     <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
 <hr>
 <h2 id="主要内容">主要内容</h2><p>本章介绍Java GUI程序设计基础。讨论GUI组件以及]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结--第十五章 异常和断言]]></title>
-    <link href="http://www.whtis.com/2016/01/30/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0-%E5%BC%82%E5%B8%B8%E5%92%8C%E6%96%AD%E8%A8%80/"/>
-    <id>http://www.whtis.com/2016/01/30/Java学习总结-第十五章-异常和断言/</id>
-    <published>2016-01-30T08:41:58.000Z</published>
-    <updated>2016-09-14T15:49:17.604Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章介绍应用异常处理来处理运行错误，以及应用断言来确保程序的正确性。</p>
-<h3 id="异常和异常类型">异常和异常类型</h3><ul>
-<li>运行会引起<code>异常（exception）</code>。异常是指程序运行中出现的时间，它中断正常的程序控制流。</li>
-<li><code>异常处理（exception handing）</code>：Java给程序员提供的稳妥处理运行错误的功能。</li>
-<li>异常类<ul>
-<li>Java的异常是Throwable派生类的一个实例。        </li>
-<li>通过扩展Throwable或它的子类，可以创建自己的异常类。</li>
-<li>异常类可以分为三种主要类型：系统错误、异常和运行异常。<ul>
-<li><code>系统错误（system error）</code>是由Java虚拟机抛出并在Error类中描述的。Error类描述内部的系统错误。此类错误程序员一般无法处理。（LinkageError、VirtualMachineError、AWTError）</li>
-<li><code>异常（exception）</code>是由Exception类描述的。Exception类描述由程序和外部环境引起的错误，这些错误能通过程序捕获和处理。（classNotFoundException、RuntimeException、···）</li>
-<li><code>运行异常（runtime exception）</code>是由RuntimeException类描述的。RuntimeException类描述编程错误，比如不合适的转换、访问一个越界数组或数值错误等。（ArithmeticException、NullPointerException、IndexOutOfBoundsException、···）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>必检异常和免检异常<ul>
-<li>RuntimeException、Error以及它们的子类都称为<code>免检异常（unchecked exception）</code>。所有其他异常都成为<code>必检异常（checked exception）</code>。</li>
-<li>必检异常编译器会强制程序员检查并处理它们。免检异常反映程序设计中不可重获的逻辑错误。</li>
-<li>Java语言不允许编写捕获或声明免检异常的代码。</li>
-</ul>
-</li>
-</ul>
-<h3 id="异常处理">异常处理</h3><p>Java的异常模型基于三种操作：<code>声明异常（declaring an exception）</code>、<code>抛出异常（throwing an exception）</code>和<code>捕获异常（catching an exception）</code>。</p>
-<ul>
-<li>声明异常：每个方法都必须说明它可能抛出的必检异常的类型。<ul>
-<li>在Java中使用关键字<code>throws</code>声明异常，使用关键字<code>throw</code>抛出异常。</li>
-</ul>
-</li>
-<li>抛出异常：程序检查到一个错误后，创建一个适当类型异常的实例并抛出它。<ul>
-<li>一个方法总能抛出免检异常。</li>
-</ul>
-</li>
-<li><p>捕获异常：使用<code>try-catch</code>语句块捕获并处理异常。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="comment">//some statments</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">	<span class="comment">//do</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>处理异常的代码称为<code>异常处理器（exception handler）</code>。寻找处理器的整个过程称为捕获异常。</li>
-<li>如果try语句块中某条语句抛出了异常，Java就会跳过try语句块中剩下的语句，开始为该异常搜索异常处理器。从第一个到最后一个逐个检查catch语句，看是否有某个catch字句中的异常类实例与该异常的类型匹配。如果有，就将该异常对象赋值给所声明的变量，执行catch子句中的代码。如果没有发现异常处理器，Java退出这个方法，把异常传递给调用该方法的方法，继续同样的过程来查找处理器。如果在调用的方法链中找不到相应的处理器，程序终止并在监视器上输出错误信息。</li>
-<li>一个异常对象包含有关异常的有价值信息，可以利用java.lang.Throwable类中的下列实例方法获取异常的信息：<ul>
-<li>public String getMessage() 返回Throwable对象的详细信息</li>
-<li>public String toString() 返回3个字符串合起来的串，它们分别是 1）异常类名的全称。2）“：”（一个冒号和空格）。3）getMessage()方法</li>
-<li>public void printStackTrace() 在控制台输出Throwable对象及其踪迹信息</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>方法是按照线程执行的。如果一个线程发生异常没有得到处理，该线程中止，但是程序中的其他线程不受影响。</li>
-</ul>
-<h3 id="重新抛出异常">重新抛出异常</h3><ul>
-<li>当一个方法出现异常是，如果没有捕获异常，该方法就会立即退出。如果方法在退出之前需要执行某些任务，应该在该方法中捕获异常，然后按如下结构将异常重新抛出，交给调用它的方法：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	statements;</span><br><span class="line">&#125; <span class="keyword">catch</span>(TheException ex) &#123;</span><br><span class="line">	perform operations before exits;</span><br><span class="line">	<span class="keyword">throw</span> ex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="finally子句">finally子句</h3><ul>
-<li>有时，不论异常是否出现或者是否被捕获，都希望执行某些代码。可以使用如下结构实现：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	statements;</span><br><span class="line">&#125; <span class="keyword">catch</span> (TheException ex) &#123;</span><br><span class="line">	handling ex;</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	finalStatements;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>使用finally子句时可能会忽略catch子句。</strong></p>
-<h3 id="何时使用异常">何时使用异常</h3><p>当必须处理不可预料的错误时应该使用try-catch语句块，不要用try-catch块处理简单的、可预料的情况。</p>
-<h3 id="创建自己的异常类">创建自己的异常类</h3><p>可以通过扩展Exception类或其子类来创建自己的异常类。</p>
-<h3 id="断言">断言</h3><p><code>断言（assertion）</code>是Java的一个语句，它允许对程序提出一个判断（假设）。断言包含一个布尔表达式，在程序运行中它应该是真。</p>
-<ul>
-<li>断言用于确保程序的正确性，避免逻辑错误。</li>
-<li>声明断言：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> assertion;</span><br><span class="line">or</span><br><span class="line"><span class="keyword">assert</span> assertion:detailMessage;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>其中assertion是一个布尔表达式，detailMessage是一个基本类型值或一个对象值。</p>
-<ul>
-<li><p>运行带断言的程序</p>
-<ul>
-<li><p>默认情况下，断言在运行时不起作用。为使它们有效，使用开关<code>-enableassertions</code>或其缩写<code>-ea</code>:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -ea xxx</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>断言可以有选择地激活，在类层次或包层次起作用或不起作用。使它不起作用的开关是<code>-disableassertions</code>,或其缩写<code>-da</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -ea:package1 -da:Class1 xxx</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="使用异常处理或断言">使用异常处理或断言</h3><ul>
-<li>不应该使用断言代替异常处理。异常处理用于在程序运行期间处理非常环境，断言是要确保程序的正确性。</li>
-<li>异常处理针对程序的健壮性，而断言涉及程序的正确性。</li>
-<li>不要使用断言检测public方法的参数。传给public方法的有效参数被认为是方法合约的一部分。</li>
-<li>使用断言进一步确认假设。这将加强对程序正确的的确认。</li>
-<li>将断言放到没有缺省情况的switch语句中。</li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>从一个通用父类可以派生出多种异常类。如果一个catch子句可以捕获一个父类的异常对象，它就能捕获那个父类所有子类的异常对象。</li>
-<li>在catch字句中指定异常的顺序是非常重要的。一般遵循从子类异常到父类异常的顺序。</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><p>习题15.5源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter15/src" target="_blank" rel="external">chapter15</a></p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章介绍应用异常处理来处理运行错误，以及应用断言来确保程]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>
