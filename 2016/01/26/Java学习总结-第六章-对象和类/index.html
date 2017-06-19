@@ -52,8 +52,8 @@
     <![endif]-->
 
     <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
     <!-- Config CSS -->
 
 
@@ -150,13 +150,13 @@
         }
     </style>
 
-	<script src="/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.min.js"></script>
 
 	<!-- UC Browser Compatible-->
 	<script>
 		var agent = navigator.userAgent.toLowerCase();
 		if(agent.indexOf('ucbrowser')>0) {
-			document.write('<link rel="stylesheet" href="/css/uc.css" type="text/css">');
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
 		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
 		}
 	</script>
@@ -379,10 +379,10 @@ window.onload = function(){
 </ul>
 <h3 id="对象的访问">对象的访问</h3><ul>
 <li><p>新创建的对象在内存中占用空间，通过访问对象的<code>引用变量</code>来访问，该变量仅包含对象的引用地址。<br>一个类所定义的类型被称为<code>引用类型（reference type）</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String str;</div></pre></td></tr></table></figure>
 </li>
 <li><p>访问新创建的对象的数据和方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">objectRefVar.data------引用对象的数据。</span><br><span class="line">objectRefVar.method------引用对象的方法。</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">objectRefVar.data------引用对象的数据。</div><div class="line">objectRefVar.method------引用对象的方法。</div></pre></td></tr></table></figure>
 </li>
 <li><p>当创建一个对象，但不赋给这个对象任何引用变量，那么这样创建的对象称为<code>匿名（anonymous）</code>对象。</p>
 </li>
@@ -397,7 +397,7 @@ window.onload = function(){
 <li>public 使类、方法和数据域可以在任何类中访问。</li>
 <li>private 使方法和数据域只能从它自己所在类中访问。</li>
 <li>默认情况下，类、方法和数据域可以从同一个包里的任何类中访问，这时也被称为<code>包私有的（package-private）</code>或者<code>包内访问的（package-access）</code>。</li>
-<li>一个对象不能访问自己类中的私有成员。但是，如果对象是在自己类内声明的则可以。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对象在自己类中声明，正确</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> x;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Foo foo = <span class="keyword">new</span> Foo();</span><br><span class="line">		System.out.println(foo.x);</span><br><span class="line">		System.out.println(foo.convert(foo.x));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">convert</span><span class="params">(<span class="keyword">boolean</span> b)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> x?<span class="number">1</span>:-<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//对象不在自己类中声明，无法访问私有成员</span></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Foo foo = <span class="keyword">new</span> Foo();</span><br><span class="line">		System.out.println(foo.x);</span><br><span class="line">		System.out.println(foo.convert(foo.x));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>一个对象不能访问自己类中的私有成员。但是，如果对象是在自己类内声明的则可以。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 对象在自己类中声明，正确</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> x;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Foo foo = <span class="keyword">new</span> Foo();</div><div class="line">		System.out.println(foo.x);</div><div class="line">		System.out.println(foo.convert(foo.x));</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">convert</span><span class="params">(<span class="keyword">boolean</span> b)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> x?<span class="number">1</span>:-<span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//对象不在自己类中声明，无法访问私有成员</span></div><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Foo foo = <span class="keyword">new</span> Foo();</div><div class="line">		System.out.println(foo.x);</div><div class="line">		System.out.println(foo.convert(foo.x));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
@@ -411,7 +411,7 @@ window.onload = function(){
 </ul>
 <h3 id="永久对象和类">永久对象和类</h3><ul>
 <li>如果一个对象一旦被创建，它的内容就不能再改变，那么该对象就称为<code>永久对象（immutable object）</code>，它的类称为<code>永久类（immutable class）</code>。</li>
-<li>一个类的所有数据都是私有的并且没有修改器，但它不一定是永久类。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//todo</span></span><br></pre></td></tr></table></figure>
+<li>一个类的所有数据都是私有的并且没有修改器，但它不一定是永久类。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//todo</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>要使一个类成为永久类，必须将所有数据域说明为私有的，并且不含返回引用非永久对象数据域的修改器和访问器。</p>
@@ -432,7 +432,7 @@ window.onload = function(){
 <ul>
 <li>隐藏的静态变量可以通过“类名.静态变量”的方式引用。隐藏的实例变量需要使用关键字<code>this</code>来引用。</li>
 </ul>
-<h3 id="对象数组">对象数组</h3><p>数组中的元素可以为对象，要初始化对象数组，可以使用for循环。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">	Objects[i] = <span class="keyword">new</span> Object();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="对象数组">对象数组</h3><p>数组中的元素可以为对象，要初始化对象数组，可以使用for循环。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">	Objects[i] = <span class="keyword">new</span> Object();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="类的抽象和封装">类的抽象和封装</h3><ul>
 <li><code>类抽象（class abstraction）</code>是将类的实现和使用分离。类的创建者提供了类的描述，让使用者明白如何使用类。从类外可以访问的方法和数据域的全体，以及对这些成员如何使用的描述，合称为<code>类的合约（class&#39;s contract）</code>。</li>
 <li><code>类的封装（class encapsulation）</code>是将类的实现细节包装好，对用户隐藏起来，用户不需要知道如何实现的，仅需要知道如何使用即可。</li>
@@ -446,10 +446,10 @@ window.onload = function(){
 <li><p>从另外的类中创建内部类的对象：</p>
 <ul>
 <li><p>如果内部类是非静态的，必须先创建外部类的实例，然后使用如下语法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">外部类.内部类 内部类对象名 = 外部类对象.new 内部类();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">外部类.内部类 内部类对象名 = 外部类对象.new 内部类();</div></pre></td></tr></table></figure>
 </li>
 <li><p>如果内部类是静态的，使用如下语法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">外部类.内部类 内部类对象名 = <span class="keyword">new</span> 外部类对象.内部类();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">外部类.内部类 内部类对象名 = <span class="keyword">new</span> 外部类对象.内部类();</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -483,29 +483,31 @@ window.onload = function(){
 
                 <!-- Post Comments -->
                 
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css" type="text/css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-        <div class="ds-thread" 
-            data-thread-key="2016/01/26/Java学习总结-第六章-对象和类/" 
-            data-url="http://www.whtis.com//2016/01/26/Java学习总结-第六章-对象和类/index.html"
-            data-title="Java学习总结--第六章 对象和类"></div>
-    <!-- 多说评论框 end -->
-</div>
 
 
+    <!-- 使用 DISQUS -->
+	<div id="disqus-comment">
+		<div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+
+	(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = '//whtis.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+	})();
+</script>
+	</div>
+	<style>
+		#disqus-comment{
+			background-color:#eee;
+			padding:2pc;
+		}
+	</style>
 
             </div>
 
@@ -615,7 +617,7 @@ window.onload = function(){
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
         </ul>
     </li>
 
@@ -648,7 +650,7 @@ window.onload = function(){
     <li>
         <a href="/archives">
              文章总数
-             <span class="sidebar-badge">37</span>
+             <span class="sidebar-badge">38</span>
         </a>
     </li>
 </ul>
@@ -789,8 +791,8 @@ It will not impact the appearance and can give developers a lot of support :)
 </footer>
                 
 				<!-- Import File -->
-<script src="/js/js.min.js" type="text/javascript"></script>
-<script src="/js/nprogress.js" type="text/javascript"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
 
 <script type="text/javascript">
     NProgress.configure({
@@ -816,7 +818,7 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 
-	<script src="/js/smoothscroll.js" type="text/javascript"></script>
+	<script src="/js/smoothscroll.js"></script>
 
 
 
@@ -827,21 +829,10 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"whtis"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = 'https://static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] 
-             || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-    </script>
-    <!-- 多说公共 js 代码 end -->
 
 
+    <!-- 使用 DISQUS js 代码 -->
+	<script id="dsq-count-scr" src="//whtis.disqus.com/count.js" async></script>
 
 
 <!-- Swiftye -->

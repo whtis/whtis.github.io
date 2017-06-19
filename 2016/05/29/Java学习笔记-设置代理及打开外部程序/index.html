@@ -52,8 +52,8 @@
     <![endif]-->
 
     <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
     <!-- Config CSS -->
 
 
@@ -150,13 +150,13 @@
         }
     </style>
 
-	<script src="/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.min.js"></script>
 
 	<!-- UC Browser Compatible-->
 	<script>
 		var agent = navigator.userAgent.toLowerCase();
 		if(agent.indexOf('ucbrowser')>0) {
-			document.write('<link rel="stylesheet" href="/css/uc.css" type="text/css">');
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
 		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
 		}
 	</script>
@@ -365,13 +365,13 @@ window.onload = function(){
 	
 		<h3 id="设置系统代理">设置系统代理</h3><ul>
 <li><p>系统设置全局代理</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.getProperties().setProperty(<span class="string">"proxySet"</span>, <span class="string">"true"</span>);</span><br><span class="line">System.getProperties().setProperty(<span class="string">"http.proxyHost"</span>, <span class="string">"ip"</span>);</span><br><span class="line">System.getProperties().setProperty(<span class="string">"http.proxyPort"</span>, port);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">System.getProperties().setProperty(<span class="string">"proxySet"</span>, <span class="string">"true"</span>);</div><div class="line">System.getProperties().setProperty(<span class="string">"http.proxyHost"</span>, <span class="string">"ip"</span>);</div><div class="line">System.getProperties().setProperty(<span class="string">"http.proxyPort"</span>, port);</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用了selenium的chrome驱动，webdriver设置代理</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">System.setProperty(<span class="string">"webdriver.chrome.driver"</span>, <span class="string">"filepath"</span>);</span><br><span class="line">String proxyIpAndPort = ip + <span class="string">":"</span> + port;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理配置</span></span><br><span class="line">DesiredCapabilities cap = <span class="keyword">new</span> DesiredCapabilities();</span><br><span class="line">org.openqa.selenium.Proxy proxy = <span class="keyword">new</span> org.openqa.selenium.Proxy();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置http、ftp、ssl代理（注：当前版本只支持所有的协议公用http协议，下述代码等同于只配置http）</span></span><br><span class="line">proxy.setHttpProxy(proxyIpAndPort)</span><br><span class="line">        .setFtpProxy(proxyIpAndPort)</span><br><span class="line">        .setSslProxy(proxyIpAndPort);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下三行是为了避免localhost和selenium driver的也使用代理，务必要加，否则无法与iedriver通讯</span></span><br><span class="line">cap.setCapability(CapabilityType.ForSeleniumServer.AVOIDING_PROXY, <span class="keyword">true</span>);</span><br><span class="line">cap.setCapability(CapabilityType.ForSeleniumServer.ONLY_PROXYING_SELENIUM_TRAFFIC, <span class="keyword">true</span>);</span><br><span class="line">System.setProperty(<span class="string">"http.nonProxyHosts"</span>, <span class="string">"localhost"</span>);</span><br><span class="line"></span><br><span class="line">cap.setCapability(CapabilityType.PROXY, proxy);</span><br><span class="line"></span><br><span class="line">WebDriver webDriver = <span class="keyword">new</span> ChromeDriver(cap);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">System.setProperty(<span class="string">"webdriver.chrome.driver"</span>, <span class="string">"filepath"</span>);</div><div class="line">String proxyIpAndPort = ip + <span class="string">":"</span> + port;</div><div class="line"></div><div class="line"><span class="comment">// 代理配置</span></div><div class="line">DesiredCapabilities cap = <span class="keyword">new</span> DesiredCapabilities();</div><div class="line">org.openqa.selenium.Proxy proxy = <span class="keyword">new</span> org.openqa.selenium.Proxy();</div><div class="line"></div><div class="line"><span class="comment">// 配置http、ftp、ssl代理（注：当前版本只支持所有的协议公用http协议，下述代码等同于只配置http）</span></div><div class="line">proxy.setHttpProxy(proxyIpAndPort)</div><div class="line">        .setFtpProxy(proxyIpAndPort)</div><div class="line">        .setSslProxy(proxyIpAndPort);</div><div class="line"></div><div class="line"><span class="comment">// 以下三行是为了避免localhost和selenium driver的也使用代理，务必要加，否则无法与iedriver通讯</span></div><div class="line">cap.setCapability(CapabilityType.ForSeleniumServer.AVOIDING_PROXY, <span class="keyword">true</span>);</div><div class="line">cap.setCapability(CapabilityType.ForSeleniumServer.ONLY_PROXYING_SELENIUM_TRAFFIC, <span class="keyword">true</span>);</div><div class="line">System.setProperty(<span class="string">"http.nonProxyHosts"</span>, <span class="string">"localhost"</span>);</div><div class="line"></div><div class="line">cap.setCapability(CapabilityType.PROXY, proxy);</div><div class="line"></div><div class="line">WebDriver webDriver = <span class="keyword">new</span> ChromeDriver(cap);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="打开外部程序">打开外部程序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Process p = Runtime.getRuntime().exec(<span class="string">"cmd command"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="打开外部程序">打开外部程序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Process p = Runtime.getRuntime().exec(<span class="string">"cmd command"</span>);</div></pre></td></tr></table></figure>
 <p><strong>如果外部程序放在一个单独的线程中执行，需要注意的是：该线程执行完并不代表着外部程序也执行完相应的任务。</strong></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
@@ -385,29 +385,31 @@ window.onload = function(){
 
                 <!-- Post Comments -->
                 
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css" type="text/css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-        <div class="ds-thread" 
-            data-thread-key="2016/05/29/Java学习笔记-设置代理及打开外部程序/" 
-            data-url="http://www.whtis.com//2016/05/29/Java学习笔记-设置代理及打开外部程序/index.html"
-            data-title="Java学习笔记--设置代理及打开外部程序"></div>
-    <!-- 多说评论框 end -->
-</div>
 
 
+    <!-- 使用 DISQUS -->
+	<div id="disqus-comment">
+		<div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+
+	(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = '//whtis.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+	})();
+</script>
+	</div>
+	<style>
+		#disqus-comment{
+			background-color:#eee;
+			padding:2pc;
+		}
+	</style>
 
             </div>
 
@@ -517,7 +519,7 @@ window.onload = function(){
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
         </ul>
     </li>
 
@@ -550,7 +552,7 @@ window.onload = function(){
     <li>
         <a href="/archives">
              文章总数
-             <span class="sidebar-badge">37</span>
+             <span class="sidebar-badge">38</span>
         </a>
     </li>
 </ul>
@@ -691,8 +693,8 @@ It will not impact the appearance and can give developers a lot of support :)
 </footer>
                 
 				<!-- Import File -->
-<script src="/js/js.min.js" type="text/javascript"></script>
-<script src="/js/nprogress.js" type="text/javascript"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
 
 <script type="text/javascript">
     NProgress.configure({
@@ -718,7 +720,7 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 
-	<script src="/js/smoothscroll.js" type="text/javascript"></script>
+	<script src="/js/smoothscroll.js"></script>
 
 
 
@@ -729,21 +731,10 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"whtis"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = 'https://static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] 
-             || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-    </script>
-    <!-- 多说公共 js 代码 end -->
 
 
+    <!-- 使用 DISQUS js 代码 -->
+	<script id="dsq-count-scr" src="//whtis.disqus.com/count.js" async></script>
 
 
 <!-- Swiftye -->

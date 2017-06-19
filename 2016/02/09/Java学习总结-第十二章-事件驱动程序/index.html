@@ -52,8 +52,8 @@
     <![endif]-->
 
     <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
     <!-- Config CSS -->
 
 
@@ -150,13 +150,13 @@
         }
     </style>
 
-	<script src="/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.min.js"></script>
 
 	<!-- UC Browser Compatible-->
 	<script>
 		var agent = navigator.userAgent.toLowerCase();
 		if(agent.indexOf('ucbrowser')>0) {
-			document.write('<link rel="stylesheet" href="/css/uc.css" type="text/css">');
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
 		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
 		}
 	</script>
@@ -390,7 +390,7 @@ window.onload = function(){
 <li>键盘事件中捕获的键都是表示字符统一码的整数，包括字母与数字键、功能键、Tab键和回车键等。它们可以分别由<code>getKeyChar()</code>和<code>getKeyCode()</code>方法获得。</li>
 <li>当击打一个统一码字符键时，就会调用<code>KeyTyped</code>处理器。<br><strong>仅有一个焦点组件能够接收KeyEvent、要使一个组件成为焦点组件，需要将属性isFocusable设置为true。</strong></li>
 </ul>
-<h3 id="定时器类Timer">定时器类Timer</h3><p>定时器类java.swing.Timer就是一个按照预定频率触发ActionEvent事件的源组件，它不是GUI组件。<br><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Timer</span>(delay, actionEvent).start();</span><br></pre></td></tr></table></figure></p>
+<h3 id="定时器类Timer">定时器类Timer</h3><p>定时器类java.swing.Timer就是一个按照预定频率触发ActionEvent事件的源组件，它不是GUI组件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new Timer(delay, actionEvent).start();</div></pre></td></tr></table></figure></p>
 <hr>
 <h2 id="复习小结">复习小结</h2><ul>
 <li>在事件处理中，忘记注册监听器是一个常见的错误。如果源对象没法通知监听器，监听器就不能响应事件。</li>
@@ -402,10 +402,10 @@ window.onload = function(){
 <li><p>习题12.7：<br>本题的难点在于所画的线需要从框架的中心开始。由于setvisible()方法才会调用paint()方法画图，在此之前，无论是JFrame还是JPanel，使用getWidth()和getHeight()方法得到的值都为0，因此需要想办法在框架画出来之后设置起始点的坐标。方法有两种：</p>
 <ul>
 <li><p>方法一：监听键盘事件的方法中，使用除功能键以外的键进行初始化设置，此方法不提倡；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">   <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">keyPressed</span><span class="params">(KeyEvent e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (e.getKeyCode()) &#123;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_UP:</span><br><span class="line">                y -= <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_DOWN:</span><br><span class="line">                y += <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_LEFT:</span><br><span class="line">                x -= <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> KeyEvent.VK_RIGHT:</span><br><span class="line">                x += <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"><span class="comment">//            default:</span></span><br><span class="line"><span class="comment">//                x = this.getWidth() / 2;</span></span><br><span class="line"><span class="comment">//                y = this.getHeight() / 2;</span></span><br><span class="line"><span class="comment">//                lineStart.move(x,y);</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">   <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">keyPressed</span><span class="params">(KeyEvent e)</span> </span>&#123;</div><div class="line">        <span class="keyword">switch</span> (e.getKeyCode()) &#123;</div><div class="line">            <span class="keyword">case</span> KeyEvent.VK_UP:</div><div class="line">                y -= <span class="number">1</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> KeyEvent.VK_DOWN:</div><div class="line">                y += <span class="number">1</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> KeyEvent.VK_LEFT:</div><div class="line">                x -= <span class="number">1</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> KeyEvent.VK_RIGHT:</div><div class="line">                x += <span class="number">1</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line"><span class="comment">//            default:</span></div><div class="line"><span class="comment">//                x = this.getWidth() / 2;</span></div><div class="line"><span class="comment">//                y = this.getHeight() / 2;</span></div><div class="line"><span class="comment">//                lineStart.move(x,y);</span></div><div class="line">        &#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>方法二：添加窗口监听事件，这样就能确保在最开始将坐标设置好。由于JPanel是不可见的，无法实现WindowListener接口，因此在JFrame实现该接口，并在相应的方法中传入正确的框架中心坐标。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $12<span class="title">_7</span> <span class="keyword">extends</span> <span class="title">JFrame</span> <span class="keyword">implements</span> <span class="title">WindowListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> $<span class="number">12_7</span>() <span class="keyword">throws</span> HeadlessException &#123;</span><br><span class="line">      <span class="keyword">this</span>.addWindowListener(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowActivated</span><span class="params">(WindowEvent e)</span> </span>&#123;</span><br><span class="line">      PaintPanel p = <span class="keyword">new</span> PaintPanel(<span class="keyword">this</span>.getWidth() / <span class="number">2</span>, <span class="keyword">this</span>.getHeight() / <span class="number">2</span>);</span><br><span class="line">      <span class="keyword">this</span>.getContentPane().add(p);</span><br><span class="line">      p.setFocusable(<span class="keyword">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $12<span class="title">_7</span> <span class="keyword">extends</span> <span class="title">JFrame</span> <span class="keyword">implements</span> <span class="title">WindowListener</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> $<span class="number">12_7</span>() <span class="keyword">throws</span> HeadlessException &#123;</div><div class="line">      <span class="keyword">this</span>.addWindowListener(<span class="keyword">this</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowActivated</span><span class="params">(WindowEvent e)</span> </span>&#123;</div><div class="line">      PaintPanel p = <span class="keyword">new</span> PaintPanel(<span class="keyword">this</span>.getWidth() / <span class="number">2</span>, <span class="keyword">this</span>.getHeight() / <span class="number">2</span>);</div><div class="line">      <span class="keyword">this</span>.getContentPane().add(p);</div><div class="line">      p.setFocusable(<span class="keyword">true</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -424,29 +424,31 @@ window.onload = function(){
 
                 <!-- Post Comments -->
                 
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css" type="text/css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-        <div class="ds-thread" 
-            data-thread-key="2016/02/09/Java学习总结-第十二章-事件驱动程序/" 
-            data-url="http://www.whtis.com//2016/02/09/Java学习总结-第十二章-事件驱动程序/index.html"
-            data-title="Java学习总结--第十二章 事件驱动程序"></div>
-    <!-- 多说评论框 end -->
-</div>
 
 
+    <!-- 使用 DISQUS -->
+	<div id="disqus-comment">
+		<div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+
+	(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = '//whtis.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+	})();
+</script>
+	</div>
+	<style>
+		#disqus-comment{
+			background-color:#eee;
+			padding:2pc;
+		}
+	</style>
 
             </div>
 
@@ -556,7 +558,7 @@ window.onload = function(){
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
         </ul>
     </li>
 
@@ -589,7 +591,7 @@ window.onload = function(){
     <li>
         <a href="/archives">
              文章总数
-             <span class="sidebar-badge">37</span>
+             <span class="sidebar-badge">38</span>
         </a>
     </li>
 </ul>
@@ -730,8 +732,8 @@ It will not impact the appearance and can give developers a lot of support :)
 </footer>
                 
 				<!-- Import File -->
-<script src="/js/js.min.js" type="text/javascript"></script>
-<script src="/js/nprogress.js" type="text/javascript"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
 
 <script type="text/javascript">
     NProgress.configure({
@@ -757,7 +759,7 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 
-	<script src="/js/smoothscroll.js" type="text/javascript"></script>
+	<script src="/js/smoothscroll.js"></script>
 
 
 
@@ -768,21 +770,10 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"whtis"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = 'https://static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] 
-             || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-    </script>
-    <!-- 多说公共 js 代码 end -->
 
 
+    <!-- 使用 DISQUS js 代码 -->
+	<script id="dsq-count-scr" src="//whtis.disqus.com/count.js" async></script>
 
 
 <!-- Swiftye -->

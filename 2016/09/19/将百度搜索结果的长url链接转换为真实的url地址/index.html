@@ -52,8 +52,8 @@
     <![endif]-->
 
     <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
     <!-- Config CSS -->
 
 
@@ -150,13 +150,13 @@
         }
     </style>
 
-	<script src="/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.min.js"></script>
 
 	<!-- UC Browser Compatible-->
 	<script>
 		var agent = navigator.userAgent.toLowerCase();
 		if(agent.indexOf('ucbrowser')>0) {
-			document.write('<link rel="stylesheet" href="/css/uc.css" type="text/css">');
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
 		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
 		}
 	</script>
@@ -370,7 +370,7 @@ window.onload = function(){
 <li>原因：百度为什么要实行加密跳转，网上有很多有意思的文章，感兴趣可以看看。这里仅从技术角度进行说明。<br><br>百度的这种跳转采用的是302重定向。虽然有时候状态码不是302，但原理差不多一样：当你点击了百度的加密链接后，会向百度内部的服务器发送请求，这个时候服务器会根据你提交的百度链接使用重定向技术自动跳转到相应的真实url。</li>
 </ul>
 <h3 id="拿到真实的URL链接">拿到真实的URL链接</h3><p>网上有很多博客都提到过这事，既然知道了302跳转的原理，那么可以采用这种思路拿到真实的URL：模拟一个请求，在百度服务器进行重定向的时候获得重定向的地址即可。<br><br>原理很简单，但是我在网上找了很多，基本都是互相抄，抄的代码怎么说呢，用的工具都是httpclient，但是都是httpclient已经废弃的方法，虽然不报错，但是没法实现这功能了。所以这也告诉我们写博客的人，一定要注明自己的代码基于的是哪个版本的工具，虽然这只是一点小事，但却能让自己和他人节约很多时间。<br><br>下面上代码：</p>
-<p><strong>使用版本：httpclient 4.3.3</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getRealUrl</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String realUrl = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">        HttpClient client = HttpClientBuilder.create().build();</span><br><span class="line">        RequestConfig config = RequestConfig.custom()</span><br><span class="line">        <span class="comment">//禁止自动重定向</span></span><br><span class="line">                .setRedirectsEnabled(<span class="keyword">false</span>)</span><br><span class="line">                .build();</span><br><span class="line"><span class="comment">//302跳转</span></span><br><span class="line">        HttpGet get = <span class="keyword">new</span> HttpGet(url);</span><br><span class="line">        get.setConfig(config);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="comment">//对url进行utf-8解码</span></span><br><span class="line">            url = URLDecoder.decode(url, <span class="string">"utf-8"</span>);</span><br><span class="line">            HttpResponse rs = client.execute(get);</span><br><span class="line">            Header h = rs.getFirstHeader(<span class="string">"Location"</span>);</span><br><span class="line">            realUrl = h.getValue().trim();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printstacktrace();</span><br><span class="line">            <span class="keyword">return</span> url;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (realUrl.equals(<span class="string">""</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> url;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> realUrl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>使用版本：httpclient 4.3.3</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getRealUrl</span><span class="params">(String url)</span> </span>&#123;</div><div class="line"></div><div class="line">        String realUrl = <span class="string">""</span>;</div><div class="line"></div><div class="line">        HttpClient client = HttpClientBuilder.create().build();</div><div class="line">        RequestConfig config = RequestConfig.custom()</div><div class="line">        <span class="comment">//禁止自动重定向</span></div><div class="line">                .setRedirectsEnabled(<span class="keyword">false</span>)</div><div class="line">                .build();</div><div class="line"><span class="comment">//302跳转</span></div><div class="line">        HttpGet get = <span class="keyword">new</span> HttpGet(url);</div><div class="line">        get.setConfig(config);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">          <span class="comment">//对url进行utf-8解码</span></div><div class="line">            url = URLDecoder.decode(url, <span class="string">"utf-8"</span>);</div><div class="line">            HttpResponse rs = client.execute(get);</div><div class="line">            Header h = rs.getFirstHeader(<span class="string">"Location"</span>);</div><div class="line">            realUrl = h.getValue().trim();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printstacktrace();</div><div class="line">            <span class="keyword">return</span> url;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (realUrl.equals(<span class="string">""</span>)) &#123;</div><div class="line">            <span class="keyword">return</span> url;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> realUrl;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
 
@@ -384,29 +384,31 @@ window.onload = function(){
 
                 <!-- Post Comments -->
                 
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css" type="text/css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-        <div class="ds-thread" 
-            data-thread-key="2016/09/19/将百度搜索结果的长url链接转换为真实的url地址/" 
-            data-url="http://www.whtis.com//2016/09/19/将百度搜索结果的长url链接转换为真实的url地址/index.html"
-            data-title="将百度搜索结果的长url链接转换为真实的url地址"></div>
-    <!-- 多说评论框 end -->
-</div>
 
 
+    <!-- 使用 DISQUS -->
+	<div id="disqus-comment">
+		<div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+
+	(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = '//whtis.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+	})();
+</script>
+	</div>
+	<style>
+		#disqus-comment{
+			background-color:#eee;
+			padding:2pc;
+		}
+	</style>
 
             </div>
 
@@ -516,7 +518,7 @@ window.onload = function(){
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
         </ul>
     </li>
 
@@ -549,7 +551,7 @@ window.onload = function(){
     <li>
         <a href="/archives">
              文章总数
-             <span class="sidebar-badge">37</span>
+             <span class="sidebar-badge">38</span>
         </a>
     </li>
 </ul>
@@ -690,8 +692,8 @@ It will not impact the appearance and can give developers a lot of support :)
 </footer>
                 
 				<!-- Import File -->
-<script src="/js/js.min.js" type="text/javascript"></script>
-<script src="/js/nprogress.js" type="text/javascript"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
 
 <script type="text/javascript">
     NProgress.configure({
@@ -717,7 +719,7 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 
-	<script src="/js/smoothscroll.js" type="text/javascript"></script>
+	<script src="/js/smoothscroll.js"></script>
 
 
 
@@ -728,21 +730,10 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"whtis"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = 'https://static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] 
-             || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-    </script>
-    <!-- 多说公共 js 代码 end -->
 
 
+    <!-- 使用 DISQUS js 代码 -->
+	<script id="dsq-count-scr" src="//whtis.disqus.com/count.js" async></script>
 
 
 <!-- Swiftye -->

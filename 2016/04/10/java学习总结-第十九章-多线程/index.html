@@ -52,8 +52,8 @@
     <![endif]-->
 
     <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
     <!-- Config CSS -->
 
 
@@ -150,13 +150,13 @@
         }
     </style>
 
-	<script src="/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.min.js"></script>
 
 	<!-- UC Browser Compatible-->
 	<script>
 		var agent = navigator.userAgent.toLowerCase();
 		if(agent.indexOf('ucbrowser')>0) {
-			document.write('<link rel="stylesheet" href="/css/uc.css" type="text/css">');
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
 		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
 		}
 	</script>
@@ -372,13 +372,13 @@ window.onload = function(){
 <li>Java对多线程程序的开发和运行提供了非常好的支持，包括锁定资源以避免冲突。</li>
 <li>每个新线程都是一个对象，它的类实现<code>Runnable</code>接口或者扩展实现了<code>Runnable</code>接口，这种新对象称为<code>可运行对象（runnable object）</code>。</li>
 </ul>
-<h3 id="创建线程的两种方式">创建线程的两种方式</h3><h4 id="扩展Thread类创建线程">扩展Thread类创建线程</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//do something</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="创建线程的两种方式">创建线程的两种方式</h3><h4 id="扩展Thread类创建线程">扩展Thread类创建线程</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">	<span class="meta">@override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//do something</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="实现runnable接口创建线程">实现runnable接口创建线程</h4><ul>
 <li><p>实现接口：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RunnThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> run &#123;</span><br><span class="line">		<span class="comment">//do something</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RunnThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">	<span class="meta">@override</span></div><div class="line">	<span class="keyword">public</span> <span class="keyword">void</span> run &#123;</div><div class="line">		<span class="comment">//do something</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>创建线程：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> RunnThread());</span><br><span class="line">t.start();</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> RunnThread());</div><div class="line">t.start();</div></pre></td></tr></table></figure>
 </li>
 <li><p>如果用户线程要实现多继承，应该选择实现Runnable接口这种方式。</p>
 </li>
@@ -419,7 +419,7 @@ window.onload = function(){
 <li>一个<code>线程组（thread group）</code>是线程的一个集合。可以同时对一个线程组进行唤醒和挂起操作。</li>
 <li>可以把一个线程组添加到另一个线程组，构成一个树形结构，除了起始组以外，树中的每个线程组都有一个父线程组。</li>
 <li>每个线程都属于一个线程组。</li>
-<li>线程组的创建：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ThreadGroup g = <span class="keyword">new</span> ThreadGroup(<span class="string">"thread group"</span>);  <span class="comment">//组名必须是唯一的字符串</span></span><br><span class="line">Thread t = <span class="keyword">new</span> Thread(g,<span class="keyword">new</span> ThreadClass(),<span class="string">"label for the thread"</span>);</span><br></pre></td></tr></table></figure>
+<li>线程组的创建：  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ThreadGroup g = <span class="keyword">new</span> ThreadGroup(<span class="string">"thread group"</span>);  <span class="comment">//组名必须是唯一的字符串</span></div><div class="line">Thread t = <span class="keyword">new</span> Thread(g,<span class="keyword">new</span> ThreadClass(),<span class="string">"label for the thread"</span>);</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><strong>线程组里的线程必须分别启动</strong></p>
@@ -431,14 +431,14 @@ window.onload = function(){
 </ul>
 <h4 id="同步语句">同步语句</h4><ul>
 <li><p>当执行方法中某一个代码块（也成为体）时，同步语句不仅仅可以用于获准给该对象加锁，而且可以用于要求对任何对象加锁。这个代码块称为<code>同步块（synchronized block）</code>。</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (expr) &#123;  <span class="comment">//表达式expr必须能求出对象的引用</span></span><br><span class="line">	语句组；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">synchronized</span> (expr) &#123;  <span class="comment">//表达式expr必须能求出对象的引用</span></div><div class="line">	语句组；</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>同步语句允许对任何对象加锁，所以可以同步地访问一个对象而不仅仅是一个方法。</p>
 </li>
 <li><p>任何同步的实例方法都可以转化为同步语句。</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">xMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//方法体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">xMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">//方法体</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上述代码等价于：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">		<span class="comment">//方法体</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">		<span class="comment">//方法体</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="线程之间的协作">线程之间的协作</h4><ul>
@@ -461,11 +461,11 @@ window.onload = function(){
 <li><p>习题19.2 19.3 19.4 19.6 19.7 19.8 19.9 19.11源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter19/src" target="_blank" rel="external">chapter19</a></p>
 </li>
 <li><p>习题19.7要求使用同步集合解决习题19.6多线程出现异常java.util.ConcurrentModificationException的问题。当完成这个题并且多次执行时，会出现下面这个问题，暂时不知道是否是错误：<br>向规则集添加数字时使用如下语句：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashSet.add(((<span class="keyword">int</span>) (Math.random() * <span class="number">10</span>)) + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hashSet.add(((<span class="keyword">int</span>) (Math.random() * <span class="number">10</span>)) + <span class="number">1</span>);</div></pre></td></tr></table></figure>
 <p>  控制台输出为以下结果：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line">Thread-<span class="number">0</span></span><br><span class="line">Thread-<span class="number">1</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">Thread-<span class="number">0</span></div><div class="line">Thread-<span class="number">1</span></div><div class="line"><span class="number">7</span></div><div class="line">Thread-<span class="number">0</span></div><div class="line">Thread-<span class="number">1</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">7</span></div><div class="line">Thread-<span class="number">0</span></div><div class="line">Thread-<span class="number">1</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">7</span></div><div class="line">Thread-<span class="number">0</span></div><div class="line">Thread-<span class="number">1</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">7</span></div><div class="line"><span class="number">8</span></div><div class="line">Thread-<span class="number">0</span></div><div class="line">Thread-<span class="number">1</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">7</span></div><div class="line"><span class="number">8</span></div><div class="line">Thread-<span class="number">0</span></div><div class="line">Thread-<span class="number">1</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">4</span></div><div class="line"><span class="number">7</span></div><div class="line"><span class="number">8</span></div><div class="line">Thread-<span class="number">0</span></div><div class="line">Thread-<span class="number">1</span></div><div class="line">...</div></pre></td></tr></table></figure>
 <p>也就是说，随机数在规则集内被重新排序了，并且在使用迭代算子遍历时被打印到控制台。排序的原因猜测是同步规则集的方法导致的：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collections.synchronizedSet(hashSet);</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Collections.synchronizedSet(hashSet);</div></pre></td></tr></table></figure>
 </li>
 <li><p>习题19.9要求写一个死锁程序，形成死锁的条件如下：</p>
 <ul>
@@ -487,7 +487,7 @@ window.onload = function(){
 </li>
 </ul>
 <p>根据这个原则，代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $19<span class="title">_9</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      DeadThread t1 = <span class="keyword">new</span> DeadThread();</span><br><span class="line">      DeadThread t2 = <span class="keyword">new</span> DeadThread();</span><br><span class="line">      t1.flag = <span class="number">0</span>;</span><br><span class="line">      t2.flag = <span class="number">1</span>;</span><br><span class="line">      t1.start();</span><br><span class="line">      t2.start();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line">  * 线程1锁定o1后休眠1s，使得有机会执行线程2，线程2锁定o2后，等待线程1释放o1，线程1此时锁定了o1，等待线程2</span><br><span class="line">  * 释放o2，形成死锁。</span><br><span class="line">  *</span><br><span class="line">*/</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DeadThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> Object o1 = <span class="keyword">new</span> Object(), o2 = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (flag==<span class="number">0</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"flag="</span> + flag);</span><br><span class="line">          <span class="keyword">synchronized</span> (o1) &#123;</span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                  Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                  e.printStackTrace();</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">synchronized</span> (o2) &#123;</span><br><span class="line">                  System.out.println(<span class="string">"o2 locked"</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (flag==<span class="number">1</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"flag="</span> + flag);</span><br><span class="line">          <span class="keyword">synchronized</span> (o2) &#123;</span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                  Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                  e.printStackTrace();</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">synchronized</span> (o1) &#123;</span><br><span class="line">                  System.out.println(<span class="string">"o2 locked"</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> $19<span class="title">_9</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      DeadThread t1 = <span class="keyword">new</span> DeadThread();</div><div class="line">      DeadThread t2 = <span class="keyword">new</span> DeadThread();</div><div class="line">      t1.flag = <span class="number">0</span>;</div><div class="line">      t2.flag = <span class="number">1</span>;</div><div class="line">      t1.start();</div><div class="line">      t2.start();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line">  * 线程1锁定o1后休眠1s，使得有机会执行线程2，线程2锁定o2后，等待线程1释放o1，线程1此时锁定了o1，等待线程2</div><div class="line">  * 释放o2，形成死锁。</div><div class="line">  *</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DeadThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> flag = <span class="number">0</span>;</div><div class="line"></div><div class="line">  <span class="keyword">static</span> Object o1 = <span class="keyword">new</span> Object(), o2 = <span class="keyword">new</span> Object();</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">if</span> (flag==<span class="number">0</span>) &#123;</div><div class="line">          System.out.println(<span class="string">"flag="</span> + flag);</div><div class="line">          <span class="keyword">synchronized</span> (o1) &#123;</div><div class="line">              <span class="keyword">try</span> &#123;</div><div class="line">                  Thread.sleep(<span class="number">1000</span>);</div><div class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                  e.printStackTrace();</div><div class="line">              &#125;</div><div class="line">              <span class="keyword">synchronized</span> (o2) &#123;</div><div class="line">                  System.out.println(<span class="string">"o2 locked"</span>);</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span> (flag==<span class="number">1</span>) &#123;</div><div class="line">          System.out.println(<span class="string">"flag="</span> + flag);</div><div class="line">          <span class="keyword">synchronized</span> (o2) &#123;</div><div class="line">              <span class="keyword">try</span> &#123;</div><div class="line">                  Thread.sleep(<span class="number">1000</span>);</div><div class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                  e.printStackTrace();</div><div class="line">              &#125;</div><div class="line">              <span class="keyword">synchronized</span> (o1) &#123;</div><div class="line">                  System.out.println(<span class="string">"o2 locked"</span>);</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <hr>
@@ -502,29 +502,31 @@ window.onload = function(){
 
                 <!-- Post Comments -->
                 
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css" type="text/css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-        <div class="ds-thread" 
-            data-thread-key="2016/04/10/java学习总结-第十九章-多线程/" 
-            data-url="http://www.whtis.com//2016/04/10/java学习总结-第十九章-多线程/index.html"
-            data-title="java学习总结-第十九章 多线程"></div>
-    <!-- 多说评论框 end -->
-</div>
 
 
+    <!-- 使用 DISQUS -->
+	<div id="disqus-comment">
+		<div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+
+	(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = '//whtis.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+	})();
+</script>
+	</div>
+	<style>
+		#disqus-comment{
+			background-color:#eee;
+			padding:2pc;
+		}
+	</style>
 
             </div>
 
@@ -634,7 +636,7 @@ window.onload = function(){
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
         </ul>
     </li>
 
@@ -667,7 +669,7 @@ window.onload = function(){
     <li>
         <a href="/archives">
              文章总数
-             <span class="sidebar-badge">37</span>
+             <span class="sidebar-badge">38</span>
         </a>
     </li>
 </ul>
@@ -808,8 +810,8 @@ It will not impact the appearance and can give developers a lot of support :)
 </footer>
                 
 				<!-- Import File -->
-<script src="/js/js.min.js" type="text/javascript"></script>
-<script src="/js/nprogress.js" type="text/javascript"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
 
 <script type="text/javascript">
     NProgress.configure({
@@ -835,7 +837,7 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 
-	<script src="/js/smoothscroll.js" type="text/javascript"></script>
+	<script src="/js/smoothscroll.js"></script>
 
 
 
@@ -846,21 +848,10 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"whtis"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = 'https://static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] 
-             || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-    </script>
-    <!-- 多说公共 js 代码 end -->
 
 
+    <!-- 使用 DISQUS js 代码 -->
+	<script id="dsq-count-scr" src="//whtis.disqus.com/count.js" async></script>
 
 
 <!-- Swiftye -->

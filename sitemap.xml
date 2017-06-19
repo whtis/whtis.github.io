@@ -2,13 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.whtis.com/2017/04/08/ubuntu16-04%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E6%96%87%E4%BB%B6-etc-shadow%E5%90%8E%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2017-04-08T08:55:00.633Z</lastmod>
+    <loc>http://www.whtis.com/2017/06/19/%E4%BD%BF%E7%94%A8ubuntu%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88/</loc>
+    <lastmod>2017-06-19T06:50:37.738Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/2017/06/17/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/</loc>
+    <lastmod>2017-06-19T03:23:10.826Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/2016/09/19/%E5%B0%86%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C%E7%9A%84%E9%95%BFurl%E9%93%BE%E6%8E%A5%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%9C%9F%E5%AE%9E%E7%9A%84url%E5%9C%B0%E5%9D%80/</loc>
+    <lastmod>2017-06-19T01:58:49.320Z</lastmod>
   </url>
   
   <url>
     <loc>http://www.whtis.com/2017/03/23/%E4%B8%80%E4%B8%AA%E5%8F%AF%E4%BB%A5%E9%93%BE%E5%BC%8F%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E7%9A%84%E7%B1%BB/</loc>
-    <lastmod>2017-03-23T10:05:49.678Z</lastmod>
+    <lastmod>2017-06-19T01:58:35.603Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/2015/10/29/ubuntu14-04%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85wordpress%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2017-04-08T09:00:02.672Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/2017/04/08/ubuntu16-04%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E6%96%87%E4%BB%B6-etc-shadow%E5%90%8E%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2017-04-08T08:55:00.633Z</lastmod>
   </url>
   
   <url>
@@ -17,23 +37,8 @@
   </url>
   
   <url>
-    <loc>http://www.whtis.com/2016/09/19/%E5%B0%86%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C%E7%9A%84%E9%95%BFurl%E9%93%BE%E6%8E%A5%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%9C%9F%E5%AE%9E%E7%9A%84url%E5%9C%B0%E5%9D%80/</loc>
-    <lastmod>2017-02-09T14:45:49.696Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://www.whtis.com/2016/11/20/hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98-material%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2016-11-20T13:21:22.658Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.whtis.com/2017/01/28/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/</loc>
-    <lastmod>2016-11-06T16:22:51.222Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.whtis.com/2015/10/29/ubuntu14-04%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85wordpress%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2016-09-14T15:50:42.931Z</lastmod>
   </url>
   
   <url>

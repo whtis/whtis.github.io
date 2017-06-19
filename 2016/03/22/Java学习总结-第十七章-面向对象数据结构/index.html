@@ -52,8 +52,8 @@
     <![endif]-->
 
     <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
     <!-- Config CSS -->
 
 
@@ -150,13 +150,13 @@
         }
     </style>
 
-	<script src="/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.min.js"></script>
 
 	<!-- UC Browser Compatible-->
 	<script>
 		var agent = navigator.userAgent.toLowerCase();
 		if(agent.indexOf('ucbrowser')>0) {
-			document.write('<link rel="stylesheet" href="/css/uc.css" type="text/css">');
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
 		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
 		}
 	</script>
@@ -375,7 +375,7 @@ window.onload = function(){
 </li>
 <li>链表<ul>
 <li>由数据创建的线性表，在特定位置进行插入和删除操作效率是很低的，因此可以采用链表结构来提高效率。</li>
-<li>链表的遍历：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Node temp = first;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++) &#123;</span><br><span class="line">     temp = temp.next;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<li>链表的遍历：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Node temp = first;</div><div class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++) &#123;</div><div class="line">     temp = temp.next;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -391,13 +391,13 @@ window.onload = function(){
 </ul>
 <h4 id="二叉树的遍历">二叉树的遍历</h4><ul>
 <li><p><code>中序遍历（inorder）:</code>首先访问当前结点的左子树，然后访问当前结点，最后访问该结点的右子树。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       inorder(root.left);</span><br><span class="line">       System.out.print(root.element + <span class="string">" "</span>);</span><br><span class="line">       inorder(root.right);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode root)</span> </span>&#123;</div><div class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</div><div class="line">           <span class="keyword">return</span>;</div><div class="line">       &#125;</div><div class="line">       inorder(root.left);</div><div class="line">       System.out.print(root.element + <span class="string">" "</span>);</div><div class="line">       inorder(root.right);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>后序遍历（postorder）：</code>首先访问当前结点的左子树，然后访问该结点的右子树，最后访问该结点。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">postorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (root==<span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">       postorder(root.left);</span><br><span class="line">       postorder(root.right);</span><br><span class="line">       System.out.print(root.element + <span class="string">" "</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">postorder</span><span class="params">(TreeNode root)</span> </span>&#123;</div><div class="line">       <span class="keyword">if</span> (root==<span class="keyword">null</span>) <span class="keyword">return</span>;</div><div class="line">       postorder(root.left);</div><div class="line">       postorder(root.right);</div><div class="line">       System.out.print(root.element + <span class="string">" "</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>前序遍历（preorder）：</code>首先访问当前结点，然后访问该结点的左子树，最后访问该结点的右子树。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">preorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">       System.out.print(root.element + <span class="string">" "</span>);</span><br><span class="line">       preorder(root.left);</span><br><span class="line">       preorder(root.right);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">preorder</span><span class="params">(TreeNode root)</span> </span>&#123;</div><div class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</div><div class="line">       System.out.print(root.element + <span class="string">" "</span>);</div><div class="line">       preorder(root.left);</div><div class="line">       preorder(root.right);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>深度优先遍历（depth-first）：</code>与前序遍历相同。</p>
 </li>
@@ -410,12 +410,12 @@ window.onload = function(){
 <hr>
 <h2 id="编程练习">编程练习</h2><ul>
 <li>习题17.1、17.2、17.3、17.6源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter17/src" target="_blank" rel="external">chapter17</a></li>
-<li>写双向链表时，在执行下列方法：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    TreeNode current = first;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; index; i++) &#123;</span><br><span class="line">        current = current.next;</span><br><span class="line">    &#125;</span><br><span class="line">    TreeNode target = current.next;</span><br><span class="line">    target.pravious.next = target.next;</span><br><span class="line">    target.next.pravious = target.pravious;</span><br><span class="line">    size--;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>写双向链表时，在执行下列方法：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">    TreeNode current = first;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; index; i++) &#123;</div><div class="line">        current = current.next;</div><div class="line">    &#125;</div><div class="line">    TreeNode target = current.next;</div><div class="line">    target.pravious.next = target.next;</div><div class="line">    target.next.pravious = target.pravious;</div><div class="line">    size--;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>执行到第7行语句时：list的状态是<code>Method threw &#39;java.lang.NullPointerException&#39; exception. Cannot evaluate _17_3.DoubleLinkedList.toString()</code>,但是整个方法执行完后，不会报错，原因暂时不知道。</p>
 <ul>
-<li>习题17.6中需要写一个方法，返回二叉树的深度，深度是指二叉树最长路径的结点个数。代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">treeDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> left = treeDepth(root.left);</span><br><span class="line">    <span class="keyword">int</span> right = treeDepth(root.right);</span><br><span class="line">    <span class="keyword">return</span> left &gt; right ? (left + <span class="number">1</span>) : (right + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>习题17.6中需要写一个方法，返回二叉树的深度，深度是指二叉树最长路径的结点个数。代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">treeDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> left = treeDepth(root.left);</div><div class="line">    <span class="keyword">int</span> right = treeDepth(root.right);</div><div class="line">    <span class="keyword">return</span> left &gt; right ? (left + <span class="number">1</span>) : (right + <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <hr>
@@ -430,29 +430,31 @@ window.onload = function(){
 
                 <!-- Post Comments -->
                 
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css" type="text/css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-        <div class="ds-thread" 
-            data-thread-key="2016/03/22/Java学习总结-第十七章-面向对象数据结构/" 
-            data-url="http://www.whtis.com//2016/03/22/Java学习总结-第十七章-面向对象数据结构/index.html"
-            data-title="Java学习总结-第十七章 面向对象数据结构"></div>
-    <!-- 多说评论框 end -->
-</div>
 
 
+    <!-- 使用 DISQUS -->
+	<div id="disqus-comment">
+		<div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+
+	(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = '//whtis.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+	})();
+</script>
+	</div>
+	<style>
+		#disqus-comment{
+			background-color:#eee;
+			padding:2pc;
+		}
+	</style>
 
             </div>
 
@@ -562,7 +564,7 @@ window.onload = function(){
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
         </ul>
     </li>
 
@@ -595,7 +597,7 @@ window.onload = function(){
     <li>
         <a href="/archives">
              文章总数
-             <span class="sidebar-badge">37</span>
+             <span class="sidebar-badge">38</span>
         </a>
     </li>
 </ul>
@@ -736,8 +738,8 @@ It will not impact the appearance and can give developers a lot of support :)
 </footer>
                 
 				<!-- Import File -->
-<script src="/js/js.min.js" type="text/javascript"></script>
-<script src="/js/nprogress.js" type="text/javascript"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
 
 <script type="text/javascript">
     NProgress.configure({
@@ -763,7 +765,7 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 
-	<script src="/js/smoothscroll.js" type="text/javascript"></script>
+	<script src="/js/smoothscroll.js"></script>
 
 
 
@@ -774,21 +776,10 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"whtis"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = 'https://static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] 
-             || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-    </script>
-    <!-- 多说公共 js 代码 end -->
 
 
+    <!-- 使用 DISQUS js 代码 -->
+	<script id="dsq-count-scr" src="//whtis.disqus.com/count.js" async></script>
 
 
 <!-- Swiftye -->

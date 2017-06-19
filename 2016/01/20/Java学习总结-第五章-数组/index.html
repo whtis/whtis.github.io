@@ -52,8 +52,8 @@
     <![endif]-->
 
     <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
     <!-- Config CSS -->
 
 
@@ -150,13 +150,13 @@
         }
     </style>
 
-	<script src="/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.min.js"></script>
 
 	<!-- UC Browser Compatible-->
 	<script>
 		var agent = navigator.userAgent.toLowerCase();
 		if(agent.indexOf('ucbrowser')>0) {
-			document.write('<link rel="stylesheet" href="/css/uc.css" type="text/css">');
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
 		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
 		}
 	</script>
@@ -370,7 +370,7 @@ window.onload = function(){
 <li>声明数组： 数据类型[] 数组名</li>
 <li>数组创建后，数组元素通过下标来访问。数组下标是<code>基于0的（0-based）</code>，因此数组的下表最大值是arrayObject.length-1。</li>
 <li><p>增强的for循环可以在不用下标变量的情况下访问整个数组，用法如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(elementType value:arrayRefVar) &#123;</span><br><span class="line">   <span class="comment">//process the value  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(elementType value:arrayRefVar) &#123;</div><div class="line">   <span class="comment">//process the value  </span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>数组初始化：数据类型[] 数组变量 = {直接量1，直接量2，···，直接量n}；<br>数组初始化语句中不使用运算符new。使用时，必须将声明、创建、初始化数组都放在一个语句中。</p>
 </li>
@@ -391,22 +391,22 @@ window.onload = function(){
 </ul>
 <h3 id="数组的查找">数组的查找</h3><ul>
 <li><p>线性查找</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">listSearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lists.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (lists[i] == key) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">listSearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lists.length; i++) &#123;</div><div class="line">            <span class="keyword">if</span> (lists[i] == key) &#123;</div><div class="line">                <span class="keyword">return</span> i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>二分法查找：前提是数组元素必须已经排序。</p>
 <ul>
 <li><p>二分法的迭代实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">          <span class="keyword">if</span> (key == lists[(high + low) / <span class="number">2</span>]) &#123;</span><br><span class="line">              <span class="keyword">return</span> (high + low) / <span class="number">2</span>;</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key &gt; lists[(high + low) / <span class="number">2</span>]) &#123;</span><br><span class="line">              low = ((high + low) / <span class="number">2</span>) + <span class="number">1</span>;</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; lists[(high + low) / <span class="number">2</span>]) &#123;</span><br><span class="line">              high = ((high + low) / <span class="number">2</span>) - <span class="number">1</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> -low - <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</div><div class="line">      <span class="keyword">while</span> (low &lt;= high) &#123;</div><div class="line">          <span class="keyword">if</span> (key == lists[(high + low) / <span class="number">2</span>]) &#123;</div><div class="line">              <span class="keyword">return</span> (high + low) / <span class="number">2</span>;</div><div class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key &gt; lists[(high + low) / <span class="number">2</span>]) &#123;</div><div class="line">              low = ((high + low) / <span class="number">2</span>) + <span class="number">1</span>;</div><div class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; lists[(high + low) / <span class="number">2</span>]) &#123;</div><div class="line">              high = ((high + low) / <span class="number">2</span>) - <span class="number">1</span>;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> -low - <span class="number">1</span>;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>二分法的递归实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">recursiveBinarySearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (low &gt; high) &#123;</span><br><span class="line">          <span class="keyword">return</span> -low - <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">int</span> mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">      <span class="keyword">if</span> (key &lt; lists[mid]) &#123;</span><br><span class="line">          <span class="keyword">return</span> recursiveBinarySearch(lists, key, low, mid - <span class="number">1</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key == lists[mid]) &#123;</span><br><span class="line">          <span class="keyword">return</span> mid;</span><br><span class="line">      &#125; <span class="keyword">else</span></span><br><span class="line">          <span class="keyword">return</span> recursiveBinarySearch(lists, key, mid + <span class="number">1</span>, high);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">recursiveBinarySearch</span><span class="params">(<span class="keyword">int</span>[] lists, <span class="keyword">int</span> key, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</div><div class="line">      <span class="keyword">if</span> (low &gt; high) &#123;</div><div class="line">          <span class="keyword">return</span> -low - <span class="number">1</span>;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">int</span> mid = (low + high) / <span class="number">2</span>;</div><div class="line">      <span class="keyword">if</span> (key &lt; lists[mid]) &#123;</div><div class="line">          <span class="keyword">return</span> recursiveBinarySearch(lists, key, low, mid - <span class="number">1</span>);</div><div class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key == lists[mid]) &#123;</div><div class="line">          <span class="keyword">return</span> mid;</div><div class="line">      &#125; <span class="keyword">else</span></div><div class="line">          <span class="keyword">return</span> recursiveBinarySearch(lists, key, mid + <span class="number">1</span>, high);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 </ul>
 <h3 id="多维数组">多维数组</h3><ul>
 <li>声明：数据类型[][] 数组引用变量<br>-数组的长度：数组的长度是指数组中元素的个数。<code>n</code>维数组是由<code>k</code>个<code>n-1</code>维数组构成，那么n维数组的个数就是<code>k</code>。例如：<br>x = new int[2][3][5],则x[0]和x[1]是二维数组，x的长度就是2。</li>
-<li>锯齿数组<br>二维数组中，每一行本身是一个数组。因而各行就可以有不同的长度，这样的数组称为锯齿数组。例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[][] x = &#123;</span><br><span class="line">	&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">4</span>,<span class="number">5</span>&#125;,</span><br><span class="line">	&#123;<span class="number">5</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>锯齿数组<br>二维数组中，每一行本身是一个数组。因而各行就可以有不同的长度，这样的数组称为锯齿数组。例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[][] x = &#123;</div><div class="line">	&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</div><div class="line">	&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</div><div class="line">	&#123;<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,</div><div class="line">	&#123;<span class="number">4</span>,<span class="number">5</span>&#125;,</div><div class="line">	&#123;<span class="number">5</span>&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <hr>
@@ -429,29 +429,31 @@ window.onload = function(){
 
                 <!-- Post Comments -->
                 
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css" type="text/css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-        <div class="ds-thread" 
-            data-thread-key="2016/01/20/Java学习总结-第五章-数组/" 
-            data-url="http://www.whtis.com//2016/01/20/Java学习总结-第五章-数组/index.html"
-            data-title="Java学习总结--第五章 数组"></div>
-    <!-- 多说评论框 end -->
-</div>
 
 
+    <!-- 使用 DISQUS -->
+	<div id="disqus-comment">
+		<div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+
+	(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = '//whtis.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+	})();
+</script>
+	</div>
+	<style>
+		#disqus-comment{
+			background-color:#eee;
+			padding:2pc;
+		}
+	</style>
 
             </div>
 
@@ -561,7 +563,7 @@ window.onload = function(){
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
         </ul>
     </li>
 
@@ -594,7 +596,7 @@ window.onload = function(){
     <li>
         <a href="/archives">
              文章总数
-             <span class="sidebar-badge">37</span>
+             <span class="sidebar-badge">38</span>
         </a>
     </li>
 </ul>
@@ -735,8 +737,8 @@ It will not impact the appearance and can give developers a lot of support :)
 </footer>
                 
 				<!-- Import File -->
-<script src="/js/js.min.js" type="text/javascript"></script>
-<script src="/js/nprogress.js" type="text/javascript"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
 
 <script type="text/javascript">
     NProgress.configure({
@@ -762,7 +764,7 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 
-	<script src="/js/smoothscroll.js" type="text/javascript"></script>
+	<script src="/js/smoothscroll.js"></script>
 
 
 
@@ -773,21 +775,10 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"whtis"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = 'https://static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] 
-             || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-    </script>
-    <!-- 多说公共 js 代码 end -->
 
 
+    <!-- 使用 DISQUS js 代码 -->
+	<script id="dsq-count-scr" src="//whtis.disqus.com/count.js" async></script>
 
 
 <!-- Swiftye -->

@@ -52,8 +52,8 @@
     <![endif]-->
 
     <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
     <!-- Config CSS -->
 
 
@@ -150,13 +150,13 @@
         }
     </style>
 
-	<script src="/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.min.js"></script>
 
 	<!-- UC Browser Compatible-->
 	<script>
 		var agent = navigator.userAgent.toLowerCase();
 		if(agent.indexOf('ucbrowser')>0) {
-			document.write('<link rel="stylesheet" href="/css/uc.css" type="text/css">');
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
 		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
 		}
 	</script>
@@ -365,7 +365,7 @@ window.onload = function(){
 	
 		<h3 id="功能说明及演示">功能说明及演示</h3><p><del><strong>Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。</strong></del><br>北邮人论坛大神给了解决方案，<a href="http://bbs.byr.cn/#!article/Java/47997" target="_blank" rel="external">链接在这</a>，以下内容为复制粘贴：</p>
 <blockquote>
-<p>Swing不是线程安全的，但也不是大问题。只要把所有的对Swing窗体的的操作都放在专门的线程（event dispatch thread）里做就行了。有一个模式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SwingUtilities.invokeLater(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        createAndShowGUI();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>Swing不是线程安全的，但也不是大问题。只要把所有的对Swing窗体的的操作都放在专门的线程（event dispatch thread）里做就行了。有一个模式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SwingUtilities.invokeLater(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        createAndShowGUI();</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <p>这样就线程安全了。这里有详细说明： <a href="http://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html" target="_blank" rel="external">http://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html</a></p>
 </blockquote>
 <h4 id="说明">说明</h4><p>综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：</p>
@@ -387,28 +387,28 @@ window.onload = function(){
 <h3 id="问题记录">问题记录</h3><ul>
 <li>如何回车后使光标出现在下一个输入框中：<br>使用<code>requestFocus（）</code>方法</li>
 <li><p>如何创建一个文件夹:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">File fileDir = <span class="keyword">new</span> File(<span class="string">"C:\\Users\\ht\\IdeaProjects\\PasswordGenerated\\PasswdGenetated\\"</span>);</span><br><span class="line"><span class="keyword">if</span> (!fileDir.isDirectory()) &#123;</span><br><span class="line"> fileDir.mkdir();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">File fileDir = <span class="keyword">new</span> File(<span class="string">"C:\\Users\\ht\\IdeaProjects\\PasswordGenerated\\PasswdGenetated\\"</span>);</div><div class="line"><span class="keyword">if</span> (!fileDir.isDirectory()) &#123;</div><div class="line"> fileDir.mkdir();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>如何获取系统剪切板并设置内容</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();</span><br><span class="line"><span class="comment">//复制到剪切板上</span></span><br><span class="line">StringSelection ss = <span class="keyword">new</span> StringSelection(password);</span><br><span class="line">clipboard.setContents(ss, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();</div><div class="line"><span class="comment">//复制到剪切板上</span></div><div class="line">StringSelection ss = <span class="keyword">new</span> StringSelection(password);</div><div class="line">clipboard.setContents(ss, <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
 </li>
 <li><p>如何获取当前系统的目录树并选取目录</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JFileChooser fileChooser = <span class="keyword">new</span> JFileChooser();</span><br><span class="line">   fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);</span><br><span class="line">   <span class="keyword">int</span> i = fileChooser.showOpenDialog(<span class="keyword">null</span>);</span><br><span class="line">   <span class="keyword">if</span> (i == fileChooser.APPROVE_OPTION) &#123;</span><br><span class="line">       String path = fileChooser.getSelectedFile().getAbsolutePath();</span><br><span class="line">       String name = fileChooser.getSelectedFile().getName();</span><br><span class="line">       System.out.println(path + name);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">JFileChooser fileChooser = <span class="keyword">new</span> JFileChooser();</div><div class="line">   fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);</div><div class="line">   <span class="keyword">int</span> i = fileChooser.showOpenDialog(<span class="keyword">null</span>);</div><div class="line">   <span class="keyword">if</span> (i == fileChooser.APPROVE_OPTION) &#123;</div><div class="line">       String path = fileChooser.getSelectedFile().getAbsolutePath();</div><div class="line">       String name = fileChooser.getSelectedFile().getName();</div><div class="line">       System.out.println(path + name);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>为了保证跨平台使用，将windows路径中的”\“替换为”/“</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.replaceAll(<span class="string">"\\\\"</span>,<span class="string">"/"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.replaceAll(<span class="string">"\\\\"</span>,<span class="string">"/"</span>);</div></pre></td></tr></table></figure>
 </li>
 <li><p>如何实现初始化界面设置密码文件位置后隐藏该界面，继而出现主界面<br>PasswordManger类中initFrame和mainFrame的先后设置。</p>
 </li>
 <li><p>如何使JList能够实时显示密码文件的个数</p>
 <ul>
 <li><p>使用<code>setModel（javax.swing.ListModel&lt;E&gt; model）</code>方法。该方法要求传入一个Model对象，ListModel的使用用例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileModel</span> <span class="keyword">extends</span> <span class="title">AbstractListModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String[] files;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">FileModel</span><span class="params">(String[] files)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.files = files;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">getElementAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> (index + <span class="number">1</span>) + <span class="string">"."</span> + files[index++];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> files.length;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileModel</span> <span class="keyword">extends</span> <span class="title">AbstractListModel</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">private</span> String[] files;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">FileModel</span><span class="params">(String[] files)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.files = files;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">getElementAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> (index + <span class="number">1</span>) + <span class="string">"."</span> + files[index++];</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> files.length;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>ListModel是一个接口，如果实现该接口，需要实现一些不必要的方法：<code>void addListDataListener(ListDataListener l)</code>和<code>void removeListDataListener(ListDataListener l)</code>,但是Java提供了一个便捷类AbstractListModel，继承该类，就可以避免实现以上方法。</p>
 </li>
 <li>除了AbstractListModel类，还有其他抽象类如DefaultListModel，但是DefaultListModel实现了ListModel的所有方法，因此可以做的更改比较小。</li>
-<li>为了监听FileModel的变化，可以采用这种方法：在每次JList内容发生变化时重新创建一个FIleModel，传入的是更新后的数组，再使用JList的<code>updateUI()</code>方法，就可以动态显示JList的内容了。<br><em>可以给FileModel添加一个监听器类<code>ListDataListener</code>,并实现该接口的抽象方法。（网上介绍，未做）</em><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateJList</span><span class="params">(String fileDirPath)</span> </span>&#123;</span><br><span class="line">        String[] files = <span class="keyword">new</span> File(fileDirPath).list();</span><br><span class="line">        FileModel fileModel = <span class="keyword">new</span> FileModel(files);</span><br><span class="line">        mainFrame.getJlFileName().setModel(fileModel);</span><br><span class="line">        mainFrame.getJlFileName().updateUI();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">- 根据指定条件生成密码</span><br><span class="line">  + 我使用如下方法，返回的字符都是字符<span class="string">'A'</span></span><br><span class="line">  ```<span class="function">java</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">char</span> <span class="title">generateChar</span><span class="params">(<span class="keyword">char</span> aChar, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> c = <span class="string">'A'</span>;</span><br><span class="line">        <span class="keyword">int</span> a = aChar + <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">if</span> (a &gt;= low &amp;&amp; a &lt;= high) &#123;</span><br><span class="line">            c = (<span class="keyword">char</span>) a;</span><br><span class="line">  <span class="comment">//          return c;</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a &lt; low) &#123;</span><br><span class="line">  <span class="comment">//          return generateChar((char) (a + 6), low, high);</span></span><br><span class="line">  			  generateChar((<span class="keyword">char</span>) (a + <span class="number">6</span>), low, high);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a &gt; high) &#123;</span><br><span class="line">  <span class="comment">//          return generateChar((char) (a - 30), low, high);</span></span><br><span class="line">  		      generateChar((<span class="keyword">char</span>) (a - <span class="number">30</span>), low, high);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<li>为了监听FileModel的变化，可以采用这种方法：在每次JList内容发生变化时重新创建一个FIleModel，传入的是更新后的数组，再使用JList的<code>updateUI()</code>方法，就可以动态显示JList的内容了。<br><em>可以给FileModel添加一个监听器类<code>ListDataListener</code>,并实现该接口的抽象方法。（网上介绍，未做）</em><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateJList</span><span class="params">(String fileDirPath)</span> </span>&#123;</div><div class="line">        String[] files = <span class="keyword">new</span> File(fileDirPath).list();</div><div class="line">        FileModel fileModel = <span class="keyword">new</span> FileModel(files);</div><div class="line">        mainFrame.getJlFileName().setModel(fileModel);</div><div class="line">        mainFrame.getJlFileName().updateUI();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">- 根据指定条件生成密码</div><div class="line">  + 我使用如下方法，返回的字符都是字符<span class="string">'A'</span></div><div class="line">  ```<span class="function">java</span></div><div class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">char</span> <span class="title">generateChar</span><span class="params">(<span class="keyword">char</span> aChar, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> &#123;</div><div class="line">        <span class="keyword">char</span> c = <span class="string">'A'</span>;</div><div class="line">        <span class="keyword">int</span> a = aChar + <span class="number">3</span>;</div><div class="line">        <span class="keyword">if</span> (a &gt;= low &amp;&amp; a &lt;= high) &#123;</div><div class="line">            c = (<span class="keyword">char</span>) a;</div><div class="line">  <span class="comment">//          return c;</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a &lt; low) &#123;</div><div class="line">  <span class="comment">//          return generateChar((char) (a + 6), low, high);</span></div><div class="line">  			  generateChar((<span class="keyword">char</span>) (a + <span class="number">6</span>), low, high);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a &gt; high) &#123;</div><div class="line">  <span class="comment">//          return generateChar((char) (a - 30), low, high);</span></div><div class="line">  		      generateChar((<span class="keyword">char</span>) (a - <span class="number">30</span>), low, high);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> c;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>问题原因：递归不设出口，每次递归返回的值都在递归自己这一层，无法返回到最初的一层<br>解决方法：使用注释掉的三条语句，删除相应的错误语句。<br><strong>递归不设出口毫无意义</strong></p>
@@ -417,7 +417,7 @@ window.onload = function(){
 </ul>
 </li>
 <li><p>生成密码的MD5值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> MessageDigest md5 = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            md5 = MessageDigest.getInstance(<span class="string">"MD5"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">generateMD5</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] bs = md5.digest(password.getBytes());</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="number">40</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">byte</span> x : bs) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((x &amp; <span class="number">0xff</span>) &gt;&gt; <span class="number">4</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                sb.append(<span class="string">"0"</span>).append(Integer.toHexString(x &amp; <span class="number">0xff</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                sb.append(Integer.toHexString(x &amp; <span class="number">0xff</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> MessageDigest md5 = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            md5 = MessageDigest.getInstance(<span class="string">"MD5"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            System.out.println(e.getMessage());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">generateMD5</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">        <span class="keyword">byte</span>[] bs = md5.digest(password.getBytes());</div><div class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="number">40</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">byte</span> x : bs) &#123;</div><div class="line">            <span class="keyword">if</span> ((x &amp; <span class="number">0xff</span>) &gt;&gt; <span class="number">4</span> == <span class="number">0</span>) &#123;</div><div class="line">                sb.append(<span class="string">"0"</span>).append(Integer.toHexString(x &amp; <span class="number">0xff</span>));</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                sb.append(Integer.toHexString(x &amp; <span class="number">0xff</span>));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sb.toString();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>初始选取配置文件路径时若该路径存在其他文件，应该避免出现在JList中</p>
 </li>
@@ -435,29 +435,31 @@ window.onload = function(){
 
                 <!-- Post Comments -->
                 
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css" type="text/css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-        <div class="ds-thread" 
-            data-thread-key="2016/02/20/GUI练习之二-密码管理器/" 
-            data-url="http://www.whtis.com//2016/02/20/GUI练习之二-密码管理器/index.html"
-            data-title="GUI练习之二-密码管理器"></div>
-    <!-- 多说评论框 end -->
-</div>
 
 
+    <!-- 使用 DISQUS -->
+	<div id="disqus-comment">
+		<div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+
+	(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = '//whtis.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+	})();
+</script>
+	</div>
+	<style>
+		#disqus-comment{
+			background-color:#eee;
+			padding:2pc;
+		}
+	</style>
 
             </div>
 
@@ -567,7 +569,7 @@ window.onload = function(){
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/02/">二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a>
         </ul>
     </li>
 
@@ -600,7 +602,7 @@ window.onload = function(){
     <li>
         <a href="/archives">
              文章总数
-             <span class="sidebar-badge">37</span>
+             <span class="sidebar-badge">38</span>
         </a>
     </li>
 </ul>
@@ -741,8 +743,8 @@ It will not impact the appearance and can give developers a lot of support :)
 </footer>
                 
 				<!-- Import File -->
-<script src="/js/js.min.js" type="text/javascript"></script>
-<script src="/js/nprogress.js" type="text/javascript"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
 
 <script type="text/javascript">
     NProgress.configure({
@@ -768,7 +770,7 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 
-	<script src="/js/smoothscroll.js" type="text/javascript"></script>
+	<script src="/js/smoothscroll.js"></script>
 
 
 
@@ -779,21 +781,10 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"whtis"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = 'https://static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] 
-             || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-    </script>
-    <!-- 多说公共 js 代码 end -->
 
 
+    <!-- 使用 DISQUS js 代码 -->
+	<script id="dsq-count-scr" src="//whtis.disqus.com/count.js" async></script>
 
 
 <!-- Swiftye -->
