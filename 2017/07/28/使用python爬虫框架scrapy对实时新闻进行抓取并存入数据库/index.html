@@ -307,7 +307,7 @@ window.onload = function(){
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/python，scrapy，新闻抓取/">python，scrapy，新闻抓取</a>
+        <a class="post_tag-link" href="/tags/python，scrapy，mysql，新闻抓取/">python，scrapy，mysql，新闻抓取</a>
     </ul>
     
     <!-- Share -->
@@ -413,7 +413,7 @@ window.onload = function(){
 <li><code>allow</code>和<code>restrict_xpaths</code>从<code>正则表达式</code>和<code>xpath</code>共同对后续帖子详情页url进行限制；</li>
 <li><code>callback</code>指定的是解析详情页的方法，顾名思义，列表页的处理是由爬虫自己处理的（使用参数，这也是我没搞懂的地方，因为不是自己处理，在爬虫无法抽取详情页url时很难定位到哪里出错了）</li>
 </ul>
-<p>如果你的<code>allow</code>和<code>restrict_xpaths</code>设置无误，且列表页返回的信息很完整，你就可以使用<code>parse_item</code>函数制定解析详情页的逻辑了。<br><strong>初始接触这种方法时，极其建议使用已经有的例子进行学习，上面提到的博客中的代码，在本文书写时仍能正常运行</strong></p>
+<p>如果你的<code>allow</code>和<code>restrict_xpaths</code>设置无误，且列表页返回的信息很完整，你就可以使用<code>parse_item</code>函数制定解析详情页的逻辑了。<br><strong>1、初始接触这种方法时，极其建议使用已经有的例子进行学习，上面提到的博客中的代码，在本文书写时仍能正常运行</strong><br><strong>2、这种方法对动态加载的列表页是无效的</strong></p>
 <h3 id="把抓取到的内容存入数据库">把抓取到的内容存入数据库</h3><p>网上大部分使用的<code>mysql</code>驱动是<code>mysqlDb</code>，但是它不支持<code>python3.x</code>。因此本文使用的是<code>pymysql</code>,<code>orm</code>框架是<a href="https://www.sqlalchemy.org/" target="_blank" rel="external"><code>SQLAlchemy</code></a><br>本文仅对一些缺少资料地方进行说明：</p>
 <ul>
 <li><code>SQLAlchemy</code>连接数据库的方法（参考自官方文档）：<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 初始化数据库连接:</span></div><div class="line">engine = create_engine(<span class="string">'mysql+pymysql://user:passwd@localhost:3306/spider?charset=utf8mb4'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 创建DBSession类型:</span></div><div class="line">DBSession = sessionmaker(bind=engine)</div></pre></td></tr></table></figure>

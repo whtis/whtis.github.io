@@ -4,13 +4,13 @@
     
   <url>
     <loc>http://www.whtis.com/2017/07/28/%E4%BD%BF%E7%94%A8python%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6scrapy%E5%AF%B9%E5%AE%9E%E6%97%B6%E6%96%B0%E9%97%BB%E8%BF%9B%E8%A1%8C%E6%8A%93%E5%8F%96%E5%B9%B6%E5%AD%98%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2017-07-28T14:23:13.925Z</lastmod>
+    <lastmod>2017-07-29T06:36:53.372Z</lastmod>
     <data>
         <display>
         <title>使用python爬虫框架scrapy对实时新闻进行抓取并存入数据库</title>
         <pubTime>2017-07-28T14:15:20.000Z</pubTime>
         
-        <tag>python，scrapy，新闻抓取 </tag>
+        <tag>python，scrapy，mysql，新闻抓取 </tag>
          
          
            

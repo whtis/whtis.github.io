@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2017-07-28T14:23:13.925Z</updated>
+  <updated>2017-07-29T06:36:53.372Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.whtis.com/2017/07/28/%E4%BD%BF%E7%94%A8python%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6scrapy%E5%AF%B9%E5%AE%9E%E6%97%B6%E6%96%B0%E9%97%BB%E8%BF%9B%E8%A1%8C%E6%8A%93%E5%8F%96%E5%B9%B6%E5%AD%98%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     <id>http://www.whtis.com/2017/07/28/使用python爬虫框架scrapy对实时新闻进行抓取并存入数据库/</id>
     <published>2017-07-28T14:15:20.000Z</published>
-    <updated>2017-07-28T14:23:13.925Z</updated>
+    <updated>2017-07-29T06:36:53.372Z</updated>
     <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>每天的新闻更新很快，如果要全面了解非常困难，更可恶的是一些门户网站还经常取一些乱七八糟的标题，点进去是文不对题。所以萌生了一个想法：自己抓取不同门户网站的新闻更新信息，然后将这些内容进行整合，推送一些当日的热点新闻。<br>想的很简单，真的做起来，发现自己还是太年轻，到写这篇博客为止，我也就是完成了一个基本的抓取框架，连内容都没有获得多少。不过本来就是抱着学习<code>python</code>的想法使用<code>scrapy</code>来抓取新闻，既然已经有了个差不多的框架，也该写写使用<code>scrapy</code>过程中的遇到的一些问题了。</p>
 <h3 id="明确需求和技术路线">明确需求和技术路线</h3><ul>
 <li>需求：很简单，抓取每天最新的新闻内容（文本），按照一定的格式存入数据库<code>mysql</code>中。</li>
@@ -70,7 +70,7 @@
 <li><code>allow</code>和<code>restrict_xpaths</code>从<code>正则表达式</code>和<code>xpath</code>共同对后续帖子详情页url进行限制；</li>
 <li><code>callback</code>指定的是解析详情页的方法，顾名思义，列表页的处理是由爬虫自己处理的（使用参数，这也是我没搞懂的地方，因为不是自己处理，在爬虫无法抽取详情页url时很难定位到哪里出错了）</li>
 </ul>
-<p>如果你的<code>allow</code>和<code>restrict_xpaths</code>设置无误，且列表页返回的信息很完整，你就可以使用<code>parse_item</code>函数制定解析详情页的逻辑了。<br><strong>初始接触这种方法时，极其建议使用已经有的例子进行学习，上面提到的博客中的代码，在本文书写时仍能正常运行</strong></p>
+<p>如果你的<code>allow</code>和<code>restrict_xpaths</code>设置无误，且列表页返回的信息很完整，你就可以使用<code>parse_item</code>函数制定解析详情页的逻辑了。<br><strong>1、初始接触这种方法时，极其建议使用已经有的例子进行学习，上面提到的博客中的代码，在本文书写时仍能正常运行</strong><br><strong>2、这种方法对动态加载的列表页是无效的</strong></p>
 <h3 id="把抓取到的内容存入数据库">把抓取到的内容存入数据库</h3><p>网上大部分使用的<code>mysql</code>驱动是<code>mysqlDb</code>，但是它不支持<code>python3.x</code>。因此本文使用的是<code>pymysql</code>,<code>orm</code>框架是<a href="https://www.sqlalchemy.org/" target="_blank" rel="external"><code>SQLAlchemy</code></a><br>本文仅对一些缺少资料地方进行说明：</p>
 <ul>
 <li><code>SQLAlchemy</code>连接数据库的方法（参考自官方文档）：<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 初始化数据库连接:</span></div><div class="line">engine = create_engine(<span class="string">'mysql+pymysql://user:passwd@localhost:3306/spider?charset=utf8mb4'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 创建DBSession类型:</span></div><div class="line">DBSession = sessionmaker(bind=engine)</div></pre></td></tr></table></figure>
@@ -98,7 +98,7 @@
     <![CDATA[<h3 id="写在前面">写在前面</h3><p>每天的新闻更新很快，如果要全面了解非常困难，更可恶的是一些门户网站还经常取一些乱七八糟的标题，点进去是文不对题。所以萌生了一个想法：自己抓取不同门户网站的新闻更新信息，然后将这些内容进行整合，推送一些当日的热点新闻。<br>想的]]>
     </summary>
     
-      <category term="python，scrapy，新闻抓取" scheme="http://www.whtis.com/tags/python%EF%BC%8Cscrapy%EF%BC%8C%E6%96%B0%E9%97%BB%E6%8A%93%E5%8F%96/"/>
+      <category term="python，scrapy，mysql，新闻抓取" scheme="http://www.whtis.com/tags/python%EF%BC%8Cscrapy%EF%BC%8Cmysql%EF%BC%8C%E6%96%B0%E9%97%BB%E6%8A%93%E5%8F%96/"/>
     
       <category term="python" scheme="http://www.whtis.com/categories/python/"/>
     
