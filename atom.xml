@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2017-07-29T06:36:53.372Z</updated>
+  <updated>2017-10-13T07:12:08.006Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -13,6 +13,358 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[spring4学习笔记（四）--Spring-4.x新特性：泛型依赖注入]]></title>
+    <link href="http://www.whtis.com/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89--Spring-4-x%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9A%E6%B3%9B%E5%9E%8B%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/"/>
+    <id>http://www.whtis.com/2017/10/13/spring4学习笔记（四）--Spring-4-x新特性：泛型依赖注入/</id>
+    <published>2017-10-13T07:09:57.000Z</published>
+    <updated>2017-10-13T07:12:08.006Z</updated>
+    <content type="html"><![CDATA[<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+]]></content>
+    <summary type="html">
+    <![CDATA[<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.b]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="spring4" scheme="http://www.whtis.com/tags/spring4/"/>
+    
+      <category term="java web" scheme="http://www.whtis.com/categories/java-web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[spring4学习笔记（三）--SpEL:Spring表达式语言]]></title>
+    <link href="http://www.whtis.com/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89--SpEL-Spring%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E8%A8%80/"/>
+    <id>http://www.whtis.com/2017/10/13/spring4学习笔记（三）--SpEL-Spring表达式语言/</id>
+    <published>2017-10-13T07:03:21.000Z</published>
+    <updated>2017-10-13T07:39:54.225Z</updated>
+    <content type="html"><![CDATA[<h2 id="spEL:Spring_表达式语言">spEL:Spring 表达式语言</h2><ul>
+<li>是一个支持运行时查询和操作对象图的强大的表达式语言。</li>
+<li>语法类似于EL：SpEL使用<code>#{...}</code>作为定界符，所有在大框号中的字符都将被认为是<code>SpEL</code></li>
+<li>SpEL为Bean的属性进行动态赋值提供了便利。</li>
+<li>通过SpEL可以实现：<ul>
+<li>通过 bean 的 <code>id</code> 对 bean 进行引用</li>
+<li>调用方法以及引用对象中的属性</li>
+<li>计算表达式的值</li>
+<li>正则表达式的匹配</li>
+</ul>
+</li>
+</ul>
+<h3 id="SpEL_可以表示基本的字面值">SpEL 可以表示基本的字面值</h3> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;</div><div class="line">  &lt;property name=&quot;user&quot; value=&quot;#&#123;2&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">  &lt;property name=&quot;password&quot; value=&quot;#&#123;3.14&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">  &lt;property name=&quot;driverClass&quot; value=&quot;#&#123;false&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">  &lt;property name=&quot;jdbcUrl&quot; value=&quot;#&#123;“whtis”&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<h3 id="SpEL_引用_bean、属性和方法">SpEL 引用 bean、属性和方法</h3><ul>
+<li>引用其他对象：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 通过 value 属性和 SpEL 配置 bean 之间的应用关系 --&gt;</div><div class="line">&lt;property name=&quot;prefix&quot; value=&quot;#&#123;prefixGenerator&#125;&quot;&gt;&lt;/property&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>引用其他对象的属性：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 通过 value 属性和 SpEL 配置 bean 之间的应用关系 --&gt;</div><div class="line">&lt;property name=&quot;suffix&quot; value=&quot;#&#123;sequenceGenerator2.suffix&#125;&quot;&gt;&lt;/property&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>调用其他方法，还可以链式操作</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 通过 value 属性和 SpEL 配置 suffix 属性值为另一个 bean 的方法的返回值 --&gt;</div><div class="line">&lt;property name=&quot;suffix&quot; value=&quot;#&#123;sequenceGenerator2.toString()&#125;&quot;&gt;&lt;/property&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>调用静态方法或静态属性：通过<code>T()</code>调用一个类的静态方法，它将返回一个 <code>Class Object</code>，然后再调用相应的方法或属性。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;property name=&quot;initValue&quot; value=#&#123;T(java.lang.Math).PI&#125;&gt;&lt;/property&gt;</div></pre></td></tr></table></figure>
+<h3 id="SpEL支持的运算符号">SpEL支持的运算符号</h3><ul>
+<li>算数运算符：<code>+，-，×，/，%，^</code></li>
+<li>加号还可以用作字符串连接</li>
+<li>比较运算符：<code>&lt;，&gt;，==，&lt;=，&gt;=，lt，gt，eq，le，ge</code></li>
+<li>逻辑运算符：<code>and，or，not，|</code></li>
+<li>if-else运算符：<code>?:(temary),?:(Elvis)</code></li>
+<li>if-else的变体</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;constructor-arg value=&quot;#&#123;kenny.song:&apos;Greensleeves&apos;&#125;&quot;</div></pre></td></tr></table></figure>
+<ul>
+<li>正则表达式：<code>matches</code></li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="spEL:Spring_表达式语言">spEL:Spring 表达式语言</h2><ul>
+<li>是一个支持运行时查询和操作对象图的强大的表达式语言。</li>
+<li>语法类似于EL：SpEL使用<code>#{...}</code>作为定界符，所有在大框号中]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="spring4" scheme="http://www.whtis.com/tags/spring4/"/>
+    
+      <category term="java web" scheme="http://www.whtis.com/categories/java-web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[spring4学习笔记（二）--spring中Bean的配置]]></title>
+    <link href="http://www.whtis.com/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89--spring%E4%B8%ADBean%E7%9A%84%E9%85%8D%E7%BD%AE/"/>
+    <id>http://www.whtis.com/2017/10/13/spring4学习笔记（二）--spring中Bean的配置/</id>
+    <published>2017-10-13T03:54:06.000Z</published>
+    <updated>2017-10-18T12:21:44.251Z</updated>
+    <content type="html"><![CDATA[<h1 id="配置形式">配置形式</h1><h2 id="基于xml文件的方式">基于xml文件的方式</h2><h3 id="Bean的配置方式">Bean的配置方式</h3><h4 id="通过全类名（反射）">通过全类名（反射）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;!--</div><div class="line">  通过全类名配置bean</div><div class="line">  class：bean 的全类名，通过反射的方式在 IOC 容器中创建 Bean。所以要求 Bean 中必须有无参数的构造器。</div><div class="line">  id： 表示容器中的Bean，唯一。</div><div class="line">  &lt;Bean id=&quot;&quot; class=&quot;&quot;&gt;&lt;/Bean&gt;</div><div class="line"> --&gt;</div></pre></td></tr></table></figure>
+<h4 id="依赖注入的方式">依赖注入的方式</h4><h5 id="构造器注入">构造器注入</h5><ul>
+<li>通过构造方法注入 Bean 的属性值或依赖的对象，它保证了 Bean 实例在实例化后就可以使用。</li>
+<li>构造器注入在<code>&lt;constructor-arg&gt;</code>元素里声明属性，该元素没有<code>name</code>属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 通过构造方法来配置 Bean 属性 --&gt;</div><div class="line">&lt;bean id=&quot;&quot; class=&quot;&quot; &gt;</div><div class="line">  &lt;!-- 使用构造器注入属性值可以指定参数的位置和参数的类型！ 以区分重载的构造器！--&gt;</div><div class="line">  &lt;constructor-arg value=&quot;&quot; (type=&quot;&quot; or index=&quot;&quot;) &gt;&lt;/constructor-arg&gt;</div><div class="line">  &lt;constructor-arg&gt;</div><div class="line">    &lt;!-- 字面值注入，基本数据类型及其封装类、String等类型都可以采取字面值注入的方式 --&gt;</div><div class="line">    &lt;value&gt;250&lt;/value&gt;</div><div class="line">    &lt;!-- 如果字面值包含特殊字符可以使用&lt;![CDATA[]]&gt;包裹起来 --&gt;</div><div class="line">    &lt;&gt;&lt;![CDATA[&lt;beijing&gt;]]&gt;&lt;&gt;</div><div class="line">  &lt;/constructor-arg&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<h5 id="属性注入">属性注入</h5><ul>
+<li>属性注入即通过<code>setter</code>方法注入Bean的属性值或依赖的对象</li>
+<li>属性注入使用 <code>&lt;property&gt;</code>元素，使用<code>name</code>属性指定 Bean 的属性名称，<code>value</code> 属性或<code>&lt;value&gt;</code> 子节点指定属性值。</li>
+<li>属性注入是实际应用中最常用的注入方式。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 通过全类名的方式来配置 bean --&gt;</div><div class="line">&lt;bean id=&quot;&quot; class=&quot;&quot; &gt;</div><div class="line">  &lt;property name=&quot;&quot; value=&quot;&quot; &gt;&lt;/property&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<h6 id="引用其他_Bean">引用其他 Bean</h6><ul>
+<li>在 Bean 的配置文件中，可以通过<code>&lt;ref&gt;</code>元素或者<code>ref</code>属性为Bean的属性或构造器参数指定对Bean的引用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;&quot; class=&quot;&quot;&gt;</div><div class="line">  &lt;property name=&quot;&quot; value=&quot;&quot; ref=&quot;&quot;&gt;&lt;/property&gt;</div><div class="line">  &lt;!--</div><div class="line">    &lt;property name=&quot;&quot; value=&quot;&quot; &gt;</div><div class="line">      &lt;ref bean=&quot;&quot;/&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">   --&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>也可以在属性或构造器里包含Bean的声明，这样的Bean称为内部Bean</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;&quot; class=&quot;&quot;&gt;</div><div class="line">  &lt;property name=&quot;&quot; &gt;</div><div class="line">  &lt;!-- 内部 Bean，不能被外部引用，只能内部使用 --&gt;</div><div class="line">    &lt;bean class=&quot;&quot; &gt;</div><div class="line">      &lt;constructor-arg value=&quot;&quot; &gt;&lt;/constructor-arg&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">  &lt;/property&gt;  </div><div class="line">&lt;/bean&gt;</div><div class="line">//构造器注入类似</div></pre></td></tr></table></figure>
+<h6 id="注入参数详解：null和级联属性">注入参数详解：null和级联属性</h6><ul>
+<li>赋<code>null</code>值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;constructor-arg&gt;&lt;null/&gt;&lt;/constructor-arg&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>级联属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 为级联属性赋值。注意：属性（car）需要先初始化才能为级联属性赋值，否则会出错 --&gt;</div><div class="line">&lt;property name=&quot;car.maxPrice&quot; value=&quot;&quot;&gt;&lt;/property&gt;</div></pre></td></tr></table></figure>
+<h6 id="集合属性">集合属性</h6><ul>
+<li>在Spring中可以通过一组内置的xml标签（<code>&lt;list&gt;、&lt;set&gt;、&lt;map&gt;</code>）来配置集合属性。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;&quot; class=&quot;&quot; &gt;</div><div class="line">  &lt;property name=&quot;list&quot;&gt;</div><div class="line">  &lt;!-- 使用list为list类型的成员变量--&gt;</div><div class="line">    &lt;list value=&quot;&quot;&gt;</div><div class="line">      &lt;ref bean=&quot;&quot;/&gt;</div><div class="line">    &lt;/list&gt;</div><div class="line">  &lt;/property&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">//set类似</div><div class="line"></div><div class="line">&lt;!-- 配置map属性值 --&gt;</div><div class="line">&lt;bean id=&quot;&quot; class=&quot;&quot; &gt;</div><div class="line">  &lt;property name=&quot;map&quot;&gt;</div><div class="line">  &lt;!-- 使用map节点及 map 的 entry 子节点配置 Map类型的成员变量 --&gt;</div><div class="line">    &lt;map&gt;</div><div class="line">      &lt;entry key=&quot;&quot; value=&quot;&quot;&gt;&lt;/entry&gt;</div><div class="line">    &lt;/map&gt;</div><div class="line">  &lt;/property&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>使用<code>&lt;props&gt;</code>定义<code>java.util.Properties</code>，该标签使用多个<code>&lt;prop&gt;</code>作为子标签，每个<code>&lt;prop&gt;</code>标签必须定义<code>key</code>属性。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置properties属性值 --&gt;</div><div class="line">&lt;bean id=&quot;&quot; class=&quot;&quot; &gt;</div><div class="line">  &lt;property name=&quot;properties&quot;&gt;</div><div class="line">  &lt;!-- 使用props节点及 props 的 prop 子节点配置 props 类型的成员变量 --&gt;</div><div class="line">    &lt;props&gt;</div><div class="line">      &lt;prop key=&quot;user&quot;&gt;root&lt;/prop&gt;</div><div class="line">      &lt;prop key=&quot;password&quot;&gt;123456&lt;/prop&gt;</div><div class="line">      &lt;prop key=&quot;jdbcUrl&quot;&gt;jdbc:mysql:///test&lt;/prop&gt;</div><div class="line">      &lt;prop key=&quot;driver&quot;&gt;com.mysql.jdbc.Driver&lt;/prop&gt;</div><div class="line">    &lt;/props&gt;</div><div class="line">  &lt;/property&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>使用<code>utility scheme</code>定义集合</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置独立的集合 bean，以供多个 bean 使用，需要引入util命名空间 --&gt;</div><div class="line">&lt;util:list id=&quot;list&quot;&gt;</div><div class="line">    &lt;ref bean=&quot;&quot;/&gt;</div><div class="line">&lt;/util:list&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>使用<code>p</code>命名空间</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 通过p命名空间为 bean 的属性赋值，需要先导入 p 命名空间，相对于传统的配置方法，较简捷 --&gt;</div><div class="line">&lt;bean id=&quot;&quot; class=&quot;&quot; p:xxx=&quot;&quot; p:zzz-ref=&quot;&quot;&gt;&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<h6 id="使用外部属性文件">使用外部属性文件</h6><ul>
+<li>在配置文件里配置 Bean 时，有时需要在Bean的配置里混入<strong>系统部署的细节信息</strong>（例如：文件路径，数据源配置信息等）。而这些部署细节实际上需要和Bean配置分离。</li>
+<li>Spring提供了一个<code>PropertyPlaceholderConfigurer</code>的<code>BeanFactory后置处理器</code>，这个处理器允许用户将Bean配置的部分内容外移到<code>属性文件</code>中。可以在Bean配置文件里使用形式为<code>${var}</code>的变量，<code>PropertyPlaceholderConfigurer</code>从属性文件里加载属性，并使用这些属性来替换变量。</li>
+<li><p>Spring还允许在属性文件中使用<code>${propName}</code>，以实现属性之间的相互引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 导入属性文件 --&gt;</div><div class="line">&lt;context:property-placeholder location=&quot;classpath&quot;db.properties&quot;/&gt;</div><div class="line"></div><div class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;</div><div class="line">  &lt;property name=&quot;user&quot; value=&quot;$&#123;user&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">  &lt;property name=&quot;password&quot; value=&quot;$&#123;password&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">  &lt;property name=&quot;driverClass&quot; value=&quot;$&#123;driverClass&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">  &lt;property name=&quot;jdbcUrl&quot; value=&quot;$&#123;jdbcUrl&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="工厂方法注入（不常用）">工厂方法注入（不常用）</h5><h4 id="通过工厂方法（静态工厂方法&amp;实例工厂方法）">通过工厂方法（静态工厂方法&amp;实例工厂方法）</h4><h5 id="通过调用静态工厂方法创建Bean">通过调用静态工厂方法创建Bean</h5><ul>
+<li>调用静态工厂方法创建Bean是将<code>对象创建的过程封装到静态方法中</code>。当客户端需要对象时，只需要简单地调用静态方法，而不关心创建对象的细节。</li>
+<li>要声明通过静态方法创建的Bean，需要在Bean的<code>class</code>属性里指定拥有该工厂的方法的类，同时在<code>factory-method</code>属性里指定工厂方法的名称。最后，使用<code>&lt;constructor-arg&gt;</code>元素为该方法传递方法参数。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 通过静态工厂方法来配置 Bean. 注意不是配置静态工厂方法实例，而是配置 bean 实例 --&gt;</div><div class="line">&lt;!--</div><div class="line">    class 属性： 指向静态方法的全类名</div><div class="line">    factory-method: 指向静态工厂方法的名字</div><div class="line">    constructor-arg：如果工厂方法需要传入参数，则使用constructor-arg 来配置参数</div><div class="line"> --&gt;</div><div class="line">&lt;bean id=&quot;&quot; class=&quot;StaticCarFactory&quot; factory-method=&quot;getCar&quot;&gt;</div><div class="line">  &lt;constructor-arg value=&quot;xxx&quot;&gt;&lt;/constructor-arg&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<p>相应的静态类如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class StaticCarFactory &#123;</div><div class="line"></div><div class="line">    static Map&lt;String, Car&gt; carMap = new HashMap();</div><div class="line"></div><div class="line">    static &#123;</div><div class="line">        carMap.put(&quot;Audi&quot;, new Car(&quot;Audi&quot;,&quot;300000&quot;));</div><div class="line">        carMap.put(&quot;Ford&quot;, new Car(&quot;Ford&quot;, &quot;400000&quot;));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static Car getCar(String name) &#123;</div><div class="line">        return carMap.get(name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="通过调用实例工厂方法创建Bean">通过调用实例工厂方法创建Bean</h5><ul>
+<li>实例工厂方法：<code>将对象的创建过程封装到另外一个对象实例的方法里</code>。当客户端需要请求对象时，只需要简单的调用该实例方法而不需要关心对象的创建细节。</li>
+<li>要声明通过实例实例工厂方法创建的Bean<ul>
+<li>在bean的<code>factory-bean</code>属性里指定拥有该工厂方法的Bean</li>
+<li>在<code>factory-method</code>属性里指定该工厂方法的名称</li>
+<li>使用<code>constructor-arg</code>元素为工厂方法传递方法参数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置工厂的实例 --&gt;</div><div class="line">&lt;bean id=&quot;carFactory&quot; class=&quot;InstanceCarFactory&quot;&gt;&lt;/bean&gt;</div><div class="line">&lt;!-- 通过实例工厂方法来配置 bean --&gt;</div><div class="line">&lt;!--</div><div class="line">    class 属性： 指向实例方法的 bean</div><div class="line">    factory-method: 指向实例工厂方法的名字</div><div class="line">    constructor-arg：如果工厂方法需要传入参数，则使用constructor-arg 来配置参数</div><div class="line"> --&gt;</div><div class="line">&lt;bean id=&quot;&quot; factory-bean=&quot;carFactory&quot; factory-method=&quot;getCar&quot;&gt;</div><div class="line">    &lt;constructor-arg value=&quot;Ford&quot;&gt;&lt;/constructor-arg&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<p>相应的实例类如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public class InstanceCarFactory &#123;</div><div class="line"></div><div class="line">    private Map&lt;String, Car&gt; map = null;</div><div class="line"></div><div class="line">    public InstanceCarFactory() &#123;</div><div class="line">        map = new HashMap&lt;String, Car&gt;();</div><div class="line">        map.put(&quot;Audi&quot;, new Car(&quot;Audi&quot;, &quot;300000&quot;));</div><div class="line">        map.put(&quot;Ford&quot;, new Car(&quot;Ford&quot;, &quot;400000&quot;));</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Car getCar(String name) &#123;</div><div class="line">        return map.get(name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="FactoryBean">FactoryBean</h4><h4 id="Spring_bean自动装配（装配引用）">Spring bean自动装配（装配引用）</h4><ul>
+<li><p>spring IOC容器可以自动装配bean，需要做的仅仅是在<code>&lt;bean&gt;</code>的autowire属性里指定自动装配的模式。</p>
+<ul>
+<li><code>byType</code>：根据bean的类型和当前bean的属性的类型尽心自动装配。若 IOC 容器中有1个以上的类型匹配的bean，则抛异常。</li>
+<li><code>byName</code>：根据bean的名字和当前bean的setter风格的属性名进行自动装配，若有匹配的，则进行自动装配，若没有匹配的，则不装配</li>
+<li><code>constructor</code>：不推荐使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;&quot; class=&quot;&quot; autowire=&quot;byName&quot;&gt;&lt;/bean&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>在Bean配置文件里设置<code>autowire</code>属性进行自动装配将会装配Bean的所有属性。然而，若只希望装配个别属性时，<code>autowire</code>就不够灵活了。</p>
+</li>
+<li><code>autowire</code>属性只能选择一种进行配置</li>
+<li>一般情况下不建议使用自动装配功能</li>
+</ul>
+<h4 id="bean_之间的关系：继承；依赖">bean 之间的关系：继承；依赖</h4><h5 id="bean_的继承">bean 的继承</h5><ul>
+<li>Spring允许继承bean的配置，被继承的bean称为<code>父bean</code>，继承这个父bean的bean称为<code>子bean</code></li>
+<li>子bean从父bean中继承配置，包括bean的属性配置</li>
+<li>子bean也可以覆盖从父bean中继承过来的配置</li>
+<li>父bean可以作为配置模板，也可以作为Bean实例，若只想把父bean作为模板，可以设置<code>&lt;bean&gt;</code>的<code>abstract</code>属性为<code>true</code>，这样Spring将不会实例化这个Bean</li>
+<li>并不是<code>&lt;bean&gt;</code>元素里的所有属性都会被继承，比如：<code>autowire</code>、<code>abstract</code>等</li>
+<li>也可以忽略父Bean的class属性，让子bean指定自己的类，而共享相同的属性配置。但此时<strong>abstract必须设置为true</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;!-- bean 配置的继承：使用 bean 的 parent 属性指定哪个 bean 的配置 --&gt;</div><div class="line">&lt;bean id=&quot;&quot; parent=&quot;&quot;&gt;&lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;!-- 抽象bean： bean 的 abstract 属性为 true 的bean。这样的 bean 不能被 IOC 容器实例化，只能用来被继承设置</div><div class="line">若某一个 bean 的 class 属性没有被指定，则该 bean 必须是一个抽象 bean --&gt;</div><div class="line">&lt;bean id=&quot;&quot; abstract=&quot;&quot;&gt;&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<h5 id="bean_的依赖">bean 的依赖</h5><ul>
+<li>Spring 允许用户通过<code>depends-on</code>属性设定Bean前置依赖的Bean，前置依赖的Bean会在本Bean实例化之前创建好。</li>
+<li>如果前置依赖于多个Bean，则可以通过逗号，空格、或的方式配置Bean的名称。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;&quot; class=&quot;&quot; depends-on=“”&gt;&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<h5 id="bean的作用域：singleton；prototype；WEB_环境作用域">bean的作用域：singleton；prototype；WEB 环境作用域</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;!--</div><div class="line">  使用 bean 的 scope 属性来配置 bean 的作用域</div><div class="line">  singleton: 默认值。容器初始时创建 bean 的实例，在整个容器的生命周期内只创建这一个 bean。单例的。</div><div class="line">  prototype： 原型的。容器初始化时不创建 bean 的实例。而在每次请求时都创建一个新的 Bean 实例，并返回。</div><div class="line"> --&gt;</div><div class="line">&lt;bean id=&quot;&quot; class=&quot;&quot; scope=&quot;&quot;&gt;&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<h2 id="基于注解的方式">基于注解的方式</h2><h3 id="基于注解配置_Bean">基于注解配置 Bean</h3><h4 id="在_classpath_中扫描组件">在 classpath 中扫描组件</h4><ul>
+<li>组件扫描：Spring 能够从<code>classpath</code>下自动扫描，侦测和实例化具有特定注解的组件。</li>
+<li>特定组件包括：<ul>
+<li><code>@Component</code>：基本注解，标识了一个受 Spring 管理的组件</li>
+<li><code>@Respository</code>：标识持久层组件</li>
+<li><code>@Service</code>：标识服务层（业务层）组件</li>
+<li><code>@Controller</code>：标识表现层组件<br><strong>以上均为建议标识内容</strong></li>
+</ul>
+</li>
+<li>对于扫描到的组件，Spring有<code>默认的命名策略</code>：使用非限定类名，第一个字母小写。<code>也可以在注解中通过value属性值标识组件的名称</code>。</li>
+<li><p>当在组件类上使用了特定的注解之后，还需要在Spring的配置文件中声明：<code>&lt;context:component-scan&gt;</code>:</p>
+<ul>
+<li>base-package 属性指定一个需要扫描的基类包，Spring容器将会扫描这个基类包里及其子包中的所有类。</li>
+<li>当需要扫描多个包时，可以使用逗号分隔。</li>
+<li>如果仅希望扫描特定的类而非基包下的所有类，可使用<code>resource-pattern</code>属性过滤特定的类，示例：</li>
+<li><code>use-default-filters</code>属性指定是否使用默认的过滤策略。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;context:</div><div class="line">  component-scan base-package=&quot;com.whtis.spring.beans&quot;</div><div class="line">  resource-pattern=&quot;autowire/*.class&quot; use-default-filters=&quot;false&quot;&gt;</div><div class="line">&lt;/context:component-scan&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>&lt;context:include-filter&gt;</code> 子节点表示要包含的目标类</li>
+<li><code>&lt;context:exclude-filter&gt;</code> 子节点表示要排除在外的目标类</li>
+<li><code>&lt;context:component-scan&gt;</code> 下可以拥有若干个<code>&lt;context:include-filter&gt;</code>和<code>&lt;context:exclude-filter&gt;</code>子节点</li>
+<li><code>&lt;context:include-filter&gt;</code>和<code>&lt;context:exclude-filter&gt;</code>子节点支持多种类型的过滤表达式：<ul>
+<li><code>annotation</code>： 所有标注了<code>XxxAnnotation</code>的类。该类型采用目标类是否标注了某个注解进行过滤。</li>
+<li><code>assinable</code>：所有继承或扩展<code>XxxService</code>的类。该类型采用目标类是否继承或扩展某个特定类进行过滤。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="组件装配">组件装配</h4><p>如果一个组件中包含其他组件，仅靠配置<code>classpath</code>会导致无法找到组件中的其他组件从而报<code>nullPointException</code>错误。</p>
+<ul>
+<li><code>&lt;context:component-scan&gt;</code>元素还会自动注册<code>AutowiredAnnotationBeanPostProcessor</code>实例，该实例可以自动装配具有<code>@Autowired</code>和<code>@Resource</code>、<code>@Inject</code>注解的属性。<ul>
+<li><code>@Autowired</code>注解自动装配具有兼容类型的单个Bean属性<ul>
+<li>构造器，普通字段（即使是非<code>public</code>），一切具有参数的方法都可以应用<code>@Autowired</code>注解。</li>
+<li>默认情况下，所有使用<code>@Autowired</code>注解的属性都需要被设置。当<code>Spring</code>找不到匹配的Bean装配属性时，会抛出异常。<strong>若某一属性允许不被设置，可以设置@Autowired注解的<code>required</code>属性为<code>false</code>。</strong></li>
+<li>默认情况下，当 IOC 容器里存在多个类型兼容的Bean时，通过类型的自动装配将无法工作。此时可以在<code>@Qualifier</code>注解里提供Bean的名称。Spring允许对方法的入参标注<code>@Qualifiter</code>以指定注入Bean的名称。</li>
+<li><code>@Autowired</code> 注解也可以应用在<code>数组类型</code>的属性上，此时Spring将会把所有匹配的Bean进行自动装配</li>
+<li><code>@Autowired</code> 注解也可以应用在<code>集合属性</code>上，此时Spring读取该集合的类型信息，然后自动装配所有与之兼容的Bean</li>
+<li><code>@Autowired</code> 注解也可以应用在<code>java.util.Map</code>上，若该Map的键值为String，那么Spring将自动装配与Map值类型兼容的Bean，此时Bean的名称作为键值。<ul>
+<li>Spring 还支持<code>@Resource</code>和<code>@Inject</code>注解，这两个注解和<code>@Autowired</code>注解的功能类似</li>
+</ul>
+</li>
+<li><code>@Resource</code> 注解要求提供一个 Bean 名称的属性，若该属性为空，则自动采用标注处的变量或方法名作为 Bean 的名称。</li>
+<li><code>@Inject</code>和<code>Autowired</code>注解一样也是按类型匹配注入的Bean，但没有<code>required</code>属性。<br><strong>建议使用<code>Autowired</code>注解</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="IOC_容器中_Bean_的生命周期">IOC 容器中 Bean 的生命周期</h1><ul>
+<li>Spring IOC 容器可以管理Bean的生命周期，Spring允许在Bean生命周期的特定点执行定制的任务。</li>
+<li>管理过程：<ul>
+<li>通过构造器或工厂方法创建Bean实例</li>
+<li>为Bean的属性设置值和对其他Bean的引用</li>
+<li>调用Bean的初始化方法</li>
+<li>Bean可以使用了</li>
+<li>当容器关闭时，调用Bean的销毁方法</li>
+</ul>
+</li>
+<li>在Bean的声明里设置<code>init-method</code>和<code>destory-method</code>属性，为Bean指定初始化和销毁方法。</li>
+<li><p>创建Bean的后置处理器</p>
+<ul>
+<li>Bean后置处理器允许在调用初始化方法前后对Bean进行额外的处理</li>
+<li>Bean后置处理器对IOC容器里的所有Bean实例逐一处理，而非单一实例。其典型应用是：检查Bean属性的正确性或根据特定的标准更改Bean的属性</li>
+<li>对Bean后置处理器而言，需要实现<code>org.springframework.beans.factory.config</code>的<code>BeanPostProcessor</code>接口。在初始化方法被调用前后，Spring将每个Bean实例分别传递给上述接口的以下两个方法：<ul>
+<li><code>postProcessBeforeInitialization()</code></li>
+<li><code>postProcessAfterInitialization()</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;!--</div><div class="line">  实现 BeanPostProcessor 接口，并具体实现</div><div class="line">  public Object postProcessBeforeInitialization(Object o, String s) init-method 之前被调用</div><div class="line">  public Object postProcessAfterInitialization(Object o, String s) init-method 之后被调用</div><div class="line">  的实现</div><div class="line"></div><div class="line">  bean: bean 实例本身</div><div class="line">  beanName: IOC 容器配置的 bean 的名字</div><div class="line">  返回值：是实际上返回给用户的那个 Bean，注意： 可以在以上两个方法中修改返回的 bean，甚至返回一个新的 bean</div><div class="line"> --&gt;</div><div class="line">&lt;!-- 配置 Bean 的后置处理器： 不需要配置 id， IOC 容器自动识别是一个 BeanPostProcessor --&gt;</div><div class="line">&lt;bean class=&quot;myBeanPostProcessor&quot;&gt;&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="配置形式">配置形式</h1><h2 id="基于xml文件的方式">基于xml文件的方式</h2><h3 id="Bean的配置方式">Bean的配置方式</h3><h4 id="通过全类名（反射）">通过全类名（反射）</h4><figure class="h]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="spring4" scheme="http://www.whtis.com/tags/spring4/"/>
+    
+      <category term="java web" scheme="http://www.whtis.com/categories/java-web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[spring4 学习笔记（一）--spring 简介]]></title>
+    <link href="http://www.whtis.com/2017/10/06/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--spring%20%E7%AE%80%E4%BB%8B/"/>
+    <id>http://www.whtis.com/2017/10/06/spring4学习笔记（一）--spring 简介/</id>
+    <published>2017-10-06T11:19:15.000Z</published>
+    <updated>2017-10-13T07:34:46.277Z</updated>
+    <content type="html"><![CDATA[<h3 id="spring4_HelloWorld">spring4 HelloWorld</h3><ul>
+<li>spring 是一个IOC（DI）和AOP容器框架</li>
+<li>具体描述<ul>
+<li>轻量级：<strong>Spring是非侵入式的</strong>-基于Spring开发的应用中的对象可以不依赖<code>Spring</code>的<code>API</code></li>
+<li>依赖注入</li>
+<li>面向切面编程（AOP）</li>
+<li>容器</li>
+<li>框架</li>
+<li>一站式</li>
+</ul>
+</li>
+</ul>
+<h3 id="IOC和DI">IOC和DI</h3><ul>
+<li>IOC（Inversion of Control）：其思想是<strong>反转资源获取的方向</strong>。传统的资源查找方式要求组件向容器发起请求查找资源。作为回应，容器适时的返回资源。而应用了IOC以后，则是<strong>容器主动地将资源推送给它所管理的组件，组件所要做的仅是选择一种合适的方式来接受资源</strong>。这种行为也成为查找的被动形式。</li>
+<li>DI（Dependency Injection）：IOC的另一种表述方式：即：<strong>组件以一些预先定义好的方式（例如：setter方法）接受来自如容器的资源注入</strong>。相对于IOC来说，这种表述更直接。<ul>
+<li>IOC<ul>
+<li>分离接口与实现</li>
+<li>工厂模式</li>
+<li>采用反转控制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Spring容器">Spring容器</h3><ul>
+<li>在Spring IOC 容器读取Bean配置创建Bean实例之前，必须对它进行实例化。只有在容器实例化后，才可以从IOC容器里获取Bean实例并使用。</li>
+<li>Spring提供了两种类型的IOC容器实现<ul>
+<li>BeanFactory： IOC容器的基本实现</li>
+<li>ApplicationContext：提供了更多的高级特性，是BeanFactory的子接口。</li>
+<li>BeanFactory是Spring框架的基础设施，面向Spring本身；ApplicationContext面向使用Spring框架的开发者，几乎所有的应用场合都直接使用ApplicationContext而非底层的BeanFactory</li>
+<li>无论使用何种方式，配置文件是相同的</li>
+</ul>
+</li>
+</ul>
+<h4 id="ApplicationContext的主要实现类">ApplicationContext的主要实现类</h4><ul>
+<li>ClassPathXmlApplicationContext:从类路径下加载配置文件</li>
+<li>FileSystemXmlApplicationContext： 从文件系统中加载配置文件</li>
+<li>ConfigurableApplicationContext扩展于ApplicationContext，新增加两个主要方法：refresh（）和close（），让ApplicationContext具有启动、刷新和关闭上下文的能力。</li>
+<li>ApplicationContext在初始化上下文的时候就实例化所有单例的Bean。（Bean的作用域）</li>
+<li>WebApplicationContext是专门为WEB应用而准备的，它允许从相对于WEB根目录的路径中完成初始化工作。</li>
+</ul>
+<h3 id="从_IOC_容器中获取_Bean_实例">从 IOC 容器中获取 Bean 实例</h3><ul>
+<li>BeanFactory 中的方法，常用的有两种：<ul>
+<li>用id定位到 IOC 容器中的 Bean</li>
+<li>利用类型返回　IOC 容器中的 Bean。但要求 IOC 容器中必须只能有一个该类型的bean</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="spring4_HelloWorld">spring4 HelloWorld</h3><ul>
+<li>spring 是一个IOC（DI）和AOP容器框架</li>
+<li>具体描述<ul>
+<li>轻量级：<strong>Spring是非侵入式的</strong]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+    
+      <category term="spring4" scheme="http://www.whtis.com/tags/spring4/"/>
+    
+      <category term="java web" scheme="http://www.whtis.com/categories/java-web/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[使用python爬虫框架scrapy对实时新闻进行抓取并存入数据库]]></title>
@@ -959,586 +1311,6 @@
       <category term="收集整理" scheme="http://www.whtis.com/tags/%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/"/>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[GUI练习之二-密码管理器]]></title>
-    <link href="http://www.whtis.com/2016/02/20/GUI%E7%BB%83%E4%B9%A0%E4%B9%8B%E4%BA%8C-%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/"/>
-    <id>http://www.whtis.com/2016/02/20/GUI练习之二-密码管理器/</id>
-    <published>2016-02-20T13:31:46.000Z</published>
-    <updated>2016-09-14T15:46:30.000Z</updated>
-    <content type="html"><![CDATA[<h3 id="功能说明及演示">功能说明及演示</h3><p><del><strong>Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。</strong></del><br>北邮人论坛大神给了解决方案，<a href="http://bbs.byr.cn/#!article/Java/47997" target="_blank" rel="external">链接在这</a>，以下内容为复制粘贴：</p>
-<blockquote>
-<p>Swing不是线程安全的，但也不是大问题。只要把所有的对Swing窗体的的操作都放在专门的线程（event dispatch thread）里做就行了。有一个模式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SwingUtilities.invokeLater(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        createAndShowGUI();</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>这样就线程安全了。这里有详细说明： <a href="http://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html" target="_blank" rel="external">http://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html</a></p>
-</blockquote>
-<h4 id="说明">说明</h4><p>综合学习的GUI图形设计和输入输出的知识，实现了一个简易的密码管理器，主要功能如下：</p>
-<ul>
-<li>可以自己选择密码文件的存放位置</li>
-<li>可以选择生成的密码是否可以用文本查看器查看</li>
-<li>可以连续的写入新数据</li>
-<li>可以根据关键字和密码条件生成相应的密码字符，并提供MD5的显示与查看功能</li>
-<li>可以根据网站/网址名进行简单的查看功能</li>
-<li>可以同步显示所有存在的密码文件列表</li>
-<li>可以选择是否在执行生成按钮后刷新页面，方便直接书写下一个密码文件</li>
-<li>其他小功能</li>
-</ul>
-<h4 id="实现思路">实现思路</h4><p>1、存储密码的同时，将生成密码的条件设置为常量，存储在一个整数数组中（waysOfWirte），并将这值附在生成的密码最后，取值时同时取出来，但是不显示在用户界面上。<br>2、利用文件后缀名的不同区别密码文件的存储格式（二进制存储方式后缀为.w，文本可读后缀名为.wf）。</p>
-<h4 id="演示">演示</h4><ul>
-<li>初始化设置，程序会在同目录下创建一个名为<code>.pmconfig.w</code>的文件，该文件将密码文件的存放路径写入供以后使用：<br><img src="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E6%93%8D%E4%BD%9C.gif" alt="初始化操作.gif"></li>
-<li>主界面的操作：包括密码文件的生成、查看、更新以及删除等操作：<br><img src="http://7xnttb.com1.z0.glb.clouddn.com/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%BB%E7%95%8C%E9%9D%A2%E6%93%8D%E4%BD%9C.gif" alt="主界面操作.gif"></li>
-</ul>
-<h3 id="问题记录">问题记录</h3><ul>
-<li>如何回车后使光标出现在下一个输入框中：<br>使用<code>requestFocus（）</code>方法</li>
-<li><p>如何创建一个文件夹:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">File fileDir = <span class="keyword">new</span> File(<span class="string">"C:\\Users\\ht\\IdeaProjects\\PasswordGenerated\\PasswdGenetated\\"</span>);</div><div class="line"><span class="keyword">if</span> (!fileDir.isDirectory()) &#123;</div><div class="line"> fileDir.mkdir();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>如何获取系统剪切板并设置内容</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();</div><div class="line"><span class="comment">//复制到剪切板上</span></div><div class="line">StringSelection ss = <span class="keyword">new</span> StringSelection(password);</div><div class="line">clipboard.setContents(ss, <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p>如何获取当前系统的目录树并选取目录</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">JFileChooser fileChooser = <span class="keyword">new</span> JFileChooser();</div><div class="line">   fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);</div><div class="line">   <span class="keyword">int</span> i = fileChooser.showOpenDialog(<span class="keyword">null</span>);</div><div class="line">   <span class="keyword">if</span> (i == fileChooser.APPROVE_OPTION) &#123;</div><div class="line">       String path = fileChooser.getSelectedFile().getAbsolutePath();</div><div class="line">       String name = fileChooser.getSelectedFile().getName();</div><div class="line">       System.out.println(path + name);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>为了保证跨平台使用，将windows路径中的”\“替换为”/“</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.replaceAll(<span class="string">"\\\\"</span>,<span class="string">"/"</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p>如何实现初始化界面设置密码文件位置后隐藏该界面，继而出现主界面<br>PasswordManger类中initFrame和mainFrame的先后设置。</p>
-</li>
-<li><p>如何使JList能够实时显示密码文件的个数</p>
-<ul>
-<li><p>使用<code>setModel（javax.swing.ListModel&lt;E&gt; model）</code>方法。该方法要求传入一个Model对象，ListModel的使用用例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileModel</span> <span class="keyword">extends</span> <span class="title">AbstractListModel</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">private</span> String[] files;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">FileModel</span><span class="params">(String[] files)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.files = files;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">getElementAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> (index + <span class="number">1</span>) + <span class="string">"."</span> + files[index++];</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> files.length;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>ListModel是一个接口，如果实现该接口，需要实现一些不必要的方法：<code>void addListDataListener(ListDataListener l)</code>和<code>void removeListDataListener(ListDataListener l)</code>,但是Java提供了一个便捷类AbstractListModel，继承该类，就可以避免实现以上方法。</p>
-</li>
-<li>除了AbstractListModel类，还有其他抽象类如DefaultListModel，但是DefaultListModel实现了ListModel的所有方法，因此可以做的更改比较小。</li>
-<li>为了监听FileModel的变化，可以采用这种方法：在每次JList内容发生变化时重新创建一个FIleModel，传入的是更新后的数组，再使用JList的<code>updateUI()</code>方法，就可以动态显示JList的内容了。<br><em>可以给FileModel添加一个监听器类<code>ListDataListener</code>,并实现该接口的抽象方法。（网上介绍，未做）</em><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateJList</span><span class="params">(String fileDirPath)</span> </span>&#123;</div><div class="line">        String[] files = <span class="keyword">new</span> File(fileDirPath).list();</div><div class="line">        FileModel fileModel = <span class="keyword">new</span> FileModel(files);</div><div class="line">        mainFrame.getJlFileName().setModel(fileModel);</div><div class="line">        mainFrame.getJlFileName().updateUI();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">- 根据指定条件生成密码</div><div class="line">  + 我使用如下方法，返回的字符都是字符<span class="string">'A'</span></div><div class="line">  ```<span class="function">java</span></div><div class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">char</span> <span class="title">generateChar</span><span class="params">(<span class="keyword">char</span> aChar, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> &#123;</div><div class="line">        <span class="keyword">char</span> c = <span class="string">'A'</span>;</div><div class="line">        <span class="keyword">int</span> a = aChar + <span class="number">3</span>;</div><div class="line">        <span class="keyword">if</span> (a &gt;= low &amp;&amp; a &lt;= high) &#123;</div><div class="line">            c = (<span class="keyword">char</span>) a;</div><div class="line">  <span class="comment">//          return c;</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a &lt; low) &#123;</div><div class="line">  <span class="comment">//          return generateChar((char) (a + 6), low, high);</span></div><div class="line">  			  generateChar((<span class="keyword">char</span>) (a + <span class="number">6</span>), low, high);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a &gt; high) &#123;</div><div class="line">  <span class="comment">//          return generateChar((char) (a - 30), low, high);</span></div><div class="line">  		      generateChar((<span class="keyword">char</span>) (a - <span class="number">30</span>), low, high);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> c;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>问题原因：递归不设出口，每次递归返回的值都在递归自己这一层，无法返回到最初的一层<br>解决方法：使用注释掉的三条语句，删除相应的错误语句。<br><strong>递归不设出口毫无意义</strong></p>
-<ul>
-<li>异常<br><code>java.lang.stackOverflow</code> 堆栈溢出，原因是递归太深</li>
-</ul>
-</li>
-<li><p>生成密码的MD5值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> MessageDigest md5 = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            md5 = MessageDigest.getInstance(<span class="string">"MD5"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            System.out.println(e.getMessage());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">generateMD5</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">        <span class="keyword">byte</span>[] bs = md5.digest(password.getBytes());</div><div class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="number">40</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">byte</span> x : bs) &#123;</div><div class="line">            <span class="keyword">if</span> ((x &amp; <span class="number">0xff</span>) &gt;&gt; <span class="number">4</span> == <span class="number">0</span>) &#123;</div><div class="line">                sb.append(<span class="string">"0"</span>).append(Integer.toHexString(x &amp; <span class="number">0xff</span>));</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                sb.append(Integer.toHexString(x &amp; <span class="number">0xff</span>));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sb.toString();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>初始选取配置文件路径时若该路径存在其他文件，应该避免出现在JList中</p>
-</li>
-</ul>
-<h3 id="源码">源码</h3><p>见我的GitHub：<a href="https://github.com/whtis/PasswordManager/tree/master/src" target="_blank" rel="external">PasswordManager</a></p>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<h3 id="功能说明及演示">功能说明及演示</h3><p><del><strong>Swing不是线程安全的，因此使用过程中应避免多开程序，防止出现莫名奇妙的错误。</strong></del><br>北邮人论坛大神给了解决方案，<a href="http://bbs.by]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="小练习" scheme="http://www.whtis.com/tags/%E5%B0%8F%E7%BB%83%E4%B9%A0/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结--第十六章 简单输入输出]]></title>
-    <link href="http://www.whtis.com/2016/02/18/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0-%E7%AE%80%E5%8D%95%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
-    <id>http://www.whtis.com/2016/02/18/Java学习总结-第十六章-简单输入输出/</id>
-    <published>2016-02-18T11:37:58.000Z</published>
-    <updated>2016-09-14T15:49:34.000Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章主要讨论数据持久化的问题。一般Java程序在结束后所有存储在内存中的数据都会消失，为了保留这些数据，就要学会如何将它们存储到磁盘文件或光盘文件中。<br>本章介绍的主要是两个方面的内容：文本I/O和二进制I/O。为了知识的连贯性，需要先介绍相关的知识，以方便理解。<br><strong>计算机中所有文件都是以二进制格式来存储的。文本I/O是在二进制I/O基础上提供了一层抽象，它封装了字符的编码和解码过程，在文本I/O中自动进行编码和解码。</strong></p>
-<h3 id="提前需要知道的一些知识">提前需要知道的一些知识</h3><ul>
-<li>windows和Unix文件存储目录的不同。</li>
-<li>位、字节、字符、ASCII码和统一码Unicode相关知识。<br>位，英文是bit，是用来表示计算机数据的一种计量单位，8bit为一个字节，ASCII码采用一个字节存储二进制数据，Java中统一码采用两个字节进行存储，统一码的低字节就是ASCII码，因此在Java中，字符是由两个字节构成的。</li>
-<li>Java中基本数据类型都占几个字节。如，int类型是4个字节，char类型是2个字节。</li>
-</ul>
-<h3 id="文件类File">文件类File</h3><p>无论是文本I/O还是二进制I/O的构造方法，都需要传入文件类参数或者文件名参数。</p>
-<h4 id="文件系统相关">文件系统相关</h4><ul>
-<li>目录路径与文件名全称是平台依赖的。</li>
-<li>为了解决不同平台路径与分隔符的问题，File类提供了四个常量：<ul>
-<li>File.PathSeparator </li>
-<li>File.PathSeparatorChar <code>&quot;/&quot;</code>or<code>&quot;\&quot;</code> </li>
-<li>File.Separator </li>
-<li>File.SeparatorChar <code>&quot;;&quot;</code>or<code>&quot;:&quot;</code></li>
-</ul>
-</li>
-<li><code>绝对路径（absolute path）</code>名是依赖于系统的，如果想开发平台无关的程序，一定不要用绝对路径。可以使用和平台无关的常量创建一个相对路径。（简单的方法是无论Win还是Linux，相对路径分隔符都使用”/“即可。）</li>
-</ul>
-<h4 id="File类的常用方法简录">File类的常用方法简录</h4><ul>
-<li>构造方法：<ul>
-<li>File（pathname：String）<br>······</li>
-</ul>
-</li>
-<li>常用方法<ul>
-<li>exists（） 检测文件是否存在</li>
-<li>isDirectory（）/isFile（） 是目录/文件</li>
-<li>isAbsolute（） 该文件是否由绝对路径创建</li>
-<li>getAbsolutePath（） 返回File对象的绝对路径</li>
-<li>getCanonicalPath（） 返回值与getAbsolutePath（）相同，但是删除了一些冗余符号</li>
-<li>getPath（）</li>
-<li>getParent（）<br>······</li>
-</ul>
-</li>
-</ul>
-<h3 id="文本I/O类">文本I/O类</h3><ul>
-<li>File类不提供从文件中读写数据的方法，因此需要选择适当的输入输出类来进行I/O操作。<strong>输入输出都是对于程序本身而言</strong>。<br><img src="文本IO类.jpg" alt="文本I/O类"></li>
-<li>Reader类是文本输入的根类，Writer类是文本输出的根类。</li>
-<li>Reader类常用方法：<ul>
-<li>read（） 从输入流读取下一个字符，返回值在0到65525之间，表示该字符的统一码。到达流的结尾时返回-1<br>···</li>
-</ul>
-</li>
-<li>Writer类常用方法：<ul>
-<li>flush（） 刷新该输出流，并将已经输出到缓冲区的所有字符写入文件<br>···</li>
-</ul>
-</li>
-<li>read（）方法读取字符，如果没有有效字符，那么它将阻塞线程。</li>
-<li>处理PrintWriter类，其他文本I/O类中的所有方法都声明抛出异常java.io.IOException。</li>
-</ul>
-<h4 id="FileReader类和FileWriter类">FileReader类和FileWriter类</h4><ul>
-<li>使用主机上默认的字符编码方式进行读写操作。</li>
-<li>所有方法均继承自父类，没有新的方法。</li>
-<li>FileReader类read（）方法是读取一个<strong>字节</strong></li>
-<li>FileWriter构造方法支持参数append：<ul>
-<li>FileWriter(File file,booean append) 如果原文件存在，可以通过设置append参数决定是覆盖还是追加</li>
-</ul>
-</li>
-</ul>
-<h4 id="InputStreamReader类和OutputStreamWriter类">InputStreamReader类和OutputStreamWriter类</h4><ul>
-<li>可以在构造方法中指定使用哪种编码方案进行读写操作。</li>
-<li>用于实现字符与字节之间的转化。写入OutputStreamWriter的字符用指定的编码方案翻译为字节。 </li>
-<li>除<code>getEncoding()</code>方法外，均继承自父类方法。getEncoding()方法返回这个数据流使用的编码方案名称。<br><strong>Java程序使用的是统一码（Unicode）。从FileReader流中读取一个字符时，返回该字符的统一码。字符在文件中的编码可能不是统一码，Java自动将它转化为统一码，想FileWriter流中写入字符时，Java自动的将统一码转化为文件指定编码。</strong></li>
-</ul>
-<h4 id="BufferedReader类和BufferedWriter类">BufferedReader类和BufferedWriter类</h4><ul>
-<li>用于输出字符与字符串。</li>
-<li>BufferedReader类和BufferedWriter类通过减少读写次数来加快输入输出的速度。缓冲区数据流使用一个类似高速缓冲器作用的字符数组。缓冲区默认是<code>8192</code>个字节。</li>
-<li>缓冲区输出流只有当它的缓冲区已满或调用<code>flush()</code>方法才调用写入文件的方法。</li>
-<li>BufferedReader常用方法：<ul>
-<li>readLine（） 整行读取（不带换行符的一行），到达流的末尾时，返回<code>null</code><br>···</li>
-</ul>
-</li>
-<li>BufferedWriter常用方法：<ul>
-<li>newLine（） 向文件写入一个依赖平台的换行符。以下方法可以获得系统的换行符：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> String lineSeparator = (String) java.security.AccessController.doPrivileged(<span class="keyword">new</span> sun.security.action.GetPropertyAction(<span class="string">"line.separator"</span>));</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>物理输入输出的I/O设备比CPU的速度慢得多，因此读取一个大文件时，使用缓冲区能够较大地提高效率。</strong></p>
-<h4 id="PrintWriter类和PrintStream类">PrintWriter类和PrintStream类</h4><ul>
-<li>可以将对象、字符串和数值以<code>文本</code>方式输出。</li>
-<li>PrintWriter的效率比PrintStream高，功能一样，前者用于替代后者。</li>
-<li>打印数值、字符或布尔值，就是将其转化为字符串打印。打印一个对象就是打印该对象用<code>toString()</code>方法返回的描述字符串。</li>
-<li>printf（）方法用于格式化输出。</li>
-<li><em>System.out解析</em><br>out是定义在System类中类型为PrintStream的一个静态变量。默认情况下，out是标准输出设备，即屏幕。可以使用<code>setOut()</code>方法设置新的out。</li>
-<li>常用构造方法：<ul>
-<li>public PrintWriter（Writer out，boolean autoFlush） autoFlush为true，println方法会引起缓冲区刷新</li>
-</ul>
-</li>
-</ul>
-<h3 id="二进制I/O">二进制I/O</h3><ul>
-<li>二进制输入输出不需要进行文本的编码与解码操作，所以要比文本I/O效率高。向文件写入字节，就是将源字节复制到文件中，从文件读取字节，就是将文件中的字节原样返回。<br><img src="二进制IO类.jpg" alt="二进制I/O类"></li>
-<li>InputStream和OutputStream的所有方法与Reader和Writer中的方法类似，不同的是前者操作的是字节，后者操作的是字符。</li>
-<li>InputStream类和OutputStream类是抽象类。</li>
-<li>InputStream类常用方法：<ul>
-<li>read（） 从输入流中读取数据的下一个字节，返回值为0~255之间的整数，如果到达流尾，返回-1</li>
-<li>available（） 返回可以从该输入流读取的字节数</li>
-<li>mark（int readlimit） 在该输入流中标记当前位置<br>···</li>
-</ul>
-</li>
-<li>OutputStream类常用方法：<ul>
-<li>write（int b） 将指定字节写到输出流，参数b是int型，写入的值是（byte）b</li>
-<li>flush（）<br>···</li>
-</ul>
-</li>
-</ul>
-<h4 id="FileInputStream类和FileOutputStream类">FileInputStream类和FileOutputStream类</h4><ul>
-<li>继承自父类的方法，没有引进新方法</li>
-<li>输入输出均是操作的字节。</li>
-</ul>
-<h4 id="FilterInputStream类和FilterOutputStream类">FilterInputStream类和FilterOutputStream类</h4><p><code>过滤器数据流（filter stream）</code>是为某种目的过滤字节的数据流。基本字节输入流提供的读取方法只能用来读取字节，如果想要读取整数值、双精度值或字符串，需要一个过滤器类来包装输入流。</p>
-<ul>
-<li>该类是父类，如果需要处理基本数值类型数据时，可以使用DataInputSteam类和DataOutputStream类来过滤字节。</li>
-</ul>
-<h4 id="DataInputStream类和DataOutputStream类">DataInputStream类和DataOutputStream类</h4><ul>
-<li>DataInputSteam从数据流中读取字节并将它们转化为适当的基本类型值或字符串。DataOutputStream将基本类型的值或字符串转化为字节并将这些字节输出到输出数据流。</li>
-<li>DataOutputStream类和DataInputSteam类以平台无关的方式读写Java的基本类型值和字符串。</li>
-<li>可以使用<code>input.available()==0</code>方法检测读取是否已经到了结尾。</li>
-<li>DataInputSteam扩展<code>FilterInputStream</code>类并实现<code>DataInput</code>接口；DataoutputStream扩展<code>FilterOutputStream</code>类并实现<code>DataOutput</code>接口。</li>
-<li>DataInput类常用方法： <ul>
-<li>readInt（） 从输入流中读取一个int值（输入流是一个字节一个字节读入，DataInputSteam的作用就是将读入的字节4个4个组合，其他方法类似）</li>
-<li>readUTF（） 从UTF格式中读取一个字符串<br>···</li>
-</ul>
-</li>
-<li>Dataoutput类常用方法：<ul>
-<li>writeByte（int v） 将参数v的低8位（一个字节）写到输出流（如果参数v是在Java中被赋值，那么v的统一码是16位（两个字节），调用该方法只能将低字节（低8位）写到输出流）</li>
-<li>writeBytes（String s） 将字符串中字符的低8位写到输出流，适合由ASCII字符构成的字符串</li>
-<li>writeChar（char c） 向输出流中写一个字符（两个字节构成）</li>
-<li>writeChars（String s） 将字符串s中的每一个字符依次写到输出流，每个字符占两个字节</li>
-<li>writeInt（int v） 向输出流写一个int值</li>
-<li>writeUTF（String s） 用UTF格式写出一个字符串<br>···<br><strong>由此可知，如果要使用二进制I/O，必须使用相对应的输入输出方法以及正确的顺序才能得到正确的数据。</strong></li>
-</ul>
-</li>
-<li><em>UTF编码</em><ul>
-<li>UTF是一种编码方案，它可以使系统高效的同时处理统一码（Unicode）和ASCII码。ASCII码字符集是统一码字符集的一个子集。</li>
-<li>为了解决8位ASCII码转为16位统一码造成的浪费问题，提出来UTF编码。UTF编码方案分别使用1字节、2字节或3字节来存储字符。<ul>
-<li>ASCII码的值不会超过0x7F,使用一个字节编码</li>
-<li>不超过0x7FF的统一码值编码为两个字节</li>
-<li>其余编码为三个字节</li>
-</ul>
-</li>
-<li>UTF字符的开始几位表明该字符的编码是几个字节的：<ul>
-<li>首位是0,一个字节的字符</li>
-<li>前三位是110，两个字节字符的第一个字节</li>
-<li>前四位是1110，它是三字节字符的第一个字节</li>
-</ul>
-</li>
-<li>UTF字符串的前两个字节用来存储字符串中的字符个数。如：writeUTF(“ABCDEF”)写入的是8个字节</li>
-<li><strong>如果字符串的大多数字符都是普通的ASCII字符，采用UTF格式存储的效率是很高的。</strong></li>
-</ul>
-</li>
-</ul>
-<h4 id="BufferedInputStream类和BufferedOutputStream类">BufferedInputStream类和BufferedOutputStream类</h4><ul>
-<li>提供缓冲区，加快读写<code>字节</code>的效率。缓冲区默认大小为<code>512</code>个字节。</li>
-</ul>
-<h3 id="对象输入输出">对象输入输出</h3><ul>
-<li>DataInputSteam类和DataOutputStream类可以实现基本数据类型与字符串的输入输出，在此基础上，ObjectInputStream类和ObjectOutputStream类还允许对象的输入输出。</li>
-<li>可以完全用ObjectInputStream类和ObjectOutputStream类替代DataInputSteam类和DataOutputStream类。</li>
-<li>ObjectInputStream扩展<code>InputStream</code>类并实现<code>ObjectInput</code>和<code>ObjectStreamConstants</code>接口,<code>ObjectInput</code>是<code>DataInput</code>的子接口；ObjectOutputStream扩展<code>OutputStream</code>类并实现<code>ObjectOutput</code>和<code>ObjectStreamConstants</code>接口,<code>ObjectOutput</code>是<code>DataOutput</code>的子接口。<code>ObjectStreamConstants</code>包含ObjectInputStream类和ObjectOutputStream类中所用的常量。<br><img src="Object输入输出类.jpg" alt="Object输入输出"></li>
-<li>常用构造方法：<ul>
-<li>public ObjectInputStream（InputStream in）</li>
-<li>public ObjectOutputStream（OutputStream out）</li>
-</ul>
-</li>
-<li>可以向数据流中写入多个对象或基本类型数据。从对应的ObjectInputStream中读回这些对象时，必须与其存入时的类型和顺序相同。对于必要的类型，必须使用Java安全性所要求的类型转换。（显式转换）</li>
-</ul>
-<h4 id="可序列化接口Serializable">可序列化接口Serializable</h4><ul>
-<li>并不是每一个对象都可以写到输出流。可以写入到输出流中的对象称为<code>可序列化的（serializable）</code>。</li>
-<li>可序列化的对象时java.io.Serializable接口的实例，所以可序列化对象的类必须实现Serializable接口。</li>
-<li>Serializable接口是一种标记性接口。它没有方法，要实现这个接口可以启动Java机制，自动执行存储对象或数组的过程。</li>
-<li>Java提供了自动进行写对象这个过程的内在机制，这个过程称为<code>对象序列化（object serialization）</code>。与此相反，读取对象的过程称为<code>对象解读序列化（object deserialization）</code>。它是在ObjectInputStream类中实现的。</li>
-<li>存储一个可序列化对象时，会对该对象的类进行编码，编码包括类名、类的说明标志、对象实例变量的值以及任何从初始对象引用的其他对象包，但是不存储对象静态变量的值。</li>
-<li><p>如果一个对象时Serializable的实例，但它包含一个非序列化的数据域，该对象不是可序列化的。为了是该对象可序列化，可以给这些数据域加上关键字<code>transient</code>，告诉Java虚拟机将对象写入对象流时忽略这些数据域。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> v1;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">double</span> v2;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">transient</span> A v3 = <span class="keyword">new</span> A();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123; &#125; <span class="comment">//A is not serializable</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>如果一个对象多次写入对象流，第一次存储一个可序列化对象时，会创建一个序列号，Java虚拟机将对象的所有内容包括序列号一起写入对象输出流，以后的存储，都是存储序列号的一个拷贝，换句话说，只存储引用。</p>
-</li>
-</ul>
-<h4 id="序列化数组">序列化数组</h4><p>当数组中的元素是可序列化的时候，数组也是可序列化的。一个完整的数组可以用writeObject方法存入文件，此后使用readObject方法将它读出。</p>
-<h3 id="随机读写文件">随机读写文件</h3><ul>
-<li>Java提供了RandomAccessFile类，它允许对文件内的随机位置进行读写。</li>
-<li>RandomAccessFile类实现了DataInput和DataOutput接口。</li>
-<li>常用方法：<ul>
-<li>RandomAccessFile（File file，String mode） 以指定File和模式创建，模式可以是”r”、”rw”等</li>
-<li>getFilePointer（） 返回从文件头到发生读写位置的偏移量</li>
-<li>length（） 返回文件的字节数</li>
-<li>seek（long pos） 设置从文件头到下一次读写位置的偏移量</li>
-<li>setLength（long newLength） 给这个文件设置一个新长度<br>···</li>
-</ul>
-</li>
-<li>随机读写文件是由字节序列组成的，在其中某个字节的位置处有一个称为<code>文件指针（file pointer）</code>的特殊标记。文件的读写操作就是在文件指针所指的位置上进行的。</li>
-<li><strong>文件指针置于文件的开头。</strong></li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>本章可能出现的异常总结如下：<ul>
-<li>企图用一个不存在的文件创建FileReader/FileWriter对象，出现异常<code>FileNotFoundException</code>。</li>
-<li>到达文件尾后还想读取数据，报<code>java.io.EOFException</code>异常。</li>
-<li>readObject（）方法可能抛出<code>ClassNOtFoundException</code>异常。</li>
-</ul>
-</li>
-<li>FilterInputStream类和FilterOutputStream类的作用在于：基本的字节输入输出流只能操作字节，但是基本类型的数据如int类型是4个字节，如果想要读取正确的int值，仅靠基本的FileInputStream和FileOutputStream类是无法完成的，因此需要在这基础上包装一层Filter Stream，使用该包装类的方法可以正确存取基本类型的数据。</li>
-<li>随机读写文件常被用来处理记录型文件，因为记录型文件每条记录的大小可以设置为固定的。这样，每次操作时，就可以确定文件指针的偏移量了。</li>
-<li>随机读写虽然说是文件指针位于文件头，但显示的实际情况是：<br><em>在空文件中插入一条记录，此时文件指针位于这条记录末尾，但是显示的却是这条记录，这点要牢记。</em></li>
-<li>I/O类可分为文本I/O和二进制I/O。文本I/O将数据解释成字符的序列，二进制I/O将数据解释成原始的二进制数。文本在文件中如何存储依赖于文件的编码方式。Java对文本I/O提供自动编码与解码。</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><ul>
-<li>16.1 单词统计可以使用StringTokenizer类的countTokens（）方法或者使用正则匹配。</li>
-<li>16.4 重写Java源代码格式。代码提供了行尾风格和次行风格相互转化的方法。</li>
-<li>16.5 使用字符串的<code>replaceAll()</code>方法删除字符。</li>
-<li>16.14 代码参考<a href="http://www.whtis.com/2016/02/16/GUI%E5%B0%8F%E7%BB%83%E4%B9%A0-%E7%AE%80%E6%98%93%E8%AE%A1%E7%AE%97%E5%99%A8/">GUI小练习-简易计算器</a></li>
-<li>16.15 代码见文件夹AddressBook。</li>
-<li>其余习题16.7 16.8 16.10 16.11源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter16/src" target="_blank" rel="external">chapter16</a></li>
-</ul>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章主要讨论数据持久化的问题。一般Java程序在结束后所]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[GUI小练习-简易计算器]]></title>
-    <link href="http://www.whtis.com/2016/02/16/GUI%E5%B0%8F%E7%BB%83%E4%B9%A0-%E7%AE%80%E6%98%93%E8%AE%A1%E7%AE%97%E5%99%A8/"/>
-    <id>http://www.whtis.com/2016/02/16/GUI小练习-简易计算器/</id>
-    <published>2016-02-16T10:51:30.000Z</published>
-    <updated>2016-09-14T15:46:19.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="简易说明">简易说明</h2><ul>
-<li>学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：<ul>
-<li>基本的加减乘除四则运算</li>
-<li>连续计算</li>
-<li>运算结果记忆</li>
-<li>程序启动次数统计</li>
-</ul>
-</li>
-<li>本来打算添加其它功能，不过基本框架出来也就不打算在这部分停留太久，暂时写下设计的功能，等以后有更简单的方法处理连续计算的时候再回来重写一下吧：<ul>
-<li>显示结果的处理，包括两个整数作运算，结果应该显示为整数、浮点数显示的位数设定等。目前为了方便，统一转为了浮点数进行计算，显示的结果也是浮点数。</li>
-<li>初始设计了四个功能键，依次为<code>Ac</code>（清零）、<code>Cv</code>（小数和分数的转化）、<code>Re</code>（最近一次结果记忆），<code>←</code>（删除），目前除<code>Cv</code>外都已实现。</li>
-<li>目前显示结果为单行显示，最初考虑的是双行，但因为文本对齐和设置的问题无法处理，最终采用的JTextField进行单行显示。</li>
-<li>组件的等比例放大和缩小问题。目前只能做到自动，因此将其设置成为了不可更改大小,避免破坏布局。</li>
-</ul>
-</li>
-</ul>
-<h2 id="遇到的问题及解决方案记录">遇到的问题及解决方案记录</h2><h3 id="布局问题">布局问题</h3><ul>
-<li>如何拼凑无缝的界面<ul>
-<li>解决方法:略</li>
-</ul>
-</li>
-</ul>
-<h3 id="加减乘除运算问题">加减乘除运算问题</h3><ul>
-<li>第一次就按运算符的处理<ul>
-<li>如果是初始操作，无视之</li>
-<li>判断StringBuffer对象里是否有东西，如果没有，直接设置运算符compute</li>
-</ul>
-</li>
-<li>多次按运算符的处理<ul>
-<li>创建一个string类型的值来存储运算符，但同时只能设置一个</li>
-</ul>
-</li>
-<li>连续运算的问题（貌似链表处理比较简单？没学过，布吉岛…）<ul>
-<li>计算器能够正常运行的一系列设计，包括stringbuffer、compute、result等<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">computeAction</span><span class="params">(ActionEvent e, JTextField textField)</span> </span>&#123;</div><div class="line"><span class="comment">//</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="小数点的问题">小数点的问题</h3><ul>
-<li><p>直接按小数点应该将其设置成正确的小数形式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (stringBuffer.toString().startsWith(<span class="string">"."</span>)) &#123;</div><div class="line">            stringBuffer.insert(<span class="number">0</span>, <span class="string">"0"</span>);</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>小数点在一次运算中只能出现一次，多按无效</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="string">"."</span>:</div><div class="line">      <span class="keyword">boolean</span> hasDot = <span class="keyword">false</span>;</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stringBuffer.length(); i++) &#123;</div><div class="line">          <span class="keyword">if</span> (stringBuffer.charAt(i) == <span class="string">'.'</span>) &#123;</div><div class="line">              hasDot = <span class="keyword">true</span>;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span> (!hasDot) &#123;</div><div class="line">          capicaty++;</div><div class="line">          stringBuffer.append(<span class="string">"."</span>);</div><div class="line">          textField.setText(stringBuffer.toString());</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">break</span>;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="等于问题">等于问题</h3><ul>
-<li>仅仅在初始时输入数字，不进行任何运算，按下等于号应该显示初始输入的数字，并将result设置为相关的值，从而进行下次运算<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(capicaty&lt;=<span class="number">0</span>) &#123;</div><div class="line">	textField.setText(String.valueOf(result));</div><div class="line">    reResult = result;</div><div class="line">    compute = <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="除法问题">除法问题</h3><ul>
-<li>出现不合法的运算会得到Infinity，为了界面友好，显示为’0’<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="string">"÷"</span>:</div><div class="line">    result /= Double.parseDouble(stringBuffer.toString());</div><div class="line">    <span class="keyword">if</span> (String.valueOf(result).equals(<span class="string">"Infinity"</span>)) &#123;</div><div class="line">        result = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">break</span>;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="代码">代码</h2><ul>
-<li>完整的代码见我的Github：<a href="https://github.com/whtis/Calculator" target="_blank" rel="external">Calculator</a></li>
-</ul>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="简易说明">简易说明</h2><ul>
-<li>学习了Java图形界面设计，写了一个简易的计算器，实现的功能如下：<ul>
-<li>基本的加减乘除四则运算</li>
-<li>连续计算</li>
-<li>运算结果记忆</li>
-<li>程序启动次数统计</li>
-<]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="小练习" scheme="http://www.whtis.com/tags/%E5%B0%8F%E7%BB%83%E4%B9%A0/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结--第十三章 创建图形用户界面]]></title>
-    <link href="http://www.whtis.com/2016/02/15/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0-%E5%88%9B%E5%BB%BA%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2/"/>
-    <id>http://www.whtis.com/2016/02/15/Java学习总结-第十三章-创建图形用户界面/</id>
-    <published>2016-02-15T14:32:39.000Z</published>
-    <updated>2016-09-14T15:48:42.000Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章综合第十一、十二章的内容，介绍GUI编程中常用的组件。</p>
-<h3 id="Swing_GUI组件的公共特性">Swing GUI组件的公共特性</h3><ul>
-<li>Component类是所有用户界面组件和容器的根类，Jcomponent类是大多数Swing组件的根类。</li>
-<li>GUI组件都有处理字体、颜色、大小、工具提示文本和边框等属性的方法。</li>
-<li>可以在Jcomponent类的任何对象上设置边框。<ul>
-<li>TitleBorder(String title) 创建标题边框</li>
-<li>LineBorder(Color color,int width) 创建线型边框</li>
-</ul>
-</li>
-<li><strong>容器类Container类是Swing GUI组件类的父类。</strong></li>
-</ul>
-<h3 id="按钮（JButton）">按钮（JButton）</h3><p><code>按钮（button）</code>是一种点击时触发行为事件的组件。Swing提供常规按钮、开关按钮、复选框和单选按钮。</p>
-<ul>
-<li>Jbutton可以响应多种类型的事件，通常我们只需要响应ActionEvent事件。</li>
-<li>按钮可以设置工具提示文本（<code>setToolTipText(xxx)</code>）和热键（<code>setMnemonic(xxx)</code>）。</li>
-</ul>
-<h4 id="图标">图标</h4><ul>
-<li>图标是一个固定大小的图片，典型的图标体型较小，用于装饰组件。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Icon icon = <span class="keyword">new</span> ImageIcon(<span class="string">"xxx"</span>);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>java目前支持GIF、PNG、JPEG三种图像格式。</strong></p>
-<ul>
-<li>每个常规按钮有一个默认图标，一个按下图标和一个在上图标，使用如下方法进行设置：<ul>
-<li>setPressedIcon(“XXX”) 设置按钮按下的图标</li>
-<li>setRolloverIcon(“xxx”) 设置鼠标停留在按钮上时的图标</li>
-</ul>
-</li>
-</ul>
-<h4 id="对齐方式">对齐方式</h4><ul>
-<li><p><code>水平对齐（horizontal alignment）</code>指定以什么样的方式在<strong>按钮</strong>上放置文本和图标。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setHorizontalAlignment(<span class="keyword">int</span>)</div></pre></td></tr></table></figure>
-<ul>
-<li>int的取值为：SwingConstants.LEADING(LEFT、CENTER、RIGHT、TRAILING)。默认的是最后一种（右对齐）。</li>
-</ul>
-</li>
-<li><p><code>垂直对齐（vertical alignment）</code>指定以什么样的垂直方式在按钮上放置文本和图标。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setVerticalAlignment(<span class="keyword">int</span>)</div></pre></td></tr></table></figure>
-<ul>
-<li>int的取值为：SwingConstants.TOP(CENTER、BOTTOM)，默认的是CENTER。</li>
-</ul>
-</li>
-</ul>
-<h4 id="文本位置">文本位置</h4><ul>
-<li><code>水平文本位置（horizontal text position）</code>指定文本相对于图标的水平位置。</li>
-<li><code>垂直文本位置（Vertical text position）</code>指定文本相对于图标的垂直位置。</li>
-<li>设置方式和默认值与对齐方式相同。</li>
-</ul>
-<h3 id="复选框（JCheckBox）">复选框（JCheckBox）</h3><ul>
-<li>一个<code>开关按钮（toggle button）</code>有两种状态，JToggleButton类继承AbstractButton并实现了一个开关按钮。开关按钮分为两种：<br>1、JCheckBox 复选按钮（方形）<br>2、 JRadionButton 单选按钮（圆形）</li>
-<li>JCheckBox先触发的是ItemEvent事件，然后触发ActionEvent事件。要确定复选框是否被选中，使用<code>isSelected()</code>方法。</li>
-</ul>
-<h3 id="单选按钮（JRadioButton）">单选按钮（JRadioButton）</h3><ul>
-<li><code>单选按钮（radio button）</code>，或者叫<code>选择按钮(option button)</code>,让用户从一组选项中选择唯一的一个选项。</li>
-<li>单选按钮使用Java.swing.ButtonGroup类的实例进行组织，并使用add方法添加按钮<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ButtonGroup group = <span class="keyword">new</span> ButtonGroup();</div><div class="line">group.add(xx1);</div><div class="line">group.add(xx2);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>如果没有创建按钮组，就无法达到单选的目的。</p>
-<ul>
-<li>JRadioButton先触发的是ItemEvent事件，然后触发ActionEvent事件。要确定复选框是否被选中，使用<code>isSelected()</code>方法。</li>
-</ul>
-<h3 id="标签（JLable）">标签（JLable）</h3><ul>
-<li><code>标签（lable）</code>是显示一小段文字、一幅图片或二者皆有的区域。</li>
-<li>JLable继承自JComponent类，具有与JButton类似的属性。</li>
-</ul>
-<h3 id="文本域（JTextField）">文本域（JTextField）</h3><ul>
-<li><code>文本域（text field）</code>可以用于输入或显示字符串。（单行）</li>
-<li>JTextField继承自JTextComponent类。</li>
-<li>JTextField触发的是ActionEvent事件（回车键触发）。</li>
-</ul>
-<h3 id="文本区（JTextArea）">文本区（JTextArea）</h3><ul>
-<li>文本区用户输入多行文本。</li>
-<li>可以创建指定行列的文本区，JTextArea继承自JTextComponent类。</li>
-<li><p>JTextArea无法滚动，但可以创建一个<code>JScrollPane</code>对象处理滚动。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">JScrollPane scrollPane = <span class="keyword">new</span> JScrollPane(<span class="keyword">new</span> JTextArea());</div></pre></td></tr></table></figure>
-</li>
-<li><p>常用属性</p>
-<ul>
-<li>setLineWrap（boolean b） 是否换行</li>
-<li>setWrapStyleWord（boolean b） 是否按单词换行，默认按照字符换行</li>
-<li>setEditable（boolean b） 是否可编辑</li>
-</ul>
-</li>
-</ul>
-<h3 id="组合框（JComboBox）">组合框（JComboBox）</h3><ul>
-<li><code>组合框（combo box）</code>，也叫<code>选择列表（choice list）</code>或<code>下拉式列表（drop-down list）</code>，它包含项目的一个列表，用户能够从中选择。<strong>使用它可以限制用户的选择范围并能避免对输入数据有效性的繁复检查。</strong></li>
-<li>JComboBox可以引发ActionEvent和ItemEvent事件。选中一个新的项目是，JComboBox会产生两次ItemEvent事件，一次是取消前一个项目，另一次是选中当前项目。</li>
-<li>常用方法<ul>
-<li>getSelectedItem（）方法返回已经选定的项目</li>
-<li>getSelectedIndex（） 返回选中的项目次序号</li>
-</ul>
-</li>
-</ul>
-<h3 id="列表框（JList）">列表框（JList）</h3><ul>
-<li><code>列表框（list）</code>是一个组件，与JComboBox类似，但是它允许用户选择一个或多个项目。</li>
-<li><p>选择模式属性selectionMode取值如下，默认为多区间选择</p>
-<ul>
-<li>SINGLE_SELECTION 单项选择</li>
-<li>SINGLE_INTERVAL_SETECTION 单区间选择（允许选择多项，但是必须连续）</li>
-<li>MULTIPLE_INTERVAL_SETECTION 多区间选择<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">JList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>JList不能自动滚动，可以参考文本区的方法设置滚动。</p>
-</li>
-<li>JList触发ListSelectionEvent事件。</li>
-<li>常用方法：<ul>
-<li>getSelectedIndices（） 以数组形式返回选中的次序号</li>
-<li>getSelectedValues（） 以数组形式返回选中的值</li>
-<li>getVisibleRowCount（） 返回可见行数</li>
-</ul>
-</li>
-</ul>
-<h3 id="滚动条（JScrollbar）">滚动条（JScrollbar）</h3><ul>
-<li><code>滚动条（scrollbar）</code>是一个控制器，它使用户能从值得一个范围中进行选择。</li>
-<li>JScrolBar的属性如下：<ul>
-<li>orientation（方向）：指定滚动条的水平或垂直模式。</li>
-<li>maximum（最大值）: 指滚动条的最大值。</li>
-<li>minimum（最小值）</li>
-<li>visibleAmount（宽度，也叫广度）：是指滚动块的相对宽度。滚动块在屏幕上的显示的实际宽度取决于最大值及visibleAmount的值。</li>
-<li>value：表示滚动条当前的值。</li>
-<li>blockIncrement（块增量）：是用户点击滚动条的块增加（减少）区时所增加（减少）的值。</li>
-<li>unitIncrement（单位增量）：用户点击单位增加（减少）区所增加（减少）的值。</li>
-<li>**滚动条上的宽度对应于<code>maximum+visibleAmount</code>。当滚动条设为最大值时，滚动块的左端在maximum处，右端在maximum+visibleAmount处。</li>
-</ul>
-</li>
-<li>用户改变滚动条的值时，滚动条产生AdjustmentEvent的一个实例。</li>
-<li>可以使用构造方法或者使用<code>setOrientation</code>方法来指定滚动条的方向。默认情况下，属性maximum的值为100，minimum为0，blockIncrement为10，visibleAmount为10。</li>
-</ul>
-<h3 id="滑动块（JSlider）">滑动块（JSlider）</h3><ul>
-<li>JSlider与JScrollBar类似，但是JSlider具有更多的属性和更多的显示形式。</li>
-<li>JSlider允许用户以图形方式在指定的区间中选择一个数值。滑动块可以在主标记以及次标记之间滑动。标记间的像素值是由<code>setMajorTickSpacing</code>和<code>setMinorTickSpacing</code>方法控制的。</li>
-<li>Slider可以带或不带标记，可以有或没有标签，可以水平显示或垂直显示。</li>
-<li>垂直滚动条的值从上向下增加，但是垂直滑动块的值从上向下减少。</li>
-<li>改变滑动块的值时，滑动块产生javax.swing.event.ChangeEvent的一个实例。</li>
-</ul>
-<h3 id="创建多个窗口">创建多个窗口</h3><p>新开的窗口叫做<code>子窗口（subwindow）</code>，主框架叫<code>主窗口（main window）</code>。</p>
-<ul>
-<li>从应用程序创建一个子窗口，需要创建JFrame的一个子类，用于定义任务和通知新窗口做什么。然后，在程序中创建该子类的一个实例，通过把它设为可见的即可弹出新窗口。</li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>可以在任何Swing组件使用边框，边框和图标都可以共享。</li>
-<li>AbstractButton类中的常量LEFT、RIGHT……也可以被许多其他Swing组件使用。由于所有的Swing组件都实现了SwingConstants，因此各种组件都可以通过SwingConstants引用这些常量。因此<code>JButton.CENTER和SwingConstants.CENTER</code>作用是一样的。</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><ul>
-<li>习题13.1 13.4 13.5 13.8 13.10 13.14 13.15源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter13/src" target="_blank" rel="external">chapter13</a></li>
-</ul>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p>本章综合第十一、十二章的内容，介绍GUI编程中常用的组件]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
     
       <category term="java" scheme="http://www.whtis.com/categories/java/"/>
     
