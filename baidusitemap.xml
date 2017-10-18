@@ -3,6 +3,28 @@
 
     
   <url>
+    <loc>http://www.whtis.com/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89--Spring-4-x%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9A%E6%B3%9B%E5%9E%8B%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</loc>
+    <lastmod>2017-10-18T12:28:51.697Z</lastmod>
+    <data>
+        <display>
+        <title>spring4学习笔记（四）--Spring-4.x新特性：泛型依赖注入</title>
+        <pubTime>2017-10-13T07:09:57.000Z</pubTime>
+        
+        <tag>java </tag>
+         
+        <tag>spring4 </tag>
+         
+         
+           
+             
+              <breadCrumb title="java web" url="http://www.whtis.com/categories/java-web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.whtis.com/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89--spring%E4%B8%ADBean%E7%9A%84%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2017-10-18T12:21:44.251Z</lastmod>
     <data>
@@ -53,28 +75,6 @@
         <display>
         <title>spring4 学习笔记（一）--spring 简介</title>
         <pubTime>2017-10-06T11:19:15.000Z</pubTime>
-        
-        <tag>java </tag>
-         
-        <tag>spring4 </tag>
-         
-         
-           
-             
-              <breadCrumb title="java web" url="http://www.whtis.com/categories/java-web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.whtis.com/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89--Spring-4-x%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9A%E6%B3%9B%E5%9E%8B%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</loc>
-    <lastmod>2017-10-13T07:12:08.006Z</lastmod>
-    <data>
-        <display>
-        <title>spring4学习笔记（四）--Spring-4.x新特性：泛型依赖注入</title>
-        <pubTime>2017-10-13T07:09:57.000Z</pubTime>
         
         <tag>java </tag>
          
