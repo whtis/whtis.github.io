@@ -437,7 +437,6 @@ td {
 html,
 body {
   height: 100%;
-  background: url("http://api.dujin.org/bing/1920.php");
 }
 .container {
   position: relative;
@@ -1951,7 +1950,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #06ffff;
+  background: #6a2dab;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3246,4 +3245,13 @@ pre .javascript .function {
   .pagination {
     margin: 8px 0 0;
   }
+}
+html,
+body {
+  height: 100%;
+  background-image: url("http://api.dujin.org/bing/1920.php");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  background-size: cover;
 }
