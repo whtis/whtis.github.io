@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.whtis.com/about/index.html</loc>
+    <lastmod>2017-10-19T09:48:01.683Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.whtis.com/2017/10/19/%E7%BB%99hexo%E5%8D%9A%E5%AE%A2nexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0Gitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2017-10-19T09:14:53.080Z</lastmod>
   </url>
@@ -219,11 +224,6 @@
   <url>
     <loc>http://www.whtis.com/2016/03/05/base64%E7%BC%96%E7%A0%81%E5%92%8C%E8%A7%A3%E7%A0%81%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81/</loc>
     <lastmod>2016-09-14T15:46:10.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.whtis.com/about/index.html</loc>
-    <lastmod>2016-08-13T15:51:23.000Z</lastmod>
   </url>
   
   <url>
