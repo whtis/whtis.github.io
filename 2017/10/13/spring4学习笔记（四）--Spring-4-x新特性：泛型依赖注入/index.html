@@ -85,17 +85,19 @@
 
 
 
-<meta name="description" content="本文章首发www.whtis.com，转载请注明出处">
+<meta name="description" content="Spring4 添加了泛型依赖注入的功能。具体的，从下面这张图来看： 假使我们创建了两个泛型基类BaseService&amp;lt;T&amp;gt;和BaseRepository&amp;lt;T&amp;gt;，并分别进行了实现UserService&amp;lt;User&amp;gt;和UserRepository&amp;lt;User&amp;gt;，如果在泛型基类中存在如下代码： 123456789public class BaseServic">
 <meta name="keywords" content="java,spring4">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spring4学习笔记（四）--Spring-4.x新特性：泛型依赖注入">
 <meta property="og:url" content="http://www.whtis.com/2017/10/13/spring4学习笔记（四）--Spring-4-x新特性：泛型依赖注入/index.html">
 <meta property="og:site_name" content="whtis&#39;s blog">
-<meta property="og:description" content="本文章首发www.whtis.com，转载请注明出处">
-<meta property="og:updated_time" content="2017-10-18T12:28:51.697Z">
+<meta property="og:description" content="Spring4 添加了泛型依赖注入的功能。具体的，从下面这张图来看： 假使我们创建了两个泛型基类BaseService&amp;lt;T&amp;gt;和BaseRepository&amp;lt;T&amp;gt;，并分别进行了实现UserService&amp;lt;User&amp;gt;和UserRepository&amp;lt;User&amp;gt;，如果在泛型基类中存在如下代码： 123456789public class BaseServic">
+<meta property="og:image" content="http://www.whtis.com/2017/10/13/spring4学习笔记（四）--Spring-4-x新特性：泛型依赖注入/spring4.x泛型依赖注入.jpg">
+<meta property="og:updated_time" content="2017-10-20T08:42:09.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring4学习笔记（四）--Spring-4.x新特性：泛型依赖注入">
-<meta name="twitter:description" content="本文章首发www.whtis.com，转载请注明出处">
+<meta name="twitter:description" content="Spring4 添加了泛型依赖注入的功能。具体的，从下面这张图来看： 假使我们创建了两个泛型基类BaseService&amp;lt;T&amp;gt;和BaseRepository&amp;lt;T&amp;gt;，并分别进行了实现UserService&amp;lt;User&amp;gt;和UserRepository&amp;lt;User&amp;gt;，如果在泛型基类中存在如下代码： 123456789public class BaseServic">
+<meta name="twitter:image" content="http://www.whtis.com/2017/10/13/spring4学习笔记（四）--Spring-4-x新特性：泛型依赖注入/spring4.x泛型依赖注入.jpg">
 
 
 
@@ -372,8 +374,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-18T20:28:51+08:00">
-                2017-10-18
+              <time title="更新于" itemprop="dateModified" datetime="2017-10-20T16:42:09+08:00">
+                2017-10-20
               </time>
             
           </span>
@@ -433,7 +435,15 @@
       
 
       
-        <hr>
+        <p>Spring4 添加了泛型依赖注入的功能。具体的，从下面这张图来看：<br><img src="spring4.x泛型依赖注入.jpg" alt="spring4.x泛型依赖注入"></p>
+<p>假使我们创建了两个泛型基类<code>BaseService&lt;T&gt;</code>和<code>BaseRepository&lt;T&gt;</code>，并分别进行了实现<code>UserService&lt;User&gt;</code>和<code>UserRepository&lt;User&gt;</code>，如果在泛型基类中存在如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseService</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">protected</span> BaseRepository baseRepository;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(baseRepository);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而<code>UserService&lt;User&gt;</code>类仅仅实现了<code>BaseService</code>的接口，没有重写<code>add</code>方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@service</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span>&lt;<span class="title">User</span>&gt; <span class="title">implement</span> <span class="title">BaseService</span></span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>UserRepository&lt;User&gt;</code>与<code>UserService&lt;User&gt;</code>类似。将这些Bean交给spring IOC进行管理，创建<code>main</code>方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"xxx.xml"</span>);</div><div class="line">        UserService userService = (UserService) ctx.getBean(<span class="string">"userService"</span>);</div><div class="line">        <span class="comment">//调用userService的add方法</span></div><div class="line">        UserService.add();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到<code>System.out.println(baseRepository);</code>的输出结果是一个<code>userRepository</code>类。<br>由此可知，spring4自动将<code>User</code>类传入了<code>baseRepository</code>的继承类中。</p>
+<hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
 
       
