@@ -3,6 +3,46 @@
 
     
   <url>
+    <loc>http://www.whtis.com/2017/10/19/%E7%BB%99hexo%E5%8D%9A%E5%AE%A2nexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0Gitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2017-10-21T11:02:40.620Z</lastmod>
+    <data>
+        <display>
+        <title>给hexo博客nexT主题添加Gitalk评论系统</title>
+        <pubTime>2017-10-19T06:58:47.000Z</pubTime>
+        
+        <tag>hexo，Gitalk，nexT </tag>
+         
+         
+           
+             
+              <breadCrumb title="hexo" url="http://www.whtis.com/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.whtis.com/2017/10/21/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/</loc>
+    <lastmod>2017-10-21T10:52:58.208Z</lastmod>
+    <data>
+        <display>
+        <title>最近要做的几件事</title>
+        <pubTime>2017-10-21T10:52:58.208Z</pubTime>
+        
+        <tag>待完成 </tag>
+         
+         
+           
+             
+              <breadCrumb title="未完成" url="http://www.whtis.com/categories/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.whtis.com/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89--SpEL-Spring%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E8%A8%80/</loc>
     <lastmod>2017-10-20T08:49:35.933Z</lastmod>
     <data>
@@ -40,26 +80,6 @@
            
              
               <breadCrumb title="java web" url="http://www.whtis.com/categories/java-web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.whtis.com/2017/10/19/%E7%BB%99hexo%E5%8D%9A%E5%AE%A2nexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0Gitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2017-10-20T08:44:04.678Z</lastmod>
-    <data>
-        <display>
-        <title>给hexo博客nexT主题添加Gitalk评论系统</title>
-        <pubTime>2017-10-19T06:58:47.000Z</pubTime>
-        
-        <tag>hexo，Gitalk，nexT </tag>
-         
-         
-           
-             
-              <breadCrumb title="hexo" url="http://www.whtis.com/categories/hexo/"/>
           
         </display>
     </data>
@@ -147,26 +167,6 @@
            
              
               <breadCrumb title="ubuntu" url="http://www.whtis.com/categories/ubuntu/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.whtis.com/2017/06/30/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/</loc>
-    <lastmod>2017-06-19T03:23:10.000Z</lastmod>
-    <data>
-        <display>
-        <title>最近要做的几件事</title>
-        <pubTime>2017-06-30T07:12:31.102Z</pubTime>
-        
-        <tag>待完成 </tag>
-         
-         
-           
-             
-              <breadCrumb title="未完成" url="http://www.whtis.com/categories/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
           
         </display>
     </data>

@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="whtis&#39;s blog">
 <meta property="og:description" content="写在前面注意，此插件基于github开发，授权阶段需要获取的权限不局限于issues，还包括编辑你代码的权限，因此对这应用授权时需要十分小心 前段时间因为hexo的nexT主题崩了（载入博客时显示全白，原因在这），换了material主题，这主题很有安卓的风格，我也写过对它的一些折腾：hexo博客主题–material折腾笔记。这些都不是重点，重点的是今年6月份，多说离开了。为此我专门注册了dis">
 <meta property="og:image" content="http://www.whtis.com/2017/10/19/给hexo博客nexT主题添加Gitalk评论系统/authorization.jpg">
-<meta property="og:updated_time" content="2017-10-20T08:44:04.678Z">
+<meta property="og:updated_time" content="2017-10-21T11:02:40.620Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="给hexo博客nexT主题添加Gitalk评论系统">
 <meta name="twitter:description" content="写在前面注意，此插件基于github开发，授权阶段需要获取的权限不局限于issues，还包括编辑你代码的权限，因此对这应用授权时需要十分小心 前段时间因为hexo的nexT主题崩了（载入博客时显示全白，原因在这），换了material主题，这主题很有安卓的风格，我也写过对它的一些折腾：hexo博客主题–material折腾笔记。这些都不是重点，重点的是今年6月份，多说离开了。为此我专门注册了dis">
@@ -374,8 +374,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-20T16:44:04+08:00">
-                2017-10-20
+              <time title="更新于" itemprop="dateModified" datetime="2017-10-21T19:02:40+08:00">
+                2017-10-21
               </time>
             
           </span>
@@ -418,6 +418,37 @@
             </span>
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,591
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
           
 
           
@@ -468,10 +499,20 @@
 <p>至此，大功告成。<strong>但需要注意的是：</strong> 当使用<code>hexo s -d</code>本地调试时你可能会看到</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">未找到相关的 Issues 进行评论</div><div class="line">请联系 @whtis 初始化创建</div></pre></td></tr></table></figure>
 <p>出现了这个提示不要紧，你只要部署后，使用github登录就好了。</p>
-<h2 id="博客的其他修改">博客的其他修改</h2><p>因为很喜欢<code>material</code>主题同步<code>bing</code>每日壁纸的功能，所以也把hexo的背景图片与bing壁纸进行同步。实现这个功能，只需要编辑<code>source/css/_custom/custom.styl</code>文件，加入如下内容即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">html, body &#123;</div><div class="line">  height: 100%;</div><div class="line">  background-image: url(&quot;http://api.dujin.org/bing/1920.php&quot;);</div><div class="line">  background-repeat: no-repeat;</div><div class="line">  background-attachment:fixed;</div><div class="line">  background-position:50% 50%;</div><div class="line">  background-size: cover;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="博客的其他修改">博客的其他修改</h2><ul>
+<li>因为很喜欢<code>material</code>主题同步<code>bing</code>每日壁纸的功能，所以也把hexo的背景图片与bing壁纸进行同步。实现这个功能，只需要编辑<code>source/css/_custom/custom.styl</code>文件，加入如下内容即可：<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">"http://api.dujin.org/bing/1920.php"</span>);</div><div class="line">  <span class="attribute">background-repeat</span>: no-repeat;</div><div class="line">  <span class="attribute">background-attachment</span>:fixed;</div><div class="line">  <span class="attribute">background-position</span>:<span class="number">50%</span> <span class="number">50%</span>;</div><div class="line">  <span class="attribute">background-size</span>: cover;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
 <p>其中，image的url是其他博主提供的<a href="https://www.dujin.org/fenxiang/jiaocheng/3618.html" target="_blank" rel="external">api接口</a>，目前看来还是很稳定的。后续也可以考虑自己抓取bing的壁纸，有关这部分内容，可以参考这篇博文:<a href="http://www.cnblogs.com/liujianshe1990-/archive/2017/10/07/7635339.html" target="_blank" rel="external">获取Bing每日图片API接口</a></p>
+<ul>
+<li>将<code>post</code>、<code>sidebar</code>和<code>header-inner</code>透明度调成80%，这是为了较好的突出背景。实现方法：编辑<code>source/css/_custom/custom.styl</code>文件，加入如下内容即可：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.header-inner</span> &#123;</div><div class="line">  <span class="attribute">opacity</span>: <span class="number">0.8</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.main-inner</span> &#123;</div><div class="line">  <span class="attribute">opacity</span>: <span class="number">0.8</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.sidebar</span> &#123;</div><div class="line">  <span class="attribute">opacity</span>: <span class="number">0.8</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>其他修改。参考文章见文末。</li>
+</ul>
 <h2 id="后记">后记</h2><p>看了<code>next</code>的<code>issues</code>发现已经有人在两个月前<code>Pull requests</code>了，但还在<code>open</code>状态，怪不得我<code>clone</code>的时候找不到这个插件。</p>
-<p>最后，有同学如果也研究过hexo的，欢迎教我怎么把<strong>文章那块（<code>post-block</code>）调成半透明的</strong>。。。楞是没有找到修改哪里才能生效⊙﹏⊙</p>
+<p><del>最后，有同学如果也研究过hexo的，欢迎教我怎么把<strong>文章那块（<code>post-block</code>）调成半透明的</strong>。。。楞是没有找到修改哪里才能生效⊙﹏⊙</del></p>
 <p>最后的最后，附一个比较全面的hexo折腾总结：<a href="http://blog.csdn.net/qq_33699981/article/details/72716951" target="_blank" rel="external">hexo的next主题个性化教程：打造炫酷网站</a></p>
 <hr>
 <div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>
@@ -539,7 +580,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo，Gitalk，nexT/" rel="tag"># hexo，Gitalk，nexT</a>
+            <a href="/tags/hexo，Gitalk，nexT/" rel="tag"><i class="fa fa-tag"></i> hexo，Gitalk，nexT</a>
           
         </div>
       
@@ -576,6 +617,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/21/最近要做的几件事/" rel="prev" title="最近要做的几件事">
+                最近要做的几件事 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -772,6 +817,15 @@
   <span class="author" itemprop="copyrightHolder">whtis</span>
 
   
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">53.0k</span>
+  
 </div>
 
 
@@ -827,12 +881,6 @@
       </div>
     
 
-    
-      <div id="needsharebutton-float">
-        <span class="btn">
-          <i class="fa fa-share-alt" aria-hidden="true"></i>
-        </span>
-      </div>
     
 
   </div>
@@ -1068,18 +1116,6 @@
       
       new needShareButton('#needsharebutton-postbottom', pbOptions);
     
-    
-      flOptions = {};
-      
-          flOptions.iconStyle = "box";
-      
-          flOptions.boxForm = "horizontal";
-      
-          flOptions.position = "middleRight";
-      
-          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
-      
-      new needShareButton('#needsharebutton-float', flOptions);
     
   </script>
 
