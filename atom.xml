@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.whtis.com/"/>
-  <updated>2018-01-24T18:23:00.055Z</updated>
+  <updated>2019-11-02T08:54:23.018Z</updated>
   <id>http://www.whtis.com/</id>
   
   <author>
@@ -15,10 +15,68 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[利用ios备份导出微信文本聊天记录]]></title>
+    <link href="http://www.whtis.com/2019/11/02/%E5%88%A9%E7%94%A8ios%E5%A4%87%E4%BB%BD%E5%AF%BC%E5%87%BA%E5%BE%AE%E4%BF%A1%E6%96%87%E6%9C%AC%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95/"/>
+    <id>http://www.whtis.com/2019/11/02/利用ios备份导出微信文本聊天记录/</id>
+    <published>2019-11-02T06:53:36.000Z</published>
+    <updated>2019-11-02T08:54:23.018Z</updated>
+    <content type="html"><![CDATA[<h3 id="目的">目的</h3><p>众所周知，源于微信的安全性和ios的封闭性，想要把微信聊天记录导出为可编辑的文本内容不是一件容易的事。itunes和微信自带的备份，可以将聊天内容恢复到同一个微信号登录的手机上，却无法将这些内容提取为可随便编辑的文本内容。在查阅了网上大量靠谱不靠谱的方法后，作者总结了一个可行的流程，根据这个流程，可以实现：将微信聊天的文本内容导出为txt文本文件，之后的用途，嘿嘿，你可以生成和某人聊天的文字云，也可以对文本内容的词频进行分析，等等等等~~~</p>
+<h3 id="注意">注意</h3><p><strong>本文所有步骤，全部基于<code>mac</code>+<code>ios</code>+<code>itunes</code>实现</strong>，android由于文件系统的开放性，可以有各种获取微信聊天内容的方法，作者在查阅资料的时候，也见过类似的博文，详见底部参考文章。工具：</p>
+<ul>
+<li>Mac: mac os 10.14.6</li>
+<li>itunes</li>
+<li>IMazing: 2.10.4 破解版，这里不放链接了=。=</li>
+<li><a href="https://sqlitebrowser.org/" target="_blank" rel="external">DB Browser for SQLite</a></li>
+<li><a href="http://wxbackup.imxfd.com/" target="_blank" rel="external">wxbackup</a></li>
+</ul>
+<h3 id="正文">正文</h3><p>整体的思路：1、使用itunes备份手机。2、使用Imazing提取微信文件夹。3、使用DB Browser for SQLite读取特定账号的微信聊天记录数据表，导出。上述流程最麻烦的就是提取微信的文件夹，作者下载试用的包括但不限于：微信管理大师（x），楼月微信聊天记录导出恢复助手（x），weback（x），果备份（x）…… 这些有些是收费的，价格不菲，然而并没有卵用，有些是跟不上时代，很久远不更新的了，所以能找到一款可以提取的软件真的不容易=。=。另外，github上相关开源项目，没有一个可用的，特别是这个<strong><a href="https://github.com/tsycnh/WeChatExporter" target="_blank" rel="external">WeChatExporter</a></strong>在查阅资料过程中出镜率很高，但实测无效。不过可以顺便了解一下nwjs哈哈哈。</p>
+<h4 id="itunes备份">itunes备份</h4><p>打开itunes，连接手机备份。这一步没啥说的。只有一点可以了解下，mac itunes备份的默认路径为：<code>/Users/${whtis}/Library/Application Support/MobileSync</code></p>
+<h4 id="导出微信文件夹">导出微信文件夹</h4><ul>
+<li>微信位于<strong>文件系统–&gt;app–&gt;AppDomain-com.tencent.xin–&gt;Documents</strong></li>
+</ul>
+<p><img src="imazing备份.png" alt="imazing备份"></p>
+<ul>
+<li><p>图中红框部分，每个人不同。因为我手机前后登过3个微信号，所以有三个文件夹。那么问题来了，如何确定哪个文件夹是我们想要导出微信记录的微信号的内容呢？文件夹的命名很关键，网上很多人也提到，文件夹的命名是<code>md5(微信号)</code>生成的，32位小写加密，这里要注意的是，<strong>md5加密的微信号，不是个人自定义的，而是腾讯原始的，以wxid_xxxxxx打头的这一串字符</strong>。如果你自定义了微信号，那么可以看一下<code>wxbackup</code>这个软件的使用。本文后面也会提到。</p>
+</li>
+<li><p>进入到特定微信号的文件中，找到DB文件夹，可以看到<code>MM.sqlite</code>这个文件，我们微信聊天的文本文件，就存在这个里面。</p>
+</li>
+<li><p>下载<a href="https://sqlitebrowser.org/" target="_blank" rel="external">DB Browser for SQLite</a>，将<code>MM.sqlite</code>打开，执行sql: <code>SELECT * from Chat_03af72c4831cc6ae3XXXXX</code>，可以看到如下图结果，Chat后跟的这串字符，即<code>md5(想导出人wxid)</code>。</p>
+<p><img src="wechat.png" alt="聊天记录数据表示例"></p>
+<p>其中，createTime是该条记录的时间戳，des中，0表示自己，Message就是微信聊天记录了。如示例图所示，导出csv，至此，主流程结束。</p>
+</li>
+</ul>
+<h4 id="文本处理">文本处理</h4><p>这里多啰嗦几句，导出的文本中包含到红包链接、语音链接、撤回消息提醒、表情发送失败提醒等。为了获得纯净的文本，需要将这部分内容去除。最好的方式就是正则替换了。这里提供我处理文本时用的一些正则表达式：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">"&lt;\?xml[\s\S]*?&lt;/msg&gt;\n"</div><div class="line"></div><div class="line">"&lt;msg&gt;(.|\n)*?&lt;/msg&gt;"</div><div class="line"></div><div class="line">"&lt;img[\s\S]*?&lt;/_wc_custom_link_&gt;"$</div><div class="line"></div><div class="line">"&lt;sysmsg[\s\S]*?&lt;/sysmsg&gt;"</div><div class="line"></div><div class="line">^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+</div><div class="line"></div><div class="line">&lt;voipinvitemsg&gt;.*?/voipextinfo&gt;</div><div class="line"></div><div class="line">&lt;voiplocalinfo&gt;&lt;wordingtype&gt;\d+&lt;/wordingtype&gt;&lt;duration&gt;\d+&lt;/duration&gt;&lt;/voiplocalinfo&gt;</div><div class="line"></div><div class="line">"因内容受保护，表情未能成功发送.*&lt;/a&gt;"</div></pre></td></tr></table></figure>
+<h4 id="其它">其它</h4><p>我们最终的目的是要获得一个可阅读的文档，因此还有一些后置工作要做，这里也放几个链接，都是处理过程中用的到的：</p>
+<ul>
+<li><a href="https://jingyan.baidu.com/article/63acb44afb1e2561fcc17e3f.html" target="_blank" rel="external">excel批量将时间戳转化为时间</a></li>
+<li><a href="https://jingyan.baidu.com/article/fcb5aff7aa222cedaa4a718e.html" target="_blank" rel="external">excel替换某一列的内容</a></li>
+<li><a href="https://jingyan.baidu.com/article/d7130635c59a6113fdf47504.html" target="_blank" rel="external">word分栏</a></li>
+</ul>
+<h3 id="参考资料">参考资料</h3><h4 id="wxbackup_微信聊天记录备份软件">wxbackup 微信聊天记录备份软件</h4><p>好东西，不解释。全网唯一能用的软件，而且免费，链接：<a href="https://zhuanlan.zhihu.com/p/32511173。文中提到的，查看微信原始id的，可以直接在导出记录界面看到相应人的wxid。唯一美中不足的是，当导出的聊天记录过多时，浏览器会卡死，期待作者优化2333。" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/32511173。文中提到的，查看微信原始id的，可以直接在导出记录界面看到相应人的wxid。唯一美中不足的是，当导出的聊天记录过多时，浏览器会卡死，期待作者优化2333。</a></p>
+<h4 id="微信聊天记录分析，Python_之_WorldCloud)"><a href="[https://52xpp.com/2018/03/20/%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%88%86%E6%9E%90%EF%BC%8Cpython-%E4%B9%8B-worldcloud/](https://52xpp.com/2018/03/20/微信聊天记录分析，python-之-worldcloud/">微信聊天记录分析，Python 之 WorldCloud</a>)</h4><p>本文主要参考之一，强烈建议阅读。</p>
+<h3 id="后记">后记</h3><p>在博客长草了一年多以后，能静下心来再写博客不容易，以后更要多进行总结，一边记录，一边成长吧。做人嘛，开心就好。</p>
+<hr>
+<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="目的">目的</h3><p>众所周知，源于微信的安全性和ios的封闭性，想要把微信聊天记录导出为可编辑的文本内容不是一件容易的事。itunes和微信自带的备份，可以将聊天内容恢复到同一个微信号登录的手机上，却无法将这些内容提取为可随便编辑的文本内容。在查阅了网上大]]>
+    </summary>
+    
+      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="ios" scheme="http://www.whtis.com/tags/ios/"/>
+    
+      <category term="wechat" scheme="http://www.whtis.com/tags/wechat/"/>
+    
+      <category term="python" scheme="http://www.whtis.com/categories/python/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[最近要做的几件事]]></title>
-    <link href="http://www.whtis.com/2018/01/25/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/"/>
-    <id>http://www.whtis.com/2018/01/25/最近要做的几件事/</id>
-    <published>2018-01-24T18:23:00.055Z</published>
+    <link href="http://www.whtis.com/2018/05/17/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/"/>
+    <id>http://www.whtis.com/2018/05/17/最近要做的几件事/</id>
+    <published>2018-05-17T12:14:17.169Z</published>
     <updated>2018-01-24T18:23:00.055Z</updated>
     <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>有时候想到要做一些跟技术有关的东西，但很多时候都会忘记。一直觉得<strong>兴趣是最好的老师</strong>这句话很对，既然有兴趣，那么最好动手做一做。写这篇文章，提醒自己的同时也是希望认识志同道合的朋友，虽然刚开始做的东西很low，但慢慢积累，总能获得成就感不是？<br><br>这篇文章会不断更新，我也想看看，我最后到底能做几件自己喜欢的事情，嘻嘻(●’◡’●)</p>
 <h5 id="2016-09-19日凌晨">2016-09-19日凌晨</h5><ul>
@@ -1056,127 +1114,6 @@
     <summary type="html">
     <![CDATA[<p>花了大半年的时间，算是彻底从头看了一遍Java的基本知识，参考书籍是《Java语言程序设计》原书第五版，作者为Y.daniel Liang，基础篇和提高篇中的重要内容都摘录在了之前的文章中。本文就是对之前的Java总结做个分类，方便自己以后回顾。</p>
 <h3 id="第]]>
-    </summary>
-    
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
-    
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Java学习总结-第二十八章 网络]]></title>
-    <link href="http://www.whtis.com/2016/04/16/Java%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E7%AB%A0-%E7%BD%91%E7%BB%9C/"/>
-    <id>http://www.whtis.com/2016/04/16/Java学习总结-第二十八章-网络/</id>
-    <published>2016-04-16T13:43:48.000Z</published>
-    <updated>2016-09-14T15:47:40.000Z</updated>
-    <content type="html"><![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p><code>基于套接字的通信</code>可以使程序通过指定的套接字进行通信。<code>套接字（socket）</code>是两个主机之间逻辑连接的端点，可以用于发送和接收数据。<br>Java支持流套接字和数据报套接字。<code>流套接字（stream socket）</code>使用传输控制协议（Transmission Control Protocol，TCP）进行数据传输，而<code>数据报套接字（datagram socket）</code>使用的是用户数据报协议（User Datagram Protocol，UDP）。</p>
-<h3 id="客户/服务器计算模式">客户/服务器计算模式</h3><ul>
-<li>服务器和客户一旦建立连接，客户和服务器就可以通过套接字进行通信。</li>
-<li><p>创建<code>服务器套接字（server socket）</code>，并把它附加到一个端口上，服务器从端口监听连接。端口标识套接字上的TCP服务，端口号的范围从0到65536，但是0到1024号是为特权服务保留的端口。</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(port);</div><div class="line"><span class="comment">//监听</span></div><div class="line">Socket socket = serverSocket.accept();</div></pre></td></tr></table></figure>
-<p><strong>如果企图在已经使用的端口上创建服务器套接字，将会引起<code>java.net.BindException</code>异常。</strong></p>
-</li>
-<li><p>服务器的监听语句会一直等待，直到一个客户与服务器套接字建立连接。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Socket socket = <span class="keyword">new</span> Socket(serverName,port);</div></pre></td></tr></table></figure>
-<p>serverName是服务器的域名或IP地址。</p>
-</li>
-<li><p>通过得到socket的输入输出流，接可以进行数据传输了：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">InputStream input = socket.getInputStream();</div><div class="line">OutputStream output = socket.getOutputStream();</div></pre></td></tr></table></figure>
-<p><strong>建议使用二进制I/O在服务器和客户间进行数据传输，以便提高效率。</strong></p>
-</li>
-</ul>
-<h3 id="网络地址类InetAddress">网络地址类InetAddress</h3><ul>
-<li><p>可以使用类InetAddress来求得客户的主机名和IP地址。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">InetAddress inetAddress = socket.getInetAddress();</div><div class="line">String hostname = inetAddress.getHostName();</div><div class="line">String ip = inetAddress.getHostAddress();</div></pre></td></tr></table></figure>
-</li>
-<li><p>可以使用静态方法getByName通过主机名或IP地址创建InetAddress的一个实例。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">InetAddress address = InetAddress.getByName(<span class="string">"www.google.com"</span>);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="多客户服务">多客户服务</h3><ul>
-<li><p>可以使用线程处理服务器上多个客户的同步问题。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</div><div class="line">	Socket socket = serverSocket.accept();</div><div class="line">	Thread thread = <span class="keyword">new</span> ThreadClass(socket);</div><div class="line">	thread.start();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>服务器套接字可以有多个连接。while循环的每次迭代创建一个新的连接。</p>
-</li>
-</ul>
-<h3 id="发送和接收对象">发送和接收对象</h3><ul>
-<li>可以在套接字流上使用ObjectInputStream和ObjectOutputStream接收和发送对象。为了能够进行传输，这些对象必须实现<code>Serializable</code>接口。</li>
-</ul>
-<h3 id="从Web服务器上读取文件">从Web服务器上读取文件</h3><ul>
-<li>可以创建一个<code>java.net.URL</code>对象，然后打开一个输入流：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">URL url = <span class="keyword">new</span> URL(<span class="string">"www.whtis.com"</span>);</div><div class="line">InputStream inputStream = url.openStream();</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="JEditorPanel类">JEditorPanel类</h3><ul>
-<li>Swing提供了一个名叫javax.swing.JEditorPanel的GUI组件，它能够自动地显示普通文本文件、HTML文件和RTF文件。 </li>
-<li><p>要显示文件的内容，可以使用setPage（URL）方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPage</span><span class="params">(URL url)</span> <span class="keyword">throws</span> IOException</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>当单击编辑窗格中的一个超链接时，JEditorPanel产生<code>javax.swing.event.HyperLink Event</code>事件，通过该事件，我们可以得到超链接的URL，并使用setPage(url)方法显示它。</p>
-</li>
-</ul>
-<h3 id="数据报套接字">数据报套接字</h3><ul>
-<li>我们编写的有些网络通信不要求TCP提供可靠的、点对点的通道，这种情况下，数据报通信效率更高。</li>
-<li>数据是用<code>分组（packet，或称为包）</code>进行传输的。数据报套接字使用<code>用户数据报协议（User Datagram Protocol，UDP）</code>，该协议不能保证分组不会丢失、或者不会重复接收、或者接收的顺序与发送的顺序不同。</li>
-<li><code>数据报（datagram）</code>是独立的，包含自身网络上的传输信息，它的到达、到达的时间和内容都没有保证。</li>
-</ul>
-<h4 id="DatagramPacket类和DatagramSocket类">DatagramPacket类和DatagramSocket类</h4><ul>
-<li>DatagramPacket表示数据报的分组。要为来自客户的传送创建DatagramPacket对象，可以使用构造方法<code>DatagramPacket(byte[] buf,int length,InetAddress host,int prot)</code>。要创建其他所有的DatagramPacket对象，使用构造方法<code>DatagramPacket(byte[] buf,int length)</code>。一旦创建了一个数据报分组，就可以使用getData()方法和setData()方法获取和设置分组中的数据。</li>
-<li>数据报套接字类DatagramSocket表示发送和接收数据报分组的套接字。数据报套接字是分组传输服务的发送和接收点。每个在套接字上发送和接收的分组都是独立编址和路由的。<ul>
-<li>要创建服务器上的数据报套接字，使用构造方法DatagramSocket(int port),它将套接字绑定到本地主机指定的端口上。</li>
-<li>要创建客户上的数据报套接字，使用构造方法DatagramSocket()，它将套接字绑定到本地主机任意一个可用的端口上。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="复习小结">复习小结</h2><ul>
-<li>流套接字的端口号和数据报套接字的端口号是互不相关的。流套接字和数据报套接字能够同时使用同一个端口号。</li>
-<li>数据报套接字使用<code>send(DatagramSocket)</code>发送分组，使用<code>receive(DatagramSocket)</code>接收分组。</li>
-</ul>
-<hr>
-<h2 id="编程练习">编程练习</h2><ul>
-<li>习题28.1 28.3 28.6 28.8 28.9 28.10源代码见我的Github： <a href="https://github.com/whtis/Java-Exercises/tree/master/chapter28/src" target="_blank" rel="external">chapter28</a></li>
-<li><p>习题28.6 </p>
-<ul>
-<li><p>服务器端的输入输出流应该和客户端的对应。</p>
-<ul>
-<li><p>客户端：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(socket.getInputStream());</div><div class="line">ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(socket.getOutputStream());</div></pre></td></tr></table></figure>
-</li>
-<li><p>相应的，服务器端的顺序应该为：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(socket.getOutputStream());</div><div class="line">ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(socket.getInputStream());</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>如何判断ObjectInputStream类中readObject()方法是否到达末尾:</p>
-<ul>
-<li><p>readObject()方法读取数据流到末尾时会抛出<code>java.io.EOFException</code>异常，可以捕获到这个异常并由此判断对象数据读取完成。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">        File file = <span class="keyword">new</span> File(<span class="string">"Address.dat"</span>);</div><div class="line">        <span class="keyword">if</span> (!file.exists()) &#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        ObjectInputStream InFromFile = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(file));</div><div class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">            lists.add(InFromFile.readObject());</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">catch</span> (EOFException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        jTextArea.append(<span class="string">"Data read completed!"</span>);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>可以在数据流中添加标识，当读取到标识后，则关闭输出流。例如：可以在写入数据完成后附加<code>null</code>作为标识。</p>
-</li>
-</ul>
-</li>
-<li>异常<code>java.io.StreamCorruptedException: invalid type code: AC</code>的出现原因及解决方案<ul>
-<li>原因：新建一个ObjecOutputStream类后，在第一次写入时，会附加一个头文件信息，随后的数据不会附加头文件。新建一个ObjectInputStream，在第一次读取时会寻找头文件，之后读取时就不会寻找头文件直接读取数据。如果写入数据时每次都附加头文件，而读取时仅第一次读取头文件，就会抛出上述异常。</li>
-<li>解决方案：写文件和读文件要统一，写文件时不能每次都附带头文件，也就是用一个输出流写数据，不要每次写入对象都新建一个输出流。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<div align="center" style="color:red;width=80px;height:90px;" onmouseout="this.style.border='1px solid blue'" onmouseover="this.style.border='none'"><br><p style="font-weight:bold;font-style:italic;">本文章首发<a href="http://www.whtis.com">www.whtis.com</a>，转载请注明出处</p><br></div>]]></content>
-    <summary type="html">
-    <![CDATA[<p><strong> 本文总结源自《Java语言程序设计》原书第五版，作者为Y.daniel Liang，习题及编程练习均参照此书。</strong></p>
-<hr>
-<h2 id="主要内容">主要内容</h2><p><code>基于套接字的通信</code>可以使程序通过]]>
     </summary>
     
       <category term="java" scheme="http://www.whtis.com/tags/java/"/>
