@@ -2,6 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.whtis.com/xin/js/jquery.js</loc>
+    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/xin/js/garden_dev.js</loc>
+    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/xin/css/default_dev.css</loc>
+    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/xin/js/garden.js</loc>
+    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/xin/js/functions_dev.js</loc>
+    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/xin/js/functions.js</loc>
+    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/xin/css/default.css</loc>
+    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/xin/love.html</loc>
+    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.whtis.com/2019/11/02/%E5%88%A9%E7%94%A8ios%E5%A4%87%E4%BB%BD%E5%AF%BC%E5%87%BA%E5%BE%AE%E4%BF%A1%E6%96%87%E6%9C%AC%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2019-11-02T08:54:23.018Z</lastmod>
   </url>
@@ -12,12 +52,12 @@
   </url>
   
   <url>
-    <loc>http://www.whtis.com/2017/11/27/%E8%BF%99%E7%AF%87%E5%8D%9A%E6%96%87%EF%BC%8C%E6%88%91%E4%B8%8D%E6%83%B3%E5%86%99%E6%8A%80%E6%9C%AF%E4%BA%86%E3%80%82%E3%80%82/</loc>
+    <loc>http://www.whtis.com/2018/05/17/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/</loc>
     <lastmod>2018-01-24T18:23:00.055Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.whtis.com/2018/05/17/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/</loc>
+    <loc>http://www.whtis.com/2017/11/27/%E8%BF%99%E7%AF%87%E5%8D%9A%E6%96%87%EF%BC%8C%E6%88%91%E4%B8%8D%E6%83%B3%E5%86%99%E6%8A%80%E6%9C%AF%E4%BA%86%E3%80%82%E3%80%82/</loc>
     <lastmod>2018-01-24T18:23:00.055Z</lastmod>
   </url>
   
