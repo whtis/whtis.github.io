@@ -3,9 +3,9 @@
   <title><![CDATA[whtis's blog]]></title>
   
   <link href="/atom.xml" rel="self"/>
-  <link href="http://www.whtis.com/"/>
+  <link href="whtis.github.io/"/>
   <updated>2019-11-02T08:54:23.018Z</updated>
-  <id>http://www.whtis.com/</id>
+  <id>whtis.github.io/</id>
   
   <author>
     <name><![CDATA[whtis]]></name>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[利用ios备份导出微信文本聊天记录]]></title>
-    <link href="http://www.whtis.com/2019/11/02/%E5%88%A9%E7%94%A8ios%E5%A4%87%E4%BB%BD%E5%AF%BC%E5%87%BA%E5%BE%AE%E4%BF%A1%E6%96%87%E6%9C%AC%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95/"/>
-    <id>http://www.whtis.com/2019/11/02/利用ios备份导出微信文本聊天记录/</id>
+    <link href="whtis.github.io/2019/11/02/%E5%88%A9%E7%94%A8ios%E5%A4%87%E4%BB%BD%E5%AF%BC%E5%87%BA%E5%BE%AE%E4%BF%A1%E6%96%87%E6%9C%AC%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95/"/>
+    <id>whtis.github.io/2019/11/02/利用ios备份导出微信文本聊天记录/</id>
     <published>2019-11-02T06:53:36.000Z</published>
     <updated>2019-11-02T08:54:23.018Z</updated>
     <content type="html"><![CDATA[<h3 id="目的">目的</h3><p>众所周知，源于微信的安全性和ios的封闭性，想要把微信聊天记录导出为可编辑的文本内容不是一件容易的事。itunes和微信自带的备份，可以将聊天内容恢复到同一个微信号登录的手机上，却无法将这些内容提取为可随便编辑的文本内容。在查阅了网上大量靠谱不靠谱的方法后，作者总结了一个可行的流程，根据这个流程，可以实现：将微信聊天的文本内容导出为txt文本文件，之后的用途，嘿嘿，你可以生成和某人聊天的文字云，也可以对文本内容的词频进行分析，等等等等~~~</p>
@@ -62,20 +62,20 @@
     <![CDATA[<h3 id="目的">目的</h3><p>众所周知，源于微信的安全性和ios的封闭性，想要把微信聊天记录导出为可编辑的文本内容不是一件容易的事。itunes和微信自带的备份，可以将聊天内容恢复到同一个微信号登录的手机上，却无法将这些内容提取为可随便编辑的文本内容。在查阅了网上大]]>
     </summary>
     
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="whtis.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="ios" scheme="http://www.whtis.com/tags/ios/"/>
+      <category term="ios" scheme="whtis.github.io/tags/ios/"/>
     
-      <category term="wechat" scheme="http://www.whtis.com/tags/wechat/"/>
+      <category term="wechat" scheme="whtis.github.io/tags/wechat/"/>
     
-      <category term="python" scheme="http://www.whtis.com/categories/python/"/>
+      <category term="python" scheme="whtis.github.io/categories/python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[最近要做的几件事]]></title>
-    <link href="http://www.whtis.com/2018/05/17/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/"/>
-    <id>http://www.whtis.com/2018/05/17/最近要做的几件事/</id>
+    <link href="whtis.github.io/2018/05/17/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/"/>
+    <id>whtis.github.io/2018/05/17/最近要做的几件事/</id>
     <published>2018-05-17T12:14:17.169Z</published>
     <updated>2018-01-24T18:23:00.055Z</updated>
     <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>有时候想到要做一些跟技术有关的东西，但很多时候都会忘记。一直觉得<strong>兴趣是最好的老师</strong>这句话很对，既然有兴趣，那么最好动手做一做。写这篇文章，提醒自己的同时也是希望认识志同道合的朋友，虽然刚开始做的东西很low，但慢慢积累，总能获得成就感不是？<br><br>这篇文章会不断更新，我也想看看，我最后到底能做几件自己喜欢的事情，嘻嘻(●’◡’●)</p>
@@ -108,16 +108,16 @@
     <![CDATA[<h3 id="写在前面">写在前面</h3><p>有时候想到要做一些跟技术有关的东西，但很多时候都会忘记。一直觉得<strong>兴趣是最好的老师</strong>这句话很对，既然有兴趣，那么最好动手做一做。写这篇文章，提醒自己的同时也是希望认识志同道合的朋友，虽然刚开始做的东]]>
     </summary>
     
-      <category term="待完成" scheme="http://www.whtis.com/tags/%E5%BE%85%E5%AE%8C%E6%88%90/"/>
+      <category term="待完成" scheme="whtis.github.io/tags/%E5%BE%85%E5%AE%8C%E6%88%90/"/>
     
-      <category term="未完成" scheme="http://www.whtis.com/categories/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
+      <category term="未完成" scheme="whtis.github.io/categories/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[我的父亲]]></title>
-    <link href="http://www.whtis.com/2018/01/25/%E6%88%91%E7%9A%84%E7%88%B6%E4%BA%B2/"/>
-    <id>http://www.whtis.com/2018/01/25/我的父亲/</id>
+    <link href="whtis.github.io/2018/01/25/%E6%88%91%E7%9A%84%E7%88%B6%E4%BA%B2/"/>
+    <id>whtis.github.io/2018/01/25/我的父亲/</id>
     <published>2018-01-24T18:18:16.000Z</published>
     <updated>2018-01-24T19:07:40.317Z</updated>
     <content type="html"><![CDATA[<p></p><p style="text-indent:2em">终于有时间写点关于父亲的文字了。</p><br><a id="more"></a><p></p>
@@ -151,14 +151,14 @@
     
     </summary>
     
-      <category term="other" scheme="http://www.whtis.com/categories/other/"/>
+      <category term="other" scheme="whtis.github.io/categories/other/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[这篇博文，我不想写技术了。。]]></title>
-    <link href="http://www.whtis.com/2017/11/27/%E8%BF%99%E7%AF%87%E5%8D%9A%E6%96%87%EF%BC%8C%E6%88%91%E4%B8%8D%E6%83%B3%E5%86%99%E6%8A%80%E6%9C%AF%E4%BA%86%E3%80%82%E3%80%82/"/>
-    <id>http://www.whtis.com/2017/11/27/这篇博文，我不想写技术了。。/</id>
+    <link href="whtis.github.io/2017/11/27/%E8%BF%99%E7%AF%87%E5%8D%9A%E6%96%87%EF%BC%8C%E6%88%91%E4%B8%8D%E6%83%B3%E5%86%99%E6%8A%80%E6%9C%AF%E4%BA%86%E3%80%82%E3%80%82/"/>
+    <id>whtis.github.io/2017/11/27/这篇博文，我不想写技术了。。/</id>
     <published>2017-11-27T12:23:14.000Z</published>
     <updated>2018-01-24T18:23:00.055Z</updated>
     <content type="html"><![CDATA[<p>最近闷的很，特别是发现打游戏太浪费时间然后远离王者荣耀后，更加的烦闷了。</p>
@@ -196,16 +196,16 @@
 <p>1、中国的强大，是资本的强大，与平民没多大]]>
     </summary>
     
-      <category term="想法，社会" scheme="http://www.whtis.com/tags/%E6%83%B3%E6%B3%95%EF%BC%8C%E7%A4%BE%E4%BC%9A/"/>
+      <category term="想法，社会" scheme="whtis.github.io/tags/%E6%83%B3%E6%B3%95%EF%BC%8C%E7%A4%BE%E4%BC%9A/"/>
     
-      <category term="随笔" scheme="http://www.whtis.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="whtis.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[spring4学习笔记（五）--AOP面向切面编程]]></title>
-    <link href="http://www.whtis.com/2017/11/04/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89-AOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/"/>
-    <id>http://www.whtis.com/2017/11/04/spring4学习笔记（五）-AOP面向切面编程/</id>
+    <link href="whtis.github.io/2017/11/04/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89-AOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/"/>
+    <id>whtis.github.io/2017/11/04/spring4学习笔记（五）-AOP面向切面编程/</id>
     <published>2017-11-04T14:14:48.000Z</published>
     <updated>2017-11-23T09:25:11.608Z</updated>
     <content type="html"><![CDATA[<h2 id="AOP_简介">AOP 简介</h2><ul>
@@ -276,18 +276,18 @@
 <li>AOP(Aspect-Oriented Programming,面向切面编程)：是对传统的<code>OOP</code>(Object-Oriented Programming 面向对象编程)的补充。</l]]>
     </summary>
     
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+      <category term="java" scheme="whtis.github.io/tags/java/"/>
     
-      <category term="spring4" scheme="http://www.whtis.com/tags/spring4/"/>
+      <category term="spring4" scheme="whtis.github.io/tags/spring4/"/>
     
-      <category term="java web" scheme="http://www.whtis.com/categories/java-web/"/>
+      <category term="java web" scheme="whtis.github.io/categories/java-web/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[给hexo博客nexT主题添加Gitalk评论系统]]></title>
-    <link href="http://www.whtis.com/2017/10/19/%E7%BB%99hexo%E5%8D%9A%E5%AE%A2nexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0Gitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://www.whtis.com/2017/10/19/给hexo博客nexT主题添加Gitalk评论系统/</id>
+    <link href="whtis.github.io/2017/10/19/%E7%BB%99hexo%E5%8D%9A%E5%AE%A2nexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0Gitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
+    <id>whtis.github.io/2017/10/19/给hexo博客nexT主题添加Gitalk评论系统/</id>
     <published>2017-10-19T06:58:47.000Z</published>
     <updated>2017-11-23T09:25:11.608Z</updated>
     <content type="html"><![CDATA[<h2 id="写在前面">写在前面</h2><p><strong>注意，此插件基于github开发，授权阶段需要获取的权限不局限于<code>issues</code>，还包括编辑你代码的权限，因此对这应用授权时需要十分小心</strong><br><img src="authorization.jpg" alt="authorization"></p>
@@ -345,16 +345,16 @@
     <![CDATA[<h2 id="写在前面">写在前面</h2><p><strong>注意，此插件基于github开发，授权阶段需要获取的权限不局限于<code>issues</code>，还包括编辑你代码的权限，因此对这应用授权时需要十分小心</strong><br><img src="auth]]>
     </summary>
     
-      <category term="hexo，Gitalk，nexT" scheme="http://www.whtis.com/tags/hexo%EF%BC%8CGitalk%EF%BC%8CnexT/"/>
+      <category term="hexo，Gitalk，nexT" scheme="whtis.github.io/tags/hexo%EF%BC%8CGitalk%EF%BC%8CnexT/"/>
     
-      <category term="hexo" scheme="http://www.whtis.com/categories/hexo/"/>
+      <category term="hexo" scheme="whtis.github.io/categories/hexo/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[spring4学习笔记（四）--Spring-4.x新特性：泛型依赖注入]]></title>
-    <link href="http://www.whtis.com/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89--Spring-4-x%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9A%E6%B3%9B%E5%9E%8B%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/"/>
-    <id>http://www.whtis.com/2017/10/13/spring4学习笔记（四）--Spring-4-x新特性：泛型依赖注入/</id>
+    <link href="whtis.github.io/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89--Spring-4-x%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9A%E6%B3%9B%E5%9E%8B%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/"/>
+    <id>whtis.github.io/2017/10/13/spring4学习笔记（四）--Spring-4-x新特性：泛型依赖注入/</id>
     <published>2017-10-13T07:09:57.000Z</published>
     <updated>2017-10-20T08:42:09.363Z</updated>
     <content type="html"><![CDATA[<p>Spring4 添加了泛型依赖注入的功能。具体的，从下面这张图来看：<br><img src="spring4.x泛型依赖注入.jpg" alt="spring4.x泛型依赖注入"></p>
@@ -373,18 +373,18 @@
 <p>假使我们创建了两个泛型基类<code>BaseService&lt;T&gt]]>
     </summary>
     
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+      <category term="java" scheme="whtis.github.io/tags/java/"/>
     
-      <category term="spring4" scheme="http://www.whtis.com/tags/spring4/"/>
+      <category term="spring4" scheme="whtis.github.io/tags/spring4/"/>
     
-      <category term="java web" scheme="http://www.whtis.com/categories/java-web/"/>
+      <category term="java web" scheme="whtis.github.io/categories/java-web/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[spring4学习笔记（三）--SpEL:Spring表达式语言]]></title>
-    <link href="http://www.whtis.com/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89--SpEL-Spring%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E8%A8%80/"/>
-    <id>http://www.whtis.com/2017/10/13/spring4学习笔记（三）--SpEL-Spring表达式语言/</id>
+    <link href="whtis.github.io/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89--SpEL-Spring%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E8%A8%80/"/>
+    <id>whtis.github.io/2017/10/13/spring4学习笔记（三）--SpEL-Spring表达式语言/</id>
     <published>2017-10-13T07:03:21.000Z</published>
     <updated>2017-10-20T08:49:35.933Z</updated>
     <content type="html"><![CDATA[<h2 id="spEL:Spring_表达式语言">spEL:Spring 表达式语言</h2><ul>
@@ -437,18 +437,18 @@
 <li>语法类似于EL：SpEL使用<code>#{...}</code>作为定界符，所有在大框号中]]>
     </summary>
     
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+      <category term="java" scheme="whtis.github.io/tags/java/"/>
     
-      <category term="spring4" scheme="http://www.whtis.com/tags/spring4/"/>
+      <category term="spring4" scheme="whtis.github.io/tags/spring4/"/>
     
-      <category term="java web" scheme="http://www.whtis.com/categories/java-web/"/>
+      <category term="java web" scheme="whtis.github.io/categories/java-web/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[spring4学习笔记（二）--spring中Bean的配置]]></title>
-    <link href="http://www.whtis.com/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89--spring%E4%B8%ADBean%E7%9A%84%E9%85%8D%E7%BD%AE/"/>
-    <id>http://www.whtis.com/2017/10/13/spring4学习笔记（二）--spring中Bean的配置/</id>
+    <link href="whtis.github.io/2017/10/13/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89--spring%E4%B8%ADBean%E7%9A%84%E9%85%8D%E7%BD%AE/"/>
+    <id>whtis.github.io/2017/10/13/spring4学习笔记（二）--spring中Bean的配置/</id>
     <published>2017-10-13T03:54:06.000Z</published>
     <updated>2017-10-20T08:49:18.062Z</updated>
     <content type="html"><![CDATA[<h1 id="配置形式">配置形式</h1><h2 id="基于xml文件的方式">基于xml文件的方式</h2><h3 id="Bean的配置方式">Bean的配置方式</h3><h4 id="通过全类名（反射）">通过全类名（反射）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;!--</div><div class="line">  通过全类名配置bean</div><div class="line">  class：bean 的全类名，通过反射的方式在 IOC 容器中创建 Bean。所以要求 Bean 中必须有无参数的构造器。</div><div class="line">  id： 表示容器中的Bean，唯一。</div><div class="line">  &lt;Bean id=&quot;&quot; class=&quot;&quot;&gt;&lt;/Bean&gt;</div><div class="line"> --&gt;</div></pre></td></tr></table></figure>
@@ -631,18 +631,18 @@
     <![CDATA[<h1 id="配置形式">配置形式</h1><h2 id="基于xml文件的方式">基于xml文件的方式</h2><h3 id="Bean的配置方式">Bean的配置方式</h3><h4 id="通过全类名（反射）">通过全类名（反射）</h4><figure class="h]]>
     </summary>
     
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+      <category term="java" scheme="whtis.github.io/tags/java/"/>
     
-      <category term="spring4" scheme="http://www.whtis.com/tags/spring4/"/>
+      <category term="spring4" scheme="whtis.github.io/tags/spring4/"/>
     
-      <category term="java web" scheme="http://www.whtis.com/categories/java-web/"/>
+      <category term="java web" scheme="whtis.github.io/categories/java-web/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[spring4 学习笔记（一）--spring 简介]]></title>
-    <link href="http://www.whtis.com/2017/10/06/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--spring%20%E7%AE%80%E4%BB%8B/"/>
-    <id>http://www.whtis.com/2017/10/06/spring4学习笔记（一）--spring 简介/</id>
+    <link href="whtis.github.io/2017/10/06/spring4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89--spring%20%E7%AE%80%E4%BB%8B/"/>
+    <id>whtis.github.io/2017/10/06/spring4学习笔记（一）--spring 简介/</id>
     <published>2017-10-06T11:19:15.000Z</published>
     <updated>2017-10-13T07:34:46.277Z</updated>
     <content type="html"><![CDATA[<h3 id="spring4_HelloWorld">spring4 HelloWorld</h3><ul>
@@ -703,18 +703,18 @@
 <li>轻量级：<strong>Spring是非侵入式的</strong]]>
     </summary>
     
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+      <category term="java" scheme="whtis.github.io/tags/java/"/>
     
-      <category term="spring4" scheme="http://www.whtis.com/tags/spring4/"/>
+      <category term="spring4" scheme="whtis.github.io/tags/spring4/"/>
     
-      <category term="java web" scheme="http://www.whtis.com/categories/java-web/"/>
+      <category term="java web" scheme="whtis.github.io/categories/java-web/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[使用python爬虫框架scrapy对实时新闻进行抓取并存入数据库]]></title>
-    <link href="http://www.whtis.com/2017/07/28/%E4%BD%BF%E7%94%A8python%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6scrapy%E5%AF%B9%E5%AE%9E%E6%97%B6%E6%96%B0%E9%97%BB%E8%BF%9B%E8%A1%8C%E6%8A%93%E5%8F%96%E5%B9%B6%E5%AD%98%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    <id>http://www.whtis.com/2017/07/28/使用python爬虫框架scrapy对实时新闻进行抓取并存入数据库/</id>
+    <link href="whtis.github.io/2017/07/28/%E4%BD%BF%E7%94%A8python%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6scrapy%E5%AF%B9%E5%AE%9E%E6%97%B6%E6%96%B0%E9%97%BB%E8%BF%9B%E8%A1%8C%E6%8A%93%E5%8F%96%E5%B9%B6%E5%AD%98%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>whtis.github.io/2017/07/28/使用python爬虫框架scrapy对实时新闻进行抓取并存入数据库/</id>
     <published>2017-07-28T14:15:20.000Z</published>
     <updated>2017-07-29T06:36:53.372Z</updated>
     <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>每天的新闻更新很快，如果要全面了解非常困难，更可恶的是一些门户网站还经常取一些乱七八糟的标题，点进去是文不对题。所以萌生了一个想法：自己抓取不同门户网站的新闻更新信息，然后将这些内容进行整合，推送一些当日的热点新闻。<br>想的很简单，真的做起来，发现自己还是太年轻，到写这篇博客为止，我也就是完成了一个基本的抓取框架，连内容都没有获得多少。不过本来就是抱着学习<code>python</code>的想法使用<code>scrapy</code>来抓取新闻，既然已经有了个差不多的框架，也该写写使用<code>scrapy</code>过程中的遇到的一些问题了。</p>
@@ -795,16 +795,16 @@
     <![CDATA[<h3 id="写在前面">写在前面</h3><p>每天的新闻更新很快，如果要全面了解非常困难，更可恶的是一些门户网站还经常取一些乱七八糟的标题，点进去是文不对题。所以萌生了一个想法：自己抓取不同门户网站的新闻更新信息，然后将这些内容进行整合，推送一些当日的热点新闻。<br>想的]]>
     </summary>
     
-      <category term="python，scrapy，mysql，新闻抓取" scheme="http://www.whtis.com/tags/python%EF%BC%8Cscrapy%EF%BC%8Cmysql%EF%BC%8C%E6%96%B0%E9%97%BB%E6%8A%93%E5%8F%96/"/>
+      <category term="python，scrapy，mysql，新闻抓取" scheme="whtis.github.io/tags/python%EF%BC%8Cscrapy%EF%BC%8Cmysql%EF%BC%8C%E6%96%B0%E9%97%BB%E6%8A%93%E5%8F%96/"/>
     
-      <category term="python" scheme="http://www.whtis.com/categories/python/"/>
+      <category term="python" scheme="whtis.github.io/categories/python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[使用ubuntu过程中的一些命令集合]]></title>
-    <link href="http://www.whtis.com/2017/06/19/%E4%BD%BF%E7%94%A8ubuntu%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88/"/>
-    <id>http://www.whtis.com/2017/06/19/使用ubuntu过程中的一些命令集合/</id>
+    <link href="whtis.github.io/2017/06/19/%E4%BD%BF%E7%94%A8ubuntu%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88/"/>
+    <id>whtis.github.io/2017/06/19/使用ubuntu过程中的一些命令集合/</id>
     <published>2017-06-19T01:57:27.000Z</published>
     <updated>2017-06-19T06:50:37.000Z</updated>
     <content type="html"><![CDATA[<h1 id="ubuntu命令备忘">ubuntu命令备忘</h1><p>用ubuntu时，经常会用到一些有用的命令，但回头好久不用又忘了。而我又是那种不喜欢查手册的人，百度一下又得费时，所以干脆开篇博客记下来，以后直接来这查好了。</p>
@@ -833,18 +833,18 @@
 <h2 id="ubuntu使用ta]]>
     </summary>
     
-      <category term="ubuntu" scheme="http://www.whtis.com/tags/ubuntu/"/>
+      <category term="ubuntu" scheme="whtis.github.io/tags/ubuntu/"/>
     
-      <category term="收集整理" scheme="http://www.whtis.com/tags/%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/"/>
+      <category term="收集整理" scheme="whtis.github.io/tags/%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/"/>
     
-      <category term="ubuntu" scheme="http://www.whtis.com/categories/ubuntu/"/>
+      <category term="ubuntu" scheme="whtis.github.io/categories/ubuntu/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[ubuntu16.04删除当前用户密码文件/etc/shadow后无法进入系统的解决方法]]></title>
-    <link href="http://www.whtis.com/2017/04/08/ubuntu16-04%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E6%96%87%E4%BB%B6-etc-shadow%E5%90%8E%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>http://www.whtis.com/2017/04/08/ubuntu16-04删除当前用户密码文件-etc-shadow后无法进入系统的解决方法/</id>
+    <link href="whtis.github.io/2017/04/08/ubuntu16-04%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E6%96%87%E4%BB%B6-etc-shadow%E5%90%8E%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>whtis.github.io/2017/04/08/ubuntu16-04删除当前用户密码文件-etc-shadow后无法进入系统的解决方法/</id>
     <published>2017-04-08T07:48:02.000Z</published>
     <updated>2017-04-08T08:55:00.000Z</updated>
     <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>最近项目用到了dspace，在windows中向dspace中导入item时会报解压错误的<code>error</code>,后来经过排查，确定是windows平台编码问题导致。于是转战ubuntu，在安装了16.04版本，配置了<code>java</code>环境、安装编译器等等一系列工作、差不多可以进行开发的时候，我手贱删除了这个文件<code>/etc/shadow</code>，为什么会删除它，这就涉及到安装shadowsocks了，这里不详说。反正是在编辑<code>/etc/shadowsocks.json</code>文件时，我觉得<code>/etc/shadow</code>可能是个临时文件，就用root权限删除了。这样一删不要紧，重启机器以后傻眼了，输入正确的用户名密码后，无法登陆到图形界面，提示也是说密码不对。类似于下图：<br><img src="http://7xnttb.com1.z0.glb.clouddn.com//558d1f9e0e1dcda9c9001b15c0b4d63d.png" alt="ubuntu密码错误"></p>
@@ -879,18 +879,18 @@
     <![CDATA[<h3 id="写在前面">写在前面</h3><p>最近项目用到了dspace，在windows中向dspace中导入item时会报解压错误的<code>error</code>,后来经过排查，确定是windows平台编码问题导致。于是转战ubuntu，在安装了16.04版本，配]]>
     </summary>
     
-      <category term="ubuntu" scheme="http://www.whtis.com/tags/ubuntu/"/>
+      <category term="ubuntu" scheme="whtis.github.io/tags/ubuntu/"/>
     
-      <category term="搜集整理" scheme="http://www.whtis.com/tags/%E6%90%9C%E9%9B%86%E6%95%B4%E7%90%86/"/>
+      <category term="搜集整理" scheme="whtis.github.io/tags/%E6%90%9C%E9%9B%86%E6%95%B4%E7%90%86/"/>
     
-      <category term="ubuntu" scheme="http://www.whtis.com/categories/ubuntu/"/>
+      <category term="ubuntu" scheme="whtis.github.io/categories/ubuntu/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[一个可以链式使用正则的类]]></title>
-    <link href="http://www.whtis.com/2017/03/23/%E4%B8%80%E4%B8%AA%E5%8F%AF%E4%BB%A5%E9%93%BE%E5%BC%8F%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E7%9A%84%E7%B1%BB/"/>
-    <id>http://www.whtis.com/2017/03/23/一个可以链式使用正则的类/</id>
+    <link href="whtis.github.io/2017/03/23/%E4%B8%80%E4%B8%AA%E5%8F%AF%E4%BB%A5%E9%93%BE%E5%BC%8F%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E7%9A%84%E7%B1%BB/"/>
+    <id>whtis.github.io/2017/03/23/一个可以链式使用正则的类/</id>
     <published>2017-03-23T07:52:01.000Z</published>
     <updated>2017-06-19T01:58:35.000Z</updated>
     <content type="html"><![CDATA[<p>最近使用webMgaic爬虫框架的时候，发现链式调用真的很好用，能省掉很多套路性的代码，所以也自己动手写了一个可以链式调用进行正则筛选的工具类。下面上代码：</p>
@@ -905,18 +905,18 @@
 <figure class="highlight java"><table><tr><td class="g]]>
     </summary>
     
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+      <category term="java" scheme="whtis.github.io/tags/java/"/>
     
-      <category term="总结，原创" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8E%9F%E5%88%9B/"/>
+      <category term="总结，原创" scheme="whtis.github.io/tags/%E6%80%BB%E7%BB%93%EF%BC%8C%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+      <category term="java" scheme="whtis.github.io/categories/java/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[hexo博客主题--material折腾笔记]]></title>
-    <link href="http://www.whtis.com/2016/11/20/hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98-material%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0/"/>
-    <id>http://www.whtis.com/2016/11/20/hexo博客主题-material折腾笔记/</id>
+    <link href="whtis.github.io/2016/11/20/hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98-material%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0/"/>
+    <id>whtis.github.io/2016/11/20/hexo博客主题-material折腾笔记/</id>
     <published>2016-11-20T12:56:17.000Z</published>
     <updated>2016-11-20T13:21:22.000Z</updated>
     <content type="html"><![CDATA[<p>&nbsp;&nbsp;好久没怎么照看博客了，昨天突然发现，以前用的<code>Next</code>主题挂了。因为用的别人的东西，不知道问题。本着折腾的想法，重新换了一个主题<code>material</code>。该主题算是满足了我大部分的需求吧。但还是有吐槽的地方……（虽然不会写js，不妨碍我吐槽。。原作者看到估计会气的吐血）</p>
@@ -945,18 +945,18 @@
     <![CDATA[<p>&nbsp;&nbsp;好久没怎么照看博客了，昨天突然发现，以前用的<code>Next</code>主题挂了。因为用的别人的东西，不知道问题。本着折腾的想法，重新换了一个主题<code>material</code>。该主题算是满足了我大部分的需求吧。但还是有吐槽的地方…]]>
     </summary>
     
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="whtis.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="hexo" scheme="http://www.whtis.com/tags/hexo/"/>
+      <category term="hexo" scheme="whtis.github.io/tags/hexo/"/>
     
-      <category term="hexo" scheme="http://www.whtis.com/categories/hexo/"/>
+      <category term="hexo" scheme="whtis.github.io/categories/hexo/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[将百度搜索结果的长url链接转换为真实的url地址]]></title>
-    <link href="http://www.whtis.com/2016/09/19/%E5%B0%86%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C%E7%9A%84%E9%95%BFurl%E9%93%BE%E6%8E%A5%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%9C%9F%E5%AE%9E%E7%9A%84url%E5%9C%B0%E5%9D%80/"/>
-    <id>http://www.whtis.com/2016/09/19/将百度搜索结果的长url链接转换为真实的url地址/</id>
+    <link href="whtis.github.io/2016/09/19/%E5%B0%86%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C%E7%9A%84%E9%95%BFurl%E9%93%BE%E6%8E%A5%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%9C%9F%E5%AE%9E%E7%9A%84url%E5%9C%B0%E5%9D%80/"/>
+    <id>whtis.github.io/2016/09/19/将百度搜索结果的长url链接转换为真实的url地址/</id>
     <published>2016-09-18T16:37:15.000Z</published>
     <updated>2017-06-19T01:58:49.000Z</updated>
     <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p>最近写爬虫的时候，想调用百度的搜索结果，于是有了这个问题。需要注意的是，本篇内容转化是仅针对百度跳转到非百度链接的，百度内部链接的跳转，如百度搜索主入口跳转到百度知道、百度文库等情况不再讨论之列。</p>
@@ -975,16 +975,16 @@
 <h3 id="问题描]]>
     </summary>
     
-      <category term="java，原创" scheme="http://www.whtis.com/tags/java%EF%BC%8C%E5%8E%9F%E5%88%9B/"/>
+      <category term="java，原创" scheme="whtis.github.io/tags/java%EF%BC%8C%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+      <category term="java" scheme="whtis.github.io/categories/java/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[PostgreSQL使用手记]]></title>
-    <link href="http://www.whtis.com/2016/09/14/PostgreSQL%E4%BD%BF%E7%94%A8%E6%89%8B%E8%AE%B0/"/>
-    <id>http://www.whtis.com/2016/09/14/PostgreSQL使用手记/</id>
+    <link href="whtis.github.io/2016/09/14/PostgreSQL%E4%BD%BF%E7%94%A8%E6%89%8B%E8%AE%B0/"/>
+    <id>whtis.github.io/2016/09/14/PostgreSQL使用手记/</id>
     <published>2016-09-14T14:29:13.000Z</published>
     <updated>2017-03-23T09:58:18.000Z</updated>
     <content type="html"><![CDATA[<h3 id="写在前面">写在前面</h3><p><blockcode><br>&emsp;&emsp;因为项目需要，要将本来的<code>mybatis+mysql</code>改为<code>mybatis+postgresql</code>,使用途中难免遇到坑，以下是我遇到的，记录下来供参考。好久没写blog，感觉都快长草了，目前在想要不要开一个分类，写点日常废话😂<br></blockcode><br>&emsp;&emsp;好了，言归正传。</p>
@@ -1036,18 +1036,18 @@
     <![CDATA[<h3 id="写在前面">写在前面</h3><p><blockcode><br>&emsp;&emsp;因为项目需要，要将本来的<code>mybatis+mysql</code>改为<code>mybatis+postgresql</code>,使用途中难免遇到坑，以下是我遇]]>
     </summary>
     
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+      <category term="java" scheme="whtis.github.io/tags/java/"/>
     
-      <category term="数据库，PostgreSQL" scheme="http://www.whtis.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8CPostgreSQL/"/>
+      <category term="数据库，PostgreSQL" scheme="whtis.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8CPostgreSQL/"/>
     
-      <category term="SQL" scheme="http://www.whtis.com/categories/SQL/"/>
+      <category term="SQL" scheme="whtis.github.io/categories/SQL/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Java学习笔记--设置代理及打开外部程序]]></title>
-    <link href="http://www.whtis.com/2016/05/29/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86%E5%8F%8A%E6%89%93%E5%BC%80%E5%A4%96%E9%83%A8%E7%A8%8B%E5%BA%8F/"/>
-    <id>http://www.whtis.com/2016/05/29/Java学习笔记-设置代理及打开外部程序/</id>
+    <link href="whtis.github.io/2016/05/29/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86%E5%8F%8A%E6%89%93%E5%BC%80%E5%A4%96%E9%83%A8%E7%A8%8B%E5%BA%8F/"/>
+    <id>whtis.github.io/2016/05/29/Java学习笔记-设置代理及打开外部程序/</id>
     <published>2016-05-29T12:14:59.000Z</published>
     <updated>2016-09-14T15:50:10.000Z</updated>
     <content type="html"><![CDATA[<h3 id="设置系统代理">设置系统代理</h3><ul>
@@ -1068,20 +1068,20 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</d]]>
     </summary>
     
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+      <category term="java" scheme="whtis.github.io/tags/java/"/>
     
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="whtis.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="java学习笔记" scheme="http://www.whtis.com/tags/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="java学习笔记" scheme="whtis.github.io/tags/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+      <category term="java" scheme="whtis.github.io/categories/java/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[HttpClient4.x使用中出现的几个问题及解决方法]]></title>
-    <link href="http://www.whtis.com/2016/05/05/HttpClient4-x%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>http://www.whtis.com/2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/</id>
+    <link href="whtis.github.io/2016/05/05/HttpClient4-x%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>whtis.github.io/2016/05/05/HttpClient4-x使用中出现的几个问题及解决方法/</id>
     <published>2016-05-05T14:38:39.000Z</published>
     <updated>2016-09-14T15:46:45.000Z</updated>
     <content type="html"><![CDATA[<p>最近才开始接触这个工具包，官网上目前已经更新到<a href="http://hc.apache.org/downloads.cgi" target="_blank" rel="external">HttpClient4.5.2</a>了。google的时候看到HttpClient从4.0版本改了底层，因此使用时会出现一些方法不再适用的问题，这里记录出现的一些问题以及相应替代的方法。</p>
@@ -1096,16 +1096,16 @@
     <![CDATA[<p>最近才开始接触这个工具包，官网上目前已经更新到<a href="http://hc.apache.org/downloads.cgi" target="_blank" rel="external">HttpClient4.5.2</a>了。google的时候看到HttpCl]]>
     </summary>
     
-      <category term="HttpClient" scheme="http://www.whtis.com/tags/HttpClient/"/>
+      <category term="HttpClient" scheme="whtis.github.io/tags/HttpClient/"/>
     
-      <category term="Web相关" scheme="http://www.whtis.com/categories/Web%E7%9B%B8%E5%85%B3/"/>
+      <category term="Web相关" scheme="whtis.github.io/categories/Web%E7%9B%B8%E5%85%B3/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Java阶段性总结]]></title>
-    <link href="http://www.whtis.com/2016/04/21/Java%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/"/>
-    <id>http://www.whtis.com/2016/04/21/Java阶段性总结/</id>
+    <link href="whtis.github.io/2016/04/21/Java%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/"/>
+    <id>whtis.github.io/2016/04/21/Java阶段性总结/</id>
     <published>2016-04-21T10:29:08.000Z</published>
     <updated>2016-09-14T15:50:25.000Z</updated>
     <content type="html"><![CDATA[<p>花了大半年的时间，算是彻底从头看了一遍Java的基本知识，参考书籍是《Java语言程序设计》原书第五版，作者为Y.daniel Liang，基础篇和提高篇中的重要内容都摘录在了之前的文章中。本文就是对之前的Java总结做个分类，方便自己以后回顾。</p>
@@ -1116,13 +1116,13 @@
 <h3 id="第]]>
     </summary>
     
-      <category term="java" scheme="http://www.whtis.com/tags/java/"/>
+      <category term="java" scheme="whtis.github.io/tags/java/"/>
     
-      <category term="原创" scheme="http://www.whtis.com/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="whtis.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="总结" scheme="http://www.whtis.com/tags/%E6%80%BB%E7%BB%93/"/>
+      <category term="总结" scheme="whtis.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
-      <category term="java" scheme="http://www.whtis.com/categories/java/"/>
+      <category term="java" scheme="whtis.github.io/categories/java/"/>
     
   </entry>
   
