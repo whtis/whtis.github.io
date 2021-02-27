@@ -53,26 +53,6 @@
 
     
   <url>
-    <loc>http://www.whtis.com/2018/05/17/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/</loc>
-    <lastmod>2018-01-24T18:23:00.055Z</lastmod>
-    <data>
-        <display>
-        <title>最近要做的几件事</title>
-        <pubTime>2018-05-17T12:14:17.169Z</pubTime>
-        
-        <tag>待完成 </tag>
-         
-         
-           
-             
-              <breadCrumb title="未完成" url="http://www.whtis.com/categories/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.whtis.com/2017/11/27/%E8%BF%99%E7%AF%87%E5%8D%9A%E6%96%87%EF%BC%8C%E6%88%91%E4%B8%8D%E6%83%B3%E5%86%99%E6%8A%80%E6%9C%AF%E4%BA%86%E3%80%82%E3%80%82/</loc>
     <lastmod>2018-01-24T18:23:00.055Z</lastmod>
     <data>
@@ -86,6 +66,26 @@
            
              
               <breadCrumb title="随笔" url="http://www.whtis.com/categories/%E9%9A%8F%E7%AC%94/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.whtis.com/2018/05/17/%E6%9C%80%E8%BF%91%E8%A6%81%E5%81%9A%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/</loc>
+    <lastmod>2018-01-24T18:23:00.055Z</lastmod>
+    <data>
+        <display>
+        <title>最近要做的几件事</title>
+        <pubTime>2018-05-17T12:14:17.169Z</pubTime>
+        
+        <tag>待完成 </tag>
+         
+         
+           
+             
+              <breadCrumb title="未完成" url="http://www.whtis.com/categories/%E6%9C%AA%E5%AE%8C%E6%88%90/"/>
           
         </display>
     </data>

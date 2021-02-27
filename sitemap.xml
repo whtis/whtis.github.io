@@ -12,22 +12,22 @@
   </url>
   
   <url>
-    <loc>http://www.whtis.com/xin/js/functions.js</loc>
-    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.whtis.com/xin/js/functions_dev.js</loc>
-    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://www.whtis.com/xin/js/garden.js</loc>
     <lastmod>2019-11-10T10:08:16.000Z</lastmod>
   </url>
   
   <url>
+    <loc>http://www.whtis.com/xin/js/functions.js</loc>
+    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.whtis.com/xin/css/default.css</loc>
+    <lastmod>2019-11-10T10:08:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.whtis.com/xin/js/functions_dev.js</loc>
     <lastmod>2019-11-10T10:08:16.000Z</lastmod>
   </url>
   
